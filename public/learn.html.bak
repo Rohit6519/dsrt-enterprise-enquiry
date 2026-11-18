@@ -1,0 +1,4592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800;900&family=Rajdhani:wght@400;500;600;700&family=Exo+2:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>What is DSRT AI? | Intelligence Infrastructure</title>
+
+  <meta
+    name="description"
+    content="Explore DSRT AI: an intelligence amplification system for model orchestration, task execution, verification, and enterprise AI infrastructure."
+  />
+
+  <meta
+    property="og:title"
+    content="What is DSRT AI? Intelligence infrastructure for enterprise AI."
+  />
+
+  <meta
+    property="og:description"
+    content="More intelligence from every token. Explore the DSRT AI system, Work Mode, War Mode, model orchestration, and enterprise infrastructure."
+  />
+
+  <meta property="og:type" content="website" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<!--
+    ==========================================================================
+
+    DSRT AI — ASSET PLACEHOLDERS
+
+    Save this page as:
+      features.html
+
+    HOME LINK:
+      index.html
+
+    REQUIRED / OPTIONAL ASSET PATHS:
+
+      assets/dsrt-logo.svg
+        Optional official DSRT AI logo.
+        The page includes a geometric fallback logo.
+
+      assets/hero-background.jpg
+        Optional first-page background image.
+
+      assets/dsrt-intro.mp4
+        Optional muted, looping intro video for the first page.
+
+      assets/sections/problem.jpg
+      assets/sections/system.jpg
+      assets/sections/principle.jpg
+      assets/sections/models.jpg
+      assets/sections/work-mode.jpg
+      assets/sections/war-mode.jpg
+      assets/sections/enterprise.jpg
+      assets/sections/industries.jpg
+      assets/sections/measurement.jpg
+      assets/sections/deployment.jpg
+
+        Optional section backgrounds. They are placed under a white overlay so
+        the page remains predominantly white. If an image is absent, the page
+        retains its white background.
+
+      assets/providers/dsrt.svg
+      assets/providers/openai.svg
+      assets/providers/anthropic.svg
+      assets/providers/google.svg
+      assets/providers/deepseek.svg
+      assets/providers/xai.svg
+      assets/providers/mistral.svg
+      assets/providers/meta.svg
+      assets/providers/cohere.svg
+      assets/providers/qwen.svg
+      assets/providers/moonshot.svg
+      assets/providers/zai.svg
+      assets/providers/minimax.svg
+      assets/providers/nvidia.svg
+      assets/providers/ai21.svg
+      assets/providers/aws.svg
+      assets/providers/azure.svg
+      assets/providers/gcloud.svg
+      assets/providers/groq.svg
+      assets/providers/together.svg
+      assets/providers/fireworks.svg
+      assets/providers/openrouter.svg
+      assets/providers/perplexity.svg
+
+        Replace these with the official provider SVGs when available.
+        Missing images automatically fall back to text initials.
+
+    CONTACT:
+      Replace hello@dsrtai.com with your preferred contact address if needed.
+
+    WORKSPACE:
+      Replace /login with your production authentication URL.
+
+    LEGAL:
+      Replace /privacy and /terms with your production legal pages.
+
+    IMPORTANT:
+      The provider list is illustrative. A provider shown here should not be
+      presented as available in a deployment unless its integration is verified.
+
+    ==========================================================================
+  -->
+
+  <style>
+    /* ========================================================================
+       01. DESIGN TOKENS
+       ======================================================================== */
+
+    :root {
+      --ink: #111419;
+      --ink-soft: #424b55;
+      --ink-muted: #6d7782;
+      --ink-faint: #929ba4;
+
+      --paper: #ffffff;
+      --paper-soft: #f5f6f5;
+      --paper-cool: #edf1f2;
+      --paper-blue: #e8edf4;
+
+      --header: #171a1f;
+      --footer: #171a1f;
+
+      --line: rgba(17, 20, 25, 0.17);
+      --line-strong: rgba(17, 20, 25, 0.36);
+      --line-dark: rgba(255, 255, 255, 0.16);
+
+      --accent: #526f83;
+      --accent-deep: #334e60;
+      --accent-light: #dce6eb;
+
+      --font-sans: "Inter", Arial, sans-serif;
+      --font-mono: "JetBrains Mono", Consolas, monospace;
+      --font-display: "Orbitron", "Inter", sans-serif;
+
+      --header-height: 76px;
+      --header-height-small: 62px;
+
+      --content-width: 1540px;
+      --side-padding: clamp(22px, 4.25vw, 72px);
+      --section-space: clamp(96px, 10vw, 160px);
+
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+      --duration: 260ms;
+    }
+
+    /* ========================================================================
+       02. BASE
+       ======================================================================== */
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: calc(var(--header-height-small) + 20px);
+      background: var(--paper);
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: var(--font-sans);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    body.is-locked {
+      overflow: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
+    }
+
+    button {
+      color: inherit;
+    }
+
+    button,
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    img,
+    svg,
+    video {
+      display: block;
+      max-width: 100%;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    p {
+      margin-top: 0;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      font-weight: 500;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    :focus-visible {
+      outline: 2px solid #507b98;
+      outline-offset: 4px;
+    }
+
+    ::selection {
+      color: #fff;
+      background: #354e5e;
+    }
+
+    .skip-link {
+      position: fixed;
+      z-index: 999;
+      top: 10px;
+      left: 10px;
+      padding: 10px 14px;
+      color: #fff;
+      background: #111;
+      transform: translateY(-160%);
+    }
+
+    .skip-link:focus {
+      transform: translateY(0);
+    }
+
+    .container {
+      width: 100%;
+      max-width: var(--content-width);
+      margin-inline: auto;
+      padding-inline: var(--side-padding);
+    }
+
+    .mono {
+      font-family: var(--font-mono);
+    }
+
+    .muted {
+      color: var(--ink-soft);
+    }
+
+    .small {
+      font-size: 0.875rem;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    /* ========================================================================
+       03. HEADER
+       ======================================================================== */
+
+    .site-header {
+      position: sticky;
+      z-index: 100;
+      top: 0;
+      color: #fff;
+      background: rgba(23, 26, 31, 0.97);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.13);
+      backdrop-filter: blur(14px);
+    }
+
+    .header-inner {
+      min-height: var(--header-height);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 30px;
+      transition: min-height var(--duration) var(--ease);
+    }
+
+    .site-header.is-scrolled .header-inner {
+      min-height: var(--header-height-small);
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+      color: #fff;
+    }
+
+    .brand-mark {
+      width: 31px;
+      height: 31px;
+      flex: 0 0 auto;
+    }
+
+    .brand-name {
+      font-family: var(--font-display);
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.13em;
+      white-space: nowrap;
+    }
+
+    .desktop-nav {
+      display: flex;
+      align-items: center;
+      gap: clamp(18px, 2.1vw, 34px);
+      margin-left: auto;
+    }
+
+    .desktop-nav a {
+      position: relative;
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 12px;
+      font-weight: 500;
+      transition: color var(--duration);
+    }
+
+    .desktop-nav a:hover,
+    .desktop-nav a.is-current {
+      color: #fff;
+    }
+
+    .desktop-nav a.is-current::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -8px;
+      height: 1px;
+      background: #fff;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .header-button,
+    .menu-toggle {
+      min-height: 42px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 18px;
+      color: #fff;
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.33);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition:
+        background var(--duration),
+        border-color var(--duration);
+    }
+
+    .header-button:hover,
+    .menu-toggle:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: #fff;
+    }
+
+    .header-button.is-primary {
+      color: #171a1f;
+      background: #fff;
+      border-color: #fff;
+    }
+
+    .header-button.is-primary:hover {
+      background: #e4e9eb;
+    }
+
+    .menu-toggle {
+      width: 42px;
+      padding: 0;
+    }
+
+    .menu-toggle-lines {
+      width: 17px;
+      display: grid;
+      gap: 5px;
+    }
+
+    .menu-toggle-lines span {
+      height: 1px;
+      background: currentColor;
+    }
+
+    .reading-progress {
+      position: absolute;
+      left: 0;
+      bottom: -1px;
+      width: 100%;
+      height: 2px;
+      background: transparent;
+      pointer-events: none;
+    }
+
+    .reading-progress span {
+      display: block;
+      width: 100%;
+      height: 100%;
+      background: #91aaba;
+      transform: scaleX(0);
+      transform-origin: left;
+    }
+
+    /* ========================================================================
+       04. NAVIGATION DRAWER
+       ======================================================================== */
+
+    .drawer {
+      position: fixed;
+      z-index: 200;
+      inset: 0;
+      display: none;
+      color: #fff;
+      background: rgba(15, 18, 22, 0.98);
+      overflow-y: auto;
+    }
+
+    .drawer.is-open {
+      display: block;
+    }
+
+    .drawer-inner {
+      min-height: 100%;
+      display: flex;
+      flex-direction: column;
+      padding-block: 25px 36px;
+    }
+
+    .drawer-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding-bottom: 28px;
+      border-bottom: 1px solid var(--line-dark);
+    }
+
+    .drawer-close {
+      width: 44px;
+      height: 44px;
+      color: #fff;
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      font-size: 24px;
+      line-height: 1;
+    }
+
+    .drawer-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 8vw;
+      padding-block: clamp(50px, 8vw, 110px);
+    }
+
+    .drawer-label {
+      margin-bottom: 18px;
+      color: #9ca8b2;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .drawer-links {
+      display: grid;
+    }
+
+    .drawer-links a {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 15px 0;
+      border-bottom: 1px solid var(--line-dark);
+      font-size: clamp(24px, 3vw, 43px);
+      line-height: 1.15;
+      letter-spacing: -0.04em;
+      transition: color var(--duration);
+    }
+
+    .drawer-links a:hover {
+      color: #a9c1d0;
+    }
+
+    .drawer-links span {
+      font-family: var(--font-mono);
+      font-size: 15px;
+      letter-spacing: 0;
+    }
+
+    .drawer-secondary {
+      display: grid;
+      align-content: start;
+      gap: 16px;
+    }
+
+    .drawer-secondary a {
+      width: fit-content;
+      color: #d2d8dc;
+      font-size: 15px;
+    }
+
+    .drawer-bottom {
+      margin-top: auto;
+      padding-top: 22px;
+      border-top: 1px solid var(--line-dark);
+      color: #8f9aa3;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    /* ========================================================================
+       05. SECTION SYSTEM
+       ======================================================================== */
+
+    .section {
+      position: relative;
+      isolation: isolate;
+      padding-block: var(--section-space);
+      background: #fff;
+      border-bottom: 1px solid var(--line);
+      scroll-margin-top: var(--header-height-small);
+      overflow: hidden;
+    }
+
+    .section.has-background::before {
+      content: "";
+      position: absolute;
+      z-index: -2;
+      inset: 0;
+      background-image: var(--section-image);
+      background-position: center;
+      background-size: cover;
+      opacity: 0.12;
+      pointer-events: none;
+    }
+
+    .section.has-background::after {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      inset: 0;
+      background: rgba(255, 255, 255, 0.88);
+      pointer-events: none;
+    }
+
+    .section-topline {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: clamp(40px, 5vw, 72px);
+      padding-top: 12px;
+      border-top: 1px solid var(--line-strong);
+    }
+
+    .eyebrow,
+    .section-index,
+    .micro-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.13em;
+      line-height: 1.5;
+      text-transform: uppercase;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0;
+      color: var(--ink-soft);
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      background: var(--accent-deep);
+    }
+
+    .section-index {
+      color: var(--ink-muted);
+      white-space: nowrap;
+    }
+
+    .section-heading {
+      max-width: 1100px;
+      margin-bottom: 0;
+      font-size: clamp(42px, 6.5vw, 100px);
+      font-weight: 400;
+      line-height: 0.99;
+      letter-spacing: -0.065em;
+    }
+
+    .section-heading.medium {
+      max-width: 1050px;
+      font-size: clamp(38px, 5vw, 76px);
+      line-height: 1.02;
+    }
+
+    .section-heading.small-heading {
+      max-width: 820px;
+      font-size: clamp(36px, 4.3vw, 64px);
+      line-height: 1.05;
+    }
+
+    .section-intro {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.65fr);
+      align-items: start;
+      gap: clamp(35px, 8vw, 120px);
+      margin-bottom: clamp(56px, 7vw, 100px);
+    }
+
+    .section-copy {
+      max-width: 570px;
+      padding-top: 6px;
+    }
+
+    .section-copy p {
+      margin-bottom: 18px;
+      color: var(--ink-soft);
+      font-size: clamp(16px, 1.35vw, 19px);
+      line-height: 1.65;
+    }
+
+    .section-copy p:first-child {
+      color: var(--ink);
+    }
+
+    .section-copy p:last-child {
+      margin-bottom: 0;
+    }
+
+    .text-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 20px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid currentColor;
+      font-size: 14px;
+      font-weight: 500;
+      transition: gap var(--duration) var(--ease);
+    }
+
+    .text-link:hover {
+      gap: 27px;
+    }
+
+    .button {
+      min-height: 52px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 34px;
+      padding: 14px 19px;
+      border: 1px solid var(--ink);
+      background: transparent;
+      color: var(--ink);
+      font-size: 13px;
+      font-weight: 500;
+      transition:
+        color var(--duration),
+        background var(--duration),
+        border-color var(--duration);
+    }
+
+    .button:hover {
+      color: #fff;
+      background: var(--ink);
+    }
+
+    .button.is-dark {
+      color: #fff;
+      background: var(--ink);
+    }
+
+    .button.is-dark:hover {
+      color: var(--ink);
+      background: #fff;
+    }
+
+    .button-arrow {
+      font-family: var(--font-mono);
+      font-size: 16px;
+      transition: transform var(--duration) var(--ease);
+    }
+
+    .button:hover .button-arrow {
+      transform: translateX(4px);
+    }
+
+    /* ========================================================================
+       06. HERO
+       ======================================================================== */
+
+    .hero {
+      position: relative;
+      isolation: isolate;
+      min-height: calc(100svh - var(--header-height));
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+      background: #f2f4f4;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .hero-background {
+      position: absolute;
+      z-index: -3;
+      inset: 0;
+
+      /*
+        HERO BACKGROUND PLACEHOLDER:
+        Replace this path with your preferred image.
+      */
+      background-image: url("assets/hero-background.jpg");
+      background-position: center;
+      background-size: cover;
+    }
+
+    .hero-video {
+      position: absolute;
+      z-index: -2;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.28;
+      filter: grayscale(1);
+      pointer-events: none;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      z-index: -1;
+      inset: 0;
+      background:
+        linear-gradient(
+          90deg,
+          rgba(255, 255, 255, 0.91) 0%,
+          rgba(255, 255, 255, 0.75) 50%,
+          rgba(255, 255, 255, 0.5) 100%
+        ),
+        linear-gradient(
+          0deg,
+          rgba(255, 255, 255, 0.86),
+          transparent 55%
+        );
+    }
+
+    .hero-grid-overlay {
+      position: absolute;
+      z-index: -1;
+      inset: 0;
+      opacity: 0.26;
+      background-image:
+        linear-gradient(to right, rgba(20, 27, 31, 0.09) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(20, 27, 31, 0.09) 1px, transparent 1px);
+      background-size: 80px 80px;
+      pointer-events: none;
+    }
+
+    .hero-main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      padding-block: clamp(90px, 12vh, 160px);
+    }
+
+    .hero-content {
+      max-width: 1300px;
+    }
+
+    .hero-kicker {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: clamp(25px, 4vw, 55px);
+      color: #3c4c57;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .hero-kicker::before {
+      content: "";
+      width: 32px;
+      height: 1px;
+      background: currentColor;
+    }
+
+    .hero-title {
+      margin: 0;
+      color: #11171c;
+      text-transform: uppercase;
+    }
+
+    .hero-title-small {
+      display: block;
+      margin-bottom: 0.2em;
+      font-family: var(--font-display);
+      font-size: clamp(24px, 4.1vw, 62px);
+      font-weight: 500;
+      line-height: 1;
+      letter-spacing: 0.02em;
+    }
+
+    .hero-title-large {
+      display: block;
+      font-family: var(--font-display);
+      font-size: clamp(58px, 11.6vw, 176px);
+      font-weight: 700;
+      line-height: 0.92;
+      letter-spacing: -0.065em;
+      white-space: nowrap;
+    }
+
+    .hero-description {
+      max-width: 620px;
+      margin: clamp(30px, 4vw, 55px) 0 0;
+      color: #2d3941;
+      font-size: clamp(17px, 1.6vw, 22px);
+      line-height: 1.6;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 34px;
+    }
+
+    .hero-bottom {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: end;
+      gap: 25px;
+      padding-block: 22px 28px;
+      border-top: 1px solid var(--line-strong);
+    }
+
+    .hero-bottom-item {
+      color: #4f5c66;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .hero-bottom-item:last-child {
+      text-align: right;
+    }
+
+    .hero-scroll {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--ink);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .hero-scroll-icon {
+      width: 34px;
+      height: 34px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--line-strong);
+      font-size: 17px;
+    }
+
+    .hero-video-control {
+      position: absolute;
+      right: var(--side-padding);
+      bottom: 100px;
+      z-index: 2;
+      display: none;
+      padding: 8px 10px;
+      color: var(--ink);
+      background: rgba(255, 255, 255, 0.75);
+      border: 1px solid var(--line-strong);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .hero-video-control.is-visible {
+      display: inline-flex;
+    }
+
+    /* ========================================================================
+       07. INTRODUCTION STATEMENT
+       ======================================================================== */
+
+    .statement-section {
+      padding-block: clamp(100px, 11vw, 175px);
+    }
+
+    .statement-grid {
+      display: grid;
+      grid-template-columns: minmax(180px, 0.35fr) minmax(0, 1fr);
+      gap: clamp(35px, 6vw, 100px);
+    }
+
+    .statement-side {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 30px;
+    }
+
+    .statement-number {
+      color: #aab2b7;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+    }
+
+    .statement-main h2 {
+      max-width: 1050px;
+      margin-bottom: 40px;
+      font-size: clamp(37px, 5.2vw, 78px);
+      font-weight: 400;
+      line-height: 1.08;
+      letter-spacing: -0.055em;
+    }
+
+    .statement-copy {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: clamp(24px, 4vw, 65px);
+      max-width: 950px;
+    }
+
+    .statement-copy p {
+      margin: 0;
+      color: var(--ink-soft);
+      font-size: 16px;
+      line-height: 1.75;
+    }
+
+    /* ========================================================================
+       08. PROBLEM
+       ======================================================================== */
+
+    .problem-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr);
+      gap: clamp(45px, 7vw, 110px);
+    }
+
+    .problem-summary {
+      align-self: start;
+      padding-top: 20px;
+      border-top: 1px solid var(--line-strong);
+    }
+
+    .problem-summary h3 {
+      max-width: 420px;
+      margin-bottom: 22px;
+      font-size: clamp(26px, 3vw, 43px);
+      line-height: 1.12;
+      letter-spacing: -0.04em;
+    }
+
+    .problem-summary p {
+      max-width: 440px;
+      color: var(--ink-soft);
+    }
+
+    .problem-list {
+      border-top: 1px solid var(--line-strong);
+    }
+
+    .problem-row {
+      display: grid;
+      grid-template-columns: 70px minmax(0, 0.8fr) minmax(0, 1fr);
+      gap: 20px;
+      padding: 25px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .problem-row-number {
+      color: var(--ink-muted);
+      font-family: var(--font-mono);
+      font-size: 11px;
+    }
+
+    .problem-row h3 {
+      margin: 0;
+      font-size: 19px;
+      line-height: 1.3;
+      letter-spacing: -0.025em;
+    }
+
+    .problem-row p {
+      margin: 0;
+      color: var(--ink-soft);
+      font-size: 14px;
+    }
+
+    .problem-callout {
+      margin-top: 75px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: end;
+      gap: 30px;
+      padding: clamp(28px, 4vw, 55px);
+      background: #f0f3f3;
+      border-left: 2px solid var(--accent);
+    }
+
+    .problem-callout p {
+      max-width: 900px;
+      margin: 0;
+      font-size: clamp(22px, 2.6vw, 36px);
+      line-height: 1.2;
+      letter-spacing: -0.04em;
+    }
+
+    .problem-callout span {
+      color: var(--ink-muted);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    /* ========================================================================
+       09. SYSTEM / PIPELINE
+       ======================================================================== */
+
+    .system-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: end;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 22px;
+    }
+
+    .system-toolbar p {
+      margin: 0;
+      color: var(--ink-muted);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .segmented-control {
+      display: inline-flex;
+      flex-wrap: wrap;
+      border: 1px solid var(--line-strong);
+    }
+
+    .segmented-control button {
+      min-height: 40px;
+      padding: 10px 15px;
+      color: var(--ink-soft);
+      background: #fff;
+      border: 0;
+      border-right: 1px solid var(--line);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.04em;
+    }
+
+    .segmented-control button:last-child {
+      border-right: 0;
+    }
+
+    .segmented-control button.is-active {
+      color: #fff;
+      background: var(--ink);
+    }
+
+    .pipeline {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+      border-top: 1px solid var(--line-strong);
+      border-left: 1px solid var(--line);
+    }
+
+    .pipeline-stage {
+      min-height: 220px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 28px;
+      padding: 20px 16px;
+      text-align: left;
+      color: var(--ink);
+      background: rgba(255, 255, 255, 0.75);
+      border: 0;
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      transition:
+        background var(--duration),
+        opacity var(--duration);
+    }
+
+    .pipeline-stage:hover {
+      background: #f3f6f6;
+    }
+
+    .pipeline-stage.is-selected {
+      background: #e9eff1;
+      box-shadow: inset 0 3px 0 var(--accent-deep);
+    }
+
+    .pipeline-stage.is-bypassed {
+      opacity: 0.43;
+    }
+
+    .stage-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 6px;
+      color: var(--ink-muted);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      text-transform: uppercase;
+    }
+
+    .stage-title {
+      display: block;
+      margin-bottom: 9px;
+      font-size: 15px;
+      font-weight: 600;
+      line-height: 1.25;
+    }
+
+    .stage-summary {
+      display: block;
+      color: var(--ink-soft);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .pipeline-inspector {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+      gap: 50px;
+      padding: clamp(25px, 3vw, 40px);
+      background: #f3f6f6;
+      border: 1px solid var(--line);
+      border-top: 0;
+    }
+
+    .inspector-code {
+      margin-bottom: 10px;
+      color: var(--accent-deep);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .pipeline-inspector h3 {
+      margin-bottom: 10px;
+      font-size: 25px;
+      letter-spacing: -0.04em;
+    }
+
+    .pipeline-inspector p {
+      max-width: 650px;
+      margin: 0;
+      color: var(--ink-soft);
+      font-size: 14px;
+    }
+
+    .inspector-meta {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 25px;
+      align-content: center;
+    }
+
+    .meta-item span {
+      display: block;
+      margin-bottom: 7px;
+      color: var(--ink-muted);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .meta-item strong {
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .architecture-note {
+      display: grid;
+      grid-template-columns: minmax(200px, 0.35fr) minmax(0, 1fr);
+      gap: 40px;
+      margin-top: 50px;
+      padding-top: 22px;
+      border-top: 1px solid var(--line-strong);
+    }
+
+    .architecture-note strong {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .architecture-note p {
+      max-width: 850px;
+      margin: 0;
+      color: var(--ink-soft);
+      font-size: 14px;
+    }
+
+    /* ========================================================================
+       10. PER-TOKEN PRINCIPLE
+       ======================================================================== */
+
+    .principle-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
+      gap: clamp(50px, 8vw, 120px);
+      align-items: start;
+    }
+
+    .equation-panel {
+      padding: clamp(28px, 4.5vw, 65px);
+      background: #f0f3f3;
+      border: 1px solid var(--line);
+    }
+
+    .equation-panel .micro-label {
+      color: var(--ink-muted);
+    }
+
+    .equation {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: clamp(16px, 2vw, 30px);
+      margin: 40px 0;
+      padding-block: 34px;
+      border-top: 1px solid var(--line-strong);
+      border-bottom: 1px solid var(--line-strong);
+    }
+
+    .equation-name,
+    .equation-equals {
+      font-size: clamp(25px, 3vw, 44px);
+      font-weight: 400;
+      letter-spacing: -0.04em;
+    }
+
+    .fraction {
+      display: inline-flex;
+      flex-direction: column;
+      text-align: center;
+      font-size: clamp(16px, 1.6vw, 23px);
+    }
+
+    .fraction span:first-child {
+      padding: 0 10px 9px;
+      border-bottom: 1px solid var(--ink);
+    }
+
+    .fraction span:last-child {
+      padding: 9px 10px 0;
+      color: var(--ink-soft);
+    }
+
+    .equation-panel p {
+      max-width: 620px;
+      margin-bottom: 0;
+      color: var(--ink-soft);
+    }
+
+    .practice-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      border-top: 1px solid var(--line-strong);
+    }
+
+    .practice-list li {
+      display: grid;
+      grid-template-columns: 45px 1fr;
+      gap: 15px;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .practice-list .number {
+      color: var(--ink-muted);
+      font-family: var(--font-mono);
+      font-size: 11px;
+    }
+
+    .practice-list strong {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 16px;
+      font-weight: 500;
+    }
+
+    .practice-list p {
+      margin: 0;
+      color: var(--ink-soft);
+      font-size: 13px;
+    }
+
+    /* ========================================================================
+       11. MODEL ORCHESTRATION
+       ======================================================================== */
+
+    .capability-strip {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      border-top: 1px solid var(--line-strong);
+      border-left: 1px solid var(--line);
+      margin-bottom: 90px;
+    }
+
+    .capability {
+      min-height: 210px;
+      padding: 25px;
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .capability-number {
+      display: block;
+      margin-bottom: 40px;
+      color: var(--ink-muted);
+      font-family: var(--font-mono);
+      font-size: 10px;
+    }
+
+    .capability h3 {
+      margin-bottom: 10px;
+      font-size: 19px;
+      letter-spacing: -0.03em;
+    }
+
+    .capability p {
+      margin: 0;
+      color: var(--ink-soft);
+      font-size: 13px;
+    }
+
+    .registry-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 25px;
+      margin-bottom: 25px;
+    }
+
+    .registry-header h3 {
+      margin: 6px 0 0;
+      font-size: clamp(28px, 3vw, 44px);
+      letter-spacing: -0.045em;
+    }
+
+    .registry-count {
+      color: var(--ink-muted);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      white-space: nowrap;
+    }
+
+    .provider-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      border-top: 1px solid var(--line-strong);
+      border-left: 1px solid var(--line);
+    }
+
+    .provider-button {
+      min-height: 94px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 18px;
+      text-align: left;
+      color: var(--ink);
+      background: rgba(255, 255, 255, 0.78);
+      border: 0;
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      transition: background var(--duration);
+    }
+
+    .provider-button:hover,
+    .provider-button.is-active {
+      background: #eaf0f1;
+    }
+
+    .provider-button.is-active {
+      box-shadow: inset 0 -2px 0 var(--accent-deep);
+    }
+
+    .provider-logo-wrap {
+      width: 36px;
+      height: 36px;
+      flex: 0 0 36px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--ink);
+      border: 1px solid var(--line);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 600;
+    }
+
+    .provider-logo-wrap img {
+      width: 25px;
+      height: 25px;
+      object-fit: contain;
+    }
+
+    .provider-name {
+      font-size: 13px;
+      font-weight: 500;
+      line-height: 1.3;
+    }
+
+    .provider-inspector {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 25px;
+      align-items: center;
+      padding: 26px;
+      background: #f2f5f5;
+      border: 1px solid var(--line);
+      border-top: 0;
+    }
+
+    .provider-inspector h4 {
+      margin: 5px 0 6px;
+      font-size: 20px;
+      letter-spacing: -0.03em;
+    }
+
+    .provider-inspector p {
+      max-width: 800px;
+      margin: 0;
+      color: var(--ink-soft);
+      font-size: 13px;
+    }
+
+    .registry-note {
+      margin: 16px 0 0;
+      color: var(--ink-muted);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      line-height: 1.7;
+    }
+
+    /* ========================================================================
+       12. WORK MODE
+       ======================================================================== */
+
+    .product-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.75fr);
+      gap: clamp(40px, 6vw, 95px);
+      align-items: start;
+    }
+
+    .workspace-preview {
+      width: 100%;
+      display: block;
+      padding: 0;
+      text-align: left;
+      color: #e8eef1;
+      background: #171b1f;
+      border: 1px solid #171b1f;
+      box-shadow: 0 25px 70px rgba(17, 20, 25, 0.12);
+      cursor: zoom-in;
+    }
+
+    .workspace-topbar {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 13px 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+      color: #a7b4bd;
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .workspace-body {
+      min-height: 400px;
+      display: grid;
+      grid-template-columns: 190px 1fr;
+    }
+
+    .workspace-sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+      padding: 18px 13px;
+      background: #14181b;
+      border-right: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .workspace-label {
+      margin-bottom: 6px;
+      color: #7d8c96;
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .workspace-session {
+      padding: 9px;
+      color: #9aa8b0;
+      font-size: 11px;
+    }
+
+    .workspace-session.is-active {
+      color: #fff;
+      background: #242b30;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .workspace-main {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 25px;
+      padding: 20px;
+    }
+
+    .workspace-models {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+
+    .workspace-chip {
+      padding: 5px 8px;
+      color: #cbd7dd;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      font-family: var(--font-mono);
+      font-size: 9px;
+    }
+
+    .workspace-chip.is-accent {
+      color: #bad6e5;
+      border-color: #607f91;
+    }
+
+    .workspace-thread {
+      display: grid;
+      gap: 12px;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .workspace-message {
+      padding: 14px;
+      background: #22292e;
+      border-left: 2px solid #81939e;
+    }
+
+    .workspace-response {
+      padding: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      color: #bdc8ce;
+    }
+
+    .workspace-response strong {
+      display: block;
+      margin-bottom: 8px;
+      color: #a6c7d9;
+      font-family: var(--font-mono);
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+    }
+
+    .workspace-telemetry {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 10px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(255, 255, 255, 0.14);
+      color: #95a4ad;
+      font-family: var(--font-mono);
+      font-size: 9px;
+    }
+
+    .feature-list {
+      border-top: 1px solid var(--line-strong);
+    }
+
+    .feature-row {
+      display: grid;
+      grid-template-columns: minmax(130px, 0.75fr) minmax(0, 1fr);
+      gap: 20px;
+      padding: 17px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .feature-row strong {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .feature-row span {
+      color: var(--ink-soft);
+      font-size: 14px;
+    }
+
+    .product-cta {
+      margin-top: 30px;
+    }
+
+    /* ========================================================================
+       13. WAR MODE
+       ======================================================================== */
+
+    .war-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 22px;
+    }
+
+    .war-note {
+      color: var(--ink-muted);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .comparison {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      border: 1px solid var(--line-strong);
+    }
+
+    .comparison-panel {
+      padding: clamp(24px, 3vw, 42px);
+      background: rgba(255, 255, 255, 0.76);
+    }
+
+    .comparison-panel + .comparison-panel {
+      border-left: 1px solid var(--line-strong);
+      background: #f1f5f5;
+    }
+
+    .comparison-head {
+      display: flex;
+      align-items: start;
+      justify-content: space-between;
+      gap: 15px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .comparison-head h3 {
+      margin: 0 0 8px;
+      font-size: clamp(24px, 2.5vw, 35px);
+      letter-spacing: -0.04em;
+    }
+
+    .comparison-head p {
+      margin: 0;
+      color: var(--ink-soft);
+      font-size: 13px;
+    }
+
+    .comparison-tag {
+      padding: 5px 8px;
+      border: 1px solid var(--line-strong);
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.08em;
+      white-space: nowrap;
+    }
+
+    .comparison-output {
+      min-height: 150px;
+      margin: 25px 0;
+      color: var(--ink-soft);
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    .comparison-metrics {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      border-top: 1px solid var(--line);
+      border-left: 1px solid var(--line);
+    }
+
+    .comparison-metric {
+      min-height: 90px;
+      padding: 15px;
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .comparison-metric span {
+      display: block;
+      margin-bottom: 7px;
+      color: var(--ink-muted);
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .comparison-metric strong {
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .dimension-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      margin-top: 30px;
+      border-top: 1px solid var(--line);
+      border-left: 1px solid var(--line);
+    }
+
+    .dimension-grid span {
+      padding: 15px;
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      color: var(--ink-soft);
+      font-family: var(--font-mono);
+      font-size: 10px;
+    }
+
+    /* ========================================================================
+       14. ENTERPRISE / DEPLOYMENT
+       ======================================================================== */
+
+    .control-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      border-top: 1px solid var(--line-strong);
+      border-left: 1px solid var(--line);
+    }
+
+    .control-card {
+      min-height: 230px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 35px;
+      padding: clamp(24px, 3vw, 38px);
+      background: rgba(255, 255, 255, 0.72);
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .control-card .micro-label {
+      color: var(--ink-muted);
+    }
+
+    .control-card h3 {
+      margin-bottom: 10px;
+      font-size: 22px;
+      letter-spacing: -0.035em;
+    }
+
+    .control-card p {
+      max-width: 360px;
+      margin: 0;
+      color: var(--ink-soft);
+      font-size: 14px;
+    }
+
+    .boundary-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 50px;
+      margin-top: 35px;
+      padding: 30px;
+      background: #f1f4f4;
+      border: 1px solid var(--line);
+    }
+
+    .boundary-grid h4 {
+      margin-bottom: 10px;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .boundary-grid p {
+      margin: 0;
+      color: var(--ink-soft);
+      font-size: 13px;
+    }
+
+    /* ========================================================================
+       15. INDUSTRIES
+       ======================================================================== */
+
+    .industries-list {
+      border-top: 1px solid var(--line-strong);
+    }
+
+    .industry {
+      border-bottom: 1px solid var(--line);
+    }
+
+    .industry-trigger {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 70px minmax(0, 0.85fr) minmax(0, 1fr) 35px;
+      align-items: start;
+      gap: 22px;
+      padding: 28px 0;
+      text-align: left;
+      color: var(--ink);
+      background: transparent;
+      border: 0;
+    }
+
+    .industry-number {
+      padding-top: 7px;
+      color: var(--ink-muted);
+      font-family: var(--font-mono);
+      font-size: 10px;
+    }
+
+    .industry-trigger h3 {
+      margin: 0;
+      font-size: clamp(21px, 2vw, 30px);
+      letter-spacing: -0.04em;
+      line-height: 1.15;
+    }
+
+    .industry-trigger p {
+      max-width: 550px;
+      margin: 0;
+      color: var(--ink-soft);
+      font-size: 14px;
+    }
+
+    .industry-icon {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--line-strong);
+      font-size: 19px;
+      line-height: 1;
+    }
+
+    .industry-detail {
+      display: none;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 35px;
+      margin-left: 92px;
+      padding: 0 55px 32px 0;
+    }
+
+    .industry.is-open .industry-detail {
+      display: grid;
+    }
+
+    .industry-detail span {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--ink-muted);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .industry-detail p {
+      margin: 0;
+      color: var(--ink-soft);
+      font-size: 14px;
+    }
+
+    /* ========================================================================
+       16. MEASUREMENT
+       ======================================================================== */
+
+    .measurement-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+      gap: clamp(45px, 7vw, 110px);
+    }
+
+    .measurement-statement {
+      padding-top: 20px;
+      border-top: 1px solid var(--line-strong);
+    }
+
+    .measurement-statement h3 {
+      max-width: 480px;
+      margin-bottom: 20px;
+      font-size: clamp(27px, 3vw, 42px);
+      line-height: 1.15;
+      letter-spacing: -0.045em;
+    }
+
+    .measurement-statement p {
+      max-width: 450px;
+      color: var(--ink-soft);
+    }
+
+    .metrics-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .metrics-table th,
+    .metrics-table td {
+      padding: 17px 12px;
+      text-align: left;
+      vertical-align: top;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .metrics-table th {
+      border-top: 1px solid var(--line-strong);
+      color: var(--ink-muted);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .metrics-table td {
+      font-size: 14px;
+    }
+
+    .metrics-table td:last-child {
+      color: var(--ink-soft);
+    }
+
+    .formula-note {
+      margin-top: 35px;
+      padding: 25px;
+      background: #f0f3f3;
+      border-left: 2px solid var(--accent);
+    }
+
+    .formula-note span {
+      display: block;
+      margin-bottom: 10px;
+      color: var(--ink-muted);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .formula-note p {
+      margin: 0;
+      font-size: 14px;
+    }
+
+    /* ========================================================================
+       17. DEPLOYMENT
+       ======================================================================== */
+
+    .pathway-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      border-top: 1px solid var(--line-strong);
+      border-left: 1px solid var(--line);
+    }
+
+    .pathway-card {
+      min-height: 245px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 35px;
+      padding: 26px;
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .pathway-card span {
+      color: var(--ink-muted);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+    }
+
+    .pathway-card h3 {
+      margin-bottom: 10px;
+      font-size: 21px;
+      letter-spacing: -0.03em;
+    }
+
+    .pathway-card p {
+      margin: 0;
+      color: var(--ink-soft);
+      font-size: 14px;
+    }
+
+    .system-summary {
+      margin-top: 70px;
+      padding: clamp(30px, 4vw, 60px);
+      background: #edf2f3;
+      border: 1px solid var(--line);
+    }
+
+    .system-summary-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 30px;
+      margin-bottom: 50px;
+    }
+
+    .system-summary-head h3 {
+      max-width: 750px;
+      margin: 10px 0 0;
+      font-size: clamp(30px, 4vw, 55px);
+      line-height: 1.06;
+      letter-spacing: -0.05em;
+    }
+
+    .system-pillars {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      border-top: 1px solid var(--line-strong);
+    }
+
+    .system-pillar {
+      padding: 20px 20px 0 0;
+    }
+
+    .system-pillar h4 {
+      margin-bottom: 8px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .system-pillar p {
+      margin: 0;
+      color: var(--ink-soft);
+      font-size: 13px;
+    }
+
+    /* ========================================================================
+       18. CLOSING
+       ======================================================================== */
+
+    .closing {
+      padding-block: clamp(110px, 12vw, 190px);
+    }
+
+    .closing-grid {
+      display: grid;
+      grid-template-columns: 1fr 0.45fr;
+      gap: 60px;
+      align-items: end;
+    }
+
+    .closing h2 {
+      max-width: 1100px;
+      margin: 0;
+      font-size: clamp(48px, 7.4vw, 112px);
+      line-height: 0.98;
+      letter-spacing: -0.065em;
+    }
+
+    .closing-copy p {
+      color: var(--ink-soft);
+      font-size: 16px;
+    }
+
+    .closing-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 30px;
+    }
+
+    .closing-tags span {
+      padding: 7px 10px;
+      border: 1px solid var(--line-strong);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    /* ========================================================================
+       19. FOOTER
+       ======================================================================== */
+
+    .site-footer {
+      overflow: hidden;
+      color: #eef2f4;
+      background: var(--footer);
+    }
+
+    .footer-top {
+      padding-block: clamp(60px, 7vw, 100px) 50px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
+      gap: clamp(50px, 9vw, 150px);
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 25px;
+    }
+
+    .footer-brand-icon {
+      width: 46px;
+      height: 46px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      background: #2b3339;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      font-family: var(--font-mono);
+      font-size: 21px;
+    }
+
+    .footer-brand-name {
+      font-family: var(--font-display);
+      font-size: 18px;
+      letter-spacing: 0.12em;
+    }
+
+    .footer-brand-sub {
+      margin-top: 4px;
+      color: #9aabb5;
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.08em;
+    }
+
+    .footer-description {
+      max-width: 600px;
+      padding-block: 20px;
+      color: #aab6be;
+      border-top: 1px solid var(--line-dark);
+      border-bottom: 1px solid var(--line-dark);
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .footer-copyright {
+      padding-block: 18px;
+      color: #d2d9de;
+      border-bottom: 1px solid var(--line-dark);
+      font-size: 13px;
+    }
+
+    .footer-legal {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 22px;
+      padding-top: 18px;
+      color: #c3cdd3;
+      font-size: 13px;
+    }
+
+    .footer-navigation {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 45px;
+    }
+
+    .footer-nav-group + .footer-nav-group {
+      margin-top: 34px;
+    }
+
+    .footer-nav-title {
+      margin-bottom: 14px;
+      color: #83949f;
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .footer-nav-links {
+      display: grid;
+      gap: 10px;
+    }
+
+    .footer-nav-links a {
+      width: fit-content;
+      color: #e2e9ec;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .footer-nav-links a:hover,
+    .footer-legal a:hover {
+      color: #a9c8d9;
+    }
+
+    .footer-watermark {
+      margin-top: 75px;
+      color: rgba(255, 255, 255, 0.045);
+      font-family: var(--font-display);
+      font-size: clamp(70px, 15vw, 220px);
+      font-weight: 700;
+      line-height: 0.8;
+      letter-spacing: -0.08em;
+      white-space: nowrap;
+      user-select: none;
+    }
+
+    .footer-bottom {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 20px;
+      padding-block: 22px 28px;
+      color: #8b9ca6;
+      border-top: 1px solid var(--line-dark);
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    /* ========================================================================
+       20. DIALOG
+       ======================================================================== */
+
+    dialog {
+      width: min(1120px, calc(100% - 40px));
+      max-height: min(90vh, 900px);
+      padding: 0;
+      color: var(--ink);
+      background: #fff;
+      border: 1px solid var(--line-strong);
+      overflow: auto;
+    }
+
+    dialog::backdrop {
+      background: rgba(10, 14, 18, 0.78);
+      backdrop-filter: blur(5px);
+    }
+
+    .dialog-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 18px 22px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .dialog-head span {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .dialog-close {
+      width: 36px;
+      height: 36px;
+      background: #fff;
+      border: 1px solid var(--line-strong);
+      font-size: 21px;
+    }
+
+    .dialog-body {
+      padding: clamp(25px, 4vw, 50px);
+    }
+
+    .dialog-body h2 {
+      margin-bottom: 15px;
+      font-size: clamp(32px, 4vw, 54px);
+      line-height: 1.05;
+      letter-spacing: -0.05em;
+    }
+
+    .dialog-body p {
+      max-width: 700px;
+      color: var(--ink-soft);
+    }
+
+    .dialog-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .dialog-workspace {
+      padding: 0;
+    }
+
+    /* ========================================================================
+       21. REVEAL ANIMATION
+       ======================================================================== */
+
+    .js .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition:
+        opacity 700ms var(--ease),
+        transform 700ms var(--ease);
+    }
+
+    .js .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ========================================================================
+       22. RESPONSIVE
+       ======================================================================== */
+
+    @media (max-width: 1200px) {
+      .desktop-nav {
+        display: none;
+      }
+
+      .pipeline {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      .provider-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 900px) {
+      .section-intro,
+      .statement-grid,
+      .problem-layout,
+      .principle-layout,
+      .product-layout,
+      .measurement-layout,
+      .closing-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .statement-side {
+        flex-direction: row;
+      }
+
+      .section-copy {
+        max-width: 700px;
+      }
+
+      .capability-strip,
+      .pathway-grid,
+      .system-pillars {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .control-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .provider-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .pipeline-inspector {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-title-large {
+        white-space: normal;
+      }
+
+      .industry-trigger {
+        grid-template-columns: 45px minmax(0, 0.9fr) minmax(0, 1fr) 32px;
+      }
+
+      .industry-detail {
+        margin-left: 67px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      :root {
+        --header-height: 68px;
+        --header-height-small: 60px;
+      }
+
+      .header-inner {
+        gap: 12px;
+      }
+
+      .brand-name {
+        font-size: 12px;
+      }
+
+      .brand-mark {
+        width: 27px;
+        height: 27px;
+      }
+
+      .header-actions .header-button:not(.home-button) {
+        display: none;
+      }
+
+      .header-button {
+        min-height: 40px;
+        padding-inline: 12px;
+        font-size: 9px;
+      }
+
+      .drawer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        min-height: calc(100svh - var(--header-height));
+      }
+
+      .hero-title-large {
+        font-size: clamp(54px, 13vw, 90px);
+      }
+
+      .hero-title-small {
+        font-size: clamp(22px, 6vw, 36px);
+      }
+
+      .hero-description {
+        font-size: 16px;
+      }
+
+      .hero-bottom {
+        grid-template-columns: 1fr auto;
+      }
+
+      .hero-bottom-item:last-child {
+        display: none;
+      }
+
+      .hero-video-control {
+        bottom: 90px;
+      }
+
+      .statement-copy,
+      .problem-row,
+      .architecture-note,
+      .boundary-grid,
+      .comparison,
+      .footer-navigation {
+        grid-template-columns: 1fr;
+      }
+
+      .problem-row {
+        gap: 8px;
+      }
+
+      .problem-callout {
+        grid-template-columns: 1fr;
+      }
+
+      .pipeline {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .pipeline-stage {
+        min-height: 185px;
+      }
+
+      .inspector-meta {
+        grid-template-columns: 1fr;
+      }
+
+      .capability-strip,
+      .control-grid,
+      .pathway-grid,
+      .system-pillars,
+      .dimension-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .provider-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .provider-inspector {
+        grid-template-columns: 1fr;
+      }
+
+      .registry-header,
+      .system-summary-head {
+        align-items: start;
+        flex-direction: column;
+      }
+
+      .workspace-body {
+        grid-template-columns: 1fr;
+      }
+
+      .workspace-sidebar {
+        border-right: 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+      }
+
+      .workspace-session:not(.is-active) {
+        display: none;
+      }
+
+      .comparison-panel + .comparison-panel {
+        border-left: 0;
+        border-top: 1px solid var(--line-strong);
+      }
+
+      .industry-trigger {
+        grid-template-columns: 35px 1fr 32px;
+        gap: 12px;
+      }
+
+      .industry-trigger p {
+        grid-column: 2 / 3;
+      }
+
+      .industry-icon {
+        grid-column: 3;
+        grid-row: 1;
+      }
+
+      .industry-detail {
+        grid-template-columns: 1fr;
+        margin-left: 47px;
+        padding-right: 0;
+      }
+
+      .footer-watermark {
+        font-size: 17vw;
+      }
+    }
+
+    @media (max-width: 390px) {
+      .capability-strip,
+      .control-grid,
+      .pathway-grid,
+      .system-pillars,
+      .dimension-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .provider-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .feature-row {
+        grid-template-columns: 1fr;
+        gap: 5px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+
+      .js .reveal {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  </style>
+
+  <script src="/compiled/pages/learn_html-inline-1.js"></script>
+  <link rel="stylesheet" href="assets/css/professional.css">
+</head>
+
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <!-- ======================================================================
+       HEADER
+       ====================================================================== -->
+
+  <header class="site-header" id="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html" aria-label="DSRT AI home">
+        <!-- Replace this fallback emblem with assets/dsrt-logo.svg if desired. -->
+        <img
+          class="brand-mark"
+          src="assets/dsrt-logo.png"
+          alt="DSRT AI"
+          width="31"
+          height="31"
+        />
+
+        <span class="brand-name">DSRT AI</span>
+      </a>
+
+      <nav class="desktop-nav" aria-label="Page navigation">
+        <a href="#overview" data-nav="overview">Overview</a>
+        <a href="#system" data-nav="system">Technology</a>
+        <a href="#models" data-nav="models">Models</a>
+        <a href="#work-mode" data-nav="work-mode">Work Mode</a>
+        <a href="#war-mode" data-nav="war-mode">War Mode</a>
+        <a href="#enterprise" data-nav="enterprise">Enterprise</a>
+      </nav>
+
+      <div class="header-actions">
+        <a class="header-button home-button" href="index.html">Home</a>
+
+        <a class="header-button" href="#overview">Explore</a>
+
+        <button
+          class="header-button is-primary"
+          type="button"
+          data-open-contact
+        >
+          Get started
+        </button>
+
+        <button
+          class="menu-toggle"
+          type="button"
+          id="menu-open"
+          aria-label="Open navigation menu"
+          aria-controls="navigation-drawer"
+          aria-expanded="false"
+        >
+          <span class="menu-toggle-lines" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+        </button>
+      </div>
+    </div>
+
+    <div class="reading-progress" aria-hidden="true">
+      <span id="reading-progress-bar"></span>
+    </div>
+  </header>
+
+  <!-- ======================================================================
+       NAVIGATION DRAWER
+       ====================================================================== -->
+
+  <div
+    class="drawer"
+    id="navigation-drawer"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="drawer-title"
+  >
+    <div class="container drawer-inner">
+      <div class="drawer-top">
+        <span class="brand-name" id="drawer-title">DSRT AI</span>
+
+        <button
+          class="drawer-close"
+          type="button"
+          id="menu-close"
+          aria-label="Close navigation menu"
+        >
+          ×
+        </button>
+      </div>
+
+      <div class="drawer-grid">
+        <div>
+          <p class="drawer-label">Explore the system</p>
+
+          <nav class="drawer-links" aria-label="Expanded navigation">
+            <a href="index.html">Home <span>↗</span></a>
+            <a href="#overview">Overview <span>↘</span></a>
+            <a href="#system">Amplification <span>↘</span></a>
+            <a href="#models">Model orchestration <span>↘</span></a>
+            <a href="#work-mode">Work Mode <span>↘</span></a>
+            <a href="#war-mode">War Mode <span>↘</span></a>
+            <a href="#enterprise">Enterprise <span>↘</span></a>
+          </nav>
+        </div>
+
+        <div>
+          <p class="drawer-label">More</p>
+
+          <div class="drawer-secondary">
+            <a href="#industries">Industry applications</a>
+            <a href="#measurement">Measurement</a>
+            <a href="#deployment">Deployment pathways</a>
+            <a href="/login">Workspace sign in</a>
+            <a href="mailto:hello@dsrtai.com">Contact DSRT AI</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="drawer-bottom">
+        Intelligence infrastructure / DSRT AI
+      </div>
+    </div>
+  </div>
+
+  <main id="main-content">
+
+    <!-- ====================================================================
+         HERO
+         ==================================================================== -->
+
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="hero-background" aria-hidden="true"></div>
+
+      <!--
+        INTRO VIDEO PLACEHOLDER:
+        Replace assets/dsrt-intro.mp4 with your own video.
+        The background image remains visible if the video is unavailable.
+      -->
+      <video
+        class="hero-video"
+        id="hero-video"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="metadata"
+        poster="assets/hero-background.jpg"
+        aria-hidden="true"
+      >
+        <!-- Optional intro video not included in this package; poster image remains as fallback. -->
+      </video>
+
+      <div class="hero-overlay" aria-hidden="true"></div>
+      <div class="hero-grid-overlay" aria-hidden="true"></div>
+
+      <button
+        class="hero-video-control"
+        id="hero-video-control"
+        type="button"
+        aria-label="Pause background video"
+      >
+        Pause video
+      </button>
+
+      <div class="container hero-main">
+        <div class="hero-content">
+          <div class="hero-kicker">
+            Intelligence infrastructure / introduction
+          </div>
+
+          <h1 class="hero-title" id="hero-title">
+            <span class="hero-title-small">What is</span>
+            <span class="hero-title-large">DSRT AI</span>
+          </h1>
+
+          <p class="hero-description">
+            An intelligence amplification system designed to produce more
+            useful work from available computation.
+          </p>
+
+          <div class="hero-actions">
+            <a class="button is-dark" href="#overview">
+              <span>Explore DSRT AI</span>
+              <span class="button-arrow" aria-hidden="true">↘</span>
+            </a>
+
+            <button class="button" type="button" data-open-contact>
+              <span>Talk to our team</span>
+              <span class="button-arrow" aria-hidden="true">→</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="container hero-bottom">
+        <div class="hero-bottom-item">
+          Built around per-token intelligence
+        </div>
+
+        <a class="hero-scroll" href="#overview">
+          <span>Scroll to explore</span>
+          <span class="hero-scroll-icon" aria-hidden="true">↓</span>
+        </a>
+
+        <div class="hero-bottom-item">
+          Intelligence / execution / measurement
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         OVERVIEW
+         ==================================================================== -->
+
+    <section class="section statement-section" id="overview">
+      <div class="container">
+        <div class="statement-grid reveal">
+          <div class="statement-side">
+            <p class="eyebrow">The DSRT AI system</p>
+            <span class="statement-number">01 / INTRODUCTION</span>
+          </div>
+
+          <div class="statement-main">
+            <h2>More intelligence from every token.</h2>
+
+            <div class="statement-copy">
+              <p>
+                DSRT AI is an intelligence amplification system that improves
+                how artificial intelligence processes work. It coordinates
+                task understanding, context, model execution, reasoning, and
+                verification to produce more useful results from available
+                computation.
+              </p>
+
+              <p>
+                It helps organizations reduce unnecessary AI expenditure while
+                maintaining the quality and reliability their operations
+                require. Built around Per-Token Intelligence. Designed for
+                real-world execution.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         THE PROBLEM
+         ==================================================================== -->
+
+    <section
+      class="section has-background"
+      id="problem"
+      style="--section-image: url('assets/sections/problem.jpg');"
+    >
+      <div class="container">
+        <div class="section-topline reveal">
+          <p class="eyebrow">The computation problem</p>
+          <span class="section-index">02 / 11</span>
+        </div>
+
+        <div class="section-intro reveal">
+          <h2 class="section-heading">
+            AI expenditure grows with the way work is executed.
+          </h2>
+
+          <div class="section-copy">
+            <p>
+              AI systems charge for computation, but the amount of computation
+              used does not always correspond to the value of the result.
+            </p>
+
+            <p>
+              A simple task may receive unnecessarily complex processing. A
+              complex task may lack sufficient context or verification.
+              Repeated information can consume tokens without contributing
+              meaningfully to the result.
+            </p>
+          </div>
+        </div>
+
+        <div class="problem-layout reveal">
+          <div class="problem-summary">
+            <h3>Small inefficiencies become operational costs.</h3>
+
+            <p>
+              For organizations running AI across daily operations, execution
+              inefficiencies accumulate across tasks, teams, and workflows.
+            </p>
+          </div>
+
+          <div class="problem-list">
+            <article class="problem-row">
+              <span class="problem-row-number">01</span>
+              <h3>Repeated context</h3>
+              <p>Previously available information is processed repeatedly.</p>
+            </article>
+
+            <article class="problem-row">
+              <span class="problem-row-number">02</span>
+              <h3>Unnecessary computation</h3>
+              <p>
+                Tasks can receive more processing than their requirements
+                justify.
+              </p>
+            </article>
+
+            <article class="problem-row">
+              <span class="problem-row-number">03</span>
+              <h3>Poor execution selection</h3>
+              <p>
+                Model and execution choices may not reflect task complexity.
+              </p>
+            </article>
+
+            <article class="problem-row">
+              <span class="problem-row-number">04</span>
+              <h3>Insufficient verification</h3>
+              <p>
+                Outputs may require additional checks before operational use.
+              </p>
+            </article>
+          </div>
+        </div>
+
+        <div class="problem-callout reveal">
+          <p>
+            The objective is not to spend fewer tokens at any cost. It is to
+            spend computation where it contributes to the result.
+          </p>
+
+          <span>Objective / aligned allocation</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         AMPLIFICATION SYSTEM
+         ==================================================================== -->
+
+    <section
+      class="section has-background"
+      id="system"
+      style="--section-image: url('assets/sections/system.jpg');"
+    >
+      <div class="container">
+        <div class="section-topline reveal">
+          <p class="eyebrow">Core technology</p>
+          <span class="section-index">03 / 11</span>
+        </div>
+
+        <div class="section-intro reveal">
+          <h2 class="section-heading medium">
+            A task should not require more computation than necessary.
+          </h2>
+
+          <div class="section-copy">
+            <p>This is where DSRT AI operates.</p>
+
+            <p>
+              Instead of treating every request as an isolated model call, DSRT
+              introduces an intelligence layer between the task and its
+              execution.
+            </p>
+
+            <p>
+              It evaluates what the task requires, organizes the relevant
+              context, determines the appropriate execution approach, and
+              assesses the resulting output.
+            </p>
+          </div>
+        </div>
+
+        <div class="system-toolbar reveal">
+          <p>Logical amplification pipeline / select a stage</p>
+
+          <div
+            class="segmented-control"
+            role="group"
+            aria-label="Pipeline execution profile"
+          >
+            <button
+              type="button"
+              class="is-active"
+              data-pipeline-mode="full"
+              aria-pressed="true"
+            >
+              Full path
+            </button>
+
+            <button
+              type="button"
+              data-pipeline-mode="direct"
+              aria-pressed="false"
+            >
+              Lightweight path
+            </button>
+          </div>
+        </div>
+
+        <div class="pipeline reveal" id="pipeline">
+          <button
+            class="pipeline-stage is-selected"
+            type="button"
+            data-stage="0"
+            aria-pressed="true"
+          >
+            <span class="stage-top"><span>01</span><span>Required</span></span>
+            <span>
+              <span class="stage-title">Task input</span>
+              <span class="stage-summary">
+                User request, enterprise workflow, or API.
+              </span>
+            </span>
+          </button>
+
+          <button
+            class="pipeline-stage"
+            type="button"
+            data-stage="1"
+            aria-pressed="false"
+          >
+            <span class="stage-top"><span>02</span><span>Adaptive</span></span>
+            <span>
+              <span class="stage-title">Intent analysis</span>
+              <span class="stage-summary">
+                Identify objective, constraints, and ambiguity.
+              </span>
+            </span>
+          </button>
+
+          <button
+            class="pipeline-stage"
+            type="button"
+            data-stage="2"
+            aria-pressed="false"
+          >
+            <span class="stage-top">
+              <span>03</span>
+              <span data-stage-condition="2">Conditional</span>
+            </span>
+            <span>
+              <span class="stage-title">Context engineering</span>
+              <span class="stage-summary">
+                Reconstruct relevant context and remove noise.
+              </span>
+            </span>
+          </button>
+
+          <button
+            class="pipeline-stage"
+            type="button"
+            data-stage="3"
+            aria-pressed="false"
+          >
+            <span class="stage-top"><span>04</span><span>Routing</span></span>
+            <span>
+              <span class="stage-title">Execution strategy</span>
+              <span class="stage-summary">
+                Determine reasoning, model, and execution requirements.
+              </span>
+            </span>
+          </button>
+
+          <button
+            class="pipeline-stage"
+            type="button"
+            data-stage="4"
+            aria-pressed="false"
+          >
+            <span class="stage-top"><span>05</span><span>Required</span></span>
+            <span>
+              <span class="stage-title">Model execution</span>
+              <span class="stage-summary">
+                Execute through the selected provider and model.
+              </span>
+            </span>
+          </button>
+
+          <button
+            class="pipeline-stage"
+            type="button"
+            data-stage="5"
+            aria-pressed="false"
+          >
+            <span class="stage-top">
+              <span>06</span>
+              <span data-stage-condition="5">Conditional</span>
+            </span>
+            <span>
+              <span class="stage-title">Evaluation and verification</span>
+              <span class="stage-summary">
+                Evaluate against requirements and applicable checks.
+              </span>
+            </span>
+          </button>
+
+          <button
+            class="pipeline-stage"
+            type="button"
+            data-stage="6"
+            aria-pressed="false"
+          >
+            <span class="stage-top"><span>07</span><span>Required</span></span>
+            <span>
+              <span class="stage-title">Final result</span>
+              <span class="stage-summary">
+                Deliver a task-oriented output with available telemetry.
+              </span>
+            </span>
+          </button>
+        </div>
+
+        <div class="pipeline-inspector" aria-live="polite">
+          <div>
+            <div class="inspector-code" id="stage-code">
+              Stage 01 / task input
+            </div>
+
+            <h3 id="stage-title">Task input</h3>
+
+            <p id="stage-description">
+              Accepts task payloads from interactive workspaces, API requests,
+              or structured enterprise workflows.
+            </p>
+          </div>
+
+          <div class="inspector-meta">
+            <div class="meta-item">
+              <span>Execution condition</span>
+              <strong id="stage-condition">At task entry</strong>
+            </div>
+
+            <div class="meta-item">
+              <span>System output</span>
+              <strong id="stage-output">Normalized task request</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="architecture-note reveal">
+          <strong>Architectural execution note</strong>
+
+          <p>
+            This is a logical amplification pipeline, not a claim that every
+            task invokes seven sequential model calls. Components execute
+            conditionally according to task requirements. The system seeks to
+            understand before execution, allocate computation deliberately, and
+            evaluate outputs where applicable.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         PER-TOKEN INTELLIGENCE
+         ==================================================================== -->
+
+    <section
+      class="section has-background"
+      id="per-token"
+      style="--section-image: url('assets/sections/principle.jpg');"
+    >
+      <div class="container">
+        <div class="section-topline reveal">
+          <p class="eyebrow">Design principle</p>
+          <span class="section-index">04 / 11</span>
+        </div>
+
+        <div class="section-intro reveal">
+          <h2 class="section-heading">
+            Intelligence is not measured by token consumption.
+          </h2>
+
+          <div class="section-copy">
+            <p>
+              A larger context, longer response, or more expensive model does
+              not automatically produce a better result.
+            </p>
+
+            <p>
+              DSRT AI approaches computation through the value each token
+              contributes to a task.
+            </p>
+          </div>
+        </div>
+
+        <div class="principle-layout reveal">
+          <div class="equation-panel">
+            <span class="micro-label">Underlying principle</span>
+
+            <div
+              class="equation"
+              role="math"
+              aria-label="Efficiency equals useful verified output divided by total execution cost"
+            >
+              <span class="equation-name">Efficiency</span>
+              <span class="equation-equals">=</span>
+
+              <span class="fraction">
+                <span>Useful verified output</span>
+                <span>Total execution cost</span>
+              </span>
+            </div>
+
+            <p>
+              DSRT AI aims to increase the amount of useful, reliable work
+              produced for every unit of AI expenditure. The system
+              distinguishes between computation that contributes to the
+              outcome and computation that does not.
+            </p>
+          </div>
+
+          <div>
+            <p class="micro-label">What this means in practice</p>
+
+            <ol class="practice-list">
+              <li>
+                <span class="number">01</span>
+                <div>
+                  <strong>Context should be relevant to the task.</strong>
+                  <p>
+                    Exclude stale conversation fragments and non-pertinent
+                    document bulk.
+                  </p>
+                </div>
+              </li>
+
+              <li>
+                <span class="number">02</span>
+                <div>
+                  <strong>Reasoning depth should reflect complexity.</strong>
+                  <p>
+                    Reserve deeper deliberation for ambiguity, synthesis, or
+                    high-stakes constraints.
+                  </p>
+                </div>
+              </li>
+
+              <li>
+                <span class="number">03</span>
+                <div>
+                  <strong>Verification should reflect risk.</strong>
+                  <p>
+                    Match validation gates to operational impact rather than
+                    checking uniformly.
+                  </p>
+                </div>
+              </li>
+
+              <li>
+                <span class="number">04</span>
+                <div>
+                  <strong>Model selection should reflect requirements.</strong>
+                  <p>
+                    Avoid defaulting every task to heavyweight frontier models.
+                  </p>
+                </div>
+              </li>
+
+              <li>
+                <span class="number">05</span>
+                <div>
+                  <strong>Additional computation should be justified.</strong>
+                  <p>
+                    Evaluate amplification overhead alongside result quality.
+                  </p>
+                </div>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         MODEL ORCHESTRATION
+         ==================================================================== -->
+
+    <section
+      class="section has-background"
+      id="models"
+      style="--section-image: url('assets/sections/models.jpg');"
+    >
+      <div class="container">
+        <div class="section-topline reveal">
+          <p class="eyebrow">Model infrastructure</p>
+          <span class="section-index">05 / 11</span>
+        </div>
+
+        <div class="section-intro reveal">
+          <h2 class="section-heading medium">
+            One interface. Multiple model providers. Deliberate execution.
+          </h2>
+
+          <div class="section-copy">
+            <p>
+              Organizations should not have to build separate infrastructure
+              around every model provider.
+            </p>
+
+            <p>
+              DSRT AI provides a unified model access and orchestration layer,
+              allowing supported models to be integrated into the same
+              execution environment.
+            </p>
+          </div>
+        </div>
+
+        <div class="capability-strip reveal">
+          <article class="capability">
+            <span class="capability-number">01 / SELECT</span>
+            <h3>Model selection</h3>
+            <p>
+              Select models according to capability, task requirements,
+              availability, and cost.
+            </p>
+          </article>
+
+          <article class="capability">
+            <span class="capability-number">02 / CONNECT</span>
+            <h3>Provider connectivity</h3>
+            <p>
+              Connect supported providers through a unified integration layer.
+            </p>
+          </article>
+
+          <article class="capability">
+            <span class="capability-number">03 / CONTROL</span>
+            <h3>Bring your own key</h3>
+            <p>
+              Use organization-owned provider credentials and retain control
+              over provider expenditure.
+            </p>
+          </article>
+
+          <article class="capability">
+            <span class="capability-number">04 / OBSERVE</span>
+            <h3>Execution tracking</h3>
+            <p>
+              Track available model selection, token consumption, execution
+              costs, and output performance.
+            </p>
+          </article>
+        </div>
+
+        <div class="registry-header reveal">
+          <div>
+            <span class="micro-label">Illustrative provider ecosystem</span>
+            <h3>One orchestration layer.</h3>
+          </div>
+
+          <span class="registry-count">23 PROVIDER ENTRIES / SELECT TO INSPECT</span>
+        </div>
+
+        <!--
+          Provider buttons are generated from providerRegistry in the script.
+          Each logo path is assets/providers/{provider-key}.svg.
+        -->
+        <div
+          class="provider-grid reveal"
+          id="provider-grid"
+          aria-label="Illustrative provider registry"
+        ></div>
+
+        <div class="provider-inspector" aria-live="polite">
+          <div>
+            <span class="micro-label" id="provider-inspector-label">
+              Provider registry / DSRT AI
+            </span>
+
+            <h4 id="provider-inspector-title">DSRT AI</h4>
+
+            <p id="provider-inspector-description">
+              The DSRT intelligence layer coordinates task understanding,
+              execution, and available model integrations.
+            </p>
+          </div>
+
+          <span class="micro-label">Registry availability varies</span>
+        </div>
+
+        <p class="registry-note">
+          Illustrative ecosystem only. Provider names and logos do not imply
+          partnership, endorsement, or verified availability. Show a provider
+          as available only when its integration is supported by the deployed
+          DSRT registry.
+        </p>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         WORK MODE
+         ==================================================================== -->
+
+    <section
+      class="section has-background"
+      id="work-mode"
+      style="--section-image: url('assets/sections/work-mode.jpg');"
+    >
+      <div class="container">
+        <div class="section-topline reveal">
+          <p class="eyebrow">Product experience</p>
+          <span class="section-index">06 / 11</span>
+        </div>
+
+        <div class="section-intro reveal">
+          <h2 class="section-heading">
+            Put amplified intelligence to work.
+          </h2>
+
+          <div class="section-copy">
+            <p>
+              Work Mode provides a single working environment for interacting
+              with supported AI models through DSRT's amplification technology.
+            </p>
+
+            <p>
+              Users can work with different models while retaining continuity
+              across tasks and conversations, without managing separate AI
+              interfaces for each activity.
+            </p>
+          </div>
+        </div>
+
+        <div class="product-layout reveal">
+          <button
+            class="workspace-preview"
+            type="button"
+            id="workspace-preview"
+            aria-label="Enlarge illustrative Work Mode interface"
+          >
+            <div class="workspace-topbar">
+              <span>DSRT Work Mode / illustrative interface</span>
+              <span>Enlarge ↗</span>
+            </div>
+
+            <div class="workspace-body">
+              <aside class="workspace-sidebar">
+                <div class="workspace-label">Working sessions</div>
+                <div class="workspace-session is-active">
+                  Q3 Procurement Risk Review
+                </div>
+                <div class="workspace-session">API Migration Spec Audit</div>
+                <div class="workspace-session">Supplier Contract Synthesis</div>
+
+                <div style="margin-top:auto;padding-top:16px;">
+                  <div class="workspace-label">Credentials</div>
+                  <div style="font:10px var(--font-mono);color:#a9c9b9;">
+                    BYOK / ORG KEY ACTIVE
+                  </div>
+                </div>
+              </aside>
+
+              <div class="workspace-main">
+                <div class="workspace-models">
+                  <span class="workspace-chip">MODEL: REGISTRY ACTIVE</span>
+                  <span class="workspace-chip is-accent">
+                    AMPLIFICATION: ON
+                  </span>
+                  <span class="workspace-chip">CONTEXT: SCOPED</span>
+                </div>
+
+                <div class="workspace-thread">
+                  <div class="workspace-message">
+                    Extract indemnity exceptions from section 14 and
+                    cross-check against our standard enterprise baseline.
+                  </div>
+
+                  <div class="workspace-response">
+                    <strong>
+                      CONTEXT SCOPED → EXECUTED → VERIFIED
+                    </strong>
+
+                    Three material exceptions identified. Unrelated appendix
+                    material excluded prior to execution; claims anchored to
+                    source lines.
+                  </div>
+                </div>
+
+                <div class="workspace-telemetry">
+                  <span>CONTEXT: SCOPED</span>
+                  <span>CONTINUITY: RETAINED</span>
+                  <span>USAGE: VISIBLE</span>
+                </div>
+              </div>
+            </div>
+          </button>
+
+          <div>
+            <div class="feature-list">
+              <div class="feature-row">
+                <strong>Unified workspace</strong>
+                <span>Work with supported models in one interface.</span>
+              </div>
+
+              <div class="feature-row">
+                <strong>Model switching</strong>
+                <span>
+                  Change models without unnecessarily losing conversation
+                  context.
+                </span>
+              </div>
+
+              <div class="feature-row">
+                <strong>Amplified execution</strong>
+                <span>Apply DSRT's task-dependent amplification process.</span>
+              </div>
+
+              <div class="feature-row">
+                <strong>File handling</strong>
+                <span>Work with supported attachments and document inputs.</span>
+              </div>
+
+              <div class="feature-row">
+                <strong>Conversation history</strong>
+                <span>Access previous working sessions.</span>
+              </div>
+
+              <div class="feature-row">
+                <strong>Usage visibility</strong>
+                <span>Inspect available token and execution information.</span>
+              </div>
+            </div>
+
+            <div class="product-cta">
+              <a class="button is-dark" href="/login">
+                <span>Explore Work Mode</span>
+                <span class="button-arrow" aria-hidden="true">→</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         WAR MODE
+         ==================================================================== -->
+
+    <section
+      class="section has-background"
+      id="war-mode"
+      style="--section-image: url('assets/sections/war-mode.jpg');"
+    >
+      <div class="container">
+        <div class="section-topline reveal">
+          <p class="eyebrow">Comparative execution</p>
+          <span class="section-index">07 / 11</span>
+        </div>
+
+        <div class="section-intro reveal">
+          <h2 class="section-heading">
+            See what amplification changes.
+          </h2>
+
+          <div class="section-copy">
+            <p>
+              War Mode is the comparative environment for examining the effect
+              of DSRT amplification on AI execution.
+            </p>
+
+            <p>
+              Compare native model output with DSRT-amplified output. Examine
+              not only what the model produces, but what it costs to produce
+              it.
+            </p>
+          </div>
+        </div>
+
+        <div class="war-toolbar reveal">
+          <div
+            class="segmented-control"
+            role="group"
+            aria-label="Illustrative comparison scenarios"
+          >
+            <button
+              type="button"
+              class="is-active"
+              data-scenario="0"
+              aria-pressed="true"
+            >
+              Policy audit
+            </button>
+
+            <button
+              type="button"
+              data-scenario="1"
+              aria-pressed="false"
+            >
+              Financial variance
+            </button>
+
+            <button
+              type="button"
+              data-scenario="2"
+              aria-pressed="false"
+            >
+              Classification
+            </button>
+          </div>
+
+          <span class="war-note">Illustrative scenarios / not live telemetry</span>
+        </div>
+
+        <div class="comparison reveal" aria-live="polite">
+          <article class="comparison-panel">
+            <div class="comparison-head">
+              <div>
+                <h3>Native execution</h3>
+                <p>Task sent directly under the selected baseline configuration.</p>
+              </div>
+
+              <span class="comparison-tag">BASELINE</span>
+            </div>
+
+            <p class="comparison-output" id="native-output">
+              Full prompt and unpruned attachment context sent directly in a
+              single call. The output contains a narrative summary but leaves
+              edge-case clauses unchecked against source bounds.
+            </p>
+
+            <div class="comparison-metrics">
+              <div class="comparison-metric">
+                <span>Input</span>
+                <strong id="native-input">Full unpruned context</strong>
+              </div>
+
+              <div class="comparison-metric">
+                <span>Output</span>
+                <strong id="native-format">Unconstrained length</strong>
+              </div>
+
+              <div class="comparison-metric">
+                <span>Cost</span>
+                <strong id="native-cost">Baseline provider billing</strong>
+              </div>
+
+              <div class="comparison-metric">
+                <span>Quality</span>
+                <strong id="native-quality">Unverified baseline response</strong>
+              </div>
+            </div>
+          </article>
+
+          <article class="comparison-panel">
+            <div class="comparison-head">
+              <div>
+                <h3>DSRT execution</h3>
+                <p>The same task processed through the amplification system.</p>
+              </div>
+
+              <span class="comparison-tag">AMPLIFIED</span>
+            </div>
+
+            <p class="comparison-output" id="dsrt-output">
+              Relevant clauses extracted before model execution; reasoning
+              budget aligned to discrepancies; verification checks clause
+              citations against supplied source sections.
+            </p>
+
+            <div class="comparison-metrics">
+              <div class="comparison-metric">
+                <span>Token consumption</span>
+                <strong id="dsrt-tokens">Scoped context and trace</strong>
+              </div>
+
+              <div class="comparison-metric">
+                <span>Cost</span>
+                <strong id="dsrt-cost">Measured per execution</strong>
+              </div>
+
+              <div class="comparison-metric">
+                <span>Quality</span>
+                <strong id="dsrt-quality">Evaluated against criteria</strong>
+              </div>
+
+              <div class="comparison-metric">
+                <span>Verification</span>
+                <strong id="dsrt-verification">Checks recorded</strong>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div class="dimension-grid reveal">
+          <span>Total execution cost</span>
+          <span>Input and output tokens</span>
+          <span>Cost difference</span>
+          <span>Task completion quality</span>
+          <span>Factual accuracy, where measurable</span>
+          <span>Instruction adherence</span>
+          <span>Latency</span>
+          <span>Amplification overhead</span>
+        </div>
+
+        <div style="margin-top:30px;" class="reveal">
+          <a class="button is-dark" href="/login">
+            <span>Explore War Mode</span>
+            <span class="button-arrow" aria-hidden="true">→</span>
+          </a>
+        </div>
+
+        <p class="registry-note">
+          Actual comparisons should report measured overhead and quality
+          side-by-side without pre-assumed outcomes.
+        </p>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         ENTERPRISE
+         ==================================================================== -->
+
+    <section
+      class="section has-background"
+      id="enterprise"
+      style="--section-image: url('assets/sections/enterprise.jpg');"
+    >
+      <div class="container">
+        <div class="section-topline reveal">
+          <p class="eyebrow">Organizational control</p>
+          <span class="section-index">08 / 11</span>
+        </div>
+
+        <div class="section-intro reveal">
+          <h2 class="section-heading medium">
+            Connect AI operations to the systems that manage them.
+          </h2>
+
+          <div class="section-copy">
+            <p>
+              An enterprise AI environment requires more than model access. It
+              needs controlled credentials, usage visibility, configuration,
+              and operational oversight.
+            </p>
+          </div>
+        </div>
+
+        <div class="control-grid reveal">
+          <article class="control-card">
+            <span class="micro-label">Control / 01</span>
+            <div>
+              <h3>Credential management</h3>
+              <p>Configure and manage provider credentials with controlled access.</p>
+            </div>
+          </article>
+
+          <article class="control-card">
+            <span class="micro-label">Control / 02</span>
+            <div>
+              <h3>Provider registry</h3>
+              <p>Maintain a structured registry of providers and available models.</p>
+            </div>
+          </article>
+
+          <article class="control-card">
+            <span class="micro-label">Control / 03</span>
+            <div>
+              <h3>Usage and cost accounting</h3>
+              <p>Track execution-level consumption and expenditure.</p>
+            </div>
+          </article>
+
+          <article class="control-card">
+            <span class="micro-label">Control / 04</span>
+            <div>
+              <h3>Access governance</h3>
+              <p>Establish organization-level permissions and credential boundaries.</p>
+            </div>
+          </article>
+
+          <article class="control-card">
+            <span class="micro-label">Control / 05</span>
+            <div>
+              <h3>Execution observability</h3>
+              <p>Inspect execution status, model usage, latency, and failures.</p>
+            </div>
+          </article>
+
+          <article class="control-card">
+            <span class="micro-label">Control / 06</span>
+            <div>
+              <h3>Integration infrastructure</h3>
+              <p>Connect supported APIs and enterprise workflows.</p>
+            </div>
+          </article>
+        </div>
+
+        <div class="boundary-grid reveal">
+          <div>
+            <h4>Platform controls</h4>
+            <p>
+              Provider registry management, BYOK credential handling, Work
+              Mode and War Mode telemetry, and per-execution token and cost
+              tracking depend on the deployed platform configuration.
+            </p>
+          </div>
+
+          <div>
+            <h4>Enterprise deployment scope</h4>
+            <p>
+              Organization-specific SSO, dedicated audit exports, private
+              network isolation, and custom compliance arrangements are scoped
+              and verified per enterprise deployment agreement.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         INDUSTRIES
+         ==================================================================== -->
+
+    <section
+      class="section has-background"
+      id="industries"
+      style="--section-image: url('assets/sections/industries.jpg');"
+    >
+      <div class="container">
+        <div class="section-topline reveal">
+          <p class="eyebrow">Applications</p>
+          <span class="section-index">09 / 11</span>
+        </div>
+
+        <div class="section-intro reveal">
+          <h2 class="section-heading">
+            One intelligence layer. Different operational environments.
+          </h2>
+
+          <div class="section-copy">
+            <p>
+              DSRT AI's amplification technology is designed to improve AI
+              execution across different kinds of work.
+            </p>
+
+            <p>
+              The underlying technology remains consistent; task requirements
+              and integrations change by industry.
+            </p>
+          </div>
+        </div>
+
+        <div class="industries-list reveal">
+          <article class="industry">
+            <button class="industry-trigger" type="button" aria-expanded="false">
+              <span class="industry-number">01</span>
+              <h3>Financial Services</h3>
+              <p>
+                Research, financial analysis, document processing, risk
+                workflows, and reporting.
+              </p>
+              <span class="industry-icon" aria-hidden="true">+</span>
+            </button>
+
+            <div class="industry-detail">
+              <div>
+                <span>Operational problem</span>
+                <p>
+                  Dense filings and multi-source disclosures inflate input
+                  context and increase unverified synthesis risk.
+                </p>
+              </div>
+
+              <div>
+                <span>Applied execution</span>
+                <p>
+                  Context engineering isolates pertinent sections; applicable
+                  verification checks compare outputs against source material.
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <article class="industry">
+            <button class="industry-trigger" type="button" aria-expanded="false">
+              <span class="industry-number">02</span>
+              <h3>Manufacturing</h3>
+              <p>
+                Technical documentation, maintenance knowledge, production
+                reporting, and operational assistance.
+              </p>
+              <span class="industry-icon" aria-hidden="true">+</span>
+            </button>
+
+            <div class="industry-detail">
+              <div>
+                <span>Operational problem</span>
+                <p>
+                  Large equipment manuals can create repetitive context
+                  consumption and irrelevant retrieval.
+                </p>
+              </div>
+
+              <div>
+                <span>Applied execution</span>
+                <p>
+                  Task routing distinguishes routine lookup from complex
+                  diagnostic analysis before selecting execution pathways.
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <article class="industry">
+            <button class="industry-trigger" type="button" aria-expanded="false">
+              <span class="industry-number">03</span>
+              <h3>Healthcare &amp; Research</h3>
+              <p>
+                Research synthesis, scientific document analysis, and
+                knowledge workflows.
+              </p>
+              <span class="industry-icon" aria-hidden="true">+</span>
+            </button>
+
+            <div class="industry-detail">
+              <div>
+                <span>Operational problem</span>
+                <p>
+                  Literature synthesis requires fidelity to evidence without
+                  extrapolating across unrelated study cohorts.
+                </p>
+              </div>
+
+              <div>
+                <span>Applied execution</span>
+                <p>
+                  Evidence checks can connect synthesized conclusions to
+                  verifiable document segments for human review.
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <article class="industry">
+            <button class="industry-trigger" type="button" aria-expanded="false">
+              <span class="industry-number">04</span>
+              <h3>Supply Chain &amp; Logistics</h3>
+              <p>
+                Supplier analysis, procurement research, logistics
+                documentation, and planning support.
+              </p>
+              <span class="industry-icon" aria-hidden="true">+</span>
+            </button>
+
+            <div class="industry-detail">
+              <div>
+                <span>Operational problem</span>
+                <p>
+                  High-volume vendor documents and exception logs require
+                  predictable processing across recurring batches.
+                </p>
+              </div>
+
+              <div>
+                <span>Applied execution</span>
+                <p>
+                  Orchestration can direct routine extraction to efficient
+                  models while escalating non-standard exceptions.
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <article class="industry">
+            <button class="industry-trigger" type="button" aria-expanded="false">
+              <span class="industry-number">05</span>
+              <h3>Software &amp; Technology</h3>
+              <p>
+                Code analysis, debugging assistance, technical research, and
+                software documentation.
+              </p>
+              <span class="industry-icon" aria-hidden="true">+</span>
+            </button>
+
+            <div class="industry-detail">
+              <div>
+                <span>Operational problem</span>
+                <p>
+                  Passing entire repositories or broad dependency logs can
+                  raise per-query costs unnecessarily.
+                </p>
+              </div>
+
+              <div>
+                <span>Applied execution</span>
+                <p>
+                  Context reconstruction focuses on pertinent dependencies and
+                  allocates reasoning according to complexity.
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <article class="industry">
+            <button class="industry-trigger" type="button" aria-expanded="false">
+              <span class="industry-number">06</span>
+              <h3>Enterprise Operations</h3>
+              <p>
+                Internal knowledge work, document workflows, reporting, and
+                process automation.
+              </p>
+              <span class="industry-icon" aria-hidden="true">+</span>
+            </button>
+
+            <div class="industry-detail">
+              <div>
+                <span>Operational problem</span>
+                <p>
+                  Fragmented AI subscriptions and redundant prompt workflows
+                  reduce centralized cost visibility.
+                </p>
+              </div>
+
+              <div>
+                <span>Applied execution</span>
+                <p>
+                  Work Mode can consolidate multi-model workflows under
+                  organization-owned credentials with available telemetry.
+                </p>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <p class="registry-note">
+          These are operational application areas, not claims of completed
+          customer deployments.
+        </p>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         MEASUREMENT
+         ==================================================================== -->
+
+    <section
+      class="section has-background"
+      id="measurement"
+      style="--section-image: url('assets/sections/measurement.jpg');"
+    >
+      <div class="container">
+        <div class="section-topline reveal">
+          <p class="eyebrow">Performance measurement</p>
+          <span class="section-index">10 / 11</span>
+        </div>
+
+        <div class="section-intro reveal">
+          <h2 class="section-heading medium">
+            Lower expenditure is only useful when the result holds.
+          </h2>
+
+          <div class="section-copy">
+            <p>DSRT AI measures efficiency and quality together.</p>
+
+            <p>
+              A system that reduces token consumption but produces an inferior
+              result has not achieved the objective.
+            </p>
+          </div>
+        </div>
+
+        <div class="measurement-layout reveal">
+          <div class="measurement-statement">
+            <h3>Measure the work, not just the tokens.</h3>
+
+            <p>
+              Evaluate execution economics alongside task completion,
+              correctness, latency, and applicable verification.
+            </p>
+          </div>
+
+          <div>
+            <table class="metrics-table">
+              <thead>
+                <tr>
+                  <th scope="col">Metric</th>
+                  <th scope="col">What it establishes</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr>
+                  <td>Total cost</td>
+                  <td>Actual expenditure per task</td>
+                </tr>
+
+                <tr>
+                  <td>Input tokens</td>
+                  <td>Context consumption</td>
+                </tr>
+
+                <tr>
+                  <td>Output tokens</td>
+                  <td>Generated token consumption</td>
+                </tr>
+
+                <tr>
+                  <td>Cost per successful task</td>
+                  <td>Economic cost of achieving the objective</td>
+                </tr>
+
+                <tr>
+                  <td>Quality score</td>
+                  <td>Result quality against defined criteria</td>
+                </tr>
+
+                <tr>
+                  <td>Accuracy</td>
+                  <td>Correctness against verified references</td>
+                </tr>
+
+                <tr>
+                  <td>Latency</td>
+                  <td>Time required to produce the result</td>
+                </tr>
+
+                <tr>
+                  <td>Verification rate</td>
+                  <td>Whether required checks passed</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="formula-note">
+              <span>Net infrastructure economics</span>
+              <p>
+                Net savings = baseline cost − amplified cost − additional
+                infrastructure cost.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         DEPLOYMENT
+         ==================================================================== -->
+
+    <section
+      class="section has-background"
+      id="deployment"
+      style="--section-image: url('assets/sections/deployment.jpg');"
+    >
+      <div class="container">
+        <div class="section-topline reveal">
+          <p class="eyebrow">Enterprise adoption</p>
+          <span class="section-index">11 / 11</span>
+        </div>
+
+        <div class="section-intro reveal">
+          <h2 class="section-heading medium">
+            Integrate with the infrastructure you already operate.
+          </h2>
+
+          <div class="section-copy">
+            <p>
+              DSRT AI fits into existing AI workflows rather than requiring
+              organizations to rebuild their technology stack.
+            </p>
+
+            <p>
+              Begin with the DSRT workspace and expand integration as
+              operational requirements evolve.
+            </p>
+          </div>
+        </div>
+
+        <div class="pathway-grid reveal">
+          <article class="pathway-card">
+            <span>PATHWAY / 01</span>
+            <div>
+              <h3>DSRT Workspace</h3>
+              <p>Access Work Mode and War Mode through the DSRT AI application.</p>
+            </div>
+          </article>
+
+          <article class="pathway-card">
+            <span>PATHWAY / 02</span>
+            <div>
+              <h3>BYOK Integration</h3>
+              <p>Connect organization-owned provider credentials.</p>
+            </div>
+          </article>
+
+          <article class="pathway-card">
+            <span>PATHWAY / 03</span>
+            <div>
+              <h3>API Integration</h3>
+              <p>
+                Connect supported capabilities to external applications and
+                workflows, subject to API availability.
+              </p>
+            </div>
+          </article>
+
+          <article class="pathway-card">
+            <span>PATHWAY / 04</span>
+            <div>
+              <h3>Enterprise Deployment</h3>
+              <p>
+                Discuss organization-specific integrations, access
+                requirements, workload architecture, and deployment.
+              </p>
+            </div>
+          </article>
+        </div>
+
+        <div class="system-summary reveal">
+          <div class="system-summary-head">
+            <div>
+              <span class="micro-label">The DSRT AI system</span>
+              <h3>More useful work. Less unnecessary computation.</h3>
+            </div>
+
+            <button class="button is-dark" type="button" data-open-contact>
+              <span>Discuss enterprise integration</span>
+              <span class="button-arrow" aria-hidden="true">→</span>
+            </button>
+          </div>
+
+          <div class="system-pillars">
+            <div class="system-pillar">
+              <h4>Intelligence</h4>
+              <p>Intent, context, reasoning, and evaluation.</p>
+            </div>
+
+            <div class="system-pillar">
+              <h4>Execution</h4>
+              <p>Models, providers, and task processing.</p>
+            </div>
+
+            <div class="system-pillar">
+              <h4>Infrastructure</h4>
+              <p>Credentials, integrations, and operational control.</p>
+            </div>
+
+            <div class="system-pillar">
+              <h4>Economics</h4>
+              <p>Token consumption, cost, and verified efficiency.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         CLOSING
+         ==================================================================== -->
+
+    <section class="section closing" id="closing">
+      <div class="container">
+        <div class="section-topline reveal">
+          <p class="eyebrow">The next layer of AI infrastructure</p>
+          <span class="section-index">DSRT AI</span>
+        </div>
+
+        <div class="closing-grid reveal">
+          <div>
+            <h2>Make every unit of computation count.</h2>
+
+            <div class="closing-tags">
+              <span>Amplification</span>
+              <span>Orchestration</span>
+              <span>Measurement</span>
+            </div>
+          </div>
+
+          <div class="closing-copy">
+            <p>
+              AI should not become more expensive simply because organizations
+              need it to do more. DSRT AI is building intelligence
+              infrastructure to make AI execution more efficient, measurable,
+              and useful.
+            </p>
+
+            <button class="button is-dark" type="button" data-open-contact>
+              <span>Talk to DSRT AI</span>
+              <span class="button-arrow" aria-hidden="true">→</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ======================================================================
+       FOOTER
+       ====================================================================== -->
+
+  <footer class="site-footer">
+    <div class="container footer-top">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand">
+            <div class="footer-brand-icon" aria-hidden="true">»</div>
+
+            <div>
+              <div class="footer-brand-name">DSRT AI</div>
+              <div class="footer-brand-sub">
+                Intelligence from every token.
+              </div>
+            </div>
+          </div>
+
+          <div class="footer-description">
+            Intelligence infrastructure for enterprise AI. DSRT AI coordinates
+            task understanding, context, model execution, and verification to
+            make computation more useful.
+          </div>
+
+          <div class="footer-copyright">
+            © <span id="copyright-year">2026</span> DSRT AI.<br />
+            All rights reserved.
+          </div>
+
+          <div class="footer-legal">
+            <a href="/privacy">Privacy ↗</a>
+            <a href="/terms">Terms ↗</a>
+            <a href="mailto:jisu@dsrtai.com">Contact ↗</a>
+          </div>
+        </div>
+
+        <div class="footer-navigation">
+          <div>
+            <div class="footer-nav-group">
+              <div class="footer-nav-title">Platform</div>
+
+              <div class="footer-nav-links">
+                <a href="#system">01 / Amplification</a>
+                <a href="#models">02 / Model orchestration</a>
+                <a href="#work-mode">03 / Work Mode</a>
+                <a href="#war-mode">04 / War Mode</a>
+              </div>
+            </div>
+
+            <div class="footer-nav-group">
+              <div class="footer-nav-title">Navigate</div>
+
+              <div class="footer-nav-links">
+                <a href="index.html">→ Home</a>
+                <a href="#top">→ Top</a>
+                <a href="#overview">→ Explore</a>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="footer-nav-group">
+              <div class="footer-nav-title">Enterprise</div>
+
+              <div class="footer-nav-links">
+                <a href="#enterprise">→ Infrastructure</a>
+                <a href="#industries">→ Applications</a>
+                <a href="#measurement">→ Measurement</a>
+                <a href="#deployment">→ Deployment</a>
+              </div>
+            </div>
+
+            <div class="footer-nav-group">
+              <div class="footer-nav-title">Contact</div>
+
+              <div class="footer-nav-links">
+                <a href="mailto:jisu@dsrtai.com">→ hello@dsrtai.com</a>
+                <a href="/login">→ Workspace sign in</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-watermark" aria-hidden="true">DSRT AI</div>
+
+      <div class="footer-bottom">
+        <span>DSRT AI — Intelligence infrastructure</span>
+        <span>Amplification · orchestration · measurement</span>
+        <a href="#top">Back to top ↑</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ======================================================================
+       CONTACT DIALOG
+       ====================================================================== -->
+
+  <dialog id="contact-dialog" aria-labelledby="contact-title">
+    <div class="dialog-head">
+      <span>DSRT AI / enterprise access</span>
+
+      <button
+        class="dialog-close"
+        type="button"
+        data-close-dialog
+        aria-label="Close contact dialog"
+      >
+        ×
+      </button>
+    </div>
+
+    <div class="dialog-body">
+      <p class="micro-label">Architecture and deployment briefings</p>
+
+      <h2 id="contact-title">Start a conversation with DSRT AI.</h2>
+
+      <p>
+        Discuss your AI workflows, provider integrations, enterprise
+        requirements, and deployment pathways with our team.
+      </p>
+
+      <p>
+        Email us with your organization name, work email, and the integration
+        pathway you would like to explore.
+      </p>
+
+      <div class="dialog-actions">
+        <a
+          class="button is-dark"
+          href="mailto:jisu@dsrtai.com?subject=DSRT%20AI%20Enterprise%20Briefing"
+        >
+          <span>Email our team</span>
+          <span class="button-arrow" aria-hidden="true">↗</span>
+        </a>
+
+        <a class="button" href="/login">
+          <span>Workspace sign in</span>
+          <span class="button-arrow" aria-hidden="true">→</span>
+        </a>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- ======================================================================
+       WORK MODE PREVIEW DIALOG
+       ====================================================================== -->
+
+  <dialog id="workspace-dialog" aria-labelledby="workspace-dialog-title">
+    <div class="dialog-head">
+      <span id="workspace-dialog-title">
+        DSRT Work Mode / illustrative interface
+      </span>
+
+      <button
+        class="dialog-close"
+        type="button"
+        data-close-dialog
+        aria-label="Close Work Mode preview"
+      >
+        ×
+      </button>
+    </div>
+
+    <div class="dialog-workspace">
+      <div class="workspace-body" style="min-height:500px;background:#171b1f;color:#e8eef1;">
+        <aside class="workspace-sidebar">
+          <div class="workspace-label">Working sessions</div>
+          <div class="workspace-session is-active">
+            Q3 Procurement Risk Review
+          </div>
+          <div class="workspace-session">API Migration Spec Audit</div>
+          <div class="workspace-session">Supplier Contract Synthesis</div>
+          <div class="workspace-session">Variance Baseline Check</div>
+
+          <div style="margin-top:auto;padding-top:16px;">
+            <div class="workspace-label">Workspace controls</div>
+            <div style="font:10px var(--font-mono);color:#a9c9b9;">
+              BYOK / ORG CREDENTIAL ACTIVE
+            </div>
+          </div>
+        </aside>
+
+        <div class="workspace-main" style="padding:28px;">
+          <div class="workspace-models">
+            <span class="workspace-chip">MODEL: REGISTRY ACTIVE</span>
+            <span class="workspace-chip is-accent">AMPLIFICATION: ON</span>
+            <span class="workspace-chip">CONTEXT: SCOPED</span>
+          </div>
+
+          <div class="workspace-thread" style="font-size:14px;">
+            <div class="workspace-message">
+              Extract indemnity exceptions from section 14 and cross-check
+              against our standard enterprise baseline. Keep output structured
+              for legal review.
+            </div>
+
+            <div class="workspace-response">
+              <strong>
+                INTENT ANALYZED → CONTEXT SCOPED → VERIFIED AGAINST BASELINE
+              </strong>
+
+              <p style="margin:0 0 10px;color:inherit;">
+                <b>1. Liability cap carve-out.</b> A clause diverges from the
+                standard fee-cap baseline.
+              </p>
+
+              <p style="margin:0 0 10px;color:inherit;">
+                <b>2. Notice period delta.</b> The supplied contract uses a
+                shorter written notice window.
+              </p>
+
+              <p style="margin:0;color:inherit;">
+                <b>3. Sub-processor indemnification.</b> The illustrative
+                clause matches the baseline requirements.
+              </p>
+            </div>
+          </div>
+
+          <div class="workspace-telemetry">
+            <span>CONTINUITY: RETAINED</span>
+            <span>VERIFICATION: SOURCE REFERENCES</span>
+            <span>USAGE: INSPECTABLE</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- ======================================================================
+       INTERACTIVE BEHAVIOR
+       ====================================================================== -->
+
+  <script src="/compiled/pages/learn_html-inline-2.js"></script>
+  <script src="/compiled/assets/js/professional-motion.js" defer></script>
+</body>
+</html>

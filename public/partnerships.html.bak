@@ -1,0 +1,4179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800;900&family=Rajdhani:wght@400;500;600;700&family=Exo+2:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DSRT AI — Enterprise Engagements</title>
+  <meta name="description" content="DSRT AI brings in-house LLM Amplification technology to enterprise AI operations, helping organizations make their AI expenditure more efficient without compromising quality and reliability." />
+  
+  <!-- Typography: Clean Neo-Grotesque + Technical Monospace -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ==========================================================================
+       1. DESIGN TOKENS & SYSTEM VARIABLES (PART III — SECTION 18)
+       ========================================================================== */
+    :root {
+      /* Palette */
+      --bg-main: #FFFFFF;
+      --bg-secondary: #F6F7F7;
+      --bg-elevated: #FAFAFB;
+      --bg-dark: #111820;
+      --bg-dark-elevated: #18222D;
+
+      --text-main: #17191B;
+      --text-secondary: #626A70;
+      --text-muted: #879097;
+      --text-inverse: #FFFFFF;
+      --text-inverse-secondary: #A9B2BA;
+
+      --border-light: #E5E7E8;
+      --border-strong: #CFD4D7;
+      --border-dark: #263240;
+
+      /* Restrained DSRT Green — used sparingly for validated positive indicators */
+      --accent-green: #126E48;
+      --accent-green-bg: #EEF6F2;
+      --accent-green-border: #C2DFD1;
+      --accent-green-bright: #28A870;
+
+      /* Error / Warning */
+      --status-error: #B42318;
+      --status-error-bg: #FEF3F2;
+      --status-error-border: #FECDCA;
+
+      /* Typography */
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+      /* Layout & Spacing */
+      --container-max: 1280px;
+      --gutter-desktop: 48px;
+      --gutter-tablet: 32px;
+      --gutter-mobile: 20px;
+      --section-space: 116px;
+      --section-space-mobile: 76px;
+
+      /* Micro-radius for authoritative technical precision */
+      --radius-sm: 2px;
+      --radius-md: 4px;
+    }
+
+    /* ==========================================================================
+       2. RESET & BASE TYPOGRAPHY
+       ========================================================================== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      line-height: 1.6;
+      font-size: 16px;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button, input, select, textarea {
+      font-family: inherit;
+      font-size: inherit;
+      color: inherit;
+    }
+
+    ul, ol {
+      list-style: none;
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--accent-green);
+      outline-offset: 2px;
+    }
+
+    /* ==========================================================================
+       3. LAYOUT PRIMITIVES & TYPOGRAPHY HIERARCHY (SECTION 18.2 & 18.3)
+       ========================================================================== */
+    .container {
+      max-width: var(--container-max);
+      margin: 0 auto;
+      padding: 0 var(--gutter-desktop);
+    }
+
+    .section {
+      padding: var(--section-space) 0;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .section--secondary {
+      background-color: var(--bg-secondary);
+    }
+
+    .section--dark {
+      background-color: var(--bg-dark);
+      color: var(--text-inverse);
+      border-bottom: 1px solid var(--border-dark);
+    }
+
+    .eyebrow {
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      background-color: var(--accent-green);
+      border-radius: 1px;
+    }
+
+    .section--dark .eyebrow {
+      color: var(--text-inverse-secondary);
+    }
+
+    .section--dark .eyebrow::before {
+      background-color: var(--accent-green-bright);
+    }
+
+    .hero-heading {
+      font-size: clamp(38px, 4.5vw, 58px);
+      font-weight: 600;
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      color: var(--text-main);
+      margin-bottom: 24px;
+    }
+
+    .section-heading {
+      font-size: clamp(28px, 3vw, 38px);
+      font-weight: 600;
+      line-height: 1.16;
+      letter-spacing: -0.025em;
+      color: var(--text-main);
+      max-width: 24ch;
+      margin-bottom: 20px;
+    }
+
+    .section--dark .section-heading {
+      color: var(--text-inverse);
+    }
+
+    .subheading {
+      font-size: clamp(19px, 1.8vw, 22px);
+      font-weight: 600;
+      line-height: 1.3;
+      letter-spacing: -0.015em;
+      color: var(--text-main);
+    }
+
+    .lead-copy {
+      font-size: 16.5px;
+      line-height: 1.65;
+      color: var(--text-secondary);
+      max-width: 68ch;
+    }
+
+    .lead-copy + .lead-copy {
+      margin-top: 14px;
+    }
+
+    .supporting-copy {
+      font-size: 14px;
+      line-height: 1.55;
+      color: var(--text-secondary);
+    }
+
+    .mono-index {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      letter-spacing: 0.04em;
+    }
+
+    .section-header-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: end;
+      margin-bottom: 64px;
+    }
+
+    .section-header-stack {
+      margin-bottom: 56px;
+    }
+
+    /* Qualification / Contractual Notice Box */
+    .governance-note {
+      margin-top: 40px;
+      padding: 20px 24px;
+      background-color: var(--bg-secondary);
+      border-left: 2px solid var(--text-main);
+      border-top: 1px solid var(--border-light);
+      border-right: 1px solid var(--border-light);
+      border-bottom: 1px solid var(--border-light);
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .section--secondary .governance-note {
+      background-color: var(--bg-main);
+    }
+
+    .governance-note__label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-main);
+      white-space: nowrap;
+      padding-top: 2px;
+    }
+
+    .governance-note__text {
+      font-size: 14px;
+      line-height: 1.55;
+      color: var(--text-secondary);
+      max-width: 85ch;
+    }
+
+    /* Buttons */
+    .btn-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 13px 24px;
+      font-size: 14.5px;
+      font-weight: 500;
+      line-height: 1.2;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: background-color 0.16s ease, border-color 0.16s ease, color 0.16s ease;
+      border: 1px solid transparent;
+      white-space: nowrap;
+    }
+
+    .btn--primary {
+      background-color: var(--text-main);
+      color: var(--text-inverse);
+      border-color: var(--text-main);
+    }
+
+    .btn--primary:hover {
+      background-color: #2C3135;
+      border-color: #2C3135;
+    }
+
+    .btn--secondary {
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      border-color: var(--border-strong);
+    }
+
+    .btn--secondary:hover {
+      background-color: var(--bg-secondary);
+      border-color: var(--text-main);
+    }
+
+    .btn--inverse {
+      background-color: var(--text-inverse);
+      color: var(--bg-dark);
+      border-color: var(--text-inverse);
+    }
+
+    .btn--inverse:hover {
+      background-color: #E6E9EC;
+      border-color: #E6E9EC;
+    }
+
+    .btn--outline-inverse {
+      background-color: transparent;
+      color: var(--text-inverse);
+      border-color: #3D4B5C;
+    }
+
+    .btn--outline-inverse:hover {
+      border-color: var(--text-inverse);
+      background-color: rgba(255, 255, 255, 0.05);
+    }
+
+    /* ==========================================================================
+       4. GLOBAL NAVIGATION
+       ========================================================================== */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background-color: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .site-header__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 16px;
+      letter-spacing: -0.02em;
+      color: var(--text-main);
+    }
+
+    .brand__mark {
+      width: 22px;
+      height: 22px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2px;
+    }
+
+    .brand__mark span {
+      background-color: var(--text-main);
+      display: block;
+    }
+
+    .brand__mark span:last-child {
+      background-color: var(--accent-green);
+    }
+
+    .brand__divider {
+      color: var(--border-strong);
+      font-weight: 400;
+    }
+
+    .brand__route {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      letter-spacing: 0.04em;
+    }
+
+    .site-nav {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .site-nav__link {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      transition: color 0.15s ease;
+      padding: 6px 0;
+      position: relative;
+    }
+
+    .site-nav__link:hover {
+      color: var(--text-main);
+    }
+
+    .site-nav__link--active {
+      color: var(--text-main);
+    }
+
+    .site-nav__link--active::after {
+      content: "";
+      position: absolute;
+      bottom: -20px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background-color: var(--text-main);
+    }
+
+    .site-header__actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn--nav {
+      padding: 9px 16px;
+      font-size: 13.5px;
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: 1px solid var(--border-light);
+      padding: 8px 10px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      color: var(--text-main);
+    }
+
+    .mobile-nav-drawer {
+      display: none;
+      border-top: 1px solid var(--border-light);
+      background-color: var(--bg-main);
+      padding: 20px var(--gutter-mobile) 24px;
+    }
+
+    .mobile-nav-drawer.is-open {
+      display: block;
+    }
+
+    .mobile-nav-drawer__list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .mobile-nav-drawer__link {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      padding: 4px 0;
+    }
+
+    .mobile-nav-drawer__link--active {
+      color: var(--text-main);
+      font-weight: 600;
+    }
+
+    /* ==========================================================================
+       5. SECTION 01 — ENTERPRISE INTRODUCTION (HERO)
+       ========================================================================== */
+    .hero {
+      padding: 88px 0 0;
+      border-bottom: 1px solid var(--border-light);
+      background-color: var(--bg-main);
+    }
+
+    .hero__grid {
+      display: grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      gap: 56px;
+      align-items: center;
+      padding-bottom: 76px;
+    }
+
+    .hero__description {
+      margin-bottom: 34px;
+    }
+
+    .hero__description p {
+      font-size: 16.5px;
+      line-height: 1.65;
+      color: var(--text-secondary);
+      max-width: 60ch;
+    }
+
+    .hero__description p + p {
+      margin-top: 14px;
+    }
+
+    /* Right: Restrained Enterprise AI Operations Visualization */
+    .hero-schematic {
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--border-light);
+      padding: 28px;
+      position: relative;
+    }
+
+    .hero-schematic__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 16px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .hero-schematic__title {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+    }
+
+    .hero-schematic__status {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--accent-green);
+      background-color: var(--accent-green-bg);
+      border: 1px solid var(--accent-green-border);
+      padding: 2px 8px;
+    }
+
+    .hero-schematic__status-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background-color: var(--accent-green);
+    }
+
+    .hero-schematic__svg {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .hero-schematic__caption {
+      margin-top: 18px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border-light);
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-secondary);
+    }
+
+    /* Bottom Three-Part Statement */
+    .hero-pillars {
+      border-top: 1px solid var(--border-light);
+      background-color: var(--bg-secondary);
+    }
+
+    .hero-pillars__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .hero-pillar {
+      padding: 26px 32px;
+      border-right: 1px solid var(--border-light);
+    }
+
+    .hero-pillar:first-child {
+      padding-left: 0;
+    }
+
+    .hero-pillar:last-child {
+      border-right: none;
+      padding-right: 0;
+    }
+
+    .hero-pillar__title {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-main);
+      margin-bottom: 6px;
+    }
+
+    .hero-pillar__desc {
+      font-size: 14.5px;
+      color: var(--text-secondary);
+      line-height: 1.45;
+    }
+
+    /* ==========================================================================
+       6. SECTION 02 — THE ENTERPRISE PROPOSITION
+       ========================================================================== */
+    .principles-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-top: 1px solid var(--border-light);
+      padding-top: 44px;
+      gap: 44px;
+    }
+
+    .principle-item {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .principle-item__top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 22px;
+    }
+
+    .principle-item__icon {
+      width: 32px;
+      height: 32px;
+      color: var(--text-main);
+    }
+
+    .principle-item__heading {
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: -0.015em;
+      margin-bottom: 12px;
+      color: var(--text-main);
+    }
+
+    .principle-item__lead {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text-main);
+      margin-bottom: 10px;
+    }
+
+    .principle-item__body {
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--text-secondary);
+    }
+
+    /* ==========================================================================
+       7. SECTION 03 — WHAT DSRT AI BRINGS TO THE TABLE
+       ========================================================================== */
+    .contributions-table {
+      border-top: 1px solid var(--text-main);
+    }
+
+    .contributions-header {
+      display: grid;
+      grid-template-columns: 72px 1.1fr 1.5fr 1.4fr;
+      gap: 28px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border-strong);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-secondary);
+    }
+
+    .contribution-row {
+      display: grid;
+      grid-template-columns: 72px 1.1fr 1.5fr 1.4fr;
+      gap: 28px;
+      padding: 32px 0;
+      border-bottom: 1px solid var(--border-light);
+      align-items: start;
+      transition: background-color 0.15s ease;
+    }
+
+    .contribution-row__num {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--accent-green);
+      padding-top: 3px;
+    }
+
+    .contribution-row__name {
+      font-size: 19px;
+      font-weight: 600;
+      letter-spacing: -0.015em;
+      line-height: 1.3;
+      color: var(--text-main);
+    }
+
+    .contribution-row__desc p {
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--text-secondary);
+    }
+
+    .contribution-row__desc p + p {
+      margin-top: 10px;
+    }
+
+    .contribution-row__value {
+      padding-left: 20px;
+      border-left: 1px solid var(--border-light);
+    }
+
+    .contribution-row__value-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--accent-green);
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    .contribution-row__value p {
+      font-size: 14.5px;
+      line-height: 1.55;
+      color: var(--text-main);
+    }
+
+    /* ==========================================================================
+       8. SECTION 04 — WHERE DSRT FITS WITHIN AN ORGANIZATION
+       ========================================================================== */
+    .workloads-list {
+      border-top: 1px solid var(--border-strong);
+    }
+
+    .workload-row {
+      display: grid;
+      grid-template-columns: 72px 1.15fr 1.6fr 240px;
+      gap: 28px;
+      padding: 30px 0;
+      border-bottom: 1px solid var(--border-light);
+      align-items: center;
+    }
+
+    .workload-row__title {
+      font-size: 19px;
+      font-weight: 600;
+      letter-spacing: -0.015em;
+      color: var(--text-main);
+    }
+
+    .workload-row__copy p {
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--text-secondary);
+    }
+
+    .workload-row__copy p + p {
+      margin-top: 8px;
+      color: var(--text-main);
+      font-size: 14.5px;
+    }
+
+    .workload-diagram {
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--border-light);
+      padding: 12px 14px;
+      height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .workload-diagram svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* ==========================================================================
+       9. SECTION 05 — DEPLOYMENT PARTNERSHIP (6-PHASE METHODOLOGY)
+       ========================================================================== */
+    .deployment-rail {
+      position: relative;
+      margin-bottom: 36px;
+    }
+
+    .deployment-rail__line {
+      position: absolute;
+      top: 18px;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background-color: var(--border-strong);
+      z-index: 0;
+    }
+
+    .deployment-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 18px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .phase-col {
+      display: flex;
+      flex-direction: column;
+      background-color: transparent;
+      text-align: left;
+    }
+
+    .phase-node-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      margin-bottom: 20px;
+      text-align: left;
+      width: fit-content;
+    }
+
+    .phase-node-dot {
+      width: 36px;
+      height: 36px;
+      background-color: var(--bg-main);
+      border: 1px solid var(--border-strong);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-main);
+      transition: all 0.16s ease;
+    }
+
+    .phase-col.is-active .phase-node-dot,
+    .phase-node-btn:hover .phase-node-dot {
+      background-color: var(--text-main);
+      border-color: var(--text-main);
+      color: var(--text-inverse);
+    }
+
+    .phase-card {
+      background-color: var(--bg-main);
+      border: 1px solid var(--border-light);
+      padding: 20px 18px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      transition: border-color 0.16s ease;
+      cursor: pointer;
+    }
+
+    .phase-col.is-active .phase-card {
+      border-color: var(--text-main);
+      box-shadow: 0 2px 0 0 var(--text-main);
+    }
+
+    .phase-card__label {
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+    }
+
+    .phase-card__title {
+      font-size: 15.5px;
+      font-weight: 600;
+      line-height: 1.3;
+      color: var(--text-main);
+      margin-bottom: 10px;
+    }
+
+    .phase-card__objective {
+      font-size: 13.5px;
+      line-height: 1.5;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+    }
+
+    .phase-card__activities {
+      margin-bottom: 18px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border-light);
+      flex: 1;
+    }
+
+    .phase-card__activities-title {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+    }
+
+    .phase-card__activities li {
+      font-size: 12.5px;
+      line-height: 1.45;
+      color: var(--text-secondary);
+      padding-left: 11px;
+      position: relative;
+      margin-bottom: 5px;
+    }
+
+    .phase-card__activities li::before {
+      content: "–";
+      position: absolute;
+      left: 0;
+      color: var(--text-muted);
+    }
+
+    .phase-card__deliverable {
+      padding-top: 12px;
+      border-top: 1px solid var(--border-light);
+      font-size: 12.5px;
+      line-height: 1.45;
+      color: var(--text-main);
+    }
+
+    .phase-card__deliverable strong {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--accent-green);
+      font-weight: 500;
+      margin-bottom: 3px;
+    }
+
+    /* ==========================================================================
+       10. SECTION 06 — WORKING WITHIN EXISTING ENVIRONMENTS (ARCHITECTURE)
+       ========================================================================== */
+    .assessment-four-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-top: 1px solid var(--border-light);
+      border-left: 1px solid var(--border-light);
+      margin-bottom: 44px;
+    }
+
+    .assessment-cell {
+      padding: 26px 24px;
+      border-right: 1px solid var(--border-light);
+      border-bottom: 1px solid var(--border-light);
+      background-color: var(--bg-main);
+    }
+
+    .assessment-cell__title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 8px;
+    }
+
+    .assessment-cell__desc {
+      font-size: 14px;
+      line-height: 1.55;
+      color: var(--text-secondary);
+    }
+
+    .arch-frame {
+      border: 1px solid var(--border-strong);
+      background-color: var(--bg-secondary);
+    }
+
+    .arch-frame__topbar {
+      padding: 16px 24px;
+      border-bottom: 1px solid var(--border-light);
+      background-color: var(--bg-main);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .arch-frame__label {
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-main);
+    }
+
+    .arch-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+    }
+
+    .arch-legend__item {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 12.5px;
+      color: var(--text-secondary);
+    }
+
+    .arch-legend__swatch {
+      width: 11px;
+      height: 11px;
+      border: 1px solid var(--text-main);
+      display: inline-block;
+    }
+
+    .arch-legend__swatch--env {
+      background-color: #FFFFFF;
+      border-color: #626A70;
+    }
+
+    .arch-legend__swatch--dsrt {
+      background-color: #111820;
+      border-color: #111820;
+    }
+
+    .arch-legend__swatch--provider {
+      background-color: #EBEEF0;
+      border-color: #626A70;
+    }
+
+    .arch-legend__swatch--measure {
+      background-color: var(--accent-green-bg);
+      border-color: var(--accent-green);
+    }
+
+    .arch-canvas-desktop {
+      padding: 36px 28px;
+    }
+
+    .arch-canvas-desktop svg {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .arch-interactive-node {
+      cursor: pointer;
+      transition: opacity 0.15s ease;
+    }
+
+    .arch-interactive-node:hover rect {
+      stroke-width: 2px;
+    }
+
+    /* Mobile Simplified Architecture Diagram (Section 25 requirement) */
+    .arch-canvas-mobile {
+      display: none;
+      padding: 20px;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .arch-m-box {
+      padding: 16px;
+      border: 1px solid var(--border-strong);
+      background-color: var(--bg-main);
+    }
+
+    .arch-m-box--dsrt {
+      background-color: var(--bg-dark);
+      color: var(--text-inverse);
+      border-color: var(--bg-dark);
+    }
+
+    .arch-m-box--measure {
+      background-color: var(--accent-green-bg);
+      border-color: var(--accent-green);
+    }
+
+    .arch-m-box__tag {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      opacity: 0.75;
+      margin-bottom: 4px;
+    }
+
+    .arch-m-box__title {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .arch-m-box__items {
+      font-size: 13px;
+      opacity: 0.85;
+      line-height: 1.45;
+    }
+
+    .arch-m-arrow {
+      text-align: center;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    .arch-inspector {
+      padding: 18px 24px;
+      background-color: var(--bg-main);
+      border-top: 1px solid var(--border-light);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .arch-inspector__content {
+      font-size: 13.5px;
+      color: var(--text-secondary);
+      max-width: 82ch;
+    }
+
+    .arch-inspector__content strong {
+      color: var(--text-main);
+      font-weight: 600;
+    }
+
+    .arch-inspector__disclaimer {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    /* ==========================================================================
+       11. SECTION 07 — MEASUREMENT AND VALIDATION
+       ========================================================================== */
+    .measurement-areas-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-top: 1px solid var(--border-light);
+      border-left: 1px solid var(--border-light);
+      margin-bottom: 48px;
+    }
+
+    .measurement-area {
+      padding: 26px 24px;
+      border-right: 1px solid var(--border-light);
+      border-bottom: 1px solid var(--border-light);
+      background-color: var(--bg-main);
+    }
+
+    .measurement-area__num {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--accent-green);
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .measurement-area__title {
+      font-size: 17px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--text-main);
+    }
+
+    .measurement-area__desc {
+      font-size: 14px;
+      line-height: 1.55;
+      color: var(--text-secondary);
+    }
+
+    /* Interactive Sample Measurement Console */
+    .eval-console {
+      border: 1px solid var(--border-strong);
+      background-color: var(--bg-main);
+    }
+
+    .eval-console__header {
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--border-light);
+      background-color: var(--bg-secondary);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .eval-console__badge-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .eval-console__badge {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--text-main);
+    }
+
+    .eval-console__sub {
+      font-size: 12.5px;
+      color: var(--text-secondary);
+    }
+
+    .scenario-tabs {
+      display: inline-flex;
+      border: 1px solid var(--border-strong);
+      background-color: var(--bg-main);
+    }
+
+    .scenario-tab {
+      padding: 8px 14px;
+      font-size: 12.5px;
+      font-weight: 500;
+      background: none;
+      border: none;
+      border-right: 1px solid var(--border-light);
+      cursor: pointer;
+      color: var(--text-secondary);
+      transition: all 0.15s ease;
+    }
+
+    .scenario-tab:last-child {
+      border-right: none;
+    }
+
+    .scenario-tab.is-active {
+      background-color: var(--text-main);
+      color: var(--text-inverse);
+    }
+
+    .eval-console__body {
+      display: grid;
+      grid-template-columns: 1.35fr 0.65fr;
+    }
+
+    .eval-table-wrap {
+      border-right: 1px solid var(--border-light);
+      overflow-x: auto;
+    }
+
+    .eval-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    .eval-table th {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-secondary);
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--border-strong);
+      background-color: var(--bg-elevated);
+    }
+
+    .eval-table td {
+      padding: 15px 20px;
+      border-bottom: 1px solid var(--border-light);
+      font-size: 14px;
+      color: var(--text-main);
+    }
+
+    .eval-table tr:last-child td {
+      border-bottom: none;
+      font-weight: 600;
+      background-color: var(--bg-secondary);
+    }
+
+    .eval-status-tag {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-secondary);
+      display: block;
+    }
+
+    .eval-val-mono {
+      font-family: var(--font-mono);
+      font-size: 13.5px;
+    }
+
+    .eval-val-positive {
+      color: var(--accent-green);
+      font-weight: 600;
+    }
+
+    .eval-accounting {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background-color: var(--bg-elevated);
+    }
+
+    .eval-accounting__title {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+    }
+
+    .eval-ledger {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .eval-ledger__row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13.5px;
+      padding-bottom: 10px;
+      border-bottom: 1px dashed var(--border-strong);
+      color: var(--text-secondary);
+    }
+
+    .eval-ledger__row span:last-child {
+      font-family: var(--font-mono);
+      color: var(--text-main);
+    }
+
+    .eval-ledger__row--net {
+      border-bottom: none;
+      border-top: 1px solid var(--text-main);
+      padding-top: 12px;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .eval-ledger__row--net span:last-child {
+      color: var(--accent-green);
+      font-size: 15px;
+    }
+
+    .eval-accounting__note {
+      font-size: 12.5px;
+      line-height: 1.5;
+      color: var(--text-secondary);
+      padding-top: 14px;
+      border-top: 1px solid var(--border-light);
+    }
+
+    /* ==========================================================================
+       12. SECTION 08 — GOVERNANCE, SECURITY AND DATA HANDLING
+       ========================================================================== */
+    .governance-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      border-top: 1px solid var(--border-strong);
+    }
+
+    .governance-item {
+      padding: 28px 32px 28px 0;
+      border-bottom: 1px solid var(--border-light);
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 24px;
+    }
+
+    .governance-item:nth-child(odd) {
+      border-right: 1px solid var(--border-light);
+      padding-right: 36px;
+    }
+
+    .governance-item:nth-child(even) {
+      padding-left: 36px;
+      padding-right: 0;
+    }
+
+    .governance-item__title {
+      font-size: 16.5px;
+      font-weight: 600;
+      color: var(--text-main);
+      line-height: 1.35;
+    }
+
+    .governance-item__desc {
+      font-size: 14.5px;
+      line-height: 1.6;
+      color: var(--text-secondary);
+    }
+
+    /* ==========================================================================
+       13. SECTION 09 — PARTNERSHIP RESPONSIBILITIES (3-COLUMN MATRIX)
+       ========================================================================== */
+    .matrix-wrapper {
+      border: 1px solid var(--border-strong);
+      background-color: var(--bg-main);
+    }
+
+    .matrix-summary-bar {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-bottom: 1px solid var(--border-strong);
+      background-color: var(--bg-secondary);
+    }
+
+    .matrix-col-head {
+      padding: 22px 28px;
+      border-right: 1px solid var(--border-light);
+    }
+
+    .matrix-col-head:last-child {
+      border-right: none;
+    }
+
+    .matrix-col-head__tag {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-secondary);
+      margin-bottom: 4px;
+    }
+
+    .matrix-col-head__title {
+      font-size: 19px;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .matrix-summary-pills {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-bottom: 1px solid var(--border-strong);
+    }
+
+    .matrix-pill-group {
+      padding: 18px 28px;
+      border-right: 1px solid var(--border-light);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .matrix-pill-group:last-child {
+      border-right: none;
+    }
+
+    .matrix-pill {
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+      padding: 4px 9px;
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--border-light);
+      color: var(--text-main);
+    }
+
+    .matrix-details-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .matrix-detail-col {
+      padding: 28px;
+      border-right: 1px solid var(--border-light);
+    }
+
+    .matrix-detail-col:last-child {
+      border-right: none;
+    }
+
+    .matrix-detail-col__clause {
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .matrix-checklist li {
+      position: relative;
+      padding-left: 18px;
+      font-size: 14.5px;
+      line-height: 1.55;
+      color: var(--text-secondary);
+      margin-bottom: 11px;
+    }
+
+    .matrix-checklist li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 8px;
+      width: 6px;
+      height: 6px;
+      background-color: var(--text-main);
+    }
+
+    .matrix-detail-col--shared .matrix-checklist li::before {
+      background-color: var(--accent-green);
+    }
+
+    /* ==========================================================================
+       14. SECTION 10 — COMMERCIAL ENGAGEMENT
+       ========================================================================== */
+    .commercial-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-top: 1px solid var(--text-main);
+    }
+
+    .commercial-item {
+      padding: 32px 28px 32px 0;
+      border-bottom: 1px solid var(--border-light);
+      border-right: 1px solid var(--border-light);
+    }
+
+    .commercial-item:nth-child(3n) {
+      border-right: none;
+      padding-right: 0;
+    }
+
+    .commercial-item:nth-child(3n + 2),
+    .commercial-item:nth-child(3n + 3) {
+      padding-left: 28px;
+    }
+
+    .commercial-item__num {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .commercial-item__title {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 10px;
+    }
+
+    .commercial-item__desc {
+      font-size: 14.5px;
+      line-height: 1.6;
+      color: var(--text-secondary);
+    }
+
+    /* ==========================================================================
+       15. SECTION 11 — ENTERPRISE SUPPORT COMMITMENT
+       ========================================================================== */
+    .support-layout {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 56px;
+      align-items: start;
+    }
+
+    .support-list {
+      border-top: 1px solid var(--border-strong);
+    }
+
+    .support-row {
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border-light);
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 24px;
+    }
+
+    .support-row__title {
+      font-size: 15.5px;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .support-row__desc {
+      font-size: 14.5px;
+      line-height: 1.55;
+      color: var(--text-secondary);
+    }
+
+    /* ==========================================================================
+       16. SECTION 12 — ENTERPRISE ENGAGEMENT PROCESS (6-STEP TIMELINE)
+       ========================================================================== */
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      border-top: 1px solid var(--text-main);
+    }
+
+    .process-step {
+      padding: 28px 20px 28px 0;
+      border-right: 1px solid var(--border-light);
+    }
+
+    .process-step:not(:first-child) {
+      padding-left: 20px;
+    }
+
+    .process-step:last-child {
+      border-right: none;
+      padding-right: 0;
+    }
+
+    .process-step__num {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--accent-green);
+      margin-bottom: 14px;
+      display: block;
+    }
+
+    .process-step__title {
+      font-size: 16.5px;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 10px;
+      line-height: 1.3;
+    }
+
+    .process-step__desc {
+      font-size: 14px;
+      line-height: 1.55;
+      color: var(--text-secondary);
+    }
+
+    /* ==========================================================================
+       17. SECTION 13 — ENTERPRISE FAQ (CLEAN ACCORDION)
+       ========================================================================== */
+    .faq-layout {
+      display: grid;
+      grid-template-columns: 0.75fr 1.25fr;
+      gap: 56px;
+      align-items: start;
+    }
+
+    .faq-controls {
+      margin-top: 24px;
+    }
+
+    .faq-toggle-all {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      background: none;
+      border: 1px solid var(--border-strong);
+      padding: 7px 12px;
+      cursor: pointer;
+      color: var(--text-secondary);
+      border-radius: var(--radius-sm);
+    }
+
+    .faq-toggle-all:hover {
+      color: var(--text-main);
+      border-color: var(--text-main);
+    }
+
+    .faq-list {
+      border-top: 1px solid var(--border-strong);
+    }
+
+    .faq-item {
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .faq-trigger {
+      width: 100%;
+      padding: 22px 0;
+      background: none;
+      border: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .faq-trigger__question {
+      font-size: 17px;
+      font-weight: 600;
+      line-height: 1.35;
+      color: var(--text-main);
+    }
+
+    .faq-trigger__icon {
+      width: 24px;
+      height: 24px;
+      border: 1px solid var(--border-light);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-family: var(--font-mono);
+      font-size: 15px;
+      color: var(--text-secondary);
+      transition: all 0.15s ease;
+    }
+
+    .faq-trigger[aria-expanded="true"] .faq-trigger__icon {
+      background-color: var(--text-main);
+      border-color: var(--text-main);
+      color: var(--text-inverse);
+    }
+
+    .faq-panel {
+      display: none;
+      padding: 0 40px 24px 0;
+    }
+
+    .faq-panel.is-open {
+      display: block;
+    }
+
+    .faq-panel p {
+      font-size: 15px;
+      line-height: 1.65;
+      color: var(--text-secondary);
+      max-width: 68ch;
+    }
+
+    /* ==========================================================================
+       18. SECTION 14 — ENTERPRISE ENQUIRY FORM
+       ========================================================================== */
+    .enquiry-layout {
+      display: grid;
+      grid-template-columns: 0.78fr 1.22fr;
+      gap: 64px;
+      align-items: start;
+    }
+
+    .enquiry-sidebar__box {
+      margin-top: 32px;
+      padding: 24px;
+      background-color: var(--bg-main);
+      border: 1px solid var(--border-light);
+    }
+
+    .enquiry-sidebar__title {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-main);
+      margin-bottom: 14px;
+    }
+
+    .enquiry-workflow-list li {
+      font-size: 13.5px;
+      color: var(--text-secondary);
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border-light);
+      display: flex;
+      gap: 10px;
+    }
+
+    .enquiry-workflow-list li:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .enquiry-workflow-list span {
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+      color: var(--accent-green);
+      flex-shrink: 0;
+    }
+
+    .enquiry-form-card {
+      background-color: var(--bg-main);
+      border: 1px solid var(--border-strong);
+      padding: 40px;
+    }
+
+    .form-group-header {
+      padding-bottom: 12px;
+      margin-bottom: 24px;
+      border-bottom: 1px solid var(--border-light);
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+
+    .form-group-header--optional {
+      margin-top: 36px;
+    }
+
+    .form-group-header__title {
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-main);
+    }
+
+    .form-group-header__meta {
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    .form-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 20px;
+    }
+
+    .form-grid-2 .form-field {
+      margin-bottom: 0;
+    }
+
+    .form-label {
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--text-main);
+      margin-bottom: 7px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .form-req {
+      color: var(--accent-green);
+      margin-left: 3px;
+    }
+
+    .form-input,
+    .form-select,
+    .form-textarea {
+      width: 100%;
+      padding: 11px 13px;
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-sm);
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      font-size: 14.5px;
+      line-height: 1.4;
+      transition: border-color 0.15s ease;
+    }
+
+    .form-input:focus,
+    .form-select:focus,
+    .form-textarea:focus {
+      outline: none;
+      border-color: var(--text-main);
+    }
+
+    .form-input.has-error,
+    .form-select.has-error,
+    .form-textarea.has-error {
+      border-color: var(--status-error);
+      background-color: var(--status-error-bg);
+    }
+
+    .form-textarea {
+      resize: vertical;
+      min-height: 112px;
+    }
+
+    .form-textarea--sm {
+      min-height: 80px;
+    }
+
+    .field-error {
+      font-size: 12.5px;
+      color: var(--status-error);
+      margin-top: 5px;
+      display: none;
+    }
+
+    .field-error.is-visible {
+      display: block;
+    }
+
+    /* Multi-provider Checkboxes */
+    .provider-Grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .provider-check {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 12px;
+      border: 1px solid var(--border-light);
+      background-color: var(--bg-elevated);
+      font-size: 13px;
+      color: var(--text-main);
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .provider-check:hover {
+      border-color: var(--border-strong);
+    }
+
+    .provider-check input {
+      accent-color: var(--text-main);
+      width: 15px;
+      height: 15px;
+    }
+
+    /* Honeypot (Spam Protection) */
+    .hp-trap {
+      position: absolute;
+      left: -9999px;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+    }
+
+    /* Consent Notice */
+    .consent-wrap {
+      margin: 28px 0 24px;
+      padding: 16px;
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--border-light);
+    }
+
+    .consent-label {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 13px;
+      line-height: 1.55;
+      color: var(--text-secondary);
+      cursor: pointer;
+    }
+
+    .consent-label input {
+      margin-top: 3px;
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+      accent-color: var(--text-main);
+    }
+
+    /* Form Banner Error / Retry */
+    .form-alert {
+      display: none;
+      margin-bottom: 20px;
+      padding: 14px 16px;
+      border: 1px solid var(--status-error-border);
+      background-color: var(--status-error-bg);
+      color: var(--status-error);
+      font-size: 13.5px;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .form-alert.is-visible {
+      display: flex;
+    }
+
+    .btn--submit {
+      width: 100%;
+      padding: 15px 24px;
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .btn--submit[disabled] {
+      opacity: 0.65;
+      cursor: not-allowed;
+    }
+
+    /* Confirmation State (Section 17 Exact Copy) */
+    .enquiry-confirmation {
+      display: none;
+      padding: 48px 40px;
+      background-color: var(--bg-main);
+      border: 1px solid var(--accent-green-border);
+      border-top: 3px solid var(--accent-green);
+    }
+
+    .enquiry-confirmation.is-visible {
+      display: block;
+    }
+
+    .enquiry-confirmation__badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent-green);
+      background-color: var(--accent-green-bg);
+      padding: 4px 10px;
+      margin-bottom: 18px;
+    }
+
+    .enquiry-confirmation__heading {
+      font-size: 26px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: var(--text-main);
+      margin-bottom: 12px;
+    }
+
+    .enquiry-confirmation__body {
+      font-size: 16px;
+      line-height: 1.65;
+      color: var(--text-secondary);
+      max-width: 58ch;
+      margin-bottom: 28px;
+    }
+
+    .enquiry-confirmation__summary {
+      padding: 18px 20px;
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--border-light);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin-bottom: 24px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px 20px;
+    }
+
+    .enquiry-confirmation__summary strong {
+      color: var(--text-main);
+      font-weight: 500;
+    }
+
+    /* ==========================================================================
+       19. CLOSING DARK CTA & GLOBAL FOOTER
+       ========================================================================== */
+    .final-cta {
+      padding: 96px 0;
+      background-color: var(--bg-dark);
+      color: var(--text-inverse);
+      border-bottom: 1px solid var(--border-dark);
+    }
+
+    .final-cta__grid {
+      display: grid;
+      grid-template-columns: 1.3fr 0.7fr;
+      gap: 48px;
+      align-items: end;
+    }
+
+    .final-cta__statement {
+      font-size: clamp(22px, 2.4vw, 30px);
+      font-weight: 500;
+      line-height: 1.38;
+      letter-spacing: -0.02em;
+      color: var(--text-inverse);
+      max-width: 44ch;
+    }
+
+    .final-cta__actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .site-footer {
+      background-color: var(--bg-dark);
+      color: var(--text-inverse-secondary);
+      padding: 56px 0 44px;
+      font-size: 13.5px;
+    }
+
+    .site-footer__top {
+      display: grid;
+      grid-template-columns: 1.5fr repeat(3, 1fr);
+      gap: 40px;
+      padding-bottom: 44px;
+      border-bottom: 1px solid var(--border-dark);
+    }
+
+    .site-footer__brand {
+      color: var(--text-inverse);
+      font-weight: 700;
+      font-size: 16px;
+      margin-bottom: 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .site-footer__brand .brand__mark span {
+      background-color: var(--text-inverse);
+    }
+
+    .site-footer__brand .brand__mark span:last-child {
+      background-color: var(--accent-green-bright);
+    }
+
+    .site-footer__tagline {
+      max-width: 34ch;
+      line-height: 1.55;
+      color: var(--text-inverse-secondary);
+    }
+
+    .site-footer__col-title {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-inverse);
+      margin-bottom: 14px;
+    }
+
+    .site-footer__links li {
+      margin-bottom: 9px;
+    }
+
+    .site-footer__links a:hover {
+      color: var(--text-inverse);
+    }
+
+    .site-footer__bottom {
+      padding-top: 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      font-size: 12.5px;
+    }
+
+    /* ==========================================================================
+       20. RESPONSIVE BEHAVIOUR (SECTION 25: TABLET & MOBILE)
+       ========================================================================== */
+    @media (max-width: 1140px) {
+      .container {
+        padding: 0 var(--gutter-tablet);
+      }
+
+      .deployment-rail__line {
+        display: none;
+      }
+
+      .deployment-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+      }
+
+      .process-steps {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .process-step:nth-child(3) {
+        border-right: none;
+      }
+
+      .process-step:nth-child(4) {
+        padding-left: 0;
+      }
+
+      .process-step:nth-child(-n+3) {
+        border-bottom: 1px solid var(--border-light);
+      }
+    }
+
+    @media (max-width: 960px) {
+      .hero__grid,
+      .section-header-grid,
+      .support-layout,
+      .faq-layout,
+      .enquiry-layout,
+      .final-cta__grid,
+      .eval-console__body {
+        grid-template-columns: 1fr;
+        gap: 36px;
+      }
+
+      .final-cta__actions {
+        justify-content: flex-start;
+      }
+
+      .eval-table-wrap {
+        border-right: none;
+        border-bottom: 1px solid var(--border-light);
+      }
+
+      .contributions-header {
+        display: none;
+      }
+
+      .contribution-row {
+        grid-template-columns: 48px 1fr;
+        gap: 14px 16px;
+      }
+
+      .contribution-row__desc,
+      .contribution-row__value {
+        grid-column: 2;
+      }
+
+      .contribution-row__value {
+        padding-left: 16px;
+        margin-top: 6px;
+      }
+
+      .workload-row {
+        grid-template-columns: 48px 1fr;
+        gap: 14px 16px;
+      }
+
+      .workload-row__copy,
+      .workload-diagram {
+        grid-column: 2;
+      }
+
+      .workload-diagram {
+        max-width: 280px;
+      }
+
+      .assessment-four-grid,
+      .measurement-areas-grid,
+      .commercial-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .commercial-item {
+        padding: 24px !important;
+        border-right: 1px solid var(--border-light) !important;
+      }
+
+      .commercial-item:nth-child(2n) {
+        border-right: none !important;
+      }
+
+      .governance-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .governance-item:nth-child(odd),
+      .governance-item:nth-child(even) {
+        border-right: none;
+        padding: 24px 0;
+      }
+
+      .matrix-summary-bar,
+      .matrix-summary-pills {
+        display: none;
+      }
+
+      .matrix-details-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .matrix-detail-col {
+        border-right: none;
+        border-bottom: 1px solid var(--border-light);
+      }
+
+      .matrix-detail-col:last-child {
+        border-bottom: none;
+      }
+
+      .matrix-detail-col::before {
+        content: attr(data-mobile-heading);
+        display: block;
+        font-size: 18px;
+        font-weight: 600;
+        color: var(--text-main);
+        margin-bottom: 6px;
+      }
+
+      .site-nav,
+      .site-header__actions .btn--nav {
+        display: none;
+      }
+
+      .mobile-menu-btn {
+        display: inline-flex;
+      }
+    }
+
+    @media (max-width: 767px) {
+      .container {
+        padding: 0 var(--gutter-mobile);
+      }
+
+      .section {
+        padding: var(--section-space-mobile) 0;
+      }
+
+      .hero {
+        padding-top: 48px;
+      }
+
+      .hero-pillars__grid,
+      .principles-grid,
+      .deployment-grid,
+      .assessment-four-grid,
+      .measurement-areas-grid,
+      .commercial-grid,
+      .process-steps,
+      .form-grid-2,
+      .provider-Grid,
+      .site-footer__top,
+      .enquiry-confirmation__summary {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-pillar {
+        padding: 20px 0;
+        border-right: none;
+        border-bottom: 1px solid var(--border-light);
+      }
+
+      .hero-pillar:last-child {
+        border-bottom: none;
+      }
+
+      .commercial-item {
+        padding: 24px 0 !important;
+        border-right: none !important;
+      }
+
+      .process-step {
+        padding: 22px 0 !important;
+        border-right: none !important;
+        border-bottom: 1px solid var(--border-light);
+      }
+
+      .process-step:last-child {
+        border-bottom: none;
+      }
+
+      .support-row,
+      .governance-item {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+
+      /* Switch complex SVG architecture diagram to dedicated clean mobile version */
+      .arch-canvas-desktop {
+        display: none;
+      }
+
+      .arch-canvas-mobile {
+        display: flex;
+      }
+
+      .scenario-tabs {
+        width: 100%;
+        flex-direction: column;
+      }
+
+      .scenario-tab {
+        border-right: none;
+        border-bottom: 1px solid var(--border-light);
+        text-align: left;
+      }
+
+      .enquiry-form-card,
+      .enquiry-confirmation {
+        padding: 24px 20px;
+      }
+
+      .governance-note {
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .btn-group .btn {
+        width: 100%;
+      }
+    }
+  </style>
+  <link rel="stylesheet" href="assets/css/professional.css">
+</head>
+<body>
+
+  <!-- ========================================================================
+       GLOBAL DSRT NAVIGATION
+       ======================================================================== -->
+  <header class="site-header" role="banner">
+    <div class="container site-header__inner">
+      <a href="/enterprise" class="brand" aria-label="DSRT AI Enterprise">
+        <span class="brand__mark" aria-hidden="true">
+          <span></span><span></span><span></span><span></span>
+        </span>
+        <span>DSRT AI</span>
+        <span class="brand__divider">/</span>
+        <span class="brand__route">ENTERPRISE</span>
+      </a>
+
+      <nav class="site-nav" aria-label="Primary Navigation">
+        <a href="#proposition" class="site-nav__link">Proposition</a>
+        <a href="#contributions" class="site-nav__link">Capabilities</a>
+        <a href="#deployment-partnership" class="site-nav__link">Implementation</a>
+        <a href="#measurement" class="site-nav__link">Validation</a>
+        <a href="#governance" class="site-nav__link">Governance</a>
+        <a href="/enterprise" class="site-nav__link site-nav__link--active" aria-current="page">Enterprise</a>
+      </nav>
+
+      <div class="site-header__actions">
+        <a href="#enterprise-enquiry" class="btn btn--primary btn--nav" data-track="nav_enquiry_cta">
+          Discuss an Engagement
+        </a>
+        <button type="button" class="mobile-menu-btn" id="mobileMenuBtn" aria-expanded="false" aria-controls="mobileNavDrawer" aria-label="Toggle navigation menu">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6">
+            <path d="M3 5h14M3 10h14M3 15h14" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="mobile-nav-drawer" id="mobileNavDrawer">
+      <ul class="mobile-nav-drawer__list">
+        <li><a href="#proposition" class="mobile-nav-drawer__link">Enterprise Proposition</a></li>
+        <li><a href="#contributions" class="mobile-nav-drawer__link">What DSRT Brings</a></li>
+        <li><a href="#deployment-partnership" class="mobile-nav-drawer__link">Deployment Partnership</a></li>
+        <li><a href="#measurement" class="mobile-nav-drawer__link">Measurement &amp; Validation</a></li>
+        <li><a href="#governance" class="mobile-nav-drawer__link">Governance &amp; Responsibilities</a></li>
+        <li><a href="#faq" class="mobile-nav-drawer__link">Enterprise FAQ</a></li>
+      </ul>
+      <a href="#enterprise-enquiry" class="btn btn--primary" style="width: 100%;">Discuss an Enterprise Engagement</a>
+    </div>
+  </header>
+
+  <main id="main-content">
+
+    <!-- ======================================================================
+         SECTION 01 — ENTERPRISE INTRODUCTION (HERO)
+         ====================================================================== -->
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="container">
+        <div class="hero__grid">
+          <!-- Left: Editorial Positioning -->
+          <div>
+            <div class="eyebrow">DSRT AI / ENTERPRISE</div>
+            <h1 id="hero-heading" class="hero-heading">Make enterprise AI more economically efficient.</h1>
+            <div class="hero__description">
+              <p>Enterprise AI expenditure deserves the same operational discipline as every other major technology investment.</p>
+              <p>DSRT AI brings in-house LLM Amplification technology to help organizations reduce unnecessary AI expenditure while maintaining the output quality and reliability their operations require.</p>
+              <p>We work with enterprise teams to evaluate their requirements, establish deployment objectives and implement an agreed approach within their operating environment.</p>
+            </div>
+            <div class="btn-group">
+              <a href="#enterprise-enquiry" class="btn btn--primary" data-track="hero_primary_cta">
+                Discuss an Enterprise Engagement
+              </a>
+              <a href="#deployment-partnership" class="btn btn--secondary" data-track="hero_secondary_cta">
+                Explore Our Approach
+              </a>
+            </div>
+          </div>
+
+          <!-- Right: Restrained Visualization of Enterprise AI Operations -->
+          <div class="hero-schematic" aria-label="Enterprise AI Operations Amplification Schematic">
+            <div class="hero-schematic__header">
+              <span class="hero-schematic__title">OPERATIONAL VIEW // LLM AMPLIFICATION LAYER</span>
+              <span class="hero-schematic__status">
+                <span class="hero-schematic__status-dot"></span>
+                BASELINE-AUDITED
+              </span>
+            </div>
+
+            <svg class="hero-schematic__svg" viewBox="0 0 520 330" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagram illustrating enterprise AI workloads passing through DSRT LLM Amplification into existing model providers while maintaining output quality and tracking expenditure">
+              <!-- Subtle Grid Background -->
+              <defs>
+                <pattern id="smallGrid" width="20" height="20" patternUnits="userSpaceOnUse">
+                  <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#E5E7E8" stroke-width="0.6"/>
+                </pattern>
+              </defs>
+              <rect width="520" height="330" fill="url(#smallGrid)" />
+
+              <!-- Top Layer: Existing Enterprise Workloads -->
+              <rect x="20" y="18" width="480" height="64" fill="#FFFFFF" stroke="#CFD4D7" stroke-width="1"/>
+              <text x="36" y="40" fill="#626A70" font-family="IBM Plex Mono, monospace" font-size="10" letter-spacing="0.06em">01 // EXISTING ENTERPRISE WORKLOADS &amp; APPLICATIONS</text>
+              <rect x="36" y="50" width="132" height="20" fill="#F6F7F7" stroke="#E5E7E8"/>
+              <text x="46" y="63" fill="#17191B" font-family="Inter, sans-serif" font-size="10.5" font-weight="500">Knowledge &amp; Research</text>
+              <rect x="178" y="50" width="142" height="20" fill="#F6F7F7" stroke="#E5E7E8"/>
+              <text x="188" y="63" fill="#17191B" font-family="Inter, sans-serif" font-size="10.5" font-weight="500">Engineering Workflows</text>
+              <rect x="330" y="50" width="154" height="20" fill="#F6F7F7" stroke="#E5E7E8"/>
+              <text x="340" y="63" fill="#17191B" font-family="Inter, sans-serif" font-size="10.5" font-weight="500">Operations &amp; Analysis</text>
+
+              <!-- Connectors Down -->
+              <line x1="160" y1="82" x2="160" y2="114" stroke="#626A70" stroke-width="1" stroke-dasharray="3 3"/>
+              <line x1="260" y1="82" x2="260" y2="114" stroke="#17191B" stroke-width="1.2"/>
+              <line x1="360" y1="82" x2="360" y2="114" stroke="#626A70" stroke-width="1" stroke-dasharray="3 3"/>
+              <polygon points="256,110 264,110 260,116" fill="#17191B"/>
+
+              <!-- Middle Layer: DSRT AI Amplification Engine -->
+              <rect x="20" y="116" width="480" height="96" fill="#111820" stroke="#111820" stroke-width="1"/>
+              <text x="36" y="139" fill="#A9B2BA" font-family="IBM Plex Mono, monospace" font-size="10" letter-spacing="0.06em">02 // DSRT AI — IN-HOUSE LLM AMPLIFICATION</text>
+              <circle cx="480" cy="135" r="4" fill="#28A870"/>
+
+              <rect x="36" y="152" width="214" height="44" fill="#18222D" stroke="#2D3B4B"/>
+              <text x="48" y="170" fill="#FFFFFF" font-family="Inter, sans-serif" font-size="11.5" font-weight="600">Computational Efficiency</text>
+              <text x="48" y="185" fill="#A9B2BA" font-family="Inter, sans-serif" font-size="10">Optimize resource &amp; token utilization</text>
+
+              <rect x="266" y="152" width="218" height="44" fill="#18222D" stroke="#2D3B4B"/>
+              <text x="278" y="170" fill="#FFFFFF" font-family="Inter, sans-serif" font-size="11.5" font-weight="600">Quality &amp; Reliability Gate</text>
+              <text x="278" y="185" fill="#A9B2BA" font-family="Inter, sans-serif" font-size="10">Aligned with baseline requirements</text>
+
+              <!-- Connectors Down -->
+              <line x1="150" y1="212" x2="150" y2="244" stroke="#17191B" stroke-width="1.2"/>
+              <polygon points="146,240 154,240 150,246" fill="#17191B"/>
+              <line x1="370" y1="212" x2="370" y2="244" stroke="#126E48" stroke-width="1.2"/>
+              <polygon points="366,240 374,240 370,246" fill="#126E48"/>
+
+              <!-- Bottom Left: Supported Providers -->
+              <rect x="20" y="246" width="232" height="66" fill="#FFFFFF" stroke="#CFD4D7"/>
+              <text x="34" y="267" fill="#626A70" font-family="IBM Plex Mono, monospace" font-size="9.5" letter-spacing="0.06em">03 // SUPPORTED AI PROVIDERS</text>
+              <text x="34" y="286" fill="#17191B" font-family="Inter, sans-serif" font-size="11.5" font-weight="600">Existing Model Infrastructure</text>
+              <text x="34" y="301" fill="#626A70" font-family="Inter, sans-serif" font-size="10">Scoped API &amp; model environments</text>
+
+              <!-- Bottom Right: Measurement & Validation -->
+              <rect x="268" y="246" width="232" height="66" fill="#EEF6F2" stroke="#C2DFD1"/>
+              <text x="282" y="267" fill="#126E48" font-family="IBM Plex Mono, monospace" font-size="9.5" letter-spacing="0.06em">04 // VALIDATION &amp; REPORTING</text>
+              <text x="282" y="286" fill="#17191B" font-family="Inter, sans-serif" font-size="11.5" font-weight="600">Net Economic Evaluation</text>
+              <text x="282" y="301" fill="#626A70" font-family="Inter, sans-serif" font-size="10">Audited against agreed baseline</text>
+            </svg>
+
+            <div class="hero-schematic__caption">
+              <span>SCOPE: AGREED ENTERPRISE ENVIRONMENT</span>
+              <span>EVALUATION: BASELINE VS. DEPLOYMENT</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Subtle Three-Part Statement -->
+      <div class="hero-pillars">
+        <div class="container">
+          <div class="hero-pillars__grid">
+            <div class="hero-pillar">
+              <div class="hero-pillar__title">Technology</div>
+              <p class="hero-pillar__desc">In-house LLM Amplification.</p>
+            </div>
+            <div class="hero-pillar">
+              <div class="hero-pillar__title">Deployment</div>
+              <p class="hero-pillar__desc">Implementation aligned with organizational requirements.</p>
+            </div>
+            <div class="hero-pillar">
+              <div class="hero-pillar__title">Accountability</div>
+              <p class="hero-pillar__desc">Outcomes evaluated against agreed measures.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SECTION 02 — THE ENTERPRISE PROPOSITION
+         ====================================================================== -->
+    <section id="proposition" class="section" aria-labelledby="proposition-heading">
+      <div class="container">
+        <div class="section-header-grid">
+          <div>
+            <div class="eyebrow">02 / THE ENTERPRISE PROPOSITION</div>
+            <h2 id="proposition-heading" class="section-heading">Your AI environment already exists. We work with it.</h2>
+          </div>
+          <div>
+            <p class="lead-copy">Organizations have already invested in AI providers, applications, internal systems and operational workflows.</p>
+            <p class="lead-copy">DSRT AI approaches enterprise deployment with that existing environment in mind.</p>
+            <p class="lead-copy">The objective is to identify where LLM Amplification can add measurable economic value without requiring an organization to unnecessarily replace the systems it already depends on.</p>
+          </div>
+        </div>
+
+        <div class="principles-grid">
+          <article class="principle-item">
+            <div class="principle-item__top">
+              <span class="mono-index">PRINCIPLE / 01</span>
+              <svg class="principle-item__icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                <rect x="4" y="5" width="24" height="7" />
+                <rect x="4" y="16" width="24" height="11" />
+                <line x1="9" y1="21.5" x2="23" y2="21.5" />
+              </svg>
+            </div>
+            <h3 class="principle-item__heading">Work with existing investments</h3>
+            <p class="principle-item__lead">Assess the current AI environment before recommending changes.</p>
+            <p class="principle-item__body">Enterprise teams operate established provider agreements, API infrastructure, internal applications and governance controls. Technical discovery begins with those commitments rather than assuming a greenfield replacement.</p>
+          </article>
+
+          <article class="principle-item">
+            <div class="principle-item__top">
+              <span class="mono-index">PRINCIPLE / 02</span>
+              <svg class="principle-item__icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                <path d="M4 26h24" />
+                <path d="M7 21l6-6 5 4 7-9" />
+                <circle cx="25" cy="10" r="2" fill="#126E48" stroke="none" />
+              </svg>
+            </div>
+            <h3 class="principle-item__heading">Focus on economic improvement</h3>
+            <p class="principle-item__lead">Identify opportunities to improve the efficiency of AI expenditure.</p>
+            <p class="principle-item__body">Recurring model usage across internal operations and product workflows generates compounding compute expenditure. Engagements target specific workloads where amplification can improve cost-efficiency while preserving output standards.</p>
+          </article>
+
+          <article class="principle-item">
+            <div class="principle-item__top">
+              <span class="mono-index">PRINCIPLE / 03</span>
+              <svg class="principle-item__icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                <rect x="5" y="5" width="22" height="22" />
+                <line x1="16" y1="5" x2="16" y2="27" />
+                <line x1="5" y1="16" x2="27" y2="16" />
+              </svg>
+            </div>
+            <h3 class="principle-item__heading">Establish measurable outcomes</h3>
+            <p class="principle-item__lead">Define a baseline and evaluate the results of the agreed deployment.</p>
+            <p class="principle-item__body">Commercial value requires objective verification. Both organizations agree on baseline metrics, comparable workload parameters, output quality thresholds and net financial calculation methods prior to deployment.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SECTION 03 — WHAT DSRT AI BRINGS TO THE TABLE
+         ====================================================================== -->
+    <section id="contributions" class="section section--secondary" aria-labelledby="contributions-heading">
+      <div class="container">
+        <div class="section-header-grid">
+          <div>
+            <div class="eyebrow">03 / WHAT DSRT BRINGS</div>
+            <h2 id="contributions-heading" class="section-heading">A technology contribution. An implementation commitment. Measurable objectives.</h2>
+          </div>
+          <div>
+            <p class="lead-copy">An enterprise engagement with DSRT AI is built around more than software access.</p>
+            <p class="lead-copy">We bring the technology, technical expertise and implementation support required to establish an agreed deployment and evaluate its results.</p>
+          </div>
+        </div>
+
+        <div class="contributions-table" role="region" aria-label="Five Principal DSRT AI Contributions">
+          <div class="contributions-header" aria-hidden="true">
+            <span>NO.</span>
+            <span>CONTRIBUTION</span>
+            <span>WHAT DSRT PROVIDES</span>
+            <span>ENTERPRISE RELEVANCE</span>
+          </div>
+
+          <!-- Contribution 01 -->
+          <div class="contribution-row">
+            <div class="contribution-row__num">01</div>
+            <h3 class="contribution-row__name">LLM Amplification technology</h3>
+            <div class="contribution-row__desc">
+              <p>DSRT AI brings its in-house developed LLM Amplification technology to enterprise AI operations.</p>
+              <p>Its purpose is to make AI usage more efficient by improving how available model capabilities and computational resources are used for a given task.</p>
+            </div>
+            <div class="contribution-row__value">
+              <span class="contribution-row__value-label">Enterprise Value</span>
+              <p>Reduce unnecessary AI expenditure while maintaining the quality and reliability required by the organization.</p>
+            </div>
+          </div>
+
+          <!-- Contribution 02 -->
+          <div class="contribution-row">
+            <div class="contribution-row__num">02</div>
+            <h3 class="contribution-row__name">Cost-efficiency assessment</h3>
+            <div class="contribution-row__desc">
+              <p>Before deployment, understand how the organization currently uses AI and where expenditure is generated.</p>
+            </div>
+            <div class="contribution-row__value">
+              <span class="contribution-row__value-label">Enterprise Value</span>
+              <p>Identify relevant workloads and opportunities where DSRT may produce meaningful economic improvement.</p>
+            </div>
+          </div>
+
+          <!-- Contribution 03 -->
+          <div class="contribution-row">
+            <div class="contribution-row__num">03</div>
+            <h3 class="contribution-row__name">Technical deployment</h3>
+            <div class="contribution-row__desc">
+              <p>DSRT AI works with the organization's designated technical stakeholders to implement the agreed solution.</p>
+              <p>This includes the deployment planning, configuration, testing and integration activities included in the contract.</p>
+            </div>
+            <div class="contribution-row__value">
+              <span class="contribution-row__value-label">Enterprise Value</span>
+              <p>An implementation process with defined technical responsibilities rather than an unsupported software handover.</p>
+            </div>
+          </div>
+
+          <!-- Contribution 04 -->
+          <div class="contribution-row">
+            <div class="contribution-row__num">04</div>
+            <h3 class="contribution-row__name">Operational integration</h3>
+            <div class="contribution-row__desc">
+              <p>Assess how DSRT AI should interact with the organization's relevant AI workflows, supported providers and existing applications.</p>
+            </div>
+            <div class="contribution-row__value">
+              <span class="contribution-row__value-label">Enterprise Value</span>
+              <p>A deployment designed around actual operational requirements rather than forcing unnecessary changes to existing processes.</p>
+            </div>
+          </div>
+
+          <!-- Contribution 05 -->
+          <div class="contribution-row">
+            <div class="contribution-row__num">05</div>
+            <h3 class="contribution-row__name">Validation and reporting</h3>
+            <div class="contribution-row__desc">
+              <p>Evaluate the deployment against agreed baseline measurements and acceptance criteria.</p>
+            </div>
+            <div class="contribution-row__value">
+              <span class="contribution-row__value-label">Enterprise Value</span>
+              <p>The organization can assess whether the engagement is delivering the intended economic and operational outcomes.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SECTION 04 — WHERE DSRT AI FITS WITHIN AN ORGANIZATION
+         ====================================================================== -->
+    <section id="workloads" class="section" aria-labelledby="workloads-heading">
+      <div class="container">
+        <div class="section-header-grid">
+          <div>
+            <div class="eyebrow">04 / WHERE DSRT FITS</div>
+            <h2 id="workloads-heading" class="section-heading">Designed for the economics of real AI workloads.</h2>
+          </div>
+          <div>
+            <p class="lead-copy">DSRT AI can be evaluated across different organizational functions where AI expenditure forms part of recurring operations.</p>
+          </div>
+        </div>
+
+        <div class="workloads-list">
+          <!-- Workload 01 -->
+          <div class="workload-row">
+            <span class="mono-index">01</span>
+            <h3 class="workload-row__title">Internal knowledge and research</h3>
+            <div class="workload-row__copy">
+              <p>Organizations use AI to retrieve, summarize, interpret and work with information.</p>
+              <p>DSRT can be evaluated for suitable recurring knowledge and research workloads.</p>
+            </div>
+            <div class="workload-diagram" aria-hidden="true">
+              <svg viewBox="0 0 210 52" fill="none">
+                <rect x="4" y="10" width="54" height="32" fill="#FFFFFF" stroke="#CFD4D7"/>
+                <text x="13" y="29" fill="#626A70" font-family="IBM Plex Mono, monospace" font-size="8.5">CORPUS</text>
+                <line x1="58" y1="26" x2="78" y2="26" stroke="#626A70"/>
+                <rect x="78" y="10" width="56" height="32" fill="#111820"/>
+                <text x="92" y="29" fill="#FFFFFF" font-family="IBM Plex Mono, monospace" font-size="8.5">DSRT</text>
+                <line x1="134" y1="26" x2="154" y2="26" stroke="#126E48"/>
+                <rect x="154" y="10" width="52" height="32" fill="#EEF6F2" stroke="#C2DFD1"/>
+                <text x="161" y="29" fill="#126E48" font-family="IBM Plex Mono, monospace" font-size="8.5">SYNTH</text>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Workload 02 -->
+          <div class="workload-row">
+            <span class="mono-index">02</span>
+            <h3 class="workload-row__title">Software engineering</h3>
+            <div class="workload-row__copy">
+              <p>AI-assisted development can involve repeated reasoning, code generation, debugging, documentation and review.</p>
+              <p>Evaluate whether amplification can improve the economics of these workflows.</p>
+            </div>
+            <div class="workload-diagram" aria-hidden="true">
+              <svg viewBox="0 0 210 52" fill="none">
+                <rect x="4" y="10" width="54" height="32" fill="#FFFFFF" stroke="#CFD4D7"/>
+                <text x="12" y="29" fill="#626A70" font-family="IBM Plex Mono, monospace" font-size="8.5">IDE / CI</text>
+                <line x1="58" y1="26" x2="78" y2="26" stroke="#626A70"/>
+                <rect x="78" y="10" width="56" height="32" fill="#111820"/>
+                <text x="92" y="29" fill="#FFFFFF" font-family="IBM Plex Mono, monospace" font-size="8.5">DSRT</text>
+                <line x1="134" y1="26" x2="154" y2="26" stroke="#126E48"/>
+                <rect x="154" y="10" width="52" height="32" fill="#EEF6F2" stroke="#C2DFD1"/>
+                <text x="162" y="29" fill="#126E48" font-family="IBM Plex Mono, monospace" font-size="8.5">VERIFY</text>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Workload 03 -->
+          <div class="workload-row">
+            <span class="mono-index">03</span>
+            <h3 class="workload-row__title">Business operations</h3>
+            <div class="workload-row__copy">
+              <p>AI-assisted document processing, operational analysis, drafting and internal task execution can create recurring model expenditure.</p>
+              <p>Identify suitable opportunities for efficiency improvements.</p>
+            </div>
+            <div class="workload-diagram" aria-hidden="true">
+              <svg viewBox="0 0 210 52" fill="none">
+                <rect x="4" y="10" width="54" height="32" fill="#FFFFFF" stroke="#CFD4D7"/>
+                <text x="16" y="29" fill="#626A70" font-family="IBM Plex Mono, monospace" font-size="8.5">DOCS</text>
+                <line x1="58" y1="26" x2="78" y2="26" stroke="#626A70"/>
+                <rect x="78" y="10" width="56" height="32" fill="#111820"/>
+                <text x="92" y="29" fill="#FFFFFF" font-family="IBM Plex Mono, monospace" font-size="8.5">DSRT</text>
+                <line x1="134" y1="26" x2="154" y2="26" stroke="#126E48"/>
+                <rect x="154" y="10" width="52" height="32" fill="#EEF6F2" stroke="#C2DFD1"/>
+                <text x="166" y="29" fill="#126E48" font-family="IBM Plex Mono, monospace" font-size="8.5">OPS</text>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Workload 04 -->
+          <div class="workload-row">
+            <span class="mono-index">04</span>
+            <h3 class="workload-row__title">Customer and internal support</h3>
+            <div class="workload-row__copy">
+              <p>Organizations may use AI to assist support teams, answer operational questions and process requests.</p>
+              <p>Assess appropriate workloads based on accuracy, reliability and operational risk.</p>
+            </div>
+            <div class="workload-diagram" aria-hidden="true">
+              <svg viewBox="0 0 210 52" fill="none">
+                <rect x="4" y="10" width="54" height="32" fill="#FFFFFF" stroke="#CFD4D7"/>
+                <text x="14" y="29" fill="#626A70" font-family="IBM Plex Mono, monospace" font-size="8.5">QUEUE</text>
+                <line x1="58" y1="26" x2="78" y2="26" stroke="#626A70"/>
+                <rect x="78" y="10" width="56" height="32" fill="#111820"/>
+                <text x="92" y="29" fill="#FFFFFF" font-family="IBM Plex Mono, monospace" font-size="8.5">DSRT</text>
+                <line x1="134" y1="26" x2="154" y2="26" stroke="#126E48"/>
+                <rect x="154" y="10" width="52" height="32" fill="#EEF6F2" stroke="#C2DFD1"/>
+                <text x="162" y="29" fill="#126E48" font-family="IBM Plex Mono, monospace" font-size="8.5">ASSIST</text>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Workload 05 -->
+          <div class="workload-row">
+            <span class="mono-index">05</span>
+            <h3 class="workload-row__title">Data analysis and reporting</h3>
+            <div class="workload-row__copy">
+              <p>AI-supported analysis and report generation can involve large contexts and repeated processing.</p>
+              <p>Evaluate the suitability of DSRT for these workloads.</p>
+            </div>
+            <div class="workload-diagram" aria-hidden="true">
+              <svg viewBox="0 0 210 52" fill="none">
+                <rect x="4" y="10" width="54" height="32" fill="#FFFFFF" stroke="#CFD4D7"/>
+                <text x="11" y="29" fill="#626A70" font-family="IBM Plex Mono, monospace" font-size="8.5">CONTEXT</text>
+                <line x1="58" y1="26" x2="78" y2="26" stroke="#626A70"/>
+                <rect x="78" y="10" width="56" height="32" fill="#111820"/>
+                <text x="92" y="29" fill="#FFFFFF" font-family="IBM Plex Mono, monospace" font-size="8.5">DSRT</text>
+                <line x1="134" y1="26" x2="154" y2="26" stroke="#126E48"/>
+                <rect x="154" y="10" width="52" height="32" fill="#EEF6F2" stroke="#C2DFD1"/>
+                <text x="160" y="29" fill="#126E48" font-family="IBM Plex Mono, monospace" font-size="8.5">REPORT</text>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="governance-note">
+          <span class="governance-note__label">Evaluation Standard</span>
+          <p class="governance-note__text">These represent enterprise evaluation areas rather than claims of universal prior deployment across every industry or workload. Every candidate use case is assessed individually for technical suitability, operational risk and measurable economic value before inclusion in scope.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SECTION 05 — DEPLOYMENT PARTNERSHIP (6-STAGE METHODOLOGY)
+         ====================================================================== -->
+    <section id="deployment-partnership" class="section section--secondary" aria-labelledby="deployment-heading">
+      <div class="container">
+        <div class="section-header-grid">
+          <div>
+            <div class="eyebrow">05 / DEPLOYMENT PARTNERSHIP</div>
+            <h2 id="deployment-heading" class="section-heading">From technical assessment to operational deployment.</h2>
+          </div>
+          <div>
+            <p class="lead-copy">An enterprise deployment requires more than providing account access.</p>
+            <p class="lead-copy">DSRT AI works with the organization's designated stakeholders through an agreed implementation process, from initial assessment through configuration, validation and operational handover.</p>
+          </div>
+        </div>
+
+        <div class="deployment-rail" aria-label="Six-Phase Enterprise Implementation Framework">
+          <div class="deployment-rail__line" aria-hidden="true"></div>
+
+          <div class="deployment-grid" id="deploymentGrid">
+            <!-- Phase 01 -->
+            <div class="phase-col is-active" data-phase="01">
+              <button type="button" class="phase-node-btn" aria-label="Inspect Phase 01">
+                <span class="phase-node-dot">01</span>
+              </button>
+              <div class="phase-card">
+                <span class="phase-card__label">Phase 01</span>
+                <h3 class="phase-card__title">Discovery and requirements</h3>
+                <p class="phase-card__objective">Understand the organization's AI environment, current expenditure, workloads and deployment objectives.</p>
+                <div class="phase-card__activities">
+                  <div class="phase-card__activities-title">Activities</div>
+                  <ul>
+                    <li>Stakeholder discussions</li>
+                    <li>Workload identification</li>
+                    <li>Existing environment review</li>
+                    <li>Technical requirements</li>
+                    <li>Governance and security requirements</li>
+                    <li>Initial commercial scope</li>
+                  </ul>
+                </div>
+                <div class="phase-card__deliverable">
+                  <strong>Deliverable</strong>
+                  Agreed discovery findings and proposed deployment scope.
+                </div>
+              </div>
+            </div>
+
+            <!-- Phase 02 -->
+            <div class="phase-col" data-phase="02">
+              <button type="button" class="phase-node-btn" aria-label="Inspect Phase 02">
+                <span class="phase-node-dot">02</span>
+              </button>
+              <div class="phase-card">
+                <span class="phase-card__label">Phase 02</span>
+                <h3 class="phase-card__title">Technical assessment and design</h3>
+                <p class="phase-card__objective">Determine how the proposed DSRT solution fits the organization's requirements.</p>
+                <div class="phase-card__activities">
+                  <div class="phase-card__activities-title">Activities</div>
+                  <ul>
+                    <li>Provider and model compatibility review</li>
+                    <li>Workflow suitability</li>
+                    <li>Integration assessment</li>
+                    <li>Data-flow considerations</li>
+                    <li>Technical dependencies</li>
+                    <li>Deployment design</li>
+                  </ul>
+                </div>
+                <div class="phase-card__deliverable">
+                  <strong>Deliverable</strong>
+                  Technical implementation plan.
+                </div>
+              </div>
+            </div>
+
+            <!-- Phase 03 -->
+            <div class="phase-col" data-phase="03">
+              <button type="button" class="phase-node-btn" aria-label="Inspect Phase 03">
+                <span class="phase-node-dot">03</span>
+              </button>
+              <div class="phase-card">
+                <span class="phase-card__label">Phase 03</span>
+                <h3 class="phase-card__title">Configuration and integration</h3>
+                <p class="phase-card__objective">Implement the agreed deployment configuration.</p>
+                <div class="phase-card__activities">
+                  <div class="phase-card__activities-title">Activities may include</div>
+                  <ul>
+                    <li>Environment configuration</li>
+                    <li>Supported provider connections</li>
+                    <li>Application or workflow integration</li>
+                    <li>Relevant access configuration</li>
+                    <li>Initial testing</li>
+                    <li>Technical issue resolution</li>
+                  </ul>
+                </div>
+                <div class="phase-card__deliverable">
+                  <strong>Deliverable</strong>
+                  Configured implementation ready for validation.
+                </div>
+              </div>
+            </div>
+
+            <!-- Phase 04 -->
+            <div class="phase-col" data-phase="04">
+              <button type="button" class="phase-node-btn" aria-label="Inspect Phase 04">
+                <span class="phase-node-dot">04</span>
+              </button>
+              <div class="phase-card">
+                <span class="phase-card__label">Phase 04</span>
+                <h3 class="phase-card__title">Validation and acceptance</h3>
+                <p class="phase-card__objective">Evaluate the implementation against the established requirements.</p>
+                <div class="phase-card__activities">
+                  <div class="phase-card__activities-title">Activities</div>
+                  <ul>
+                    <li>Baseline comparison</li>
+                    <li>Output-quality evaluation</li>
+                    <li>Cost evaluation</li>
+                    <li>Reliability testing</li>
+                    <li>Acceptance criteria review</li>
+                    <li>Identified issue resolution</li>
+                  </ul>
+                </div>
+                <div class="phase-card__deliverable">
+                  <strong>Deliverable</strong>
+                  Validation report and agreed acceptance outcome.
+                </div>
+              </div>
+            </div>
+
+            <!-- Phase 05 -->
+            <div class="phase-col" data-phase="05">
+              <button type="button" class="phase-node-btn" aria-label="Inspect Phase 05">
+                <span class="phase-node-dot">05</span>
+              </button>
+              <div class="phase-card">
+                <span class="phase-card__label">Phase 05</span>
+                <h3 class="phase-card__title">Deployment and enablement</h3>
+                <p class="phase-card__objective">Prepare the approved implementation for operational use.</p>
+                <div class="phase-card__activities">
+                  <div class="phase-card__activities-title">Activities</div>
+                  <ul>
+                    <li>Deployment coordination</li>
+                    <li>User or administrator orientation</li>
+                    <li>Documentation</li>
+                    <li>Operational handover</li>
+                    <li>Agreed rollout support</li>
+                  </ul>
+                </div>
+                <div class="phase-card__deliverable">
+                  <strong>Deliverable</strong>
+                  Operational deployment and handover documentation.
+                </div>
+              </div>
+            </div>
+
+            <!-- Phase 06 -->
+            <div class="phase-col" data-phase="06">
+              <button type="button" class="phase-node-btn" aria-label="Inspect Phase 06">
+                <span class="phase-node-dot">06</span>
+              </button>
+              <div class="phase-card">
+                <span class="phase-card__label">Phase 06</span>
+                <h3 class="phase-card__title">Ongoing engagement</h3>
+                <p class="phase-card__objective">Continue supporting the deployment under the agreed support arrangement.</p>
+                <div class="phase-card__activities">
+                  <div class="phase-card__activities-title">Activities may include</div>
+                  <ul>
+                    <li>Technical support</li>
+                    <li>Issue investigation</li>
+                    <li>Configuration assistance</li>
+                    <li>Performance reviews</li>
+                    <li>Agreed optimization work</li>
+                    <li>Change and upgrade planning</li>
+                  </ul>
+                </div>
+                <div class="phase-card__deliverable">
+                  <strong>Deliverable</strong>
+                  Ongoing support according to the contract.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="governance-note">
+          <span class="governance-note__label">Methodology Scope</span>
+          <p class="governance-note__text">The six phases describe the proposed enterprise engagement methodology. Specific scope boundaries, engineering activities, deliverables, timelines, acceptance criteria and ongoing support commitments are established and agreed in writing for each contract.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SECTION 06 — WORKING WITHIN EXISTING ENTERPRISE ENVIRONMENTS
+         ====================================================================== -->
+    <section id="integration" class="section" aria-labelledby="integration-heading">
+      <div class="container">
+        <div class="section-header-grid">
+          <div>
+            <div class="eyebrow">06 / WORKING WITHIN EXISTING ENVIRONMENTS</div>
+            <h2 id="integration-heading" class="section-heading">Integration should respect the environment it enters.</h2>
+          </div>
+          <div>
+            <p class="lead-copy">An enterprise should not have to redesign its entire AI environment simply to evaluate DSRT AI.</p>
+            <p class="lead-copy">The engagement begins by understanding the organization's existing providers, models, applications and technical constraints. The proposed deployment is then scoped around what is supported and commercially agreed.</p>
+          </div>
+        </div>
+
+        <!-- Four Areas of Technical Assessment -->
+        <div class="assessment-four-grid">
+          <div class="assessment-cell">
+            <h3 class="assessment-cell__title">AI provider environment</h3>
+            <p class="assessment-cell__desc">Identify the providers, models and API configurations relevant to the deployment.</p>
+          </div>
+          <div class="assessment-cell">
+            <h3 class="assessment-cell__title">Existing applications</h3>
+            <p class="assessment-cell__desc">Understand the applications and business workflows that may interact with DSRT.</p>
+          </div>
+          <div class="assessment-cell">
+            <h3 class="assessment-cell__title">Deployment environment</h3>
+            <p class="assessment-cell__desc">Assess the technical environment and available deployment options.</p>
+          </div>
+          <div class="assessment-cell">
+            <h3 class="assessment-cell__title">Access and data flows</h3>
+            <p class="assessment-cell__desc">Establish the required access boundaries, data flows and operational responsibilities.</p>
+          </div>
+        </div>
+
+        <!-- Architecture Diagram with Legend & Interactive Inspector -->
+        <div class="arch-frame">
+          <div class="arch-frame__topbar">
+            <span class="arch-frame__label">ILLUSTRATIVE RELATIONSHIP ARCHITECTURE (SELECT LAYER TO INSPECT)</span>
+            <div class="arch-legend" aria-label="Architecture Diagram Legend">
+              <span class="arch-legend__item">
+                <span class="arch-legend__swatch arch-legend__swatch--env"></span>
+                Existing enterprise environment
+              </span>
+              <span class="arch-legend__item">
+                <span class="arch-legend__swatch arch-legend__swatch--dsrt"></span>
+                DSRT AI
+              </span>
+              <span class="arch-legend__item">
+                <span class="arch-legend__swatch arch-legend__swatch--provider"></span>
+                Supported external providers
+              </span>
+              <span class="arch-legend__item">
+                <span class="arch-legend__swatch arch-legend__swatch--measure"></span>
+                Measurement and reporting
+              </span>
+            </div>
+          </div>
+
+          <!-- Desktop SVG Architecture Diagram -->
+          <div class="arch-canvas-desktop">
+            <svg viewBox="0 0 1120 340" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Enterprise Integration Architecture showing Existing Enterprise Applications flowing through DSRT AI to Supported AI Providers, with an underlying Measurement and Reporting Layer">
+              <!-- Node 1: Existing Enterprise Environment -->
+              <g class="arch-interactive-node" tabindex="0" role="button" data-arch-node="env" aria-label="Inspect Existing Enterprise Environment">
+                <rect x="20" y="24" width="300" height="196" fill="#FFFFFF" stroke="#626A70" stroke-width="1.2"/>
+                <text x="40" y="52" fill="#626A70" font-family="IBM Plex Mono, monospace" font-size="10.5" letter-spacing="0.06em">EXISTING ENTERPRISE ENVIRONMENT</text>
+                <line x1="40" y1="64" x2="300" y2="64" stroke="#E5E7E8"/>
+                <rect x="40" y="80" width="260" height="34" fill="#F6F7F7" stroke="#E5E7E8"/>
+                <text x="54" y="101" fill="#17191B" font-family="Inter, sans-serif" font-size="12.5" font-weight="500">Internal AI Applications &amp; Tools</text>
+                <rect x="40" y="124" width="260" height="34" fill="#F6F7F7" stroke="#E5E7E8"/>
+                <text x="54" y="145" fill="#17191B" font-family="Inter, sans-serif" font-size="12.5" font-weight="500">Scoped Business Workflows</text>
+                <rect x="40" y="168" width="260" height="34" fill="#F6F7F7" stroke="#E5E7E8"/>
+                <text x="54" y="189" fill="#17191B" font-family="Inter, sans-serif" font-size="12.5" font-weight="500">Access Boundaries &amp; Governance</text>
+              </g>
+
+              <!-- Flow Arrow 1 -> 2 -->
+              <line x1="320" y1="112" x2="404" y2="112" stroke="#17191B" stroke-width="1.4"/>
+              <polygon points="400,107 408,112 400,117" fill="#17191B"/>
+              <line x1="408" y1="136" x2="324" y2="136" stroke="#626A70" stroke-width="1.2" stroke-dasharray="4 3"/>
+              <polygon points="328,131 320,136 328,141" fill="#626A70"/>
+              <text x="334" y="102" fill="#626A70" font-family="IBM Plex Mono, monospace" font-size="9.5">SCOPED API</text>
+
+              <!-- Node 2: DSRT AI -->
+              <g class="arch-interactive-node" tabindex="0" role="button" data-arch-node="dsrt" aria-label="Inspect DSRT AI Layer">
+                <rect x="410" y="24" width="300" height="196" fill="#111820" stroke="#111820" stroke-width="1.4"/>
+                <text x="430" y="52" fill="#A9B2BA" font-family="IBM Plex Mono, monospace" font-size="10.5" letter-spacing="0.06em">DSRT AI (CONTRACTED SCOPE)</text>
+                <line x1="430" y1="64" x2="690" y2="64" stroke="#263240"/>
+                <rect x="430" y="80" width="260" height="42" fill="#18222D" stroke="#2D3B4B"/>
+                <text x="444" y="100" fill="#FFFFFF" font-family="Inter, sans-serif" font-size="12.5" font-weight="600">LLM Amplification Engine</text>
+                <text x="444" y="114" fill="#A9B2BA" font-family="Inter, sans-serif" font-size="10.5">Task &amp; compute efficiency layer</text>
+                <rect x="430" y="132" width="260" height="34" fill="#18222D" stroke="#2D3B4B"/>
+                <text x="444" y="153" fill="#FFFFFF" font-family="Inter, sans-serif" font-size="12" font-weight="500">Configured Workflow Routing</text>
+                <rect x="430" y="174" width="260" height="30" fill="#18222D" stroke="#2D3B4B"/>
+                <text x="444" y="193" fill="#A9B2BA" font-family="IBM Plex Mono, monospace" font-size="10.5">SUPPORTED PROVIDER CONNECTIONS</text>
+              </g>
+
+              <!-- Flow Arrow 2 -> 3 -->
+              <line x1="710" y1="112" x2="794" y2="112" stroke="#17191B" stroke-width="1.4"/>
+              <polygon points="790,107 798,112 790,117" fill="#17191B"/>
+              <line x1="798" y1="136" x2="714" y2="136" stroke="#626A70" stroke-width="1.2" stroke-dasharray="4 3"/>
+              <polygon points="718,131 710,136 718,141" fill="#626A70"/>
+              <text x="720" y="102" fill="#626A70" font-family="IBM Plex Mono, monospace" font-size="9.5">MODEL CALLS</text>
+
+              <!-- Node 3: Supported External Providers -->
+              <g class="arch-interactive-node" tabindex="0" role="button" data-arch-node="providers" aria-label="Inspect Supported External Providers">
+                <rect x="800" y="24" width="300" height="196" fill="#EBEEF0" stroke="#626A70" stroke-width="1.2"/>
+                <text x="820" y="52" fill="#626A70" font-family="IBM Plex Mono, monospace" font-size="10.5" letter-spacing="0.06em">SUPPORTED EXTERNAL PROVIDERS</text>
+                <line x1="820" y1="64" x2="1080" y2="64" stroke="#CFD4D7"/>
+                <rect x="820" y="80" width="260" height="38" fill="#FFFFFF" stroke="#CFD4D7"/>
+                <text x="834" y="103" fill="#17191B" font-family="Inter, sans-serif" font-size="12.5" font-weight="500">Supported Commercial LLM APIs</text>
+                <rect x="820" y="128" width="260" height="38" fill="#FFFFFF" stroke="#CFD4D7"/>
+                <text x="834" y="151" fill="#17191B" font-family="Inter, sans-serif" font-size="12.5" font-weight="500">Agreed Model Endpoints</text>
+                <text x="820" y="192" fill="#626A70" font-family="Inter, sans-serif" font-size="11">Subject to provider compatibility review</text>
+              </g>
+
+              <!-- Vertical Telemetry Connectors -->
+              <line x1="170" y1="220" x2="170" y2="256" stroke="#126E48" stroke-width="1.2" stroke-dasharray="3 3"/>
+              <line x1="560" y1="220" x2="560" y2="256" stroke="#126E48" stroke-width="1.2"/>
+              <line x1="950" y1="220" x2="950" y2="256" stroke="#126E48" stroke-width="1.2" stroke-dasharray="3 3"/>
+
+              <!-- Node 4: Measurement and Reporting Layer -->
+              <g class="arch-interactive-node" tabindex="0" role="button" data-arch-node="measurement" aria-label="Inspect Measurement and Reporting Layer">
+                <rect x="20" y="256" width="1080" height="64" fill="#EEF6F2" stroke="#126E48" stroke-width="1.2"/>
+                <text x="40" y="282" fill="#126E48" font-family="IBM Plex Mono, monospace" font-size="10.5" font-weight="500" letter-spacing="0.06em">MEASUREMENT AND REPORTING LAYER</text>
+                <text x="40" y="302" fill="#17191B" font-family="Inter, sans-serif" font-size="12.5">Baseline Comparison  ·  Token Consumption  ·  Provider Expenditure  ·  Output Quality &amp; Reliability  ·  Processing Overhead  ·  Net Economic Impact</text>
+              </g>
+            </svg>
+          </div>
+
+          <!-- Simplified Mobile Architecture View (Section 25) -->
+          <div class="arch-canvas-mobile" aria-label="Simplified Mobile Architecture Relationship Diagram">
+            <div class="arch-m-box">
+              <div class="arch-m-box__tag">01 // Existing Enterprise Environment</div>
+              <div class="arch-m-box__title">Applications &amp; Business Workflows</div>
+              <div class="arch-m-box__items">Internal AI tools, scoped processes, access &amp; governance boundaries.</div>
+            </div>
+            <div class="arch-m-arrow">↓ ↑ SCOPED INTEGRATION</div>
+            <div class="arch-m-box arch-m-box--dsrt">
+              <div class="arch-m-box__tag">02 // DSRT AI</div>
+              <div class="arch-m-box__title">In-House LLM Amplification</div>
+              <div class="arch-m-box__items">Computational efficiency configuration &amp; supported provider routing.</div>
+            </div>
+            <div class="arch-m-arrow">↓ ↑ SUPPORTED API CALLS</div>
+            <div class="arch-m-box">
+              <div class="arch-m-box__tag">03 // Supported External Providers</div>
+              <div class="arch-m-box__title">Agreed Providers &amp; Models</div>
+              <div class="arch-m-box__items">Verified during technical assessment for model &amp; API compatibility.</div>
+            </div>
+            <div class="arch-m-arrow">↓ TELEMETRY &amp; EVALUATION</div>
+            <div class="arch-m-box arch-m-box--measure">
+              <div class="arch-m-box__tag">04 // Measurement &amp; Reporting</div>
+              <div class="arch-m-box__title">Baseline vs. Deployment Validation</div>
+              <div class="arch-m-box__items">Expenditure, tokens, output quality, reliability, overhead &amp; net impact.</div>
+            </div>
+          </div>
+
+          <div class="arch-inspector">
+            <p class="arch-inspector__content" id="archInspectorText">
+              <strong>Architecture Overview:</strong> Select any component in the diagram above to inspect how technical boundaries are assessed during Phase 02.
+            </p>
+            <span class="arch-inspector__disclaimer">Illustrative of operational relationship — not a claim of universal compatibility.</span>
+          </div>
+        </div>
+
+        <div class="governance-note">
+          <span class="governance-note__label">Technical Compatibility</span>
+          <p class="governance-note__text">DSRT AI will document supported integrations and deployment requirements during technical assessment. Custom integrations, private deployments, on-premises installations and specialized infrastructure requirements must be evaluated and explicitly agreed before being offered as contractual deliverables.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SECTION 07 — MEASUREMENT AND VALIDATION
+         ====================================================================== -->
+    <section id="measurement" class="section section--secondary" aria-labelledby="measurement-heading">
+      <div class="container">
+        <div class="section-header-grid">
+          <div>
+            <div class="eyebrow">07 / MEASUREMENT AND VALIDATION</div>
+            <h2 id="measurement-heading" class="section-heading">Economic improvement must be demonstrated.</h2>
+          </div>
+          <div>
+            <p class="lead-copy">A lower AI bill is not sufficient if output quality, reliability or operational performance deteriorates.</p>
+            <p class="lead-copy">Enterprise deployments should establish a baseline and evaluate the results using agreed measurements across comparable workloads, equivalent quality requirements and an agreed measurement period.</p>
+          </div>
+        </div>
+
+        <!-- Six Measurement Areas -->
+        <div class="measurement-areas-grid">
+          <div class="measurement-area">
+            <span class="measurement-area__num">MEASUREMENT 01</span>
+            <h3 class="measurement-area__title">Expenditure</h3>
+            <p class="measurement-area__desc">Evaluate relevant AI provider expenditure before and after the deployment.</p>
+          </div>
+          <div class="measurement-area">
+            <span class="measurement-area__num">MEASUREMENT 02</span>
+            <h3 class="measurement-area__title">Token consumption</h3>
+            <p class="measurement-area__desc">Measure relevant input and output token consumption for comparable workloads.</p>
+          </div>
+          <div class="measurement-area">
+            <span class="measurement-area__num">MEASUREMENT 03</span>
+            <h3 class="measurement-area__title">Output quality</h3>
+            <p class="measurement-area__desc">Evaluate whether the resulting outputs meet the organization's established quality requirements.</p>
+          </div>
+          <div class="measurement-area">
+            <span class="measurement-area__num">MEASUREMENT 04</span>
+            <h3 class="measurement-area__title">Reliability</h3>
+            <p class="measurement-area__desc">Assess consistency, factual accuracy and task completion against agreed evaluation criteria.</p>
+          </div>
+          <div class="measurement-area">
+            <span class="measurement-area__num">MEASUREMENT 05</span>
+            <h3 class="measurement-area__title">Processing overhead</h3>
+            <p class="measurement-area__desc">Account for additional processing, amplification overhead and other relevant operational costs.</p>
+          </div>
+          <div class="measurement-area">
+            <span class="measurement-area__num">MEASUREMENT 06</span>
+            <h3 class="measurement-area__title">Net economic impact</h3>
+            <p class="measurement-area__desc">Compare the overall cost of the agreed deployment with the baseline.</p>
+          </div>
+        </div>
+
+        <!-- Interactive Sample Measurement Console (Explicitly Labelled Sample Data) -->
+        <div class="eval-console" role="region" aria-label="Sample Measurement Evaluation Framework">
+          <div class="eval-console__header">
+            <div class="eval-console__badge-wrap">
+              <span class="eval-console__badge">ILLUSTRATIVE SAMPLE DATA — EVALUATION METHODOLOGY MODEL</span>
+              <span class="eval-console__sub">Demonstrates how DSRT AI separates gross provider reduction, overhead and contract fees from net benefit. Not a client result or savings guarantee.</span>
+            </div>
+
+            <div class="scenario-tabs" role="tablist" aria-label="Sample Workload Scenarios">
+              <button type="button" class="scenario-tab is-active" role="tab" aria-selected="true" data-scenario="research">
+                Sample A: Knowledge Synthesis
+              </button>
+              <button type="button" class="scenario-tab" role="tab" aria-selected="false" data-scenario="engineering">
+                Sample B: Engineering Review
+              </button>
+              <button type="button" class="scenario-tab" role="tab" aria-selected="false" data-scenario="operations">
+                Sample C: Document Operations
+              </button>
+            </div>
+          </div>
+
+          <div class="eval-console__body">
+            <div class="eval-table-wrap">
+              <table class="eval-table">
+                <thead>
+                  <tr>
+                    <th>Measurement</th>
+                    <th>Method</th>
+                    <th>Baseline (Sample)</th>
+                    <th>DSRT Deployment (Sample)</th>
+                  </tr>
+                </thead>
+                <tbody id="evalTableBody">
+                  <!-- Populated dynamically from clean JS content model, with static initial render for immediate SEO/no-JS readability -->
+                  <tr>
+                    <td>Provider expenditure</td>
+                    <td><span class="eval-status-tag">Measured</span></td>
+                    <td class="eval-val-mono">$42,000 / period</td>
+                    <td class="eval-val-mono">$27,800 / period</td>
+                  </tr>
+                  <tr>
+                    <td>Token consumption</td>
+                    <td><span class="eval-status-tag">Measured</span></td>
+                    <td class="eval-val-mono">1.84B tokens</td>
+                    <td class="eval-val-mono">1.19B tokens</td>
+                  </tr>
+                  <tr>
+                    <td>Output quality</td>
+                    <td><span class="eval-status-tag">Evaluated</span></td>
+                    <td class="eval-val-mono">94.2% rubric score</td>
+                    <td class="eval-val-mono">94.5% (Threshold ≥ 94.0%)</td>
+                  </tr>
+                  <tr>
+                    <td>Reliability</td>
+                    <td><span class="eval-status-tag">Evaluated</span></td>
+                    <td class="eval-val-mono">98.8% completion</td>
+                    <td class="eval-val-mono">98.9% (Agreed parity)</td>
+                  </tr>
+                  <tr>
+                    <td>Additional processing</td>
+                    <td><span class="eval-status-tag">Recorded</span></td>
+                    <td class="eval-val-mono">$0</td>
+                    <td class="eval-val-mono">$1,650 amplification + $4,200 scope fee</td>
+                  </tr>
+                  <tr>
+                    <td>Total relevant cost</td>
+                    <td><span class="eval-status-tag">Calculated</span></td>
+                    <td class="eval-val-mono">$42,000</td>
+                    <td class="eval-val-mono eval-val-positive">$33,650 (Net -$8,350 / period)</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="eval-accounting">
+              <div>
+                <div class="eval-accounting__title">NET ACCOUNTING BREAKDOWN (<span id="evalScenarioName">SAMPLE A</span>)</div>
+                <div class="eval-ledger" id="evalLedger">
+                  <div class="eval-ledger__row">
+                    <span>Gross provider cost reduction</span>
+                    <span>$14,200</span>
+                  </div>
+                  <div class="eval-ledger__row">
+                    <span>Less: Additional processing costs</span>
+                    <span>− $1,650</span>
+                  </div>
+                  <div class="eval-ledger__row">
+                    <span>Less: Illustrative DSRT contract cost</span>
+                    <span>− $4,200</span>
+                  </div>
+                  <div class="eval-ledger__row eval-ledger__row--net">
+                    <span>Net financial benefit (Sample)</span>
+                    <span>$8,350 / period</span>
+                  </div>
+                </div>
+              </div>
+              <p class="eval-accounting__note">
+                Percentage or financial improvements should never be evaluated without deducting amplification processing overhead and DSRT contract fees across equivalent output quality thresholds.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SECTION 08 — GOVERNANCE, SECURITY AND DATA HANDLING
+         ====================================================================== -->
+    <section id="governance" class="section" aria-labelledby="governance-heading">
+      <div class="container">
+        <div class="section-header-grid">
+          <div>
+            <div class="eyebrow">08 / ENTERPRISE GOVERNANCE</div>
+            <h2 id="governance-heading" class="section-heading">Deployment requirements are part of the engagement.</h2>
+          </div>
+          <div>
+            <p class="lead-copy">Enterprise deployments must account for the organization's security, privacy, access and governance requirements from the beginning.</p>
+            <p class="lead-copy">DSRT AI will work with the organization's designated technical and governance stakeholders to document applicable requirements and determine deployment suitability.</p>
+          </div>
+        </div>
+
+        <div class="governance-grid">
+          <div class="governance-item">
+            <h3 class="governance-item__title">Data handling</h3>
+            <p class="governance-item__desc">Document the information processed by DSRT AI, the relevant data flows and the responsibilities of each party.</p>
+          </div>
+          <div class="governance-item">
+            <h3 class="governance-item__title">Access management</h3>
+            <p class="governance-item__desc">Establish the required access permissions and administrative responsibilities for the agreed deployment.</p>
+          </div>
+          <div class="governance-item">
+            <h3 class="governance-item__title">Provider dependencies</h3>
+            <p class="governance-item__desc">Identify the external AI providers involved and their applicable data-handling terms.</p>
+          </div>
+          <div class="governance-item">
+            <h3 class="governance-item__title">Retention and deletion</h3>
+            <p class="governance-item__desc">Document applicable retention, deletion and data-management arrangements.</p>
+          </div>
+          <div class="governance-item">
+            <h3 class="governance-item__title">Security review</h3>
+            <p class="governance-item__desc">Provide the relevant technical and security documentation available for the deployment under consideration.</p>
+          </div>
+          <div class="governance-item">
+            <h3 class="governance-item__title">Incident management</h3>
+            <p class="governance-item__desc">Establish communication, escalation and response responsibilities in the contract.</p>
+          </div>
+        </div>
+
+        <div class="governance-note">
+          <span class="governance-note__label">Governance Assessment</span>
+          <p class="governance-note__text">Available technical controls, architecture documentation and data-handling specifications are provided during technical evaluation so your security and procurement teams can assess suitability directly against organizational policy before any deployment commitment is made.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SECTION 09 — PARTNERSHIP RESPONSIBILITIES (3-COLUMN MATRIX)
+         ====================================================================== -->
+    <section id="responsibilities" class="section section--secondary" aria-labelledby="responsibilities-heading">
+      <div class="container">
+        <div class="section-header-grid">
+          <div>
+            <div class="eyebrow">09 / PARTNERSHIP RESPONSIBILITIES</div>
+            <h2 id="responsibilities-heading" class="section-heading">Clear responsibilities on both sides.</h2>
+          </div>
+          <div>
+            <p class="lead-copy">Successful deployment requires coordinated participation from both organizations.</p>
+            <p class="lead-copy">We establish implementation ownership, dependencies, deliverables and acceptance criteria before execution begins.</p>
+          </div>
+        </div>
+
+        <div class="matrix-wrapper" role="region" aria-label="Mutual Responsibility Matrix">
+          <div class="matrix-summary-bar">
+            <div class="matrix-col-head">
+              <div class="matrix-col-head__tag">PROVIDER ACCOUNTABILITY</div>
+              <h3 class="matrix-col-head__title">DSRT AI</h3>
+            </div>
+            <div class="matrix-col-head">
+              <div class="matrix-col-head__tag">JOINT GOVERNANCE</div>
+              <h3 class="matrix-col-head__title">Shared</h3>
+            </div>
+            <div class="matrix-col-head">
+              <div class="matrix-col-head__tag">CLIENT ACCOUNTABILITY</div>
+              <h3 class="matrix-col-head__title">Enterprise</h3>
+            </div>
+          </div>
+
+          <!-- Summary Matrix Row -->
+          <div class="matrix-summary-pills">
+            <div class="matrix-pill-group">
+              <span class="matrix-pill">Technical delivery</span>
+              <span class="matrix-pill">Configuration</span>
+              <span class="matrix-pill">Validation</span>
+              <span class="matrix-pill">Documentation</span>
+              <span class="matrix-pill">Contracted support</span>
+            </div>
+            <div class="matrix-pill-group">
+              <span class="matrix-pill">Project objectives</span>
+              <span class="matrix-pill">Milestone reviews</span>
+              <span class="matrix-pill">Acceptance criteria</span>
+              <span class="matrix-pill">Risk management</span>
+              <span class="matrix-pill">Performance reviews</span>
+            </div>
+            <div class="matrix-pill-group">
+              <span class="matrix-pill">Business requirements</span>
+              <span class="matrix-pill">Environment access</span>
+              <span class="matrix-pill">Internal testing</span>
+              <span class="matrix-pill">Procurement</span>
+              <span class="matrix-pill">Designated stakeholders</span>
+            </div>
+          </div>
+
+          <!-- Full Contractual Responsibility Breakdown -->
+          <div class="matrix-details-grid">
+            <div class="matrix-detail-col" data-mobile-heading="DSRT AI Responsibilities">
+              <span class="matrix-detail-col__clause">Subject to the agreed contract:</span>
+              <ul class="matrix-checklist">
+                <li>Provide the contracted DSRT AI software and technology access.</li>
+                <li>Deliver the agreed technical implementation.</li>
+                <li>Configure supported integrations within scope.</li>
+                <li>Coordinate implementation activities with designated stakeholders.</li>
+                <li>Perform agreed validation and testing.</li>
+                <li>Provide relevant technical documentation.</li>
+                <li>Deliver the contracted training and handover.</li>
+                <li>Provide support under the agreed support terms.</li>
+                <li>Communicate material implementation issues and dependencies.</li>
+              </ul>
+            </div>
+
+            <div class="matrix-detail-col matrix-detail-col--shared" data-mobile-heading="Shared Responsibilities">
+              <span class="matrix-detail-col__clause">Jointly governed throughout the engagement:</span>
+              <ul class="matrix-checklist">
+                <li>Establish project objectives.</li>
+                <li>Approve the technical scope.</li>
+                <li>Agree on implementation milestones.</li>
+                <li>Review risks and dependencies.</li>
+                <li>Evaluate results.</li>
+                <li>Approve changes.</li>
+                <li>Maintain communication throughout the engagement.</li>
+              </ul>
+            </div>
+
+            <div class="matrix-detail-col" data-mobile-heading="Enterprise Responsibilities">
+              <span class="matrix-detail-col__clause">Subject to the agreed contract:</span>
+              <ul class="matrix-checklist">
+                <li>Appoint an authorized project owner.</li>
+                <li>Provide relevant technical and business requirements.</li>
+                <li>Provide access to agreed environments and resources.</li>
+                <li>Identify relevant security and governance requirements.</li>
+                <li>Coordinate internal technical stakeholders.</li>
+                <li>Provide the agreed test cases and evaluation criteria.</li>
+                <li>Participate in validation and acceptance.</li>
+                <li>Provide required commercial and procurement approvals.</li>
+                <li>Pay the agreed commercial fees.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SECTION 10 — COMMERCIAL ENGAGEMENT
+         ====================================================================== -->
+    <section id="commercial" class="section" aria-labelledby="commercial-heading">
+      <div class="container">
+        <div class="section-header-grid">
+          <div>
+            <div class="eyebrow">10 / COMMERCIAL ENGAGEMENT</div>
+            <h2 id="commercial-heading" class="section-heading">A contract defined by scope, requirements and outcomes.</h2>
+          </div>
+          <div>
+            <p class="lead-copy">Enterprise engagements are structured around the organization's deployment requirements rather than a fixed per-seat subscription.</p>
+            <p class="lead-copy">The commercial agreement establishes the scope of work, deliverables, implementation responsibilities, support arrangements and applicable commercial terms.</p>
+          </div>
+        </div>
+
+        <div class="commercial-grid">
+          <div class="commercial-item">
+            <span class="commercial-item__num">01</span>
+            <h3 class="commercial-item__title">Deployment scope</h3>
+            <p class="commercial-item__desc">The agreed users, workflows, environments, integrations and implementation boundaries.</p>
+          </div>
+          <div class="commercial-item">
+            <span class="commercial-item__num">02</span>
+            <h3 class="commercial-item__title">Technology access</h3>
+            <p class="commercial-item__desc">The DSRT AI products, capabilities and usage arrangements included in the agreement.</p>
+          </div>
+          <div class="commercial-item">
+            <span class="commercial-item__num">03</span>
+            <h3 class="commercial-item__title">Implementation</h3>
+            <p class="commercial-item__desc">The agreed configuration, integration, testing, deployment and handover activities.</p>
+          </div>
+          <div class="commercial-item">
+            <span class="commercial-item__num">04</span>
+            <h3 class="commercial-item__title">Commercial structure</h3>
+            <p class="commercial-item__desc">The applicable subscription, licensing, implementation and additional service fees, where relevant.</p>
+          </div>
+          <div class="commercial-item">
+            <span class="commercial-item__num">05</span>
+            <h3 class="commercial-item__title">Support arrangement</h3>
+            <p class="commercial-item__desc">The contracted support scope, service hours, escalation procedures and response commitments.</p>
+          </div>
+          <div class="commercial-item">
+            <span class="commercial-item__num">06</span>
+            <h3 class="commercial-item__title">Contract duration</h3>
+            <p class="commercial-item__desc">The agreed contract term, renewal provisions, termination conditions and applicable transition arrangements.</p>
+          </div>
+        </div>
+
+        <div class="governance-note">
+          <span class="governance-note__label">Commercial Principle</span>
+          <p class="governance-note__text">Every enterprise engagement is scoped individually. Commercial proposals are prepared following technical assessment and are based directly on actual deployment requirements, implementation boundaries and agreed operational responsibilities.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SECTION 11 — ENTERPRISE SUPPORT COMMITMENT
+         ====================================================================== -->
+    <section id="support" class="section section--secondary" aria-labelledby="support-heading">
+      <div class="container">
+        <div class="support-layout">
+          <div>
+            <div class="eyebrow">11 / ENTERPRISE SUPPORT</div>
+            <h2 id="support-heading" class="section-heading">Deployment support does not end at account activation.</h2>
+            <p class="lead-copy">DSRT AI's enterprise engagement includes support for the agreed implementation, technical validation and operational handover.</p>
+            <p class="lead-copy">The objective is to ensure that the organization can deploy and use the contracted solution within the agreed environment and scope.</p>
+
+            <div class="governance-note" style="margin-top: 28px;">
+              <span class="governance-note__label">Support Terms</span>
+              <p class="governance-note__text">Specific service hours, escalation paths, response commitments and optional ongoing engineering arrangements are defined explicitly in the enterprise proposal and signed commercial agreement.</p>
+            </div>
+          </div>
+
+          <div class="support-list">
+            <div class="support-row">
+              <h3 class="support-row__title">Implementation support</h3>
+              <p class="support-row__desc">Technical coordination during configuration and deployment.</p>
+            </div>
+            <div class="support-row">
+              <h3 class="support-row__title">Integration assistance</h3>
+              <p class="support-row__desc">Support for the integrations included in the contract.</p>
+            </div>
+            <div class="support-row">
+              <h3 class="support-row__title">Technical issue investigation</h3>
+              <p class="support-row__desc">Investigation and handling of issues within the agreed support scope.</p>
+            </div>
+            <div class="support-row">
+              <h3 class="support-row__title">Operational enablement</h3>
+              <p class="support-row__desc">Documentation, orientation and handover for designated stakeholders.</p>
+            </div>
+            <div class="support-row">
+              <h3 class="support-row__title">Performance review</h3>
+              <p class="support-row__desc">Review of agreed measurement and operational outcomes.</p>
+            </div>
+            <div class="support-row">
+              <h3 class="support-row__title">Ongoing technical engagement</h3>
+              <p class="support-row__desc">Additional optimization, changes and technical work according to the commercial agreement.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SECTION 12 — ENTERPRISE ENGAGEMENT PROCESS
+         ====================================================================== -->
+    <section id="process" class="section" aria-labelledby="process-heading">
+      <div class="container">
+        <div class="section-header-stack">
+          <div class="eyebrow">12 / ENGAGEMENT PROCESS</div>
+          <h2 id="process-heading" class="section-heading">A defined path from discussion to deployment.</h2>
+          <p class="lead-copy">How a commercial relationship with DSRT AI progresses from initial requirement review to contracted operational delivery.</p>
+        </div>
+
+        <div class="process-steps">
+          <div class="process-step">
+            <span class="process-step__num">STEP 01</span>
+            <h3 class="process-step__title">Initial discussion</h3>
+            <p class="process-step__desc">Understand the organization's objectives and whether DSRT AI is relevant to the requirement.</p>
+          </div>
+          <div class="process-step">
+            <span class="process-step__num">STEP 02</span>
+            <h3 class="process-step__title">Requirements assessment</h3>
+            <p class="process-step__desc">Review the relevant workloads, current AI environment and commercial objectives.</p>
+          </div>
+          <div class="process-step">
+            <span class="process-step__num">STEP 03</span>
+            <h3 class="process-step__title">Technical evaluation</h3>
+            <p class="process-step__desc">Determine technical suitability, dependencies and deployment scope.</p>
+          </div>
+          <div class="process-step">
+            <span class="process-step__num">STEP 04</span>
+            <h3 class="process-step__title">Proposal and agreement</h3>
+            <p class="process-step__desc">Establish the deliverables, milestones, responsibilities, support and commercial terms.</p>
+          </div>
+          <div class="process-step">
+            <span class="process-step__num">STEP 05</span>
+            <h3 class="process-step__title">Implementation</h3>
+            <p class="process-step__desc">Execute the agreed deployment and validation activities.</p>
+          </div>
+          <div class="process-step">
+            <span class="process-step__num">STEP 06</span>
+            <h3 class="process-step__title">Operational engagement</h3>
+            <p class="process-step__desc">Complete the handover and continue under the agreed support and commercial arrangement.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SECTION 13 — ENTERPRISE FAQ
+         ====================================================================== -->
+    <section id="faq" class="section section--secondary" aria-labelledby="faq-heading">
+      <div class="container">
+        <div class="faq-layout">
+          <div>
+            <div class="eyebrow">13 / ENTERPRISE FAQ</div>
+            <h2 id="faq-heading" class="section-heading">Decision-maker questions.</h2>
+            <p class="lead-copy">Direct answers regarding technical fit, operational scope, security evaluation and commercial structure.</p>
+            <div class="faq-controls">
+              <button type="button" class="faq-toggle-all" id="faqToggleAllBtn" data-expanded="false">
+                Expand all answers
+              </button>
+            </div>
+          </div>
+
+          <div class="faq-list" id="faqAccordion">
+            <!-- Q1 -->
+            <div class="faq-item">
+              <button type="button" class="faq-trigger" aria-expanded="true" aria-controls="faq-panel-1" id="faq-btn-1">
+                <span class="faq-trigger__question">Is DSRT AI an AI provider or an AI model company?</span>
+                <span class="faq-trigger__icon" aria-hidden="true">−</span>
+              </button>
+              <div class="faq-panel is-open" id="faq-panel-1" role="region" aria-labelledby="faq-btn-1">
+                <p>DSRT AI develops LLM Amplification technology designed to improve the efficiency of AI usage. Enterprise engagements focus on applying this technology to relevant organizational workloads and supported environments.</p>
+              </div>
+            </div>
+
+            <!-- Q2 -->
+            <div class="faq-item">
+              <button type="button" class="faq-trigger" aria-expanded="false" aria-controls="faq-panel-2" id="faq-btn-2">
+                <span class="faq-trigger__question">Do we need to replace our existing AI providers?</span>
+                <span class="faq-trigger__icon" aria-hidden="true">+</span>
+              </button>
+              <div class="faq-panel" id="faq-panel-2" role="region" aria-labelledby="faq-btn-2">
+                <p>Not necessarily. The first step is to assess your current environment and determine where DSRT AI can be integrated with supported providers and workflows.</p>
+              </div>
+            </div>
+
+            <!-- Q3 -->
+            <div class="faq-item">
+              <button type="button" class="faq-trigger" aria-expanded="false" aria-controls="faq-panel-3" id="faq-btn-3">
+                <span class="faq-trigger__question">Does DSRT AI require us to migrate our existing systems?</span>
+                <span class="faq-trigger__icon" aria-hidden="true">+</span>
+              </button>
+              <div class="faq-panel" id="faq-panel-3" role="region" aria-labelledby="faq-btn-3">
+                <p>The objective is to assess the existing environment before defining an implementation approach. Any required changes or dependencies will be documented in the proposed scope.</p>
+              </div>
+            </div>
+
+            <!-- Q4 -->
+            <div class="faq-item">
+              <button type="button" class="faq-trigger" aria-expanded="false" aria-controls="faq-panel-4" id="faq-btn-4">
+                <span class="faq-trigger__question">Does DSRT AI guarantee a 40% cost reduction?</span>
+                <span class="faq-trigger__icon" aria-hidden="true">+</span>
+              </button>
+              <div class="faq-panel" id="faq-panel-4" role="region" aria-labelledby="faq-btn-4">
+                <p>No universal savings guarantee should be implied. The potential improvement depends on workload suitability and actual deployment results. Financial objectives and measurement criteria can be agreed before implementation.</p>
+              </div>
+            </div>
+
+            <!-- Q5 -->
+            <div class="faq-item">
+              <button type="button" class="faq-trigger" aria-expanded="false" aria-controls="faq-panel-5" id="faq-btn-5">
+                <span class="faq-trigger__question">Does DSRT AI handle implementation?</span>
+                <span class="faq-trigger__icon" aria-hidden="true">+</span>
+              </button>
+              <div class="faq-panel" id="faq-panel-5" role="region" aria-labelledby="faq-btn-5">
+                <p>Yes. DSRT AI can undertake the implementation, configuration, integration and validation activities included in the agreed enterprise scope.</p>
+              </div>
+            </div>
+
+            <!-- Q6 -->
+            <div class="faq-item">
+              <button type="button" class="faq-trigger" aria-expanded="false" aria-controls="faq-panel-6" id="faq-btn-6">
+                <span class="faq-trigger__question">Can we define our own deployment requirements?</span>
+                <span class="faq-trigger__icon" aria-hidden="true">+</span>
+              </button>
+              <div class="faq-panel" id="faq-panel-6" role="region" aria-labelledby="faq-btn-6">
+                <p>Yes. Deployment requirements are assessed with the organization's designated stakeholders and incorporated into the technical and commercial scope where feasible.</p>
+              </div>
+            </div>
+
+            <!-- Q7 -->
+            <div class="faq-item">
+              <button type="button" class="faq-trigger" aria-expanded="false" aria-controls="faq-panel-7" id="faq-btn-7">
+                <span class="faq-trigger__question">Can DSRT AI work with our security requirements?</span>
+                <span class="faq-trigger__icon" aria-hidden="true">+</span>
+              </button>
+              <div class="faq-panel" id="faq-panel-7" role="region" aria-labelledby="faq-btn-7">
+                <p>Security and governance requirements are reviewed during technical assessment. Available controls, documentation and any limitations must be evaluated before deployment.</p>
+              </div>
+            </div>
+
+            <!-- Q8 -->
+            <div class="faq-item">
+              <button type="button" class="faq-trigger" aria-expanded="false" aria-controls="faq-panel-8" id="faq-btn-8">
+                <span class="faq-trigger__question">How is enterprise pricing determined?</span>
+                <span class="faq-trigger__icon" aria-hidden="true">+</span>
+              </button>
+              <div class="faq-panel" id="faq-panel-8" role="region" aria-labelledby="faq-btn-8">
+                <p>Enterprise pricing is custom and based on deployment size, technical requirements, implementation scope, support arrangements and applicable commercial terms.</p>
+              </div>
+            </div>
+
+            <!-- Q9 -->
+            <div class="faq-item">
+              <button type="button" class="faq-trigger" aria-expanded="false" aria-controls="faq-panel-9" id="faq-btn-9">
+                <span class="faq-trigger__question">Who owns implementation responsibilities?</span>
+                <span class="faq-trigger__icon" aria-hidden="true">+</span>
+              </button>
+              <div class="faq-panel" id="faq-panel-9" role="region" aria-labelledby="faq-btn-9">
+                <p>DSRT AI and the enterprise agree on their respective responsibilities before the project begins. These are documented in the commercial agreement and implementation plan.</p>
+              </div>
+            </div>
+
+            <!-- Q10 -->
+            <div class="faq-item">
+              <button type="button" class="faq-trigger" aria-expanded="false" aria-controls="faq-panel-10" id="faq-btn-10">
+                <span class="faq-trigger__question">What happens after deployment?</span>
+                <span class="faq-trigger__icon" aria-hidden="true">+</span>
+              </button>
+              <div class="faq-panel" id="faq-panel-10" role="region" aria-labelledby="faq-btn-10">
+                <p>DSRT AI provides the contracted handover and support arrangements. Ongoing technical work, performance reviews and additional optimization are governed by the agreement.</p>
+              </div>
+            </div>
+
+            <!-- Q11 -->
+            <div class="faq-item">
+              <button type="button" class="faq-trigger" aria-expanded="false" aria-controls="faq-panel-11" id="faq-btn-11">
+                <span class="faq-trigger__question">How do we begin?</span>
+                <span class="faq-trigger__icon" aria-hidden="true">+</span>
+              </button>
+              <div class="faq-panel" id="faq-panel-11" role="region" aria-labelledby="faq-btn-11">
+                <p>Submit an enterprise enquiry with your organizational and deployment requirements. The DSRT AI team can then assess whether an engagement is appropriate.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SECTION 14 — ENTERPRISE ENQUIRY
+         ====================================================================== -->
+    <section id="enterprise-enquiry" class="section" aria-labelledby="enquiry-heading">
+      <div class="container">
+        <div class="enquiry-layout">
+          <!-- Left Context Column -->
+          <div>
+            <div class="eyebrow">14 / ENTERPRISE ENQUIRY</div>
+            <h2 id="enquiry-heading" class="section-heading">Discuss an enterprise engagement.</h2>
+            <p class="lead-copy">Tell us about your organization's AI environment and what you intend to achieve.</p>
+            <p class="lead-copy">The DSRT AI team will review the requirements and determine the appropriate next step for a technical and commercial discussion.</p>
+
+            <div class="enquiry-sidebar__box">
+              <div class="enquiry-sidebar__title">POST-ENQUIRY REVIEW WORKFLOW</div>
+              <ul class="enquiry-workflow-list">
+                <li><span>01</span> Record organizational requirements &amp; stakeholders</li>
+                <li><span>02</span> Initial technical &amp; commercial qualification</li>
+                <li><span>03</span> Discovery discussion with designated owners</li>
+                <li><span>04</span> Technical integration &amp; dependency assessment</li>
+                <li><span>05</span> Scoped commercial proposal &amp; contract review</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Right Form Column -->
+          <div>
+            <form id="enterpriseEnquiryForm" class="enquiry-form-card" novalidate>
+              <!-- Form-level Error / Retry Alert -->
+              <div id="formAlert" class="form-alert" role="alert">
+                <span id="formAlertText">Please review the highlighted fields before submitting.</span>
+                <button type="button" id="formRetryBtn" class="btn btn--secondary" style="padding: 6px 12px; font-size: 12.5px; display: none;">Retry Submission</button>
+              </div>
+
+              <!-- Honeypot Spam Protection -->
+              <div class="hp-trap" aria-hidden="true">
+                <label for="org_fax_extension">Leave this field blank</label>
+                <input type="text" id="org_fax_extension" name="org_fax_extension" tabindex="-1" autocomplete="off" />
+              </div>
+
+              <!-- REQUIRED FIELDS (1–8) -->
+              <div class="form-group-header">
+                <span class="form-group-header__title">Organizational &amp; Engagement Details</span>
+                <span class="form-group-header__meta">Fields marked <span class="form-req">*</span> are required</span>
+              </div>
+
+              <div class="form-grid-2">
+                <!-- 1. Full name -->
+                <div class="form-field">
+                  <label class="form-label" for="fullName">
+                    <span>Full name <span class="form-req">*</span></span>
+                  </label>
+                  <input type="text" id="fullName" name="fullName" class="form-input" autocomplete="name" required />
+                  <span class="field-error" id="err-fullName">Enter your full name.</span>
+                </div>
+
+                <!-- 2. Business email -->
+                <div class="form-field">
+                  <label class="form-label" for="businessEmail">
+                    <span>Business email <span class="form-req">*</span></span>
+                  </label>
+                  <input type="email" id="businessEmail" name="businessEmail" class="form-input" autocomplete="email" placeholder="name@organization.com" required />
+                  <span class="field-error" id="err-businessEmail">Enter a valid organizational email address.</span>
+                </div>
+              </div>
+
+              <div class="form-grid-2">
+                <!-- 3. Organization -->
+                <div class="form-field">
+                  <label class="form-label" for="organization">
+                    <span>Organization <span class="form-req">*</span></span>
+                  </label>
+                  <input type="text" id="organization" name="organization" class="form-input" autocomplete="organization" required />
+                  <span class="field-error" id="err-organization">Enter your organization name.</span>
+                </div>
+
+                <!-- 4. Job title or role -->
+                <div class="form-field">
+                  <label class="form-label" for="jobTitle">
+                    <span>Job title or role <span class="form-req">*</span></span>
+                  </label>
+                  <input type="text" id="jobTitle" name="jobTitle" class="form-input" autocomplete="organization-title" placeholder="e.g., CTO, VP Engineering, Head of AI" required />
+                  <span class="field-error" id="err-jobTitle">Enter your role or job title.</span>
+                </div>
+              </div>
+
+              <div class="form-grid-2">
+                <!-- 5. Organization website -->
+                <div class="form-field">
+                  <label class="form-label" for="website">
+                    <span>Organization website <span class="form-req">*</span></span>
+                  </label>
+                  <input type="url" id="website" name="website" class="form-input" placeholder="https://organization.com" required />
+                  <span class="field-error" id="err-website">Enter a valid organization domain or URL.</span>
+                </div>
+
+                <!-- 6. Country or operating region -->
+                <div class="form-field">
+                  <label class="form-label" for="country">
+                    <span>Country or operating region <span class="form-req">*</span></span>
+                  </label>
+                  <input type="text" id="country" name="country" class="form-input" autocomplete="country-name" placeholder="e.g., United States, United Kingdom, EU" required />
+                  <span class="field-error" id="err-country">Enter your primary country or operating region.</span>
+                </div>
+              </div>
+
+              <!-- 7. Primary engagement objective -->
+              <div class="form-field">
+                <label class="form-label" for="engagementObjective">
+                  <span>Primary engagement objective <span class="form-req">*</span></span>
+                </label>
+                <select id="engagementObjective" name="engagementObjective" class="form-select" required>
+                  <option value="">Select primary engagement objective</option>
+                  <option value="Reduce existing AI expenditure">Reduce existing AI expenditure</option>
+                  <option value="Evaluate LLM Amplification">Evaluate LLM Amplification</option>
+                  <option value="Integrate DSRT AI into existing workflows">Integrate DSRT AI into existing workflows</option>
+                  <option value="Explore an organization-wide deployment">Explore an organization-wide deployment</option>
+                  <option value="Evaluate a technical partnership">Evaluate a technical partnership</option>
+                  <option value="Discuss another enterprise requirement">Discuss another enterprise requirement</option>
+                </select>
+                <span class="field-error" id="err-engagementObjective">Select a primary engagement objective.</span>
+              </div>
+
+              <!-- 8. Brief description of the requirement -->
+              <div class="form-field">
+                <label class="form-label" for="requirements">
+                  <span>Brief description of the requirement <span class="form-req">*</span></span>
+                </label>
+                <textarea id="requirements" name="requirements" class="form-textarea" placeholder="Outline the relevant AI workloads, operational context and objectives you wish to evaluate." required></textarea>
+                <span class="field-error" id="err-requirements">Provide a brief description of your requirement (minimum 20 characters).</span>
+              </div>
+
+              <!-- OPTIONAL FIELDS (9–14) -->
+              <div class="form-group-header form-group-header--optional">
+                <span class="form-group-header__title">Environment &amp; Operational Context</span>
+                <span class="form-group-header__meta">Optional</span>
+              </div>
+
+              <div class="form-grid-2">
+                <!-- 9. Approximate monthly AI expenditure -->
+                <div class="form-field">
+                  <label class="form-label" for="monthlyAISpend">Approximate monthly AI expenditure</label>
+                  <select id="monthlyAISpend" name="monthlyAISpend" class="form-select">
+                    <option value="">Prefer not to specify / Under assessment</option>
+                    <option value="Under $10,000 / month">Under $10,000 / month</option>
+                    <option value="$10,000 – $50,000 / month">$10,000 – $50,000 / month</option>
+                    <option value="$50,000 – $250,000 / month">$50,000 – $250,000 / month</option>
+                    <option value="$250,000+ / month">$250,000+ / month</option>
+                  </select>
+                </div>
+
+                <!-- 10. Approximate number of AI users -->
+                <div class="form-field">
+                  <label class="form-label" for="approximateUsers">Approximate number of AI users</label>
+                  <select id="approximateUsers" name="approximateUsers" class="form-select">
+                    <option value="">Not applicable / API-driven workloads</option>
+                    <option value="Under 50 users">Under 50 users</option>
+                    <option value="50 – 250 users">50 – 250 users</option>
+                    <option value="250 – 1,000 users">250 – 1,000 users</option>
+                    <option value="1,000+ users">1,000+ users</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- 11. Current AI providers -->
+              <div class="form-field">
+                <span class="form-label">Current AI providers</span>
+                <div class="provider-Grid" role="group" aria-label="Current AI providers">
+                  <label class="provider-check">
+                    <input type="checkbox" name="currentProviders" value="OpenAI" />
+                    <span>OpenAI</span>
+                  </label>
+                  <label class="provider-check">
+                    <input type="checkbox" name="currentProviders" value="Anthropic" />
+                    <span>Anthropic</span>
+                  </label>
+                  <label class="provider-check">
+                    <input type="checkbox" name="currentProviders" value="Azure OpenAI" />
+                    <span>Azure OpenAI</span>
+                  </label>
+                  <label class="provider-check">
+                    <input type="checkbox" name="currentProviders" value="AWS Bedrock" />
+                    <span>AWS Bedrock</span>
+                  </label>
+                  <label class="provider-check">
+                    <input type="checkbox" name="currentProviders" value="Google Vertex AI" />
+                    <span>Google Vertex AI</span>
+                  </label>
+                  <label class="provider-check">
+                    <input type="checkbox" name="currentProviders" value="Other / Internal" />
+                    <span>Other / Internal</span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="form-grid-2">
+                <!-- 12. Current AI deployment environment -->
+                <div class="form-field">
+                  <label class="form-label" for="deploymentEnvironment">Current AI deployment environment</label>
+                  <input type="text" id="deploymentEnvironment" name="deploymentEnvironment" class="form-input" placeholder="e.g., Cloud APIs, AWS/GCP/Azure VPC, Internal Gateway" />
+                </div>
+
+                <!-- 13. Expected deployment timeline -->
+                <div class="form-field">
+                  <label class="form-label" for="expectedTimeline">Expected deployment timeline</label>
+                  <select id="expectedTimeline" name="expectedTimeline" class="form-select">
+                    <option value="">Exploratory / To be determined</option>
+                    <option value="Immediate evaluation (Current quarter)">Immediate evaluation (Current quarter)</option>
+                    <option value="Near-term (1 – 3 months)">Near-term (1 – 3 months)</option>
+                    <option value="Medium-term (3 – 6 months)">Medium-term (3 – 6 months)</option>
+                    <option value="Long-term planning (6+ months)">Long-term planning (6+ months)</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- 14. Additional technical requirements -->
+              <div class="form-field" style="margin-bottom: 0;">
+                <label class="form-label" for="additionalRequirements">Additional technical requirements</label>
+                <textarea id="additionalRequirements" name="additionalRequirements" class="form-textarea form-textarea--sm" placeholder="Optional details regarding governance, access boundaries, integration constraints or evaluation criteria."></textarea>
+              </div>
+
+              <!-- Consent & Privacy Notice -->
+              <div class="consent-wrap">
+                <label class="consent-label" for="privacyConsent">
+                  <input type="checkbox" id="privacyConsent" name="privacyConsent" required />
+                  <span>I authorize DSRT AI to store and review the organizational and technical information submitted in this enquiry for the purpose of evaluating a potential commercial engagement, in accordance with DSRT AI privacy and data-handling policies. <span class="form-req">*</span></span>
+                </label>
+                <span class="field-error" id="err-privacyConsent" style="margin-left: 28px;">Confirmation is required to submit an enterprise enquiry.</span>
+              </div>
+
+              <button type="submit" id="submitEnquiryBtn" class="btn btn--primary btn--submit">
+                Submit Enterprise Enquiry
+              </button>
+            </form>
+
+            <!-- Confirmation State (Exact Section 17 Copy) -->
+            <div id="enquiryConfirmation" class="enquiry-confirmation" role="status" aria-live="polite">
+              <div class="enquiry-confirmation__badge">
+                <span>●</span> ENQUIRY RECORDED
+              </div>
+              <h3 class="enquiry-confirmation__heading">Your enquiry has been received.</h3>
+              <p class="enquiry-confirmation__body">Thank you for outlining your organization's requirements. The DSRT AI team will review the information and follow up regarding the appropriate next step.</p>
+              
+              <div class="enquiry-confirmation__summary" id="confirmationSummary">
+                <!-- Populated dynamically on submission -->
+              </div>
+
+              <button type="button" id="newEnquiryBtn" class="btn btn--secondary">
+                Submit Another Requirement
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         CLOSING DARK SECTION (SECTION 19 & SECTION 29 POSITIONING STATEMENT)
+         ====================================================================== -->
+    <section class="final-cta" aria-labelledby="final-cta-heading">
+      <div class="container">
+        <div class="eyebrow">DSRT AI // COMMERCIAL PARTNERSHIP</div>
+        <div class="final-cta__grid">
+          <h2 id="final-cta-heading" class="final-cta__statement">
+            DSRT AI is not asking an enterprise to purchase another AI subscription. It is proposing a structured engagement to improve the economics of the organization's AI operations, with defined technical responsibilities, implementation support and measurable objectives.
+          </h2>
+          <div class="final-cta__actions">
+            <a href="#enterprise-enquiry" class="btn btn--inverse" data-track="footer_primary_cta">
+              Discuss an Enterprise Engagement
+            </a>
+            <a href="#deployment-partnership" class="btn btn--outline-inverse" data-track="footer_secondary_cta">
+              Review Implementation Phases
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ========================================================================
+       GLOBAL DSRT FOOTER
+       ======================================================================== -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="site-footer__top">
+        <div>
+          <a href="/enterprise" class="site-footer__brand">
+            <span class="brand__mark" aria-hidden="true">
+              <span></span><span></span><span></span><span></span>
+            </span>
+            <span>DSRT AI</span>
+          </a>
+          <p class="site-footer__tagline">In-house LLM Amplification technology for organizations seeking measurable economic discipline across their AI operations.</p>
+        </div>
+
+        <div>
+          <div class="site-footer__col-title">Platform Surfaces</div>
+          <ul class="site-footer__links">
+            <li><a href="/product">Product</a></li>
+            <li><a href="/how-it-works">How It Works</a></li>
+            <li><a href="/pricing">Pricing</a></li>
+            <li><a href="/enterprise">Enterprise Engagements</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="site-footer__col-title">Enterprise Scope</div>
+          <ul class="site-footer__links">
+            <li><a href="#contributions">Capabilities &amp; Value</a></li>
+            <li><a href="#deployment-partnership">Deployment Methodology</a></li>
+            <li><a href="#measurement">Validation Framework</a></li>
+            <li><a href="#responsibilities">Responsibility Matrix</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="site-footer__col-title">Governance</div>
+          <ul class="site-footer__links">
+            <li><a href="#governance">Security &amp; Data Handling</a></li>
+            <li><a href="#commercial">Commercial Structure</a></li>
+            <li><a href="#faq">Enterprise FAQ</a></li>
+            <li><a href="#enterprise-enquiry">Submit Enterprise Enquiry</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="site-footer__bottom">
+        <span>&copy; <span id="footerYear">2025</span> DSRT AI. All rights reserved.</span>
+        <span>Website information describes engagement methodology and does not constitute a binding contractual guarantee.</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========================================================================
+       MODULAR APPLICATION ARCHITECTURE (SECTION 21 & SECTION 22)
+       Structured cleanly into Content, Validation, Enquiry Database Service & UI
+       ======================================================================== -->
+  <script src="/compiled/pages/partnerships_html-inline-1.js"></script>
+  <script src="/compiled/assets/js/professional-motion.js" defer></script>
+</body>
+</html>

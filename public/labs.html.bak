@@ -1,0 +1,3310 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>DSRT LABS — Intelligence Infrastructure</title>
+
+  <meta
+    name="description"
+    content="DSRT LABS — Research, Engineering and Intelligence Infrastructure for scientific systems, simulation and autonomous execution."
+  />
+
+  <meta name="theme-color" content="#05070d" />
+
+  <script src="/compiled/pages/labs_html-inline-1.js"></script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800;900&family=Rajdhani:wght@400;500;600;700&family=Exo+2:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500;600&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+    /* =====================================================================
+       0. TOKENS
+       ===================================================================== */
+
+    :root {
+      --bg: #05070d;
+      --bg-soft: #090d16;
+      --text: #f4f6fb;
+      --muted: #93a0b8;
+      --muted-2: #66758f;
+      --accent: #8f7dff;
+      --accent-2: #b9a8ff;
+      --border: rgba(255,255,255,0.09);
+      --border-strong: rgba(255,255,255,0.2);
+
+      --font-display: 'Orbitron', sans-serif;
+      --font-ui: 'Rajdhani', sans-serif;
+      --font-body: 'Exo 2', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+
+      --gutter: 58px;
+      --nav-pad: 54px;
+      --max: 1680px;
+      --nav-h: 90px;
+
+      /* Scroll distance per topic, expressed in viewport-height units. */
+      --topic-scroll: 88;
+
+      --ease: cubic-bezier(.16, 1, .3, 1);
+    }
+
+    /* =====================================================================
+       1. RESET / BASE
+       ===================================================================== */
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: var(--nav-h);
+      scrollbar-gutter: stable;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-weight: 400;
+      line-height: 1.5;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    body.is-locked {
+      overflow: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+      color: inherit;
+      background: none;
+      border: 0;
+      cursor: pointer;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    :focus-visible {
+      outline: 1px solid var(--accent-2);
+      outline-offset: 3px;
+    }
+
+    .wrap {
+      width: min(100%, var(--max));
+      margin: 0 auto;
+      padding-left: var(--gutter);
+      padding-right: var(--gutter);
+    }
+
+    .label {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: rgba(190, 180, 255, 0.72);
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      white-space: nowrap;
+    }
+
+    /* Reveal: plain fade + rise. No blur. */
+
+    .js .reveal {
+      opacity: 0;
+      transform: translateY(26px);
+      transition:
+        opacity 0.9s var(--ease),
+        transform 0.9s var(--ease);
+    }
+
+    .js .reveal.in {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* =====================================================================
+       2. NAV
+       ===================================================================== */
+
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      height: var(--nav-h);
+      padding: 0 var(--nav-pad);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid transparent;
+      transition:
+        background 0.35s ease,
+        border-color 0.35s ease;
+    }
+
+    .nav.scrolled {
+      background: rgba(4, 7, 13, 0.72);
+      -webkit-backdrop-filter: blur(14px);
+      backdrop-filter: blur(14px);
+      border-bottom-color: rgba(255,255,255,0.06);
+    }
+
+    .nav.layer-open {
+      background: transparent;
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+      border-bottom-color: transparent;
+    }
+
+    /* Brand: logo + wordmark. */
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .brand-logo {
+      height: 30px;
+      width: auto;
+      max-width: 120px;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+
+    .brand-text {
+      font-family: var(--font-display);
+      font-size: 0.98rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .nav-btn {
+      height: 44px;
+      padding: 0 24px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(255,255,255,0.24);
+      color: rgba(255,255,255,0.88);
+      font-family: var(--font-ui);
+      font-size: 0.86rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      transition:
+        border-color 0.3s ease,
+        color 0.3s ease,
+        background 0.3s ease;
+    }
+
+    .nav-btn:hover {
+      border-color: #fff;
+      color: #fff;
+    }
+
+    .nav-btn.primary {
+      border-color: rgba(255,255,255,0.7);
+      color: #fff;
+    }
+
+    .nav-btn.primary:hover {
+      background: #fff;
+      color: #05070d;
+    }
+
+    .icon-btn {
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255,255,255,0.24);
+      color: rgba(255,255,255,0.88);
+      transition:
+        border-color 0.3s ease,
+        color 0.3s ease;
+      flex-shrink: 0;
+    }
+
+    .icon-btn:hover {
+      border-color: #fff;
+      color: #fff;
+    }
+
+    .icon-btn svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .icon-btn .i-close {
+      display: none;
+    }
+
+    .icon-btn[aria-expanded="true"] .i-open {
+      display: none;
+    }
+
+    .icon-btn[aria-expanded="true"] .i-close {
+      display: block;
+    }
+
+    /* =====================================================================
+       3. OVERLAYS — MENU / SEARCH / COOKIES
+       ===================================================================== */
+
+    .layer {
+      position: fixed;
+      inset: 0;
+      visibility: hidden;
+      opacity: 0;
+      transition:
+        opacity 0.4s ease,
+        visibility 0s linear 0.4s;
+    }
+
+    .layer.open {
+      visibility: visible;
+      opacity: 1;
+      transition:
+        opacity 0.4s ease,
+        visibility 0s;
+    }
+
+    /* ---- Menu ---- */
+
+    .menu {
+      z-index: 90;
+      background: rgba(5, 7, 13, 0.97);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: calc(var(--nav-h) + 20px) var(--gutter) 48px;
+      overflow-y: auto;
+    }
+
+    .menu-inner {
+      width: min(100%, 1100px);
+      margin: 0 auto;
+    }
+
+    .menu-list {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .menu-list li {
+      border-top: 1px solid var(--border);
+    }
+
+    .menu-list li:last-child {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .menu-link {
+      display: flex;
+      align-items: baseline;
+      gap: 26px;
+      padding: 20px 0;
+      font-family: var(--font-ui);
+      font-weight: 700;
+      font-size: clamp(1.7rem, 4.4vw, 3.6rem);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      line-height: 1.05;
+      color: rgba(255,255,255,0.6);
+      transition:
+        color 0.3s ease,
+        padding-left 0.4s var(--ease);
+    }
+
+    .menu-link:hover {
+      color: #fff;
+      padding-left: 14px;
+    }
+
+    .menu-link .label {
+      min-width: 34px;
+    }
+
+    .menu-foot {
+      margin-top: 36px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px 30px;
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted-2);
+    }
+
+    /* ---- Search ---- */
+
+    .search {
+      z-index: 120;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 14vh 20px 20px;
+    }
+
+    .search-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(3, 5, 10, 0.78);
+      -webkit-backdrop-filter: blur(6px);
+      backdrop-filter: blur(6px);
+    }
+
+    .search-panel {
+      position: relative;
+      width: min(100%, 720px);
+      background: #0a0e18;
+      border: 1px solid var(--border-strong);
+      box-shadow: 0 50px 100px -30px rgba(0,0,0,0.9);
+      transform: translateY(14px);
+      transition: transform 0.5s var(--ease);
+    }
+
+    .search.open .search-panel {
+      transform: none;
+    }
+
+    .search-field {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 0 22px;
+      height: 64px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .search-field svg {
+      width: 18px;
+      height: 18px;
+      color: var(--muted);
+      flex-shrink: 0;
+    }
+
+    .search-field input {
+      flex: 1;
+      height: 100%;
+      background: none;
+      border: 0;
+      outline: 0;
+      color: #fff;
+      font-family: var(--font-ui);
+      font-size: 1.25rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+    }
+
+    .search-field input::placeholder {
+      color: var(--muted-2);
+    }
+
+    .search-esc {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.16em;
+      color: var(--muted);
+      border: 1px solid var(--border-strong);
+      padding: 4px 8px;
+    }
+
+    .search-results {
+      max-height: min(52vh, 440px);
+      overflow-y: auto;
+      padding: 8px;
+    }
+
+    .search-results button {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 150px 1fr;
+      gap: 4px 18px;
+      padding: 14px 16px;
+      text-align: left;
+      transition: background 0.2s ease;
+    }
+
+    .search-results button:hover,
+    .search-results button[aria-selected="true"] {
+      background: rgba(255,255,255,0.06);
+    }
+
+    .sr-env {
+      grid-row: 1 / span 2;
+      font-family: var(--font-mono);
+      font-size: 0.64rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(190, 180, 255, 0.8);
+      padding-top: 5px;
+    }
+
+    .sr-title {
+      font-family: var(--font-ui);
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .sr-text {
+      font-size: 0.86rem;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.55;
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .search-empty {
+      padding: 28px 18px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    /* ---- Cookie dialog ---- */
+
+    .cookie {
+      z-index: 130;
+      display: grid;
+      place-items: center;
+      padding: 20px;
+    }
+
+    .cookie-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(3, 5, 10, 0.72);
+    }
+
+    .cookie-panel {
+      position: relative;
+      width: min(100%, 520px);
+      background: #0a0e18;
+      border: 1px solid var(--border-strong);
+      box-shadow: 0 50px 100px -30px rgba(0,0,0,0.9);
+      padding: 34px 34px 30px;
+      transform: translateY(14px);
+      transition: transform 0.5s var(--ease);
+    }
+
+    .cookie.open .cookie-panel {
+      transform: none;
+    }
+
+    .cookie-title {
+      font-family: var(--font-ui);
+      font-size: 1.7rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin: 10px 0 12px;
+    }
+
+    .cookie-copy {
+      color: var(--muted);
+      font-size: 0.94rem;
+      font-weight: 300;
+      line-height: 1.7;
+      margin-bottom: 22px;
+    }
+
+    .cookie-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      padding: 16px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .cookie-row:last-of-type {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .cookie-row strong {
+      display: block;
+      font-family: var(--font-ui);
+      font-size: 1.02rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .cookie-row span.d {
+      display: block;
+      margin-top: 2px;
+      font-size: 0.84rem;
+      font-weight: 300;
+      color: var(--muted);
+    }
+
+    .switch {
+      position: relative;
+      width: 46px;
+      height: 26px;
+      flex-shrink: 0;
+    }
+
+    .switch input {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+      z-index: 2;
+    }
+
+    .switch i {
+      position: absolute;
+      inset: 0;
+      border: 1px solid var(--border-strong);
+      border-radius: 999px;
+      transition:
+        background 0.3s ease,
+        border-color 0.3s ease;
+    }
+
+    .switch i::after {
+      content: "";
+      position: absolute;
+      top: 4px;
+      left: 4px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #fff;
+      transition: transform 0.3s var(--ease);
+    }
+
+    .switch input:checked + i {
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .switch input:checked + i::after {
+      transform: translateX(20px);
+    }
+
+    .switch input:disabled {
+      cursor: not-allowed;
+    }
+
+    .switch input:disabled + i {
+      opacity: 0.55;
+    }
+
+    .switch input:focus-visible + i {
+      outline: 1px solid var(--accent-2);
+      outline-offset: 3px;
+    }
+
+    .cookie-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 24px;
+    }
+
+    .btn {
+      height: 44px;
+      padding: 0 20px;
+      border: 1px solid var(--border-strong);
+      font-family: var(--font-ui);
+      font-size: 0.84rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      transition:
+        background 0.3s ease,
+        color 0.3s ease,
+        border-color 0.3s ease;
+    }
+
+    .btn:hover {
+      border-color: #fff;
+    }
+
+    .btn.solid {
+      background: #fff;
+      color: #05070d;
+      border-color: #fff;
+    }
+
+    .btn.solid:hover {
+      background: transparent;
+      color: #fff;
+    }
+
+    /* =====================================================================
+       4. HERO
+       ===================================================================== */
+
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      min-height: 100svh;
+      width: 100%;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+      background-color: #080b16;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url("assets/hero-bg.png");
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      transform: scale(1.03);
+      filter: brightness(0.82) saturate(1.08) contrast(1.08);
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(4,6,12,0.92) 0%, rgba(4,6,12,0.6) 34%, rgba(4,6,12,0.2) 58%, rgba(4,6,12,0.48) 100%),
+        linear-gradient(180deg, rgba(3,5,11,0.18) 0%, rgba(3,5,11,0.08) 38%, rgba(3,5,11,0.78) 100%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 5;
+      padding-top: calc(var(--nav-h) + 40px);
+      padding-bottom: 80px;
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-weight: 900;
+      text-transform: uppercase;
+      line-height: 0.92;
+      letter-spacing: 0.01em;
+      font-size: clamp(4.4rem, 12.5vw, 12.4rem);
+      color: #f7f8fc;
+    }
+
+    .hero-title span {
+      display: block;
+    }
+
+    .hero-tagline {
+      margin-top: 40px;
+      max-width: 980px;
+      font-family: var(--font-ui);
+      font-size: clamp(1.6rem, 3.2vw, 3.1rem);
+      line-height: 1.08;
+      font-weight: 500;
+      color: rgba(243, 245, 252, 0.8);
+    }
+
+    .hero-tagline strong {
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .hero-rule {
+      margin-top: 52px;
+      width: min(100%, 1320px);
+      height: 1px;
+      background: linear-gradient(90deg, rgba(255,255,255,0.6), rgba(255,255,255,0.06));
+    }
+
+    .hero-meta {
+      margin-top: 22px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px 30px;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(201, 209, 230, 0.6);
+    }
+
+    .hero-meta a {
+      transition: color 0.3s ease;
+    }
+
+    .hero-meta a:hover {
+      color: #fff;
+    }
+
+    /* =====================================================================
+       5. SECTION INTRO + CHAPTER CARDS
+       ===================================================================== */
+
+    .section-intro {
+      position: relative;
+      z-index: 5;
+      padding-top: 160px;
+      padding-bottom: 80px;
+    }
+
+    .section-intro .label {
+      margin-bottom: 22px;
+    }
+
+    .section-intro-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 4.8vw, 4.6rem);
+      line-height: 1.04;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      font-weight: 800;
+      max-width: 1100px;
+    }
+
+    .section-intro-copy {
+      margin-top: 30px;
+      max-width: 720px;
+      color: var(--muted);
+      font-size: 1.06rem;
+      font-weight: 300;
+      line-height: 1.85;
+    }
+
+    /* The chapter card is the breathing room between environments. */
+
+    .chapter {
+      position: relative;
+      z-index: 5;
+      min-height: 92vh;
+      display: flex;
+      align-items: center;
+      padding: 120px 0;
+    }
+
+    .chapter-inner {
+      display: flex;
+      align-items: flex-end;
+      gap: 56px;
+    }
+
+    .chapter[data-side="right"] .chapter-inner {
+      flex-direction: row-reverse;
+      text-align: right;
+    }
+
+    .chapter-num {
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: clamp(5rem, 11vw, 10rem);
+      line-height: 0.8;
+      color: rgba(255,255,255,0.07);
+      flex-shrink: 0;
+    }
+
+    .chapter-body {
+      min-width: 0;
+      max-width: 760px;
+    }
+
+    .chapter-body .label {
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    .chapter-title {
+      font-family: var(--font-display);
+      font-weight: 800;
+      text-transform: uppercase;
+      font-size: clamp(1.55rem, 4.6vw, 4.6rem);
+      line-height: 1.04;
+      letter-spacing: 0.03em;
+      overflow-wrap: break-word;
+    }
+
+    .chapter-copy {
+      margin-top: 26px;
+      max-width: 560px;
+      color: var(--muted);
+      font-size: 1.04rem;
+      font-weight: 300;
+      line-height: 1.85;
+    }
+
+    .chapter[data-side="right"] .chapter-copy {
+      margin-left: auto;
+    }
+
+    .chapter-rule {
+      margin-top: 40px;
+      width: 120px;
+      height: 1px;
+      background: rgba(255,255,255,0.5);
+    }
+
+    .chapter[data-side="right"] .chapter-rule {
+      margin-left: auto;
+    }
+
+    /* =====================================================================
+       6. ENVIRONMENT — PINNED SCENE
+       ===================================================================== */
+
+    .env {
+      position: relative;
+      height: calc(100vh + var(--steps) * var(--topic-scroll) * 1vh);
+      height: calc(100svh + var(--steps) * var(--topic-scroll) * 1svh);
+      --R: 320px;
+    }
+
+    .env-stage {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      height: 100svh;
+      overflow: hidden;
+      background: var(--bg);
+      isolation: isolate;
+    }
+
+    /* ---- Backgrounds ---- */
+
+    .env-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    .bg-slide {
+      position: absolute;
+      inset: 0;
+      background-image: var(--img);
+      background-size: cover;
+      background-position: center;
+      background-color: #0a0e18;
+      filter: brightness(0.78) saturate(1.05) contrast(1.06);
+      opacity: 0;
+      transform: scale(1.06);
+      will-change: opacity, transform;
+    }
+
+    .bg-slide:first-child {
+      opacity: 1;
+    }
+
+    .env-shade {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .env[data-side="left"] .env-shade {
+      background:
+        linear-gradient(90deg, rgba(4,6,12,0.88) 0%, rgba(4,6,12,0.56) 46%, rgba(4,6,12,0.34) 68%, rgba(4,6,12,0.66) 100%);
+    }
+
+    .env[data-side="right"] .env-shade {
+      background:
+        linear-gradient(270deg, rgba(4,6,12,0.88) 0%, rgba(4,6,12,0.56) 46%, rgba(4,6,12,0.34) 68%, rgba(4,6,12,0.66) 100%);
+    }
+
+    .env-edge {
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 20vh;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .env-edge.top {
+      top: 0;
+      background: linear-gradient(180deg, var(--bg) 0%, rgba(5,7,13,0) 100%);
+    }
+
+    .env-edge.bottom {
+      bottom: 0;
+      background: linear-gradient(0deg, var(--bg) 0%, rgba(5,7,13,0) 100%);
+    }
+
+    /* ---- Header strip ---- */
+
+    .stage-head {
+      position: absolute;
+      top: calc(var(--nav-h) + 8px);
+      left: 0;
+      right: 0;
+      z-index: 6;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: rgba(232, 236, 250, 0.7);
+    }
+
+    .stage-env {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .stage-env::before {
+      content: "";
+      width: 34px;
+      height: 1px;
+      background: rgba(255,255,255,0.5);
+    }
+
+    .stage-count b {
+      color: #fff;
+      font-weight: 600;
+    }
+
+    /* ---- Main layout ---- */
+
+    .env-layout {
+      position: absolute;
+      inset: 0;
+      margin: 0 auto;
+      z-index: 5;
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+      column-gap: 56px;
+      align-items: center;
+      padding-top: calc(var(--nav-h) + 44px);
+      padding-bottom: 104px;
+    }
+
+    .env[data-side="right"] .env-layout {
+      grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    }
+
+    .env[data-side="right"] .wheel {
+      order: 2;
+    }
+
+    .env[data-side="right"] .info {
+      order: 1;
+      justify-self: start;
+    }
+
+    .env[data-side="left"] .info {
+      justify-self: end;
+    }
+
+    /* ---- Wheel ---- */
+
+    .wheel {
+      position: relative;
+      height: 100%;
+      min-width: 0;
+    }
+
+    .wheel-arc {
+      position: absolute;
+      top: 50%;
+      width: calc(var(--R) * 2);
+      height: calc(var(--R) * 2);
+      margin-top: calc(var(--R) * -1);
+      border: 1px solid rgba(255,255,255,0.22);
+      border-radius: 50%;
+      pointer-events: none;
+      -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 22%, #000 78%, transparent 100%);
+      mask-image: linear-gradient(180deg, transparent 0%, #000 22%, #000 78%, transparent 100%);
+    }
+
+    .env[data-side="left"] .wheel-arc {
+      left: calc(var(--R) * -1);
+      clip-path: inset(0 0 0 50%);
+    }
+
+    .env[data-side="right"] .wheel-arc {
+      right: calc(var(--R) * -1);
+      clip-path: inset(0 50% 0 0);
+    }
+
+    .wheel-item {
+      position: absolute;
+      top: 50%;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      width: max-content;
+      max-width: calc(100% - var(--R) - 12px);
+      padding: 6px 0;
+      color: #fff;
+      font-family: var(--font-ui);
+      font-weight: 700;
+      font-size: clamp(1.2rem, 1.95vw, 2.05rem);
+      line-height: 1.05;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      opacity: 0.4;
+      will-change: transform, opacity;
+    }
+
+    .env[data-side="left"] .wheel-item {
+      left: var(--R);
+      padding-left: 28px;
+      text-align: left;
+      transform-origin: 0 50%;
+    }
+
+    .env[data-side="right"] .wheel-item {
+      right: var(--R);
+      padding-right: 28px;
+      flex-direction: row-reverse;
+      text-align: right;
+      transform-origin: 100% 50%;
+    }
+
+    .wheel-item::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--bg);
+      border: 1px solid rgba(255,255,255,0.75);
+      transition:
+        background 0.35s ease,
+        transform 0.35s var(--ease);
+    }
+
+    .env[data-side="left"] .wheel-item::before {
+      left: 0;
+      transform: translate(-50%, -50%);
+    }
+
+    .env[data-side="right"] .wheel-item::before {
+      right: 0;
+      transform: translate(50%, -50%);
+    }
+
+    .wheel-item.is-active::before {
+      background: #fff;
+    }
+
+    .env[data-side="left"] .wheel-item.is-active::before {
+      transform: translate(-50%, -50%) scale(1.35);
+    }
+
+    .env[data-side="right"] .wheel-item.is-active::before {
+      transform: translate(50%, -50%) scale(1.35);
+    }
+
+    .wi-num {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      color: rgba(190, 180, 255, 0.85);
+      padding-top: 0.55em;
+    }
+
+    .wi-title {
+      min-width: 0;
+    }
+
+    /* ---- Info card ---- */
+
+    .info {
+      position: relative;
+      width: min(100%, 540px);
+    }
+
+    .info::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      transform: translate(16px, 16px);
+      background: rgba(255,255,255,0.05);
+      z-index: 0;
+    }
+
+    .env[data-side="right"] .info::before {
+      transform: translate(-16px, 16px);
+    }
+
+    .info-card {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      padding: 34px 36px 38px;
+      background: rgba(9, 12, 20, 0.68);
+      -webkit-backdrop-filter: blur(18px);
+      backdrop-filter: blur(18px);
+      border: 1px solid rgba(255,255,255,0.18);
+      box-shadow:
+        0 60px 100px -30px rgba(0,0,0,0.85),
+        0 24px 48px -24px rgba(0,0,0,0.6);
+    }
+
+    .topic-panel {
+      grid-area: 1 / 1;
+      min-width: 0;
+      --d: 0;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .no-js .topic-panel:not(:first-child) {
+      display: none;
+    }
+
+    .no-js .topic-panel {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .topic-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding-bottom: 18px;
+      margin-bottom: 22px;
+      border-bottom: 1px solid var(--border);
+      font-family: var(--font-mono);
+      font-size: 0.66rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: rgba(190, 180, 255, 0.8);
+    }
+
+    .topic-top b {
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .topic-title {
+      font-family: var(--font-ui);
+      font-size: clamp(1.9rem, 2.7vw, 2.8rem);
+      font-weight: 700;
+      line-height: 1.02;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: #fff;
+      transform: translate3d(0, calc(var(--d) * 28px), 0);
+    }
+
+    .topic-lead {
+      margin-top: 18px;
+      font-size: 1.04rem;
+      font-weight: 300;
+      line-height: 1.75;
+      color: rgba(228, 233, 246, 0.92);
+      transform: translate3d(0, calc(var(--d) * 42px), 0);
+    }
+
+    .topic-points {
+      margin-top: 22px;
+      display: grid;
+      gap: 12px;
+      transform: translate3d(0, calc(var(--d) * 56px), 0);
+    }
+
+    .topic-points li {
+      position: relative;
+      padding-left: 22px;
+      font-size: 0.94rem;
+      font-weight: 300;
+      line-height: 1.7;
+      color: rgba(176, 188, 212, 0.9);
+    }
+
+    .topic-points li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.72em;
+      width: 7px;
+      height: 1px;
+      background: rgba(190, 180, 255, 0.9);
+    }
+
+    /* ---- Progress strip ---- */
+
+    .stage-foot {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 34px;
+      z-index: 6;
+    }
+
+    .progress {
+      display: flex;
+      gap: 12px;
+    }
+
+    .seg {
+      flex: 1;
+      min-width: 0;
+      text-align: left;
+      padding-top: 6px;
+    }
+
+    .seg-label {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 10px;
+      font-family: var(--font-mono);
+      font-size: 0.64rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(200, 208, 228, 0.5);
+      white-space: nowrap;
+      transition: color 0.3s ease;
+    }
+
+    .seg-label i {
+      font-style: normal;
+    }
+
+    .seg-label em {
+      font-style: normal;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .seg.is-active .seg-label,
+    .seg:hover .seg-label {
+      color: #fff;
+    }
+
+    .seg-bar {
+      display: block;
+      height: 2px;
+      background: rgba(255,255,255,0.18);
+    }
+
+    .seg-fill {
+      display: block;
+      height: 100%;
+      background: #fff;
+      transform-origin: left center;
+      transform: scaleX(var(--fill, 0));
+    }
+
+    /* =====================================================================
+       7. FOOTER — REFERENCE DESIGN / SINGLE VIEWPORT
+       All footer colors, dimensions and responsive adjustments are scoped.
+       ===================================================================== */
+
+    .footer {
+      --footer-ink: #111b2d;
+      --footer-muted: #5d6b84;
+      --footer-label: #8794ad;
+      --footer-line: rgba(41,55,82,0.18);
+      --footer-space: clamp(10px, 1.85svh, 22px);
+      --footer-body: clamp(12px, 1.95svh, 16px);
+      --footer-pill-h: clamp(34px, 5.7svh, 52px);
+
+      position: relative;
+      z-index: 5;
+      height: 100vh;
+      height: 100svh;
+      min-height: 0;
+      overflow: hidden;
+      color: var(--footer-ink);
+      background:
+        radial-gradient(
+          ellipse at 0% 0%,
+          rgba(184,199,240,0.52) 0%,
+          rgba(184,199,240,0) 66%
+        ),
+        linear-gradient(
+          135deg,
+          #dfe6fb 0%,
+          #edf1fc 51%,
+          #ffffff 100%
+        );
+    }
+
+    .footer-shell {
+      height: 100%;
+      display: grid;
+      grid-template-rows: minmax(0, 1fr) auto auto;
+      padding-top: calc(var(--nav-h) + clamp(10px, 1.7svh, 22px));
+      padding-bottom: clamp(16px, 3svh, 32px);
+    }
+
+    .footer-main {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      column-gap: clamp(48px, 8vw, 124px);
+      align-items: start;
+      min-height: 0;
+    }
+
+    .footer-left {
+      min-width: 0;
+      min-height: 0;
+    }
+
+    /* ---- Brand ---- */
+
+    .footer-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 18px;
+      max-width: 100%;
+      padding-bottom: var(--footer-space);
+    }
+
+    .footer-logo-tile {
+      width: clamp(38px, 6.2svh, 56px);
+      height: clamp(38px, 6.2svh, 56px);
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      color: #ffffff;
+      background: #0b1019;
+      border-radius: 13px;
+      box-shadow: 0 16px 32px rgba(31,45,78,0.12);
+    }
+
+    .footer-logo-tile svg {
+      display: block;
+      width: 25px;
+      height: 25px;
+    }
+
+    .footer-brand-copy {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      min-width: 0;
+    }
+
+    .footer-brand-name {
+      font-family: var(--font-display);
+      font-size: clamp(0.88rem, 2.3svh, 1.16rem);
+      font-weight: 600;
+      line-height: 1.1;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .footer-brand-tagline {
+      font-family: var(--font-mono);
+      font-size: clamp(0.52rem, 1.3svh, 0.71rem);
+      font-weight: 400;
+      line-height: 1.5;
+      letter-spacing: 0.09em;
+      color: var(--footer-muted);
+    }
+
+    /* ---- Description, copyright and cookie link ---- */
+
+    .footer-description {
+      padding: var(--footer-space) 0;
+      border-top: 1px solid var(--footer-line);
+    }
+
+    .footer-copy {
+      max-width: 490px;
+      color: var(--footer-muted);
+      font-family: var(--font-body);
+      font-size: var(--footer-body);
+      font-weight: 400;
+      line-height: 1.72;
+    }
+
+    .footer-legal {
+      padding: var(--footer-space) 0;
+      border-top: 1px solid var(--footer-line);
+    }
+
+    .footer-copyright {
+      color: var(--footer-ink);
+      font-family: var(--font-body);
+      font-size: var(--footer-body);
+      font-weight: 400;
+      line-height: 1.65;
+    }
+
+    .footer-cookie-row {
+      padding: var(--footer-space) 0;
+      border-top: 1px solid var(--footer-line);
+      border-bottom: 1px solid var(--footer-line);
+    }
+
+    .footer-cookie {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--footer-ink);
+      font-family: var(--font-body);
+      font-size: var(--footer-body);
+      font-weight: 400;
+      line-height: 1.5;
+      text-align: left;
+      transition: opacity 0.2s ease;
+    }
+
+    .footer-cookie sup {
+      position: static;
+      font-size: 0.7em;
+      line-height: 1;
+    }
+
+    .footer-cookie:hover {
+      opacity: 0.65;
+    }
+
+    /* ---- Social pills ---- */
+
+    .footer-socials {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: clamp(8px, 1.6svh, 14px);
+      max-width: 440px;
+      padding-top: var(--footer-space);
+    }
+
+    .footer-socials a {
+      height: var(--footer-pill-h);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 0;
+      padding: 0 12px;
+      border: 1px solid rgba(28,41,67,0.28);
+      border-radius: 999px;
+      background: transparent;
+      color: var(--footer-ink);
+      font-family: var(--font-mono);
+      font-size: clamp(0.56rem, 1.3svh, 0.68rem);
+      font-weight: 500;
+      line-height: 1;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      transition:
+        background 0.25s ease,
+        color 0.25s ease,
+        border-color 0.25s ease;
+    }
+
+    .footer-socials a:hover {
+      background: var(--footer-ink);
+      color: #ffffff;
+      border-color: var(--footer-ink);
+    }
+
+    /* ---- Right-side navigation ---- */
+
+    .footer-right {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(20px, 3.8svh, 48px);
+      min-width: 0;
+      padding-top: 5px;
+    }
+
+    .footer-link-group {
+      min-width: 0;
+    }
+
+    .footer-group-title {
+      margin-bottom: clamp(12px, 2svh, 22px);
+      color: var(--footer-label);
+      font-family: var(--font-mono);
+      font-size: clamp(0.5rem, 1.2svh, 0.625rem);
+      font-weight: 400;
+      line-height: 1.5;
+      letter-spacing: 0.34em;
+      text-transform: uppercase;
+    }
+
+    .footer-links {
+      display: grid;
+      gap: clamp(8px, 1.5svh, 16px);
+    }
+
+    .footer-links a {
+      display: flex;
+      align-items: baseline;
+      gap: clamp(10px, 1.3vw, 18px);
+      color: var(--footer-ink);
+      font-family: var(--font-ui);
+      font-size: clamp(0.82rem, 2.2svh, 1.1rem);
+      font-weight: 600;
+      line-height: 1.3;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: color 0.25s ease;
+    }
+
+    .footer-link-index {
+      width: 16px;
+      flex-shrink: 0;
+      color: var(--footer-label);
+      font-family: var(--font-mono);
+      font-size: clamp(0.5rem, 1.3svh, 0.65rem);
+      font-weight: 400;
+      line-height: 1.5;
+      letter-spacing: 0.16em;
+    }
+
+    .footer-link-text {
+      min-width: 0;
+      overflow-wrap: anywhere;
+    }
+
+    .footer-links a:hover {
+      color: #596da2;
+    }
+
+    /* ---- Oversized background wordmark ---- */
+
+    .footer-wordmark {
+      height: clamp(72px, 18svh, 180px);
+      margin-top: clamp(12px, 2svh, 24px);
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .footer-wordmark svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .footer-wordmark text {
+      fill: rgba(32,45,68,0.055);
+      font-family: var(--font-display);
+      font-size: 210px;
+      font-weight: 900;
+    }
+
+    /* ---- Bottom strip ---- */
+
+    .footer-bottom {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      align-items: center;
+      column-gap: 24px;
+      padding-top: clamp(14px, 2.4svh, 26px);
+      border-top: 1px solid rgba(41,55,82,0.12);
+      color: var(--footer-label);
+      font-family: var(--font-mono);
+      font-size: clamp(0.45rem, 0.74vw, 0.6rem);
+      font-weight: 400;
+      line-height: 1.5;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+    }
+
+    .footer-bottom-brand {
+      color: #354761;
+      white-space: nowrap;
+    }
+
+    .footer-bottom-brand span {
+      color: var(--footer-label);
+    }
+
+    .footer-bottom-system {
+      min-width: 0;
+      text-align: center;
+    }
+
+    .footer-back-top {
+      color: var(--footer-label);
+      white-space: nowrap;
+      transition: color 0.25s ease;
+    }
+
+    .footer-back-top:hover {
+      color: var(--footer-ink);
+    }
+
+    .footer :focus-visible {
+      outline-color: #243b74;
+    }
+
+    /* =====================================================================
+       8. REDUCED MOTION
+       ===================================================================== */
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      .js .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+
+      .layer,
+      .search-panel,
+      .cookie-panel {
+        transition: none;
+      }
+    }
+
+    /* =====================================================================
+       9. RESPONSIVE
+       ===================================================================== */
+
+    @media (max-width: 1320px) {
+      :root {
+        --gutter: 34px;
+        --nav-pad: 28px;
+      }
+
+      .env-layout {
+        column-gap: 40px;
+      }
+
+      .footer-main {
+        column-gap: 64px;
+      }
+    }
+
+    @media (max-height: 760px) and (min-width: 1081px) {
+      .info-card {
+        padding: 26px 30px 30px;
+      }
+
+      .topic-top {
+        margin-bottom: 16px;
+        padding-bottom: 14px;
+      }
+
+      .topic-lead {
+        margin-top: 14px;
+        font-size: 0.98rem;
+        line-height: 1.65;
+      }
+
+      .topic-points {
+        margin-top: 16px;
+        gap: 8px;
+      }
+
+      .topic-points li {
+        font-size: 0.9rem;
+        line-height: 1.6;
+      }
+    }
+
+    /* Tablet + mobile: original compact environment selector. */
+
+    @media (max-width: 1080px) {
+      .env-layout,
+      .env[data-side="right"] .env-layout {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-rows: auto 1fr;
+        align-items: start;
+        row-gap: 14px;
+        padding-top: calc(var(--nav-h) + 52px);
+        padding-bottom: 84px;
+      }
+
+      .env[data-side="right"] .wheel {
+        order: 1;
+      }
+
+      .env[data-side="right"] .info,
+      .env[data-side="left"] .info {
+        order: 2;
+        justify-self: stretch;
+        align-self: end;
+        width: 100%;
+        max-width: none;
+      }
+
+      .wheel {
+        height: 200px;
+      }
+
+      .wheel-arc {
+        display: none;
+      }
+
+      .env[data-side] .wheel-item {
+        left: 0;
+        right: auto;
+        max-width: 100%;
+        padding-left: 28px;
+        padding-right: 0;
+        flex-direction: row;
+        text-align: left;
+        transform-origin: 0 50%;
+        font-size: clamp(1.15rem, 3.4vw, 1.7rem);
+      }
+
+      .env[data-side] .wheel-item::before {
+        left: 0;
+        right: auto;
+        transform: translate(-50%, -50%);
+      }
+
+      .env[data-side] .wheel-item.is-active::before {
+        transform: translate(-50%, -50%) scale(1.35);
+      }
+
+      .env[data-side="left"] .env-shade,
+      .env[data-side="right"] .env-shade {
+        background: linear-gradient(180deg, rgba(4,6,12,0.7) 0%, rgba(4,6,12,0.5) 45%, rgba(4,6,12,0.82) 100%);
+      }
+
+      .info::before {
+        display: none;
+      }
+
+      .info-card {
+        padding: 26px 26px 28px;
+      }
+
+      .seg-label em {
+        display: none;
+      }
+
+      .chapter-inner,
+      .chapter[data-side="right"] .chapter-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+        gap: 22px;
+      }
+
+      .chapter[data-side="right"] .chapter-copy,
+      .chapter[data-side="right"] .chapter-rule {
+        margin-left: 0;
+      }
+
+      .footer-main {
+        grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+        column-gap: 40px;
+      }
+
+      .footer-brand {
+        gap: 12px;
+      }
+
+      .footer-bottom {
+        column-gap: 16px;
+        letter-spacing: 0.18em;
+      }
+    }
+
+    @media (max-width: 1080px) and (max-height: 780px) {
+      .topic-points {
+        display: none;
+      }
+
+      .wheel {
+        height: 170px;
+      }
+    }
+
+    @media (max-width: 700px) {
+      :root {
+        --gutter: 18px;
+        --nav-pad: 18px;
+        --nav-h: 72px;
+      }
+
+      .brand-text {
+        font-size: 0.86rem;
+        letter-spacing: 0.14em;
+      }
+
+      .brand-logo {
+        height: 26px;
+      }
+
+      .nav-btn {
+        height: 40px;
+        padding: 0 14px;
+        font-size: 0.78rem;
+        letter-spacing: 0.12em;
+      }
+
+      .nav-btn.secondary {
+        display: none;
+      }
+
+      .icon-btn {
+        width: 40px;
+        height: 40px;
+      }
+
+      .nav-right {
+        gap: 8px;
+      }
+
+      .hero-content {
+        padding-bottom: 56px;
+      }
+
+      .hero-title {
+        font-size: clamp(3.4rem, 19vw, 5.6rem);
+        line-height: 0.95;
+      }
+
+      .hero-tagline {
+        font-size: clamp(1.3rem, 6.2vw, 2rem);
+        margin-top: 30px;
+      }
+
+      .hero-meta {
+        flex-direction: column;
+        gap: 10px;
+        font-size: 0.6rem;
+      }
+
+      .section-intro {
+        padding-top: 110px;
+        padding-bottom: 40px;
+      }
+
+      .section-intro-title {
+        font-size: clamp(1.5rem, 7vw, 2.6rem);
+      }
+
+      .chapter {
+        padding: 90px 0;
+        min-height: 80vh;
+      }
+
+      .chapter-title {
+        font-size: clamp(1.45rem, 6.6vw, 2.4rem);
+      }
+
+      .stage-head {
+        font-size: 0.6rem;
+        letter-spacing: 0.2em;
+      }
+
+      .stage-env::before {
+        width: 20px;
+      }
+
+      .info-card {
+        padding: 22px 20px 24px;
+      }
+
+      .topic-top {
+        margin-bottom: 14px;
+        padding-bottom: 12px;
+        font-size: 0.6rem;
+      }
+
+      .topic-title {
+        font-size: 1.55rem;
+      }
+
+      .topic-lead {
+        font-size: 0.94rem;
+        line-height: 1.65;
+        margin-top: 12px;
+      }
+
+      .topic-points li {
+        font-size: 0.88rem;
+        line-height: 1.6;
+      }
+
+      .stage-foot {
+        bottom: 22px;
+      }
+
+      .seg-label {
+        font-size: 0.58rem;
+      }
+
+      .menu-link {
+        padding: 16px 0;
+        gap: 16px;
+      }
+
+      .search {
+        padding-top: 10vh;
+      }
+
+      .search-results button {
+        grid-template-columns: 1fr;
+      }
+
+      .sr-env {
+        grid-row: auto;
+        padding-top: 0;
+      }
+
+      /* Footer remains one viewport with a compact two-column layout. */
+
+      .footer {
+        --footer-space: clamp(8px, 1.5svh, 12px);
+        --footer-body: clamp(11px, 1.75svh, 13px);
+        --footer-pill-h: clamp(30px, 4.6svh, 36px);
+      }
+
+      .footer-shell {
+        padding-top: calc(var(--nav-h) + 14px);
+        padding-bottom: 16px;
+      }
+
+      .footer-main {
+        grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+        column-gap: 18px;
+      }
+
+      .footer-brand {
+        gap: 9px;
+      }
+
+      .footer-logo-tile {
+        width: 32px;
+        height: 32px;
+        border-radius: 9px;
+      }
+
+      .footer-logo-tile svg {
+        width: 20px;
+        height: 20px;
+      }
+
+      .footer-brand-copy {
+        gap: 4px;
+      }
+
+      .footer-brand-name {
+        font-size: 0.65rem;
+        letter-spacing: 0.12em;
+      }
+
+      .footer-brand-tagline {
+        font-size: 0.5rem;
+        line-height: 1.5;
+        letter-spacing: 0.03em;
+      }
+
+      .footer-copy {
+        line-height: 1.65;
+      }
+
+      .footer-copyright {
+        line-height: 1.6;
+      }
+
+      .footer-cookie {
+        gap: 5px;
+      }
+
+      .footer-socials {
+        gap: 8px;
+      }
+
+      .footer-socials a {
+        padding: 0 5px;
+        font-size: 0.5rem;
+        letter-spacing: 0.14em;
+      }
+
+      .footer-right {
+        gap: clamp(18px, 3svh, 28px);
+        padding-top: 2px;
+      }
+
+      .footer-group-title {
+        margin-bottom: 11px;
+        font-size: 0.48rem;
+        letter-spacing: 0.22em;
+      }
+
+      .footer-links {
+        gap: 10px;
+      }
+
+      .footer-links a {
+        gap: 7px;
+        font-size: 0.76rem;
+        line-height: 1.35;
+        letter-spacing: 0.05em;
+      }
+
+      .footer-link-index {
+        width: 12px;
+        font-size: 0.47rem;
+      }
+
+      .footer-wordmark {
+        height: clamp(44px, 13vw, 82px);
+        margin-top: 12px;
+      }
+
+      .footer-bottom {
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 7px 10px;
+        padding-top: 14px;
+        font-size: 0.44rem;
+        line-height: 1.6;
+        letter-spacing: 0.12em;
+      }
+
+      .footer-bottom-brand {
+        white-space: normal;
+      }
+
+      .footer-bottom-system {
+        grid-column: 1 / -1;
+        grid-row: 2;
+        text-align: left;
+      }
+
+      .footer-back-top {
+        grid-column: 2;
+        grid-row: 1;
+      }
+    }
+
+    /* Footer-only density adjustment for shorter desktop screens. */
+
+    @media (max-height: 680px) and (min-width: 701px) {
+      .footer {
+        --footer-space: clamp(8px, 1.5svh, 12px);
+        --footer-pill-h: clamp(30px, 5.4svh, 38px);
+      }
+
+      .footer-right {
+        gap: clamp(16px, 3svh, 22px);
+      }
+
+      .footer-wordmark {
+        height: clamp(60px, 16svh, 110px);
+      }
+
+      .footer-bottom {
+        padding-top: 12px;
+      }
+    }
+
+    /* Footer-only adjustment for smaller phone heights. */
+
+    @media (max-width: 700px) and (max-height: 650px) {
+      .footer {
+        --footer-space: 8px;
+        --footer-body: 11px;
+        --footer-pill-h: 30px;
+      }
+
+      .footer-shell {
+        padding-top: calc(var(--nav-h) + 10px);
+        padding-bottom: 12px;
+      }
+
+      .footer-main {
+        column-gap: 14px;
+      }
+
+      .footer-copy,
+      .footer-copyright {
+        line-height: 1.55;
+      }
+
+      .footer-right {
+        gap: 18px;
+      }
+
+      .footer-wordmark {
+        height: clamp(36px, 11vw, 56px);
+        margin-top: 8px;
+      }
+
+      .footer-bottom {
+        gap: 5px 8px;
+        padding-top: 12px;
+      }
+    }
+
+    /* Footer-only landscape layout: retain every item without a tall stack. */
+
+    @media (max-height: 520px) and (min-width: 560px) {
+      .footer {
+        --footer-space: 6px;
+        --footer-body: 11px;
+        --footer-pill-h: 28px;
+      }
+
+      .footer-shell {
+        padding-top: calc(var(--nav-h) + 6px);
+        padding-bottom: 10px;
+      }
+
+      .footer-main {
+        grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+        column-gap: 32px;
+      }
+
+      .footer-left {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 8px 16px;
+      }
+
+      .footer-brand {
+        grid-column: 1 / -1;
+        padding-bottom: 0;
+      }
+
+      .footer-logo-tile {
+        width: 30px;
+        height: 30px;
+        border-radius: 8px;
+      }
+
+      .footer-brand-name {
+        font-size: 0.78rem;
+      }
+
+      .footer-brand-tagline {
+        font-size: 0.5rem;
+      }
+
+      .footer-description {
+        grid-column: 1 / -1;
+        padding: 7px 0;
+      }
+
+      .footer-copy {
+        max-width: none;
+        line-height: 1.45;
+      }
+
+      .footer-legal {
+        padding: 0;
+        border: 0;
+      }
+
+      .footer-copyright {
+        line-height: 1.45;
+      }
+
+      .footer-cookie-row {
+        align-self: center;
+        padding: 0;
+        border: 0;
+      }
+
+      .footer-socials {
+        grid-column: 1 / -1;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 6px;
+        max-width: none;
+        padding-top: 0;
+      }
+
+      .footer-socials a {
+        padding: 0 4px;
+        font-size: 0.47rem;
+        letter-spacing: 0.1em;
+      }
+
+      .footer-right {
+        gap: 9px;
+        padding-top: 0;
+      }
+
+      .footer-group-title {
+        margin-bottom: 5px;
+        font-size: 0.45rem;
+        line-height: 1.2;
+      }
+
+      .footer-links {
+        gap: 5px;
+      }
+
+      .footer-links a {
+        gap: 8px;
+        font-size: 0.75rem;
+        line-height: 1.25;
+      }
+
+      .footer-link-index {
+        width: 12px;
+        font-size: 0.45rem;
+      }
+
+      .footer-wordmark {
+        height: 42px;
+        margin-top: 6px;
+      }
+
+      .footer-bottom {
+        grid-template-columns: auto minmax(0, 1fr) auto;
+        gap: 12px;
+        padding-top: 9px;
+        font-size: 0.4rem;
+        letter-spacing: 0.1em;
+      }
+
+      .footer-bottom-system {
+        grid-column: auto;
+        grid-row: auto;
+        text-align: center;
+      }
+
+      .footer-back-top {
+        grid-column: auto;
+        grid-row: auto;
+      }
+    }
+  </style>
+  <link rel="stylesheet" href="assets/css/professional.css">
+</head>
+
+<body>
+
+  <!-- =====================================================================
+       NAV
+       Logo: assets/logo.png
+       ===================================================================== -->
+
+  <header class="nav" id="nav">
+    <a href="index.html" class="brand" aria-label="DSRT LABS — home">
+      <img
+        class="brand-logo"
+        src="assets/logo.png"
+        alt=""
+        width="30"
+        height="30"
+        onerror="this.style.display='none'"
+      >
+      <span class="brand-text">DSRT LABS</span>
+    </a>
+
+    <nav class="nav-right" aria-label="Primary">
+      <a href="index.html" class="nav-btn secondary">Home</a>
+      <a href="#environments" class="nav-btn primary">Explore</a>
+
+      <button
+        class="icon-btn"
+        id="searchBtn"
+        type="button"
+        aria-label="Search topics"
+        aria-expanded="false"
+      >
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.7"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <circle cx="11" cy="11" r="7"></circle>
+          <path d="m20 20-3.5-3.5"></path>
+        </svg>
+      </button>
+
+      <button
+        class="icon-btn"
+        id="menuBtn"
+        type="button"
+        aria-label="Menu"
+        aria-expanded="false"
+        aria-controls="menu"
+      >
+        <svg
+          class="i-open"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.7"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M4 7h16"></path>
+          <path d="M4 12h16"></path>
+          <path d="M4 17h16"></path>
+        </svg>
+
+        <svg
+          class="i-close"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.7"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M6 6l12 12"></path>
+          <path d="M18 6L6 18"></path>
+        </svg>
+      </button>
+    </nav>
+  </header>
+
+  <!-- =====================================================================
+       MENU OVERLAY
+       ===================================================================== -->
+
+  <div class="layer menu" id="menu" aria-hidden="true" aria-label="Site menu">
+    <div class="menu-inner">
+      <ul class="menu-list">
+        <li>
+          <a class="menu-link" href="index.html">
+            <span class="label">00</span>Home
+          </a>
+        </li>
+        <li>
+          <a class="menu-link" href="#research" data-menu-link>
+            <span class="label">01</span>Research
+          </a>
+        </li>
+        <li>
+          <a class="menu-link" href="#engineering" data-menu-link>
+            <span class="label">02</span>Engineering
+          </a>
+        </li>
+        <li>
+          <a class="menu-link" href="#infrastructure" data-menu-link>
+            <span class="label">03</span>Intelligence Infrastructure
+          </a>
+        </li>
+        <li>
+          <a class="menu-link" href="#footer" data-menu-link>
+            <span class="label">04</span>Contact
+          </a>
+        </li>
+      </ul>
+
+      <div class="menu-foot">
+        <span>DSRT LABS — Scientific AI Systems</span>
+        <span>Research • Engineering • Intelligence Infrastructure</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- =====================================================================
+       SEARCH OVERLAY
+       ===================================================================== -->
+
+  <div
+    class="layer search"
+    id="search"
+    aria-hidden="true"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Search topics"
+  >
+    <div class="search-backdrop" data-close></div>
+
+    <div class="search-panel">
+      <div class="search-field">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.7"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <circle cx="11" cy="11" r="7"></circle>
+          <path d="m20 20-3.5-3.5"></path>
+        </svg>
+
+        <input
+          id="searchInput"
+          type="text"
+          placeholder="Search research, engineering, infrastructure…"
+          autocomplete="off"
+          spellcheck="false"
+          data-autofocus
+          aria-label="Search"
+        >
+
+        <span class="search-esc">ESC</span>
+      </div>
+
+      <div class="search-results" id="searchResults" role="listbox"></div>
+    </div>
+  </div>
+
+  <!-- =====================================================================
+       COOKIE SETTINGS
+       ===================================================================== -->
+
+  <div
+    class="layer cookie"
+    id="cookie"
+    aria-hidden="true"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="cookieTitle"
+  >
+    <div class="cookie-backdrop" data-close></div>
+
+    <div class="cookie-panel">
+      <span class="label">Privacy</span>
+      <h2 class="cookie-title" id="cookieTitle">Cookie settings</h2>
+
+      <p class="cookie-copy">
+        Choose which cookies DSRT LABS may use. Essential cookies keep
+        the site working and cannot be turned off.
+      </p>
+
+      <div class="cookie-row">
+        <div>
+          <strong>Essential</strong>
+          <span class="d">Required for core site function.</span>
+        </div>
+        <label class="switch">
+          <input
+            type="checkbox"
+            data-pref="essential"
+            checked
+            disabled
+            aria-label="Essential cookies"
+          >
+          <i></i>
+        </label>
+      </div>
+
+      <div class="cookie-row">
+        <div>
+          <strong>Analytics</strong>
+          <span class="d">Anonymous usage measurement.</span>
+        </div>
+        <label class="switch">
+          <input type="checkbox" data-pref="analytics" aria-label="Analytics cookies">
+          <i></i>
+        </label>
+      </div>
+
+      <div class="cookie-row">
+        <div>
+          <strong>Preferences</strong>
+          <span class="d">Remembers your display choices.</span>
+        </div>
+        <label class="switch">
+          <input type="checkbox" data-pref="preferences" aria-label="Preference cookies">
+          <i></i>
+        </label>
+      </div>
+
+      <div class="cookie-actions">
+        <button class="btn solid" type="button" data-cookie="save">Save</button>
+        <button class="btn" type="button" data-cookie="accept">Accept all</button>
+        <button class="btn" type="button" data-cookie="reject">Reject optional</button>
+      </div>
+    </div>
+  </div>
+
+  <main>
+
+    <!-- ===================================================================
+         HERO
+         =================================================================== -->
+
+    <section class="hero" id="home">
+      <div class="hero-bg" aria-hidden="true"></div>
+      <div class="hero-overlay" aria-hidden="true"></div>
+
+      <div class="hero-content wrap">
+        <h1 class="hero-title reveal">
+          <span>DSRT</span>
+          <span>LABS</span>
+        </h1>
+
+        <p class="hero-tagline reveal">
+          We build <strong>intelligence that moves industries forward.</strong>
+        </p>
+
+        <div class="hero-rule reveal"></div>
+
+        <div class="hero-meta reveal">
+          <div>Research • Engineering • Intelligence Infrastructure</div>
+          <div>Scientific systems, simulation and autonomous execution</div>
+          <a href="#environments">Scroll ↓</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         INTRO
+         =================================================================== -->
+
+    <section class="section-intro wrap" id="environments">
+      <div class="label reveal">Environments</div>
+
+      <h2 class="section-intro-title reveal">
+        Three layers behind<br>DSRT intelligence.
+      </h2>
+
+      <p class="section-intro-copy reveal">
+        DSRT LABS is structured as a scientific and engineering system.
+        Research defines the problems, engineering builds the mechanisms,
+        and intelligence infrastructure turns computation into
+        operational capability.
+      </p>
+    </section>
+
+    <!-- ===================================================================
+         CHAPTER 01 — RESEARCH
+         =================================================================== -->
+
+    <section class="chapter" id="research" data-side="left">
+      <div class="wrap chapter-inner">
+        <div class="chapter-num reveal" aria-hidden="true">01</div>
+
+        <div class="chapter-body">
+          <span class="label reveal">Environment 01</span>
+          <h2 class="chapter-title reveal">Research</h2>
+
+          <p class="chapter-copy reveal">
+            Where the problems are defined. Public programmes, architecture,
+            publications and simulations that document how DSRT thinks
+            and what it has found.
+          </p>
+
+          <div class="chapter-rule reveal"></div>
+        </div>
+      </div>
+    </section>
+
+    <section
+      class="env"
+      id="research-stage"
+      data-env="research"
+      data-name="Research"
+      data-side="left"
+      style="--steps:4"
+    >
+      <div class="env-stage">
+        <div class="env-bg" aria-hidden="true">
+          <div class="bg-slide" style="--img: url('assets/research-01.jpg'), url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1920&q=70');"></div>
+          <div class="bg-slide" style="--img: url('assets/research-02.jpg'), url('https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1920&q=70');"></div>
+          <div class="bg-slide" style="--img: url('assets/research-03.jpg'), url('https://images.unsplash.com/photo-1531297484001-80022131f5a1?auto=format&fit=crop&w=1920&q=70');"></div>
+          <div class="bg-slide" style="--img: url('assets/research-04.jpg'), url('https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?auto=format&fit=crop&w=1920&q=70');"></div>
+        </div>
+
+        <div class="env-shade" aria-hidden="true"></div>
+        <div class="env-edge top" aria-hidden="true"></div>
+        <div class="env-edge bottom" aria-hidden="true"></div>
+
+        <div class="stage-head wrap">
+          <span class="stage-env">Environment 01 — Research</span>
+          <span class="stage-count"><b data-count>01</b> / 04</span>
+        </div>
+
+        <div class="env-layout wrap">
+          <nav class="wheel" aria-label="Research topics">
+            <span class="wheel-arc" aria-hidden="true"></span>
+
+            <button class="wheel-item" type="button" data-goto="0">
+              <span class="wi-num">01</span>
+              <span class="wi-title">Public Research</span>
+            </button>
+
+            <button class="wheel-item" type="button" data-goto="1">
+              <span class="wi-num">02</span>
+              <span class="wi-title">Technical Architecture</span>
+            </button>
+
+            <button class="wheel-item" type="button" data-goto="2">
+              <span class="wi-num">03</span>
+              <span class="wi-title">Publications</span>
+            </button>
+
+            <button class="wheel-item" type="button" data-goto="3">
+              <span class="wi-num">04</span>
+              <span class="wi-title">Scientific Simulations</span>
+            </button>
+          </nav>
+
+          <div class="info">
+            <div class="info-card">
+              <article class="topic-panel" aria-hidden="false">
+                <header class="topic-top">
+                  <span>Research</span>
+                  <span><b>01</b> / 04</span>
+                </header>
+                <h3 class="topic-title">Public Research</h3>
+                <p class="topic-lead">
+                  Explore the research programmes, technical questions,
+                  and ongoing investigations at DSRT LABS.
+                </p>
+                <ul class="topic-points">
+                  <li>Understand the problems being studied, the methods being developed, and the progress made.</li>
+                  <li>Follow research from initial hypotheses to experimentally supported findings.</li>
+                </ul>
+              </article>
+
+              <article class="topic-panel" aria-hidden="true">
+                <header class="topic-top">
+                  <span>Research</span>
+                  <span><b>02</b> / 04</span>
+                </header>
+                <h3 class="topic-title">Technical Architecture</h3>
+                <p class="topic-lead">
+                  Examine the systems, components, and engineering
+                  principles behind DSRT technology.
+                </p>
+                <ul class="topic-points">
+                  <li>Trace how individual components interact, exchange information, and contribute to execution.</li>
+                  <li>Study the interfaces, dependencies, and design decisions that shape each system.</li>
+                </ul>
+              </article>
+
+              <article class="topic-panel" aria-hidden="true">
+                <header class="topic-top">
+                  <span>Research</span>
+                  <span><b>03</b> / 04</span>
+                </header>
+                <h3 class="topic-title">Publications</h3>
+                <p class="topic-lead">
+                  Read technical papers, engineering specifications,
+                  research reports, and documented findings.
+                </p>
+                <ul class="topic-points">
+                  <li>Review the methodology, assumptions, supporting evidence, and limitations behind each publication.</li>
+                  <li>Access versioned technical material produced through DSRT LABS research.</li>
+                </ul>
+              </article>
+
+              <article class="topic-panel" aria-hidden="true">
+                <header class="topic-top">
+                  <span>Research</span>
+                  <span><b>04</b> / 04</span>
+                </header>
+                <h3 class="topic-title">Scientific Simulations</h3>
+                <p class="topic-lead">
+                  Explore computational models of token economics,
+                  inference costs, resource allocation, and system efficiency.
+                </p>
+                <ul class="topic-points">
+                  <li>Adjust parameters, compare scenarios, and examine how different variables affect the results.</li>
+                  <li>Study the underlying equations, assumptions, and measurable trade-offs behind each simulation.</li>
+                </ul>
+              </article>
+            </div>
+          </div>
+        </div>
+
+        <div class="stage-foot wrap">
+          <div class="progress">
+            <button class="seg" type="button" data-goto="0">
+              <span class="seg-label"><i>01</i><em>Public Research</em></span>
+              <span class="seg-bar"><span class="seg-fill"></span></span>
+            </button>
+
+            <button class="seg" type="button" data-goto="1">
+              <span class="seg-label"><i>02</i><em>Technical Architecture</em></span>
+              <span class="seg-bar"><span class="seg-fill"></span></span>
+            </button>
+
+            <button class="seg" type="button" data-goto="2">
+              <span class="seg-label"><i>03</i><em>Publications</em></span>
+              <span class="seg-bar"><span class="seg-fill"></span></span>
+            </button>
+
+            <button class="seg" type="button" data-goto="3">
+              <span class="seg-label"><i>04</i><em>Scientific Simulations</em></span>
+              <span class="seg-bar"><span class="seg-fill"></span></span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         CHAPTER 02 — ENGINEERING
+         =================================================================== -->
+
+    <section class="chapter" id="engineering" data-side="right">
+      <div class="wrap chapter-inner">
+        <div class="chapter-num reveal" aria-hidden="true">02</div>
+
+        <div class="chapter-body">
+          <span class="label reveal">Environment 02</span>
+          <h2 class="chapter-title reveal">Engineering</h2>
+
+          <p class="chapter-copy reveal">
+            Where mechanisms are built. Experiments, governance,
+            execution infrastructure and records that keep every system
+            accountable and traceable.
+          </p>
+
+          <div class="chapter-rule reveal"></div>
+        </div>
+      </div>
+    </section>
+
+    <section
+      class="env"
+      id="engineering-stage"
+      data-env="engineering"
+      data-name="Engineering"
+      data-side="right"
+      style="--steps:4"
+    >
+      <div class="env-stage">
+        <div class="env-bg" aria-hidden="true">
+          <div class="bg-slide" style="--img: url('assets/engineering-01.jpg'), url('https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1920&q=70');"></div>
+          <div class="bg-slide" style="--img: url('assets/engineering-02.jpg'), url('https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1920&q=70');"></div>
+          <div class="bg-slide" style="--img: url('assets/engineering-03.jpg'), url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1920&q=70');"></div>
+          <div class="bg-slide" style="--img: url('assets/engineering-04.jpg'), url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1920&q=70');"></div>
+        </div>
+
+        <div class="env-shade" aria-hidden="true"></div>
+        <div class="env-edge top" aria-hidden="true"></div>
+        <div class="env-edge bottom" aria-hidden="true"></div>
+
+        <div class="stage-head wrap">
+          <span class="stage-env">Environment 02 — Engineering</span>
+          <span class="stage-count"><b data-count>01</b> / 04</span>
+        </div>
+
+        <div class="env-layout wrap">
+          <nav class="wheel" aria-label="Engineering topics">
+            <span class="wheel-arc" aria-hidden="true"></span>
+
+            <button class="wheel-item" type="button" data-goto="0">
+              <span class="wi-num">01</span>
+              <span class="wi-title">Internal Experiments</span>
+            </button>
+
+            <button class="wheel-item" type="button" data-goto="1">
+              <span class="wi-num">02</span>
+              <span class="wi-title">Architecture Governance</span>
+            </button>
+
+            <button class="wheel-item" type="button" data-goto="2">
+              <span class="wi-num">03</span>
+              <span class="wi-title">Execution Infrastructure</span>
+            </button>
+
+            <button class="wheel-item" type="button" data-goto="3">
+              <span class="wi-num">04</span>
+              <span class="wi-title">Research Administration</span>
+            </button>
+          </nav>
+
+          <div class="info">
+            <div class="info-card">
+              <article class="topic-panel" aria-hidden="false">
+                <header class="topic-top">
+                  <span>Engineering</span>
+                  <span><b>01</b> / 04</span>
+                </header>
+                <h3 class="topic-title">Internal Experiments</h3>
+                <p class="topic-lead">
+                  Controlled investigations into the behaviour
+                  and performance of DSRT systems.
+                </p>
+                <ul class="topic-points">
+                  <li>Evaluate new methods against established baselines, defined conditions, and measurable criteria.</li>
+                  <li>Maintain experiment records, execution results, and technical observations for review.</li>
+                </ul>
+              </article>
+
+              <article class="topic-panel" aria-hidden="true">
+                <header class="topic-top">
+                  <span>Engineering</span>
+                  <span><b>02</b> / 04</span>
+                </header>
+                <h3 class="topic-title">Architecture Governance</h3>
+                <p class="topic-lead">
+                  Technical oversight of DSRT system architecture
+                  and engineering standards.
+                </p>
+                <ul class="topic-points">
+                  <li>Define component boundaries, interface contracts, dependencies, and architectural decisions.</li>
+                  <li>Review and approve structural changes to maintain system consistency and integrity.</li>
+                </ul>
+              </article>
+
+              <article class="topic-panel" aria-hidden="true">
+                <header class="topic-top">
+                  <span>Engineering</span>
+                  <span><b>03</b> / 04</span>
+                </header>
+                <h3 class="topic-title">Execution Infrastructure</h3>
+                <p class="topic-lead">
+                  Engineering and operational management
+                  of DSRT execution environments.
+                </p>
+                <ul class="topic-points">
+                  <li>Develop runtime systems, resource management, task execution, and failure-handling mechanisms.</li>
+                  <li>Monitor system performance, availability, execution behaviour, and operational reliability.</li>
+                </ul>
+              </article>
+
+              <article class="topic-panel" aria-hidden="true">
+                <header class="topic-top">
+                  <span>Engineering</span>
+                  <span><b>04</b> / 04</span>
+                </header>
+                <h3 class="topic-title">Research Administration</h3>
+                <p class="topic-lead">
+                  Centralised management of research programmes
+                  and technical records.
+                </p>
+                <ul class="topic-points">
+                  <li>Maintain project documentation, experiment histories, review procedures, and approval records.</li>
+                  <li>Ensure traceability across research activities, engineering decisions, and documented findings.</li>
+                </ul>
+              </article>
+            </div>
+          </div>
+        </div>
+
+        <div class="stage-foot wrap">
+          <div class="progress">
+            <button class="seg" type="button" data-goto="0">
+              <span class="seg-label"><i>01</i><em>Internal Experiments</em></span>
+              <span class="seg-bar"><span class="seg-fill"></span></span>
+            </button>
+
+            <button class="seg" type="button" data-goto="1">
+              <span class="seg-label"><i>02</i><em>Architecture Governance</em></span>
+              <span class="seg-bar"><span class="seg-fill"></span></span>
+            </button>
+
+            <button class="seg" type="button" data-goto="2">
+              <span class="seg-label"><i>03</i><em>Execution Infrastructure</em></span>
+              <span class="seg-bar"><span class="seg-fill"></span></span>
+            </button>
+
+            <button class="seg" type="button" data-goto="3">
+              <span class="seg-label"><i>04</i><em>Research Administration</em></span>
+              <span class="seg-bar"><span class="seg-fill"></span></span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================
+         CHAPTER 03 — INTELLIGENCE INFRASTRUCTURE
+         =================================================================== -->
+
+    <section class="chapter" id="infrastructure" data-side="left">
+      <div class="wrap chapter-inner">
+        <div class="chapter-num reveal" aria-hidden="true">03</div>
+
+        <div class="chapter-body">
+          <span class="label reveal">Environment 03</span>
+
+          <h2 class="chapter-title reveal">
+            Intelligence<br>Infrastructure
+          </h2>
+
+          <p class="chapter-copy reveal">
+            Where computation becomes capability. Simulation, orchestration,
+            optimization and autonomous execution, built to operate
+            under real constraints.
+          </p>
+
+          <div class="chapter-rule reveal"></div>
+        </div>
+      </div>
+    </section>
+
+    <section
+      class="env"
+      id="infrastructure-stage"
+      data-env="infrastructure"
+      data-name="Intelligence Infrastructure"
+      data-side="left"
+      style="--steps:4"
+    >
+      <div class="env-stage">
+        <div class="env-bg" aria-hidden="true">
+          <div class="bg-slide" style="--img: url('assets/infrastructure-01.jpg'), url('https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1920&q=70');"></div>
+          <div class="bg-slide" style="--img: url('assets/infrastructure-02.jpg'), url('https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=1920&q=70');"></div>
+          <div class="bg-slide" style="--img: url('assets/infrastructure-03.jpg'), url('https://images.unsplash.com/photo-1639322537228-f710d846310a?auto=format&fit=crop&w=1920&q=70');"></div>
+          <div class="bg-slide" style="--img: url('assets/infrastructure-04.jpg'), url('https://images.unsplash.com/photo-1624953587687-daf255b6b80a?auto=format&fit=crop&w=1920&q=70');"></div>
+        </div>
+
+        <div class="env-shade" aria-hidden="true"></div>
+        <div class="env-edge top" aria-hidden="true"></div>
+        <div class="env-edge bottom" aria-hidden="true"></div>
+
+        <div class="stage-head wrap">
+          <span class="stage-env">Environment 03 — Intelligence Infrastructure</span>
+          <span class="stage-count"><b data-count>01</b> / 04</span>
+        </div>
+
+        <div class="env-layout wrap">
+          <nav class="wheel" aria-label="Intelligence Infrastructure topics">
+            <span class="wheel-arc" aria-hidden="true"></span>
+
+            <button class="wheel-item" type="button" data-goto="0">
+              <span class="wi-num">01</span>
+              <span class="wi-title">Simulation Engines</span>
+            </button>
+
+            <button class="wheel-item" type="button" data-goto="1">
+              <span class="wi-num">02</span>
+              <span class="wi-title">Orchestration</span>
+            </button>
+
+            <button class="wheel-item" type="button" data-goto="2">
+              <span class="wi-num">03</span>
+              <span class="wi-title">Computational Optimization</span>
+            </button>
+
+            <button class="wheel-item" type="button" data-goto="3">
+              <span class="wi-num">04</span>
+              <span class="wi-title">Autonomous Systems</span>
+            </button>
+          </nav>
+
+          <div class="info">
+            <div class="info-card">
+              <article class="topic-panel" aria-hidden="false">
+                <header class="topic-top">
+                  <span>Intelligence Infrastructure</span>
+                  <span><b>01</b> / 04</span>
+                </header>
+                <h3 class="topic-title">Simulation Engines</h3>
+                <p class="topic-lead">
+                  Computational environments for modelling
+                  and evaluating system behaviour.
+                </p>
+                <ul class="topic-points">
+                  <li>Define execution scenarios, resource constraints, and variable operating conditions.</li>
+                  <li>Compare simulated outcomes with measured results to assess model accuracy.</li>
+                </ul>
+              </article>
+
+              <article class="topic-panel" aria-hidden="true">
+                <header class="topic-top">
+                  <span>Intelligence Infrastructure</span>
+                  <span><b>02</b> / 04</span>
+                </header>
+                <h3 class="topic-title">Orchestration</h3>
+                <p class="topic-lead">
+                  Coordination and control of models, services,
+                  tools, and computational workloads.
+                </p>
+                <ul class="topic-points">
+                  <li>Manage task scheduling, execution dependencies, routing, and distributed processes.</li>
+                  <li>Control resource allocation, execution state, and recovery across interconnected systems.</li>
+                </ul>
+              </article>
+
+              <article class="topic-panel" aria-hidden="true">
+                <header class="topic-top">
+                  <span>Intelligence Infrastructure</span>
+                  <span><b>03</b> / 04</span>
+                </header>
+                <h3 class="topic-title">Computational Optimization</h3>
+                <p class="topic-lead">
+                  Research and implementation of methods
+                  for improving computational performance.
+                </p>
+                <ul class="topic-points">
+                  <li>Evaluate resource allocation, execution paths, memory consumption, and processing costs.</li>
+                  <li>Measure optimization against defined performance, reliability, and cost constraints.</li>
+                </ul>
+              </article>
+
+              <article class="topic-panel" aria-hidden="true">
+                <header class="topic-top">
+                  <span>Intelligence Infrastructure</span>
+                  <span><b>04</b> / 04</span>
+                </header>
+                <h3 class="topic-title">Autonomous Systems</h3>
+                <p class="topic-lead">
+                  Development of systems capable of planning
+                  and executing multi-step operations.
+                </p>
+                <ul class="topic-points">
+                  <li>Implement task decomposition, tool interaction, state management, and execution control.</li>
+                  <li>Evaluate completion accuracy, operational reliability, and recovery under changing conditions.</li>
+                </ul>
+              </article>
+            </div>
+          </div>
+        </div>
+
+        <div class="stage-foot wrap">
+          <div class="progress">
+            <button class="seg" type="button" data-goto="0">
+              <span class="seg-label"><i>01</i><em>Simulation Engines</em></span>
+              <span class="seg-bar"><span class="seg-fill"></span></span>
+            </button>
+
+            <button class="seg" type="button" data-goto="1">
+              <span class="seg-label"><i>02</i><em>Orchestration</em></span>
+              <span class="seg-bar"><span class="seg-fill"></span></span>
+            </button>
+
+            <button class="seg" type="button" data-goto="2">
+              <span class="seg-label"><i>03</i><em>Computational Optimization</em></span>
+              <span class="seg-bar"><span class="seg-fill"></span></span>
+            </button>
+
+            <button class="seg" type="button" data-goto="3">
+              <span class="seg-label"><i>04</i><em>Autonomous Systems</em></span>
+              <span class="seg-bar"><span class="seg-fill"></span></span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =====================================================================
+       UPDATED FOOTER
+       Full-width reference layout, contained within one viewport.
+       ===================================================================== -->
+
+  <footer class="footer" id="footer">
+    <div class="footer-shell wrap">
+      <h2 class="sr-only">DSRT LABS information and links</h2>
+
+      <div class="footer-main">
+        <div class="footer-left">
+          <a
+            class="footer-brand"
+            href="index.html"
+            aria-label="DSRT LABS — home"
+          >
+            <span class="footer-logo-tile" aria-hidden="true">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="m6.5 6 6 6-6 6"></path>
+                <path d="m12 6 6 6-6 6"></path>
+              </svg>
+            </span>
+
+            <span class="footer-brand-copy">
+              <span class="footer-brand-name">DSRT LABS</span>
+              <span class="footer-brand-tagline">Intelligence at scientific scale.</span>
+            </span>
+          </a>
+
+          <div class="footer-description">
+            <p class="footer-copy">
+              Scientific AI systems. Research defines the problems,
+              engineering builds the mechanisms, and intelligence
+              infrastructure turns computation into operational capability.
+            </p>
+          </div>
+
+          <div class="footer-legal">
+            <p class="footer-copyright">
+              © <span data-year>2026</span> DSRT Labs Technologies Inc.<br>
+              All rights reserved.
+            </p>
+          </div>
+
+          <div class="footer-cookie-row">
+            <button
+              class="footer-cookie"
+              type="button"
+              data-open="cookie"
+            >
+              Cookie Settings <sup aria-hidden="true">↗</sup>
+            </button>
+          </div>
+
+          <!-- Replace these homepage URLs with your real social profiles. -->
+          <div class="footer-socials" aria-label="Social profiles">
+            <a
+              href="https://www.youtube.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >YouTube</a>
+
+            <a
+              href="https://x.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >X</a>
+
+            <a
+              href="https://www.linkedin.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >LinkedIn</a>
+
+            <a
+              href="https://github.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >GitHub</a>
+          </div>
+        </div>
+
+        <nav class="footer-right" aria-label="Footer navigation">
+          <div class="footer-link-group">
+            <h3 class="footer-group-title">Environments</h3>
+
+            <ul class="footer-links">
+              <li>
+                <a href="#research">
+                  <span class="footer-link-index" aria-hidden="true">01</span>
+                  <span class="footer-link-text">Research</span>
+                </a>
+              </li>
+              <li>
+                <a href="#engineering">
+                  <span class="footer-link-index" aria-hidden="true">02</span>
+                  <span class="footer-link-text">Engineering</span>
+                </a>
+              </li>
+              <li>
+                <a href="#infrastructure">
+                  <span class="footer-link-index" aria-hidden="true">03</span>
+                  <span class="footer-link-text">Intelligence Infrastructure</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="footer-link-group">
+            <h3 class="footer-group-title">Navigate</h3>
+
+            <ul class="footer-links">
+              <li>
+                <a href="index.html">
+                  <span class="footer-link-index" aria-hidden="true">→</span>
+                  <span class="footer-link-text">Home</span>
+                </a>
+              </li>
+              <li>
+                <a href="#home">
+                  <span class="footer-link-index" aria-hidden="true">→</span>
+                  <span class="footer-link-text">Top</span>
+                </a>
+              </li>
+              <li>
+                <a href="#environments">
+                  <span class="footer-link-index" aria-hidden="true">→</span>
+                  <span class="footer-link-text">Explore</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="footer-link-group">
+            <h3 class="footer-group-title">Contact</h3>
+
+            <ul class="footer-links">
+              <li>
+                <a href="mailto:jisu@dsrtai.com">
+                  <span class="footer-link-index" aria-hidden="true">→</span>
+                  <span class="footer-link-text">jisu@dsrtai.com</span>
+                </a>
+              </li>
+              <li>
+                <a href="mailto:dsrt.systems@gmail.com">
+                  <span class="footer-link-index" aria-hidden="true">→</span>
+                  <span class="footer-link-text">dsrt.systems@gmail.com</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+
+      <div class="footer-wordmark" aria-hidden="true">
+        <svg
+          viewBox="0 0 1400 180"
+          preserveAspectRatio="none"
+          focusable="false"
+        >
+          <text
+            x="0"
+            y="172"
+            textLength="1400"
+            lengthAdjust="spacingAndGlyphs"
+          >DSRT LABS</text>
+        </svg>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="footer-bottom-brand">
+          DSRT LABS <span>— Scientific AI Systems</span>
+        </p>
+
+        <p class="footer-bottom-system">
+          Research • Engineering • Intelligence Infrastructure
+        </p>
+
+        <a class="footer-back-top" href="#home">
+          Back to top ↑
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/compiled/pages/labs_html-inline-2.js"></script>
+  <script src="/compiled/assets/js/professional-motion.js" defer></script>
+</body>
+</html>

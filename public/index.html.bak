@@ -1,0 +1,5984 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dsrt AI — Intelligence at your budget</title>
+    <meta
+      name="description"
+      content="Dsrt AI amplifies the AI providers you already use — more quality, lower cost, verified results. Pre-register today."
+    />
+
+    <!-- 🟡 PLACEHOLDER [SITE ICONS] -->
+    <link rel="icon" type="image/png" href="assets/dsrt-logo.png" />
+    <link rel="apple-touch-icon" href="assets/dsrt-logo.png" />
+
+    <!-- 🟡 PLACEHOLDER [SOCIAL PREVIEW] — use an absolute https:// URL in production -->
+    <meta property="og:title" content="Dsrt AI — Intelligence at your budget" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="assets/images/og-image.png" />
+
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Orbitron:wght@400;500;600;700;800&family=Share+Tech+Mono&display=swap");
+
+      /* =====================================================================
+   ASSET MANIFEST (placeholder paths — edit here)
+   ---------------------------------------------------------------------
+   DSRT AI LOGO (nav, footer, dashboard, panels, core)
+     assets/dsrt-logo.png
+   BACKGROUNDS
+     BG 1  assets/images/backgrounds/bg-1-hero.jpg      page 1 (hero + dashboard)
+     BG 2  assets/images/backgrounds/bg-2-story.jpg     pages 2–5 (shared, 1920×1020 native)
+     BG 3  assets/images/backgrounds/bg-3-footer.jpg    footer (RAW — no veil, no blur)
+   SECTION IMAGES (.png → .webp → .jpg → .jpeg)
+     assets/images/sections/build.png
+     assets/images/sections/principle.png
+     assets/images/sections/intelligence.png
+     assets/images/sections/verification.png
+   PROVIDER ICONS (.svg → .png → placeholder)
+     assets/icons/providers/<provider-key>.svg|png
+     assets/icons/placeholder.svg|png
+   Run listAssetPaths() in the console for the full generated list.
+   ===================================================================== */
+
+      :root {
+        --bg-1-hero: url("assets/images/backgrounds/bg-1-hero.jpg");
+        --bg-2-story: url("assets/images/backgrounds/bg-2-story.jpg");
+        --bg-3-footer: url("assets/images/backgrounds/bg-3-footer.jpg");
+
+        --surface-primary: #ffffff;
+        --surface-secondary: #f8fafc;
+        --text-primary: #0f172a;
+        --text-secondary: #475569;
+        --text-tertiary: #94a3b8;
+        --border-light: #e2e8f0;
+
+        --blue-title: #1d4ed8;
+        --blue-accent: #2563eb;
+        --blue-soft: #bfdbfe;
+        --body-ink: #334155;
+
+        --app-bg: #070707;
+        --app-sidebar: #0d0d0d;
+        --app-card: #121212;
+        --app-card-hover: #191919;
+        --app-border: rgba(255, 255, 255, 0.09);
+        --app-border-hover: rgba(255, 255, 255, 0.18);
+        --app-text: #f5f5f5;
+        --app-text-muted: #a3a3a3;
+        --app-text-dim: #737373;
+
+        --brand-blue-bg: rgba(255, 255, 255, 0.08);
+        --brand-red: #f87171;
+        --brand-red-bg: rgba(248, 113, 113, 0.1);
+        --brand-amber: #f59e0b;
+        --brand-amber-bg: rgba(245, 158, 11, 0.08);
+        --brand-purple: #a78bfa;
+        --brand-purple-bg: rgba(167, 139, 250, 0.1);
+
+        --nav-bg: #0a0a0a;
+        --nav-border: rgba(255, 255, 255, 0.08);
+        --nav-text-muted: #a3a3a3;
+
+        --footer-ink: #111827;
+        --footer-muted: #6b7280;
+        --footer-line: rgba(17, 24, 39, 0.18);
+
+        --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+        --robo-eyebrow: 15px;
+        --robo-body: 18px;
+        --robo-body-lh: 1.85;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+        scroll-snap-type: y proximity;
+        scroll-padding-top: 64px;
+        overflow-x: hidden;
+        width: 100%;
+      }
+
+      body {
+        font-family:
+          "Inter",
+          -apple-system,
+          BlinkMacSystemFont,
+          sans-serif;
+        background-color: var(--surface-primary);
+        color: var(--text-primary);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        overflow-x: hidden;
+        font-size: 14px;
+        line-height: 1.5;
+        width: 100%;
+        max-width: 100vw;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5 {
+        letter-spacing: -0.02em;
+        font-weight: 600;
+        overflow-wrap: break-word;
+      }
+
+      .mono {
+        font-family: "JetBrains Mono", monospace;
+      }
+
+      button,
+      a,
+      .setting-pill,
+      .dropdown-item,
+      .sidebar-item {
+        -webkit-tap-highlight-color: transparent;
+      }
+      button {
+        font-family: inherit;
+      }
+
+      button:focus-visible,
+      a:focus-visible,
+      .setting-pill:focus-visible,
+      .dropdown-item:focus-visible,
+      .sidebar-item:focus-visible {
+        outline: 2px solid rgba(255, 255, 255, 0.65);
+        outline-offset: 2px;
+      }
+
+      ::-webkit-scrollbar {
+        width: 5px;
+        height: 5px;
+      }
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 3px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: rgba(255, 255, 255, 0.2);
+      }
+
+      .page {
+        position: relative;
+        scroll-snap-align: start;
+        scroll-snap-stop: normal;
+      }
+
+      /* ================= NAVIGATION ================= */
+
+      .nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 64px;
+        background: transparent;
+        border-bottom: 1px solid transparent;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 40px;
+        z-index: 1000;
+        transition:
+          background 0.35s ease,
+          border-color 0.35s ease,
+          backdrop-filter 0.35s ease;
+      }
+
+      .nav.scrolled {
+        background: #0a0a0a;
+        border-bottom-color: var(--nav-border);
+        backdrop-filter: blur(20px) saturate(140%);
+        -webkit-backdrop-filter: blur(20px) saturate(140%);
+      }
+
+      .nav-logo {
+        font-size: 19px;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: var(--text-primary);
+        text-decoration: none;
+        letter-spacing: -0.02em;
+        transition: color 0.35s ease;
+        flex-shrink: 0;
+      }
+
+      .nav.scrolled .nav-logo {
+        color: #ffffff;
+      }
+
+      .nav-logo .brand-icon-slot {
+        width: 28px;
+        height: 28px;
+        border-radius: 7px;
+        background: linear-gradient(135deg, #2a2a2a, #0a0a0a);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        overflow: hidden;
+      }
+
+      .nav-logo .brand-icon-slot img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        padding: 12%;
+        display: block;
+      }
+
+      .nav-menu {
+        display: flex;
+        gap: 32px;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .nav-link {
+        color: var(--text-secondary);
+        font-size: 13.5px;
+        font-weight: 500;
+        text-decoration: none;
+        transition: color 0.35s ease;
+        white-space: nowrap;
+      }
+
+      .nav-link:hover {
+        color: var(--text-primary);
+      }
+      .nav.scrolled .nav-link {
+        color: var(--nav-text-muted);
+      }
+      .nav.scrolled .nav-link:hover {
+        color: #ffffff;
+      }
+
+      .nav-actions {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        flex-shrink: 0;
+      }
+
+      .btn-get-started {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 9px 20px;
+        border-radius: 4px;
+        background: var(--text-primary);
+        color: #ffffff;
+        font-size: 13px;
+        font-weight: 600;
+        text-decoration: none;
+        white-space: nowrap;
+        transition:
+          background 0.35s ease,
+          color 0.35s ease,
+          transform 0.2s ease,
+          box-shadow 0.2s ease;
+      }
+
+      .btn-get-started:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 6px 18px rgba(15, 23, 42, 0.18);
+      }
+      .nav.scrolled .btn-get-started {
+        background: #ffffff;
+        color: #0a0a0a;
+      }
+      .nav.scrolled .btn-get-started:hover {
+        box-shadow: 0 6px 18px rgba(255, 255, 255, 0.15);
+      }
+
+      /* ================= PAGE DOTS ================= */
+
+      .page-dots {
+        position: fixed;
+        right: 14px;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 900;
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        padding: 8px 4px;
+        border-radius: 999px;
+        background: rgba(10, 10, 10, 0.55);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .page-dots a {
+        position: relative;
+        width: 20px;
+        height: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+      }
+
+      .page-dots a::after {
+        content: "";
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.35);
+        transition:
+          transform 0.25s,
+          background 0.25s;
+      }
+
+      .page-dots a.active::after {
+        background: #ffffff;
+        transform: scale(1.45);
+      }
+      .page-dots a:hover::after {
+        background: #ffffff;
+      }
+
+      .pd-label {
+        position: absolute;
+        right: calc(100% + 12px);
+        top: 50%;
+        transform: translateY(-50%) translateX(6px);
+        opacity: 0;
+        pointer-events: none;
+        white-space: nowrap;
+        font-family: "Share Tech Mono", monospace;
+        font-size: 12px;
+        letter-spacing: 0.6px;
+        background: #0a0a0a;
+        color: #ffffff;
+        padding: 5px 10px;
+        border-radius: 6px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        transition:
+          opacity 0.2s,
+          transform 0.2s;
+      }
+
+      .page-dots a:hover .pd-label,
+      .page-dots a:focus-visible .pd-label {
+        opacity: 1;
+        transform: translateY(-50%) translateX(0);
+      }
+
+      /* ================= PAGE 1 — HERO + DASHBOARD ================= */
+
+      .page-top {
+        background: #f4f7fb;
+        overflow: hidden;
+        padding-bottom: 110px;
+        isolation: isolate;
+      }
+
+      .page-bg {
+        position: absolute;
+        inset: -10% 0 0 0;
+        z-index: 0;
+        background:
+          var(--bg-1-hero) center / cover no-repeat,
+          radial-gradient(
+            1200px 600px at 15% 0%,
+            rgba(37, 99, 235, 0.16),
+            transparent 60%
+          ),
+          radial-gradient(
+            900px 500px at 85% 10%,
+            rgba(167, 139, 250, 0.18),
+            transparent 60%
+          ),
+          radial-gradient(
+            700px 500px at 50% 90%,
+            rgba(15, 23, 42, 0.08),
+            transparent 60%
+          ),
+          linear-gradient(180deg, #ffffff 0%, #eef3fb 60%, #f8fafc 100%);
+        will-change: transform;
+        transform: translate3d(0, 0, 0);
+      }
+
+      .page-bg-blur {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        height: 62%;
+        z-index: 1;
+        backdrop-filter: blur(22px) saturate(120%);
+        -webkit-backdrop-filter: blur(22px) saturate(120%);
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.55) 0%,
+          rgba(255, 255, 255, 0.35) 45%,
+          rgba(255, 255, 255, 0) 100%
+        );
+        -webkit-mask-image: linear-gradient(
+          180deg,
+          #000 0%,
+          #000 55%,
+          transparent 100%
+        );
+        mask-image: linear-gradient(
+          180deg,
+          #000 0%,
+          #000 55%,
+          transparent 100%
+        );
+        pointer-events: none;
+      }
+
+      .page-top > .hero-section,
+      .page-top > .demo-section {
+        position: relative;
+        z-index: 2;
+      }
+
+      .hero-section {
+        padding-top: 128px;
+        padding-bottom: 60px;
+        text-align: center;
+        position: relative;
+      }
+      .hero-content {
+        max-width: 680px;
+        margin: 0 auto;
+        padding: 0 24px;
+      }
+
+      .hero-title {
+        font-size: clamp(32px, 4.5vw, 50px);
+        font-weight: 700;
+        line-height: 1.1;
+        margin-bottom: 16px;
+        letter-spacing: -0.03em;
+        color: var(--text-primary);
+      }
+
+      .hero-tagline {
+        font-family: Georgia, "Times New Roman", serif;
+        font-style: italic;
+        font-weight: 600;
+        font-size: clamp(18px, 2.2vw, 24px);
+        color: #181818;
+        margin: 0 0 32px;
+      }
+
+      .hero-actions {
+        display: flex;
+        gap: 12px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .btn-hero-primary {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--text-primary);
+        color: #ffffff;
+        padding: 11px 24px;
+        border-radius: 10px;
+        border: none;
+        font-size: 14px;
+        font-weight: 600;
+        text-decoration: none;
+        cursor: pointer;
+        transition: all 0.2s;
+        box-shadow:
+          0 1px 3px rgba(15, 23, 42, 0.1),
+          0 6px 20px rgba(15, 23, 42, 0.1);
+      }
+
+      .btn-hero-primary:hover {
+        transform: translateY(-1px);
+        box-shadow:
+          0 2px 6px rgba(15, 23, 42, 0.15),
+          0 10px 30px rgba(15, 23, 42, 0.15);
+      }
+
+      .btn-hero-secondary {
+        background: rgba(255, 255, 255, 0.85);
+        color: var(--text-primary);
+        padding: 11px 24px;
+        border-radius: 10px;
+        border: 1px solid var(--border-light);
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: 0.2s;
+      }
+
+      .btn-hero-secondary:hover {
+        background: #f8fafc;
+        border-color: #cbd5e1;
+      }
+
+      /* ================= DEMO ================= */
+
+      .demo-section {
+        padding: 0 24px;
+      }
+      .demo-container {
+        max-width: 1260px;
+        margin: 0 auto;
+        perspective: 1200px;
+      }
+
+      .mac-window {
+        background: var(--app-bg);
+        border-radius: 14px;
+        overflow: hidden;
+        box-shadow:
+          0 0 0 1px rgba(255, 255, 255, 0.06) inset,
+          0 0 0 1px rgba(0, 0, 0, 0.05),
+          0 25px 50px -12px rgba(0, 0, 0, 0.4),
+          0 50px 100px -20px rgba(0, 0, 0, 0.25);
+        transform: translateY(20px);
+        opacity: 0;
+        animation: windowEntrance 0.8s var(--ease-out-expo) 0.2s forwards;
+      }
+
+      @keyframes windowEntrance {
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      .mac-titlebar {
+        height: 38px;
+        background: #080808;
+        display: flex;
+        align-items: center;
+        padding: 0 16px;
+        gap: 7px;
+        border-bottom: 1px solid var(--app-border);
+        position: relative;
+        user-select: none;
+      }
+
+      .mac-titlebar-center {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 11px;
+        font-weight: 500;
+        color: var(--app-text-dim);
+        white-space: nowrap;
+      }
+
+      .mac-titlebar-center .brand-icon-slot-mini {
+        width: 14px;
+        height: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0.85;
+      }
+      .mac-titlebar-center .brand-icon-slot-mini img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        display: block;
+      }
+
+      .mac-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+      }
+      .mac-dot.close {
+        background: #ed6a5e;
+      }
+      .mac-dot.min {
+        background: #f4bf4f;
+      }
+      .mac-dot.max {
+        background: #61c554;
+      }
+
+      .app-layout {
+        display: flex;
+        height: 720px;
+        background: var(--app-bg);
+      }
+
+      .app-sidebar {
+        width: 240px;
+        background: var(--app-sidebar);
+        border-right: 1px solid var(--app-border);
+        padding: 14px 10px 10px;
+        display: flex;
+        flex-direction: column;
+        flex-shrink: 0;
+      }
+
+      .sidebar-brand {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 4px 10px 16px;
+        margin-bottom: 4px;
+      }
+
+      .sidebar-brand-icon {
+        width: 24px;
+        height: 24px;
+        background: linear-gradient(135deg, #3f3f3f, #050505);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        flex-shrink: 0;
+      }
+
+      .sidebar-brand-icon img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        padding: 14%;
+        display: block;
+      }
+      .sidebar-brand-text {
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--app-text);
+      }
+
+      .sidebar-scroll {
+        flex: 1;
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 1px;
+        overflow-y: auto;
+        padding-right: 2px;
+      }
+
+      .sidebar-label {
+        font-size: 9px;
+        font-weight: 700;
+        color: var(--app-text-dim);
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+        margin: 14px 0 4px 10px;
+      }
+
+      .sidebar-item {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        padding: 7px 10px;
+        border-radius: 7px;
+        color: var(--app-text-muted);
+        font-size: 12px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.15s;
+        position: relative;
+      }
+
+      .sidebar-item:hover {
+        background: rgba(255, 255, 255, 0.05);
+        color: var(--app-text);
+      }
+      .sidebar-item.active {
+        background: var(--brand-blue-bg);
+        color: var(--app-text);
+      }
+      .sidebar-item .si-icon {
+        width: 15px;
+        height: 15px;
+        flex-shrink: 0;
+      }
+
+      .sidebar-bottom {
+        border-top: 1px solid var(--app-border);
+        padding-top: 10px;
+        margin-top: 8px;
+        display: flex;
+        flex-direction: column;
+        gap: 1px;
+      }
+
+      .sidebar-profile {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 8px 10px;
+        border-radius: 7px;
+        cursor: pointer;
+        transition: 0.15s;
+      }
+      .sidebar-profile:hover {
+        background: rgba(255, 255, 255, 0.04);
+      }
+
+      .profile-avatar {
+        width: 30px;
+        height: 30px;
+        border-radius: 8px;
+        background: linear-gradient(135deg, #4b4b4b, #111111);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 10px;
+        font-weight: 700;
+        color: white;
+        flex-shrink: 0;
+      }
+
+      .profile-info {
+        flex: 1;
+        min-width: 0;
+      }
+      .profile-name {
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--app-text);
+      }
+      .profile-email {
+        font-size: 10px;
+        color: var(--app-text-dim);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .app-main {
+        flex: 1;
+        padding: 18px 24px;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        min-width: 0;
+      }
+
+      .settings-row {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 16px;
+        flex-wrap: wrap;
+      }
+
+      .setting-pill {
+        flex: 1;
+        min-width: 140px;
+        background: var(--app-card);
+        border: 1px solid var(--app-border);
+        border-radius: 9px;
+        padding: 7px 12px;
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        cursor: pointer;
+        transition: all 0.15s;
+        position: relative;
+      }
+
+      .setting-pill:hover {
+        border-color: var(--app-border-hover);
+        background: var(--app-card-hover);
+      }
+
+      .sp-label {
+        font-size: 9px;
+        font-weight: 700;
+        color: var(--app-text-dim);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+      .sp-value {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 6px;
+      }
+      .sp-val-left {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        font-size: 12px;
+        font-weight: 500;
+        color: var(--app-text);
+        min-width: 0;
+      }
+      .sp-val-left > span {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        min-width: 0;
+      }
+      .sp-chevron {
+        width: 12px;
+        height: 12px;
+        color: var(--app-text-dim);
+        flex-shrink: 0;
+      }
+
+      .route-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        border: 1px solid rgba(255, 255, 255, 0.6);
+        background: #ffffff;
+        flex-shrink: 0;
+      }
+
+      .route-dot.off {
+        background: transparent;
+      }
+
+      /* DROPDOWN */
+
+      .dropdown-wrapper {
+        position: relative;
+      }
+
+      .dropdown-menu {
+        position: absolute;
+        top: calc(100% + 4px);
+        left: 0;
+        background: #171717;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 10px;
+        padding: 6px;
+        z-index: 200;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+        max-height: 380px;
+        overflow-y: auto;
+        display: none;
+        min-width: 280px;
+      }
+
+      .dropdown-menu.show {
+        display: block;
+      }
+
+      .dropdown-section-label {
+        font-size: 9px;
+        font-weight: 700;
+        color: var(--app-text-dim);
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+        padding: 8px 10px 4px;
+        margin-top: 2px;
+      }
+
+      .dropdown-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 7px 10px;
+        border-radius: 6px;
+        color: var(--app-text-muted);
+        font-size: 12px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: 0.12s;
+      }
+
+      .dropdown-item:hover {
+        background: rgba(255, 255, 255, 0.06);
+        color: var(--app-text);
+      }
+      .dropdown-item.selected {
+        background: var(--brand-blue-bg);
+        color: var(--app-text);
+      }
+
+      .dropdown-item .di-icon {
+        width: 20px;
+        height: 20px;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .dropdown-item .di-name {
+        flex: 1;
+      }
+      .dropdown-item .di-sub {
+        font-size: 9.5px;
+        color: var(--app-text-dim);
+        margin-top: 2px;
+      }
+      .dropdown-divider {
+        height: 1px;
+        background: rgba(255, 255, 255, 0.06);
+        margin: 4px 0;
+      }
+
+      /* ICON SLOTS */
+
+      .provider-icon-slot {
+        width: 20px;
+        height: 20px;
+        border-radius: 5px;
+        background: linear-gradient(135deg, #2a2a2a, #0a0a0a);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #e5e5e5;
+        flex-shrink: 0;
+        overflow: hidden;
+      }
+
+      .provider-icon-slot .icon-img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        padding: 18%;
+        display: block;
+      }
+      .provider-icon-slot.small {
+        width: 14px;
+        height: 14px;
+        border-radius: 3px;
+      }
+      .provider-icon-slot.small .icon-img {
+        padding: 8%;
+      }
+      .provider-icon-slot.medium {
+        width: 16px;
+        height: 16px;
+        border-radius: 4px;
+      }
+      .provider-icon-slot.medium .icon-img {
+        padding: 10%;
+      }
+      .provider-icon-slot.large {
+        width: 22px;
+        height: 22px;
+        border-radius: 5px;
+      }
+      .provider-icon-slot.large .icon-img {
+        padding: 12%;
+      }
+      .provider-icon-slot.xl {
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+      }
+      .provider-icon-slot.xl .icon-img {
+        padding: 16%;
+      }
+
+      /* COMPARISON HEADER */
+
+      .comparison-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 12px;
+        gap: 16px;
+        flex-wrap: wrap;
+      }
+      .ch-left {
+        flex: 1;
+        min-width: 200px;
+      }
+      .ch-title-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 4px;
+      }
+      .ch-title {
+        font-size: 16px;
+        font-weight: 600;
+        color: white;
+      }
+
+      .ch-status {
+        font-size: 9px;
+        font-weight: 700;
+        padding: 2px 8px;
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.08);
+        color: #e5e5e5;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+      }
+
+      .ch-status .dot {
+        width: 4px;
+        height: 4px;
+        background: currentColor;
+        border-radius: 50%;
+      }
+      .ch-meta {
+        font-size: 11px;
+        color: var(--app-text-dim);
+      }
+      .ch-right {
+        display: flex;
+        gap: 16px;
+        align-items: flex-start;
+        flex-wrap: wrap;
+      }
+      .ch-metric-mini {
+        text-align: center;
+        padding: 4px 12px;
+        border-left: 1px solid var(--app-border);
+      }
+      .ch-metric-mini:first-child {
+        border-left: none;
+      }
+      .ch-metric-label {
+        font-size: 8px;
+        font-weight: 700;
+        color: var(--app-text-dim);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 2px;
+      }
+      .ch-metric-val {
+        font-size: 18px;
+        font-weight: 700;
+        color: white;
+        font-family: "JetBrains Mono", monospace;
+      }
+      .ch-metric-val.hi {
+        color: #ffffff;
+      }
+      .ch-metric-val.blue {
+        color: var(--app-text);
+      }
+      .ch-metric-change {
+        font-size: 9px;
+        color: #d4d4d4;
+        font-weight: 600;
+      }
+
+      .app-tabs {
+        display: flex;
+        background: var(--app-card);
+        border-radius: 6px;
+        padding: 2px;
+        border: 1px solid var(--app-border);
+        margin-bottom: 12px;
+        width: fit-content;
+        max-width: 100%;
+      }
+
+      .app-tab {
+        padding: 4px 14px;
+        background: transparent;
+        border: none;
+        color: var(--app-text-muted);
+        font-size: 11px;
+        font-weight: 600;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: 0.15s;
+      }
+
+      .app-tab.active {
+        background: #2a2a2a;
+        color: white;
+      }
+      .app-tab:hover:not(.active) {
+        color: var(--app-text);
+      }
+
+      /* COMPARISON GRID */
+
+      .comparison-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: minmax(0, 1fr);
+        gap: 14px;
+        flex: 1;
+        min-height: 0;
+        margin-bottom: 14px;
+      }
+
+      .panel-col {
+        background: var(--app-card);
+        border: 1px solid var(--app-border);
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
+        overflow: hidden;
+        transition: border-color 0.2s;
+      }
+
+      .panel-col:hover {
+        border-color: var(--app-border-hover);
+      }
+      .panel-col.amplified {
+        border-color: rgba(255, 255, 255, 0.16);
+      }
+      .panel-col.amplified:hover {
+        border-color: rgba(255, 255, 255, 0.3);
+      }
+
+      .panel-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 14px;
+        border-bottom: 1px solid var(--app-border);
+        background: rgba(0, 0, 0, 0.25);
+        flex-shrink: 0;
+        gap: 8px;
+      }
+
+      .panel-model {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        min-width: 0;
+      }
+      .panel-model-info {
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+      }
+      .panel-model-name {
+        color: var(--app-text);
+        font-weight: 600;
+        font-size: 12px;
+      }
+      .panel-model-sub {
+        color: var(--app-text-dim);
+        font-size: 9px;
+        font-weight: 500;
+      }
+      .panel-actions {
+        display: flex;
+        gap: 4px;
+        align-items: center;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+      }
+
+      .panel-badge {
+        font-size: 8px;
+        font-weight: 700;
+        padding: 2px 6px;
+        border-radius: 3px;
+        letter-spacing: 0.5px;
+      }
+      .badge-raw {
+        background: #1e2433;
+        color: var(--app-text-muted);
+      }
+      .badge-amp {
+        background: var(--brand-blue-bg);
+        color: var(--app-text);
+      }
+
+      .badge-done {
+        background: rgba(255, 255, 255, 0.08);
+        color: #e5e5e5;
+        display: flex;
+        align-items: center;
+        gap: 3px;
+      }
+
+      .badge-done .dot {
+        width: 4px;
+        height: 4px;
+        background: currentColor;
+        border-radius: 50%;
+      }
+
+      .panel-action-btn {
+        background: none;
+        border: none;
+        color: var(--app-text-dim);
+        cursor: pointer;
+        padding: 4px;
+        border-radius: 4px;
+        transition: 0.15s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .panel-action-btn:hover {
+        background: rgba(255, 255, 255, 0.05);
+        color: var(--app-text);
+      }
+      .panel-token-count {
+        font-size: 9px;
+        color: var(--app-text-dim);
+        font-family: "JetBrains Mono", monospace;
+        padding: 0 4px;
+      }
+
+      .panel-scroll-area {
+        flex: 1;
+        min-height: 0;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        padding: 16px;
+      }
+
+      .panel-content {
+        font-size: 12px;
+        line-height: 1.7;
+        color: #cbd5e1;
+      }
+      .panel-content h3 {
+        color: white;
+        font-size: 13px;
+        margin-bottom: 12px;
+        font-weight: 600;
+      }
+      .panel-content h4 {
+        color: white;
+        font-size: 12px;
+        margin: 18px 0 8px;
+        font-weight: 600;
+      }
+      .panel-content p {
+        margin-bottom: 10px;
+      }
+      .panel-content ul,
+      .panel-content ol {
+        margin-left: 20px;
+        margin-bottom: 12px;
+      }
+      .panel-content li {
+        margin-bottom: 5px;
+      }
+      .panel-content strong {
+        color: #e2e8f0;
+        font-weight: 600;
+      }
+      .panel-content table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 12px 0;
+        font-size: 11px;
+      }
+
+      .panel-content th {
+        text-align: left;
+        padding: 6px 10px;
+        background: rgba(255, 255, 255, 0.03);
+        border-bottom: 1px solid var(--app-border);
+        color: var(--app-text-muted);
+        font-weight: 600;
+        font-size: 10px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .panel-content td {
+        padding: 6px 10px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+        color: #cbd5e1;
+      }
+      .panel-content td.mono-val {
+        font-family: "JetBrains Mono", monospace;
+        color: white;
+      }
+
+      .callout {
+        background: rgba(255, 255, 255, 0.06);
+        border-left: 3px solid #e5e5e5;
+        padding: 10px 12px;
+        border-radius: 0 6px 6px 0;
+        margin: 14px 0;
+        font-size: 11px;
+        color: #e5e5e5;
+      }
+      .callout strong {
+        color: #ffffff;
+      }
+      .callout-warning {
+        background: var(--brand-amber-bg);
+        border-left: 3px solid var(--brand-amber);
+        padding: 10px 12px;
+        border-radius: 0 6px 6px 0;
+        margin: 14px 0;
+        font-size: 11px;
+        color: #fbbf24;
+      }
+      .callout-red {
+        background: var(--brand-red-bg);
+        border-left: 3px solid var(--brand-red);
+        padding: 10px 12px;
+        border-radius: 0 6px 6px 0;
+        margin: 14px 0;
+        font-size: 11px;
+        color: #fca5a5;
+      }
+
+      .calc-block {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid var(--app-border);
+        border-radius: 6px;
+        padding: 10px 14px;
+        margin: 10px 0;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 11px;
+        color: #e5e5e5;
+        white-space: pre-line;
+      }
+
+      .metric-highlight {
+        display: inline-flex;
+        flex-direction: column;
+        align-items: center;
+        background: var(--app-card);
+        border: 1px solid var(--app-border);
+        border-radius: 8px;
+        padding: 10px 18px;
+        margin: 8px 4px;
+        text-align: center;
+      }
+
+      .metric-highlight .mh-label-sm {
+        font-size: 8px;
+        font-weight: 700;
+        color: var(--app-text-dim);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+      .metric-highlight .mh-val-lg {
+        font-size: 22px;
+        font-weight: 700;
+        color: white;
+        font-family: "JetBrains Mono", monospace;
+      }
+      .metric-highlight .mh-val-lg.hi {
+        color: #ffffff;
+      }
+      .metric-highlight .mh-val-lg.blue {
+        color: white;
+      }
+      .metric-highlight .mh-val-lg.red {
+        color: var(--brand-red);
+      }
+      .metrics-row {
+        display: flex;
+        gap: 8px;
+        margin: 12px 0;
+        flex-wrap: wrap;
+      }
+
+      /* PROMPT COMPOSER */
+
+      .prompt-container {
+        width: 100%;
+      }
+      .attached-files {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 8px;
+        flex-wrap: wrap;
+      }
+
+      .attached-chip {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        background: var(--app-card);
+        border: 1px solid var(--app-border);
+        border-radius: 8px;
+        padding: 5px 10px;
+        font-size: 11px;
+        color: var(--app-text-muted);
+      }
+
+      .attached-chip .ac-icon {
+        width: 14px;
+        height: 14px;
+        color: var(--app-text);
+      }
+      .attached-chip .ac-status {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #ffffff;
+      }
+      .attached-chip .ac-remove {
+        width: 14px;
+        height: 14px;
+        cursor: pointer;
+        color: var(--app-text-dim);
+        transition: 0.15s;
+        border-radius: 3px;
+      }
+      .attached-chip .ac-remove:hover {
+        color: var(--brand-red);
+      }
+
+      .prompt-box {
+        background: var(--app-card);
+        border: 1px solid var(--app-border);
+        border-radius: 14px;
+        padding: 6px 10px 6px 8px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        transition: all 0.2s;
+        position: relative;
+      }
+
+      .prompt-box:focus-within {
+        border-color: rgba(255, 255, 255, 0.55);
+        box-shadow:
+          0 0 0 1px rgba(255, 255, 255, 0.12),
+          0 4px 20px rgba(0, 0, 0, 0.2);
+      }
+
+      .prompt-icon-btn {
+        background: none;
+        border: none;
+        color: var(--app-text-dim);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 6px;
+        border-radius: 7px;
+        transition: 0.15s;
+        flex-shrink: 0;
+        position: relative;
+      }
+
+      .prompt-icon-btn:hover {
+        background: rgba(255, 255, 255, 0.05);
+        color: var(--app-text);
+      }
+      .prompt-icon-btn.recording {
+        color: var(--brand-red);
+        animation: recordPulse 1.5s ease-in-out infinite;
+      }
+
+      @keyframes recordPulse {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.5;
+        }
+      }
+
+      .prompt-input {
+        flex: 1;
+        background: transparent;
+        border: none;
+        color: white;
+        font-size: 13px;
+        font-family: inherit;
+        outline: none;
+        padding: 7px 0;
+        min-width: 0;
+      }
+
+      .prompt-input::placeholder {
+        color: var(--app-text-dim);
+      }
+      .prompt-controls {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        flex-shrink: 0;
+      }
+
+      .model-selector-btn {
+        background: #1e1e1e;
+        color: var(--app-text-muted);
+        border: 1px solid var(--app-border);
+        border-radius: 7px;
+        padding: 5px 10px;
+        font-size: 10px;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        cursor: pointer;
+        transition: 0.15s;
+        letter-spacing: 0.3px;
+      }
+
+      .model-selector-btn:hover {
+        background: #2a2a2a;
+        color: white;
+        border-color: var(--app-border-hover);
+      }
+
+      .prompt-run-btn {
+        background: white;
+        color: #0f172a;
+        border: none;
+        border-radius: 8px;
+        padding: 7px 16px;
+        font-weight: 600;
+        font-size: 12px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        cursor: pointer;
+        transition: all 0.2s;
+        box-shadow: 0 2px 8px rgba(255, 255, 255, 0.08);
+      }
+
+      .prompt-run-btn:hover {
+        background: #f1f5f9;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(255, 255, 255, 0.12);
+      }
+
+      .attachment-menu {
+        position: absolute;
+        bottom: calc(100% + 8px);
+        left: 0;
+        background: #171717;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 12px;
+        padding: 8px;
+        z-index: 200;
+        box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5);
+        display: none;
+        min-width: 220px;
+      }
+
+      .attachment-menu.show {
+        display: block;
+      }
+
+      .attachment-menu-title {
+        font-size: 10px;
+        font-weight: 700;
+        color: var(--app-text-dim);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        padding: 4px 10px 8px;
+      }
+
+      .am-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 8px 10px;
+        border-radius: 7px;
+        cursor: pointer;
+        transition: 0.12s;
+        color: var(--app-text-muted);
+        font-size: 12px;
+        font-weight: 500;
+      }
+
+      .am-item:hover {
+        background: rgba(255, 255, 255, 0.05);
+        color: var(--app-text);
+      }
+
+      .am-item .am-icon {
+        width: 28px;
+        height: 28px;
+        border-radius: 7px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+
+      .am-item .am-info {
+        flex: 1;
+      }
+      .am-item .am-label {
+        font-size: 12px;
+        color: var(--app-text);
+        font-weight: 500;
+      }
+      .am-item .am-desc {
+        font-size: 9px;
+        color: var(--app-text-dim);
+      }
+
+      .am-icon-doc {
+        background: rgba(255, 255, 255, 0.1);
+        color: #ffffff;
+      }
+      .am-icon-img {
+        background: var(--brand-purple-bg);
+        color: var(--brand-purple);
+      }
+      .am-icon-data {
+        background: rgba(255, 255, 255, 0.08);
+        color: #e5e5e5;
+      }
+      .am-icon-code {
+        background: var(--brand-amber-bg);
+        color: var(--brand-amber);
+      }
+      .am-icon-url {
+        background: rgba(129, 140, 248, 0.1);
+        color: #a5b4fc;
+      }
+
+      /* ================= CTA BAND ================= */
+
+      .cta-band {
+        position: relative;
+        padding: 90px 24px 120px;
+        background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+      }
+
+      .cta-box {
+        position: relative;
+        max-width: 1260px;
+        margin: 0 auto;
+        padding: 64px;
+        background: #0a0a0a;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        border-radius: 8px;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: center;
+        gap: 48px;
+        overflow: hidden;
+        box-shadow: 0 30px 70px -30px rgba(15, 23, 42, 0.45);
+      }
+
+      .cta-stack {
+        display: grid;
+        min-width: 0;
+      }
+
+      .cta-line {
+        grid-area: 1 / 1;
+        align-self: center;
+        font-family: "Orbitron", sans-serif;
+        font-size: clamp(22px, 2.6vw, 38px);
+        font-weight: 600;
+        line-height: 1.25;
+        letter-spacing: 0.01em;
+        color: #ffffff;
+        opacity: 0;
+        transform: translate3d(0, 60%, 0);
+        transition:
+          opacity 0.9s var(--ease-out-expo),
+          transform 0.9s var(--ease-out-expo);
+        will-change: transform, opacity;
+      }
+
+      .cta-line.is-active {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+      }
+      .cta-line.is-out {
+        opacity: 0;
+        transform: translate3d(0, -60%, 0);
+      }
+
+      .cta-get {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        min-width: 300px;
+        min-height: 150px;
+        padding: 30px 32px;
+        background: #ffffff;
+        color: #0a0a0a;
+        border-radius: 6px;
+        text-decoration: none;
+        font-family: "Orbitron", sans-serif;
+        font-size: clamp(20px, 1.9vw, 26px);
+        font-weight: 700;
+        line-height: 1.2;
+        text-align: center;
+        box-shadow: 0 18px 40px -18px rgba(255, 255, 255, 0.25);
+        transition:
+          transform 0.25s ease,
+          box-shadow 0.25s ease,
+          background 0.25s ease;
+      }
+
+      .cta-get span {
+        display: block;
+        white-space: nowrap;
+      }
+      .cta-get small {
+        font-family: "Share Tech Mono", monospace;
+        font-size: 12px;
+        font-weight: 400;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        color: #525252;
+      }
+      .cta-get:hover {
+        transform: translateY(-2px);
+        background: #f1f5f9;
+        box-shadow: 0 22px 46px -18px rgba(255, 255, 255, 0.35);
+      }
+
+      /* ================= PAGES 2–5 — STORY WRAPPER ================= */
+
+      .story-wrap {
+        position: relative;
+        background: #f5f8fd;
+      }
+
+      .story-bg-stick {
+        position: sticky;
+        top: 0;
+        height: 100vh;
+        margin-bottom: -100vh;
+        z-index: 0;
+        overflow: hidden;
+        pointer-events: none;
+      }
+
+      .story-bg-img {
+        position: absolute;
+        inset: -60px 0;
+        background:
+          var(--bg-2-story) center / auto no-repeat,
+          radial-gradient(
+            1000px 600px at 12% 8%,
+            rgba(37, 99, 235, 0.14),
+            transparent 62%
+          ),
+          radial-gradient(
+            900px 600px at 88% 30%,
+            rgba(167, 139, 250, 0.14),
+            transparent 62%
+          ),
+          radial-gradient(
+            900px 600px at 40% 100%,
+            rgba(15, 23, 42, 0.08),
+            transparent 62%
+          ),
+          linear-gradient(180deg, #f8fbff 0%, #eef3fb 100%);
+        transform: translate3d(0, 100%, 0);
+        will-change: transform;
+      }
+
+      .story-bg-veil {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.8) 0%,
+          rgba(255, 255, 255, 0.72) 50%,
+          rgba(255, 255, 255, 0.8) 100%
+        );
+        backdrop-filter: blur(5px) saturate(115%);
+        -webkit-backdrop-filter: blur(5px) saturate(115%);
+      }
+
+      .story-wrap > .page {
+        z-index: 1;
+      }
+      .page-story {
+        scroll-snap-align: none;
+      }
+      .page-story > section {
+        scroll-snap-align: start;
+      }
+
+      .scroll-text-section {
+        padding: 170px 24px 150px;
+        position: relative;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+      }
+      .scroll-text-inner {
+        max-width: 1140px;
+        width: 100%;
+        margin: 0 auto;
+      }
+
+      .scroll-eyebrow {
+        font-family: "Share Tech Mono", monospace;
+        font-size: var(--robo-eyebrow);
+        letter-spacing: 2.4px;
+        text-transform: uppercase;
+        color: var(--blue-accent);
+        margin-bottom: 40px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .scroll-eyebrow::before {
+        content: "";
+        width: 36px;
+        height: 1px;
+        background: var(--blue-accent);
+      }
+
+      .scroll-text {
+        font-family: "Orbitron", sans-serif;
+        font-size: clamp(30px, 4.4vw, 60px);
+        font-weight: 600;
+        line-height: 1.3;
+        letter-spacing: -0.005em;
+        color: #0f172a;
+      }
+
+      .scroll-text .sw {
+        display: inline-block;
+        opacity: 0.12;
+        will-change: opacity;
+      }
+
+      .build-section {
+        padding: 120px 24px;
+        border-top: 1px solid rgba(37, 99, 235, 0.1);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+      }
+
+      .build-container {
+        max-width: 1320px;
+        width: 100%;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+        gap: 72px;
+        align-items: center;
+      }
+
+      .build-content {
+        text-align: center;
+      }
+
+      .build-title {
+        font-family: "Orbitron", sans-serif;
+        font-size: clamp(28px, 3.5vw, 44px);
+        font-weight: 600;
+        line-height: 1.2;
+        letter-spacing: -0.01em;
+        color: var(--blue-title);
+      }
+
+      .build-body {
+        margin: calc(3 * var(--robo-body-lh) * 1em) auto 0;
+        max-width: 480px;
+        font-family: "Share Tech Mono", monospace;
+        font-size: var(--robo-body);
+        line-height: var(--robo-body-lh);
+        color: var(--body-ink);
+      }
+
+      .desc-page {
+        min-height: 100vh;
+        padding: 110px 24px 90px;
+        display: flex;
+        align-items: center;
+        border-top: 1px solid rgba(37, 99, 235, 0.1);
+      }
+
+      .desc-inner {
+        max-width: 1400px;
+        width: 100%;
+        margin: 0 auto;
+      }
+
+      .desc-row {
+        display: grid;
+        grid-template-columns: minmax(0, 0.9fr) minmax(0, 1fr) minmax(0, 1.4fr);
+        gap: 52px;
+        align-items: center;
+      }
+
+      .desc-col-title {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+        align-items: flex-start;
+      }
+
+      .desc-index {
+        font-family: "Share Tech Mono", monospace;
+        font-size: var(--robo-eyebrow);
+        letter-spacing: 1.8px;
+        text-transform: uppercase;
+        color: var(--blue-accent);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .desc-index::before {
+        content: "";
+        width: 22px;
+        height: 1px;
+        background: var(--blue-accent);
+      }
+
+      .desc-title {
+        font-family: "Orbitron", sans-serif;
+        font-size: clamp(27px, 3.2vw, 42px);
+        font-weight: 600;
+        line-height: 1.22;
+        letter-spacing: -0.01em;
+        color: #000000;
+      }
+
+      .desc-body {
+        font-family: "Share Tech Mono", monospace;
+        font-size: var(--robo-body);
+        line-height: var(--robo-body-lh);
+        color: var(--body-ink);
+      }
+
+      .desc-body strong {
+        color: var(--blue-title);
+        font-weight: 400;
+        border-bottom: 1px solid var(--blue-soft);
+      }
+
+      .desc-body .desc-points {
+        list-style: none;
+        margin-top: 22px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .desc-body .desc-points li {
+        display: flex;
+        gap: 12px;
+        font-size: 15px;
+        color: var(--text-secondary);
+      }
+      .desc-body .desc-points li::before {
+        content: ">";
+        color: var(--blue-accent);
+        flex-shrink: 0;
+      }
+
+      .btn-inline {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 11px 18px;
+        border-radius: 8px;
+        background: #0a0a0a;
+        color: #ffffff;
+        font-family: "Inter", sans-serif;
+        font-size: 13px;
+        font-weight: 600;
+        text-decoration: none;
+        transition:
+          transform 0.2s ease,
+          box-shadow 0.2s ease;
+        box-shadow: 0 10px 24px -14px rgba(10, 10, 10, 0.55);
+      }
+
+      .btn-inline:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 16px 30px -14px rgba(10, 10, 10, 0.6);
+      }
+
+      .build-container .btn-inline {
+        margin: 28px auto 0;
+      }
+
+      .split-image {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 4 / 3;
+        border-radius: 18px;
+        border: 1px solid var(--blue-soft);
+        background:
+          linear-gradient(rgba(37, 99, 235, 0.05) 1px, transparent 1px) 0 0 /
+            28px 28px,
+          linear-gradient(90deg, rgba(37, 99, 235, 0.05) 1px, transparent 1px) 0
+            0 / 28px 28px,
+          linear-gradient(180deg, #f5f9ff, #eaf2ff);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 34px 70px -30px rgba(37, 99, 235, 0.3);
+        overflow: hidden;
+      }
+
+      .split-image.xl {
+        aspect-ratio: 5 / 4;
+        min-height: 400px;
+        border-radius: 20px;
+      }
+
+      .split-img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        z-index: 2;
+      }
+
+      .split-ph {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        padding: 0 20px;
+        text-align: center;
+        font-family: "Share Tech Mono", monospace;
+        font-size: 14px;
+        letter-spacing: 1.4px;
+        text-transform: uppercase;
+        color: var(--blue-accent);
+      }
+
+      .split-ph small {
+        font-size: 11px;
+        letter-spacing: 0.4px;
+        text-transform: none;
+        color: var(--text-secondary);
+        word-break: break-all;
+      }
+      .split-image.has-img .split-ph {
+        display: none;
+      }
+
+      /* ================= SYSTEM — ANIMATED ARCHITECTURE ================= */
+
+      .page-system {
+        background: #050505;
+        color: #ffffff;
+        padding: 120px 24px 120px;
+        overflow: hidden;
+        isolation: isolate;
+      }
+
+      .system-canvas {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        pointer-events: none;
+      }
+
+      .system-grid-bg {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        background-image:
+          linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+          linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0.035) 1px,
+            transparent 1px
+          );
+        background-size: 48px 48px;
+        animation: gridDrift 24s linear infinite;
+        -webkit-mask-image: radial-gradient(
+          ellipse at center,
+          #000 30%,
+          transparent 78%
+        );
+        mask-image: radial-gradient(
+          ellipse at center,
+          #000 30%,
+          transparent 78%
+        );
+      }
+
+      @keyframes gridDrift {
+        to {
+          background-position: 48px 48px;
+        }
+      }
+
+      .system-head {
+        position: relative;
+        z-index: 1;
+        text-align: center;
+        margin: 0 auto 52px;
+        max-width: 880px;
+      }
+
+      .system-fig {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 11px;
+        letter-spacing: 2.4px;
+        text-transform: uppercase;
+        color: #737373;
+        margin-bottom: 16px;
+      }
+
+      .system-title {
+        font-family: "Orbitron", sans-serif;
+        font-size: clamp(30px, 4vw, 48px);
+        font-weight: 600;
+        letter-spacing: 0.14em;
+        color: #ffffff;
+      }
+
+      .system-sub {
+        font-family: "JetBrains Mono", monospace;
+        font-size: clamp(10px, 1.1vw, 12px);
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: #8a8a8a;
+        margin-top: 16px;
+      }
+
+      .system-heading {
+        font-family: "Orbitron", sans-serif;
+        font-size: clamp(22px, 2.6vw, 34px);
+        font-weight: 600;
+        line-height: 1.25;
+        margin-top: 28px;
+        color: #ffffff;
+      }
+
+      .system-stage-wrap {
+        position: relative;
+        z-index: 1;
+        max-width: 1120px;
+        margin: 0 auto;
+      }
+
+      .system-frame {
+        position: relative;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 18px;
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.04),
+          rgba(255, 255, 255, 0.01)
+        );
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+        padding: 26px;
+        overflow: hidden;
+      }
+
+      .system-scroll {
+        overflow-x: auto;
+        overflow-y: hidden;
+      }
+
+      .system-board {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 1000 / 600;
+        container-type: inline-size;
+      }
+
+      .sys-svg {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        overflow: visible;
+        z-index: 1;
+      }
+
+      .sys-path {
+        fill: none;
+        stroke: rgba(255, 255, 255, 0.16);
+        stroke-width: 1.2;
+        stroke-dasharray: 3 7;
+        transition:
+          stroke 0.5s ease,
+          stroke-width 0.5s ease;
+        animation: dashFlow 1.4s linear infinite;
+      }
+
+      .sys-path.lit {
+        stroke: rgba(255, 255, 255, 0.78);
+        stroke-width: 1.7;
+      }
+
+      @keyframes dashFlow {
+        to {
+          stroke-dashoffset: -20;
+        }
+      }
+
+      .sys-packet {
+        fill: #ffffff;
+        filter: url(#sysGlow);
+        transition: opacity 0.5s ease;
+      }
+
+      .sys-halo {
+        position: absolute;
+        left: 44%;
+        top: 50%;
+        width: 34cqw;
+        aspect-ratio: 1;
+        margin: -17cqw 0 0 -17cqw;
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 1;
+      }
+      .sys-halo.h1 {
+        border: 1px dashed rgba(255, 255, 255, 0.2);
+        animation: spin 46s linear infinite;
+      }
+      .sys-halo.h2 {
+        border: 1px solid rgba(255, 255, 255, 0.07);
+        animation: haloPulse 4.2s ease-in-out infinite;
+      }
+
+      @keyframes haloPulse {
+        0%,
+        100% {
+          transform: scale(0.96);
+          opacity: 0.45;
+        }
+        50% {
+          transform: scale(1.04);
+          opacity: 1;
+        }
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      .sys-scan {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.4),
+          transparent
+        );
+        animation: scanY 7s linear infinite;
+        z-index: 1;
+        pointer-events: none;
+      }
+
+      @keyframes scanY {
+        from {
+          top: 0;
+        }
+        to {
+          top: 100%;
+        }
+      }
+
+      .sys-node {
+        position: absolute;
+        transform: translate(-50%, -50%);
+        width: 17cqw;
+        height: 9.67%;
+        background: rgba(12, 12, 12, 0.85);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 12px;
+        padding: 1.1cqw 1.3cqw;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        z-index: 2;
+        transition:
+          border-color 0.5s ease,
+          box-shadow 0.5s ease,
+          transform 0.5s ease,
+          background 0.5s ease;
+      }
+
+      .sys-node:hover {
+        border-color: rgba(255, 255, 255, 0.45);
+      }
+
+      .sys-node.is-live {
+        transform: translate(-50%, calc(-50% - 2px));
+        border-color: rgba(255, 255, 255, 0.78);
+        background: rgba(20, 20, 20, 0.95);
+        box-shadow:
+          0 0 0 4px rgba(255, 255, 255, 0.05),
+          0 0 34px rgba(255, 255, 255, 0.14);
+      }
+
+      .sn-title {
+        font-family: "JetBrains Mono", monospace;
+        font-size: clamp(9px, 1.25cqw, 13px);
+        font-weight: 600;
+        color: #e5e5e5;
+        letter-spacing: 0.3px;
+        line-height: 1.25;
+      }
+
+      .sys-node.is-live .sn-title {
+        color: #ffffff;
+      }
+
+      .sn-sub {
+        font-family: "JetBrains Mono", monospace;
+        font-size: clamp(7px, 0.95cqw, 10px);
+        color: #737373;
+        margin-top: 4px;
+        line-height: 1.3;
+      }
+
+      .sn-dot {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: #ffffff;
+        opacity: 0.25;
+      }
+
+      .sys-node.is-live .sn-dot {
+        opacity: 1;
+        animation: dotPulse 1.2s ease-in-out infinite;
+      }
+
+      @keyframes dotPulse {
+        0%,
+        100% {
+          transform: scale(1);
+          box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.6);
+        }
+        50% {
+          transform: scale(1.4);
+          box-shadow: 0 0 0 5px rgba(255, 255, 255, 0);
+        }
+      }
+
+      .sn-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+        text-align: left;
+        justify-content: flex-start;
+      }
+      .sn-row .sn-text {
+        min-width: 0;
+      }
+      .sn-row .provider-icon-slot {
+        width: clamp(20px, 2.4cqw, 28px);
+        height: clamp(20px, 2.4cqw, 28px);
+      }
+
+      .sys-node.node-core {
+        width: 23cqw;
+        height: 29.33%;
+        background: rgba(6, 6, 6, 0.94);
+        border: 1px solid rgba(255, 255, 255, 0.28);
+        border-radius: 16px;
+        z-index: 3;
+        gap: 6px;
+      }
+
+      .sys-node.node-core .sn-title {
+        font-family: "Orbitron", sans-serif;
+        font-size: clamp(10px, 1.5cqw, 15px);
+        letter-spacing: 0.12em;
+      }
+      .sys-node.node-core .sn-caps {
+        font-family: "JetBrains Mono", monospace;
+        font-size: clamp(7px, 0.9cqw, 10px);
+        letter-spacing: 1.6px;
+        color: #a3a3a3;
+        text-transform: uppercase;
+      }
+      .sys-node.node-core .sn-ptis {
+        font-family: "JetBrains Mono", monospace;
+        font-size: clamp(6px, 0.8cqw, 9px);
+        color: #6b6b6b;
+        margin-top: 4px;
+      }
+
+      .sys-orb {
+        width: clamp(34px, 5.2cqw, 56px);
+        height: clamp(34px, 5.2cqw, 56px);
+        animation: spin 14s linear infinite;
+      }
+
+      .sys-node.node-output {
+        width: 14cqw;
+        height: 13.33%;
+        border-color: rgba(255, 255, 255, 0.3);
+      }
+      .sys-node.node-eval {
+        width: 28cqw;
+        height: 12.67%;
+        border-color: rgba(255, 255, 255, 0.22);
+      }
+      .sys-node.node-econ {
+        width: 21cqw;
+        height: 10.33%;
+      }
+      .sys-node.node-provider {
+        width: 17cqw;
+        height: 10.67%;
+      }
+
+      .sys-stages {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 10px;
+        margin-top: 22px;
+      }
+
+      .sys-stage {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .ss-num {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 10px;
+        color: #6b6b6b;
+        letter-spacing: 1px;
+      }
+      .ss-name {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 11px;
+        color: #8a8a8a;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        transition: color 0.4s ease;
+      }
+
+      .ss-bar {
+        display: block;
+        height: 2px;
+        background: rgba(255, 255, 255, 0.1);
+        overflow: hidden;
+        border-radius: 2px;
+      }
+      .ss-bar i {
+        display: block;
+        height: 100%;
+        width: 0;
+        background: #ffffff;
+      }
+
+      .sys-stage.is-done .ss-bar i {
+        width: 100%;
+      }
+      .sys-stage.is-done .ss-name {
+        color: #b3b3b3;
+      }
+      .sys-stage.is-active .ss-bar i {
+        animation: stageFill var(--stage-ms, 2800ms) linear forwards;
+      }
+      .sys-stage.is-active .ss-name {
+        color: #ffffff;
+      }
+      .sys-stage.is-active .ss-num {
+        color: #ffffff;
+      }
+
+      @keyframes stageFill {
+        from {
+          width: 0;
+        }
+        to {
+          width: 100%;
+        }
+      }
+
+      .sys-caption {
+        margin-top: 20px;
+        min-height: 44px;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 13px;
+        line-height: 1.6;
+        color: #bdbdbd;
+        transition: opacity 0.22s ease;
+      }
+
+      .sys-caption span {
+        color: #ffffff;
+        font-weight: 600;
+        margin-right: 6px;
+      }
+      .sys-caption.swap {
+        opacity: 0;
+      }
+
+      .sys-live {
+        margin-top: 22px;
+        padding-top: 20px;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 14px;
+        position: relative;
+      }
+
+      .sys-live-tag {
+        position: absolute;
+        top: -9px;
+        right: 0;
+        background: #050505;
+        padding: 0 8px;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 9px;
+        letter-spacing: 1.2px;
+        text-transform: uppercase;
+        color: #6b6b6b;
+      }
+
+      .sys-live-cell {
+        text-align: center;
+      }
+      .sys-live-label {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 9.5px;
+        color: #737373;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 6px;
+      }
+      .sys-live-val {
+        font-family: "JetBrains Mono", monospace;
+        font-size: clamp(16px, 2vw, 22px);
+        font-weight: 600;
+        color: #ffffff;
+        font-variant-numeric: tabular-nums;
+      }
+
+      .system-cta {
+        position: relative;
+        z-index: 1;
+        text-align: center;
+        margin-top: 44px;
+      }
+
+      .btn-preregister {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 14px 28px;
+        border-radius: 999px;
+        background: #ffffff;
+        color: #0a0a0a;
+        font-family: "Inter", sans-serif;
+        font-size: 14px;
+        font-weight: 700;
+        text-decoration: none;
+        letter-spacing: 0.1px;
+        box-shadow:
+          0 0 0 1px rgba(255, 255, 255, 0.2),
+          0 14px 40px -12px rgba(255, 255, 255, 0.35);
+        transition:
+          transform 0.25s ease,
+          box-shadow 0.25s ease,
+          background 0.25s ease;
+      }
+
+      .btn-preregister:hover {
+        transform: translateY(-2px);
+        background: #f1f5f9;
+        box-shadow:
+          0 0 0 1px rgba(255, 255, 255, 0.3),
+          0 20px 46px -12px rgba(255, 255, 255, 0.4);
+      }
+      .btn-preregister .arrow {
+        transition: transform 0.25s ease;
+        display: inline-block;
+      }
+      .btn-preregister:hover .arrow {
+        transform: translateX(3px);
+      }
+
+      /* ================= REVEAL ================= */
+
+      .reveal {
+        opacity: 0;
+        transition:
+          opacity 1s var(--ease-out-expo),
+          transform 1s var(--ease-out-expo);
+        transition-delay: var(--reveal-delay, 0ms);
+        will-change: opacity, transform;
+      }
+      .reveal.from-left {
+        transform: translateX(-70px);
+      }
+      .reveal.from-right {
+        transform: translateX(70px);
+      }
+      .reveal.from-up {
+        transform: translateY(50px);
+      }
+      .reveal.is-visible {
+        opacity: 1;
+        transform: none;
+      }
+
+      /* ================= INDUSTRY APPLICATIONS ================= */
+
+      .page-industries {
+        background: #ffffff;
+        padding: 120px 24px 130px;
+        position: relative;
+        border-top: 1px solid #e5e7eb;
+      }
+
+      .page-industries::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image:
+          linear-gradient(rgba(15, 23, 42, 0.03) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(15, 23, 42, 0.03) 1px, transparent 1px);
+        background-size: 56px 56px;
+        pointer-events: none;
+      }
+
+      .ind-wrap {
+        position: relative;
+        max-width: 1240px;
+        margin: 0 auto;
+      }
+
+      .ind-head {
+        text-align: center;
+        max-width: 820px;
+        margin: 0 auto 56px;
+      }
+
+      .ind-eyebrow {
+        font-family: "Share Tech Mono", monospace;
+        font-size: var(--robo-eyebrow);
+        letter-spacing: 2.2px;
+        text-transform: uppercase;
+        color: var(--blue-accent);
+        margin-bottom: 18px;
+      }
+
+      .ind-title {
+        font-family: "Orbitron", sans-serif;
+        font-size: clamp(26px, 3.2vw, 42px);
+        font-weight: 600;
+        line-height: 1.2;
+        letter-spacing: -0.01em;
+        color: #000000;
+      }
+
+      .ind-sub {
+        font-family: "Share Tech Mono", monospace;
+        font-size: 16px;
+        line-height: 1.8;
+        color: var(--body-ink);
+        margin-top: 18px;
+      }
+
+      .ind-levers {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 16px;
+        max-width: 1000px;
+        margin: 0 auto 56px;
+      }
+
+      .lever {
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        padding: 20px 22px;
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(6px);
+      }
+
+      .lever-num {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 11px;
+        color: #737373;
+        letter-spacing: 1px;
+      }
+      .lever-name {
+        font-family: "Inter", sans-serif;
+        font-size: 16px;
+        font-weight: 700;
+        color: #0a0a0a;
+        margin: 6px 0 6px;
+      }
+      .lever-text {
+        font-size: 13.5px;
+        color: #525252;
+        line-height: 1.6;
+      }
+
+      .ind-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 22px;
+      }
+
+      .ind-card {
+        background: #0b0b0b;
+        border: 1px solid #1f1f1f;
+        border-radius: 16px;
+        padding: 30px;
+        color: #e5e5e5;
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+        transition:
+          transform 0.35s var(--ease-out-expo),
+          border-color 0.35s ease,
+          box-shadow 0.35s ease;
+      }
+
+      .ind-card:hover {
+        border-color: rgba(255, 255, 255, 0.28);
+        box-shadow: 0 24px 50px -24px rgba(0, 0, 0, 0.6);
+      }
+
+      .ind-card.reveal.is-visible:hover {
+        transform: translateY(-4px);
+      }
+
+      .ind-top {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .ind-icon {
+        width: 46px;
+        height: 46px;
+        border-radius: 12px;
+        background: #151515;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #ffffff;
+        flex-shrink: 0;
+      }
+
+      .ind-icon svg {
+        width: 20px;
+        height: 20px;
+      }
+
+      .ind-name {
+        font-size: 18px;
+        font-weight: 600;
+        color: #ffffff;
+        letter-spacing: -0.01em;
+      }
+      .ind-tags {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 11px;
+        color: #6b6b6b;
+        margin-top: 4px;
+      }
+
+      .ind-desc {
+        font-size: 14.5px;
+        line-height: 1.75;
+        color: #bdbdbd;
+      }
+
+      .ind-steps {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .ind-steps li {
+        display: grid;
+        grid-template-columns: 26px 1fr;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 12.5px;
+        line-height: 1.6;
+        color: #cfcfcf;
+      }
+
+      .ind-steps li span {
+        color: #ffffff;
+        font-weight: 600;
+      }
+
+      .ind-profit {
+        background: rgba(255, 255, 255, 0.03);
+        border-left: 2px solid #ffffff;
+        border-radius: 0 8px 8px 0;
+        padding: 12px 16px;
+      }
+
+      .ind-profit-label {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 9.5px;
+        letter-spacing: 1.2px;
+        text-transform: uppercase;
+        color: #8a8a8a;
+        margin-bottom: 6px;
+      }
+
+      .ind-profit p {
+        font-size: 13.5px;
+        line-height: 1.6;
+        color: #e5e5e5;
+      }
+
+      .ind-metrics {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+        padding-top: 18px;
+        border-top: 1px solid #1f1f1f;
+        margin-top: auto;
+      }
+
+      .ind-metrics span {
+        display: block;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 8.5px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        color: #6b6b6b;
+        margin-bottom: 6px;
+      }
+
+      .ind-metrics strong {
+        display: block;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 12px;
+        font-weight: 600;
+        color: #ffffff;
+        line-height: 1.4;
+      }
+
+      .ind-cta {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 2px;
+        padding: 13px 18px;
+        border-radius: 10px;
+        background: #ffffff;
+        color: #0a0a0a;
+        font-size: 13.5px;
+        font-weight: 700;
+        text-decoration: none;
+        transition:
+          background 0.25s ease,
+          transform 0.25s ease;
+      }
+
+      .ind-cta:hover {
+        background: #e5e5e5;
+        transform: translateY(-1px);
+      }
+      .ind-cta .arrow {
+        transition: transform 0.25s ease;
+      }
+      .ind-cta:hover .arrow {
+        transform: translateX(4px);
+      }
+
+      .ind-note {
+        max-width: 880px;
+        margin: 36px auto 0;
+        text-align: center;
+        font-family: "Share Tech Mono", monospace;
+        font-size: 12.5px;
+        line-height: 1.7;
+        color: #6b7280;
+      }
+
+      /* ================= PAGE — PROVIDERS ================= */
+
+      .page-providers {
+        background: #050505;
+        color: #ffffff;
+        padding: 120px 0 130px;
+        overflow: hidden;
+        position: relative;
+        z-index: 1;
+      }
+
+      .page-providers::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(
+            900px 420px at 50% 100%,
+            rgba(255, 255, 255, 0.06),
+            transparent 70%
+          ),
+          radial-gradient(
+            600px 300px at 50% 0%,
+            rgba(255, 255, 255, 0.04),
+            transparent 70%
+          );
+        pointer-events: none;
+      }
+
+      .providers-head {
+        position: relative;
+        text-align: center;
+        padding: 0 24px;
+        margin-bottom: 70px;
+      }
+
+      .providers-eyebrow {
+        font-family: "Share Tech Mono", monospace;
+        font-size: var(--robo-eyebrow);
+        letter-spacing: 2.4px;
+        text-transform: uppercase;
+        color: #93c5fd;
+        margin-bottom: 18px;
+      }
+
+      .providers-title {
+        font-family: "Orbitron", sans-serif;
+        font-size: clamp(24px, 3vw, 38px);
+        font-weight: 600;
+        letter-spacing: -0.01em;
+        color: #ffffff;
+      }
+
+      .providers-sub {
+        font-family: "Share Tech Mono", monospace;
+        font-size: 16px;
+        line-height: 1.8;
+        color: #a3a3a3;
+        margin-top: 14px;
+      }
+
+      .pm-stage {
+        position: relative;
+        width: 100%;
+        height: 300px;
+        perspective: 1400px;
+        -webkit-mask-image: linear-gradient(
+          90deg,
+          transparent 0%,
+          #000 14%,
+          #000 86%,
+          transparent 100%
+        );
+        mask-image: linear-gradient(
+          90deg,
+          transparent 0%,
+          #000 14%,
+          #000 86%,
+          transparent 100%
+        );
+      }
+
+      .pm-track {
+        position: absolute;
+        inset: 0;
+        transform-style: preserve-3d;
+      }
+
+      .pm-card {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 168px;
+        height: 96px;
+        margin: -48px 0 0 -84px;
+        border-radius: 16px;
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.07),
+          rgba(255, 255, 255, 0.025)
+        );
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        box-shadow:
+          0 0 0 1px rgba(0, 0, 0, 0.4) inset,
+          0 24px 50px -22px rgba(0, 0, 0, 0.9);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        will-change: transform, opacity, filter;
+        backface-visibility: hidden;
+        user-select: none;
+      }
+
+      .pm-card .pm-label {
+        font-family: "Share Tech Mono", monospace;
+        font-size: 13px;
+        letter-spacing: 0.6px;
+        color: #e5e5e5;
+        white-space: nowrap;
+      }
+      .pm-card .provider-icon-slot {
+        background: linear-gradient(135deg, #1b1b1b, #050505);
+        border-color: rgba(255, 255, 255, 0.14);
+      }
+
+      .pm-ground {
+        position: relative;
+        width: min(1100px, 92%);
+        height: 1px;
+        margin: 40px auto 0;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.18),
+          transparent
+        );
+      }
+
+      .providers-cta {
+        position: relative;
+        text-align: center;
+        margin-top: 56px;
+        padding: 0 24px;
+      }
+      .providers-cta p {
+        font-family: "Share Tech Mono", monospace;
+        font-size: 14px;
+        color: #a3a3a3;
+        margin-bottom: 22px;
+      }
+
+      /* ================= TOAST ================= */
+
+      .toast {
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%) translateY(100px);
+        background: #0f172a;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 24px;
+        font-size: 13px;
+        font-weight: 500;
+        opacity: 0;
+        transition: 0.3s var(--ease-out-expo);
+        z-index: 9999;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        max-width: calc(100vw - 32px);
+        text-align: center;
+      }
+
+      .toast.show {
+        transform: translateX(-50%) translateY(0);
+        opacity: 1;
+      }
+      .hidden-input {
+        display: none;
+      }
+
+      /* ================= FOOTER ================= */
+
+      .site-footer {
+        position: relative;
+        isolation: isolate;
+        overflow: hidden;
+        color: var(--footer-ink);
+        padding: 96px 24px 72px;
+        border-top: 1px solid #e5e7eb;
+        font-family:
+          "Inter",
+          -apple-system,
+          BlinkMacSystemFont,
+          sans-serif;
+        scroll-snap-align: end;
+        background: #ffffff;
+      }
+
+      .footer-bg {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+      }
+
+      .footer-bg-img {
+        position: absolute;
+        inset: 0;
+        background:
+          var(--bg-3-footer) center / cover no-repeat,
+          radial-gradient(
+            900px 500px at 10% 0%,
+            rgba(37, 99, 235, 0.1),
+            transparent 62%
+          ),
+          radial-gradient(
+            800px 500px at 95% 100%,
+            rgba(15, 23, 42, 0.08),
+            transparent 62%
+          ),
+          linear-gradient(180deg, #ffffff 0%, #eef3fb 100%);
+      }
+
+      .footer-inner {
+        position: relative;
+        z-index: 1;
+        max-width: 1280px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1.1fr 1fr 1fr 1fr;
+        gap: 56px 60px;
+        align-items: start;
+      }
+
+      .footer-brand {
+        display: flex;
+        flex-direction: column;
+        max-width: 320px;
+      }
+
+      .footer-brand-logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 16px;
+        font-weight: 700;
+        color: var(--footer-ink);
+        text-decoration: none;
+        letter-spacing: -0.02em;
+      }
+
+      .footer-brand-logo .footer-logo-mark {
+        width: 24px;
+        height: 24px;
+        border-radius: 6px;
+        background: linear-gradient(135deg, #3f3f3f, #050505);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        overflow: hidden;
+      }
+
+      .footer-logo-img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        padding: 14%;
+        display: block;
+      }
+      .footer-tagline {
+        font-family: "Share Tech Mono", monospace;
+        font-size: 12px;
+        color: var(--footer-muted);
+        margin-top: 8px;
+      }
+      .footer-divider {
+        height: 1px;
+        background: var(--footer-line);
+        margin: 22px 0;
+      }
+      .footer-copy {
+        font-size: 14px;
+        line-height: 1.5;
+        color: var(--footer-ink);
+      }
+
+      .footer-cookie {
+        background: none;
+        border: none;
+        padding: 0;
+        font-size: 14px;
+        color: var(--footer-ink);
+        cursor: pointer;
+        text-align: left;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+      }
+
+      .footer-cookie:hover {
+        text-decoration: underline;
+      }
+
+      .footer-social {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+        max-width: 280px;
+      }
+
+      .footer-social a {
+        display: block;
+        text-align: center;
+        padding: 10px 14px;
+        border: 1px solid #374151;
+        border-radius: 999px;
+        font-size: 12px;
+        font-weight: 500;
+        letter-spacing: 0.4px;
+        text-transform: uppercase;
+        color: var(--footer-ink);
+        text-decoration: none;
+        background: rgba(255, 255, 255, 0.5);
+        transition: 0.2s;
+      }
+
+      .footer-social a:hover {
+        background: var(--footer-ink);
+        color: #ffffff;
+      }
+
+      .footer-group {
+        margin-top: 48px;
+      }
+
+      .footer-col-label {
+        font-size: 11px;
+        letter-spacing: 0.6px;
+        text-transform: uppercase;
+        color: var(--footer-muted);
+        font-weight: 500;
+        margin-bottom: 18px;
+      }
+
+      .footer-links {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 9px;
+      }
+
+      .footer-links a {
+        font-size: 15px;
+        line-height: 1.4;
+        color: var(--footer-ink);
+        text-decoration: none;
+        transition: color 0.15s;
+      }
+      .footer-links a:hover {
+        color: var(--blue-accent);
+        text-decoration: underline;
+        text-underline-offset: 3px;
+      }
+
+      /* ================= RESPONSIVE ================= */
+
+      @media (max-width: 1280px) {
+        .nav {
+          padding: 0 28px;
+        }
+        .nav-menu {
+          gap: 22px;
+        }
+      }
+
+      @media (max-width: 1200px) {
+        .desc-row {
+          grid-template-columns: 1fr 1fr;
+        }
+        .desc-row .split-image {
+          grid-column: 1 / -1;
+          max-width: 760px;
+          margin: 0 auto;
+        }
+        .page-dots {
+          display: none;
+        }
+        .footer-inner {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+        .footer-brand {
+          max-width: none;
+        }
+      }
+
+      @media (max-width: 1024px) {
+        .app-layout {
+          height: auto;
+        }
+        .comparison-grid {
+          grid-template-columns: 1fr;
+          grid-template-rows: auto auto;
+        }
+        .panel-col {
+          height: 440px;
+        }
+        .app-sidebar {
+          width: 200px;
+        }
+        .build-container {
+          grid-template-columns: 1fr;
+          gap: 48px;
+        }
+        .build-container .split-image {
+          max-width: 640px;
+          margin: 0 auto;
+          width: 100%;
+        }
+        .cta-box {
+          grid-template-columns: 1fr;
+          gap: 36px;
+          padding: 52px 44px;
+        }
+        .cta-get {
+          width: 100%;
+          min-width: 0;
+        }
+        .ind-grid {
+          grid-template-columns: 1fr;
+        }
+        .ind-levers {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 900px) {
+        .nav-menu {
+          display: none;
+        }
+      }
+
+      /* =========================================================
+   MOBILE STABILIZATION & SCROLLING FIXES
+   ========================================================= */
+
+      @media (max-width: 768px) {
+        html {
+          scroll-snap-type: none;
+        }
+
+        /* NAV */
+        .nav {
+          height: 60px;
+          padding: 0 16px;
+        }
+        .nav-logo {
+          font-size: 16px;
+          gap: 8px;
+        }
+        .nav-logo .brand-icon-slot {
+          width: 26px;
+          height: 26px;
+        }
+        .btn-get-started {
+          padding: 8px 14px;
+          font-size: 12.5px;
+        }
+
+        /* HERO */
+        .hero-section {
+          padding-top: 112px;
+          padding-bottom: 40px;
+        }
+        .hero-content {
+          padding: 0 16px;
+        }
+        .hero-actions {
+          flex-direction: column;
+          align-items: stretch;
+          max-width: 320px;
+          margin: 0 auto;
+        }
+        .btn-hero-primary,
+        .btn-hero-secondary {
+          width: 100%;
+          justify-content: center;
+        }
+
+        /* DEMO — must NOT shrink; scroll horizontally to view full interface */
+        .demo-section {
+          padding: 0 12px;
+        }
+        .demo-container {
+          max-width: 100%;
+          overflow-x: auto;
+          -webkit-overflow-scrolling: touch;
+        }
+        .mac-window {
+          min-width: 780px;
+        } /* Force wide layout, user scrolls */
+        .app-sidebar {
+          display: none;
+        } /* Hide sidebar on mobile to save space */
+        .app-main {
+          padding: 14px;
+        }
+        .settings-row {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 8px;
+          margin-bottom: 14px;
+        }
+        .setting-pill {
+          min-width: 0;
+          padding: 7px 10px;
+        }
+        .dropdown-menu {
+          min-width: 0;
+          width: min(300px, 80vw);
+        }
+        .setting-pill:nth-child(even) .dropdown-menu {
+          left: auto;
+          right: 0;
+        }
+        .comparison-header {
+          flex-direction: column;
+        }
+        .ch-right {
+          width: 100%;
+          justify-content: space-between;
+          gap: 8px;
+        }
+        .ch-metric-val {
+          font-size: 16px;
+        }
+        .ch-title {
+          font-size: 15px;
+        }
+        .panel-header {
+          flex-wrap: wrap;
+          padding: 10px 12px;
+        }
+        .panel-scroll-area {
+          padding: 14px;
+        }
+        .panel-col {
+          height: 420px;
+        }
+        .prompt-box {
+          flex-wrap: wrap;
+          row-gap: 4px;
+          padding: 8px;
+        }
+        .prompt-input {
+          order: -1;
+          flex: 1 1 100%;
+          width: 100%;
+          padding: 6px 4px;
+        }
+        .prompt-controls {
+          margin-left: auto;
+        }
+        .attachment-menu {
+          max-width: calc(100vw - 48px);
+        }
+
+        /* STORY PAGES */
+        .scroll-text-section {
+          padding: 120px 20px 100px;
+          min-height: auto;
+        }
+        .build-section {
+          padding: 90px 20px;
+          min-height: auto;
+        }
+        .desc-page {
+          padding: 90px 20px 80px;
+          min-height: auto;
+        }
+        .desc-row {
+          grid-template-columns: 1fr;
+          gap: 28px;
+        }
+        .split-image.xl {
+          min-height: 280px;
+        }
+
+        /* SYSTEM */
+        .page-system {
+          padding: 90px 12px 90px;
+        }
+        .system-frame {
+          padding: 14px;
+          border-radius: 14px;
+        }
+        .system-scroll {
+          overflow-x: auto;
+        }
+        .system-board {
+          min-width: 720px;
+        } /* Keep board size, allow scroll */
+        .sys-stages {
+          grid-template-columns: repeat(5, minmax(90px, 1fr));
+          overflow-x: auto;
+        }
+        .sys-live {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        /* CTA BAND */
+        .cta-band {
+          padding: 56px 12px 80px;
+        }
+        .cta-box {
+          padding: 40px 24px;
+          gap: 28px;
+          border-radius: 6px;
+        }
+        .cta-get {
+          min-height: 120px;
+          padding: 26px 20px;
+        }
+
+        /* INDUSTRIES */
+        .page-industries {
+          padding: 90px 16px 96px;
+        }
+        .ind-card {
+          padding: 22px;
+        }
+        .ind-metrics {
+          grid-template-columns: 1fr 1fr;
+        }
+
+        /* PROVIDERS */
+        .page-providers {
+          padding: 90px 0 100px;
+        }
+        .pm-stage {
+          height: 240px;
+        }
+        .pm-card {
+          width: 140px;
+          height: 84px;
+          margin: -42px 0 0 -70px;
+        }
+
+        /* FOOTER */
+        .site-footer {
+          padding: 64px 20px 48px;
+        }
+        .footer-group {
+          margin-top: 36px;
+        }
+      }
+
+      @media (max-width: 560px) {
+        .footer-inner {
+          grid-template-columns: 1fr;
+        }
+        .settings-row {
+          grid-template-columns: 1fr;
+        }
+        .ch-metric-mini {
+          padding: 4px 8px;
+        }
+        .ind-metrics {
+          grid-template-columns: 1fr;
+          gap: 10px;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .reveal {
+          opacity: 1;
+          transform: none;
+          transition: none;
+        }
+        .scroll-text .sw {
+          opacity: 1 !important;
+        }
+        html {
+          scroll-behavior: auto;
+          scroll-snap-type: none;
+        }
+        .page-bg {
+          transform: none !important;
+        }
+        .story-bg-img {
+          transform: none !important;
+        }
+        .cta-line {
+          transition: none;
+        }
+        .sys-path,
+        .sys-halo,
+        .sys-orb,
+        .sys-scan,
+        .system-grid-bg,
+        .sys-node.is-live .sn-dot {
+          animation: none !important;
+        }
+        .sys-stage.is-active .ss-bar i {
+          animation: none;
+          width: 100%;
+        }
+      }
+    </style>
+    <link rel="stylesheet" href="assets/css/professional.css" />
+  </head>
+  <body>
+    <!-- ================= NAVIGATION ================= -->
+
+    <nav class="nav" id="siteNav">
+      <a class="nav-logo" href="#pageTop">
+        <span class="brand-icon-slot">
+          <img
+            src="assets/dsrt-logo.png"
+            alt="Dsrt AI logo"
+            onerror="this.style.visibility = 'hidden'"
+          />
+        </span>
+        Dsrt AI
+      </a>
+
+      <div class="nav-menu">
+        <a class="nav-link" href="product.html">Platform</a>
+        <a class="nav-link" href="features.html">Features</a>
+        <a class="nav-link" href="/pricing.html">Pricing</a>
+        <a class="nav-link" href="dsrt-labs.html">Dsrt Labs</a>
+        <a class="nav-link" href="Enterprise.html">Enterprise</a>
+        <a class="nav-link" href="/social.html">Social</a>
+        <a class="nav-link" href="learn.html">Learn</a>
+      </div>
+
+      <div class="nav-actions">
+        <a class="btn-get-started" href="Registration.html?intent=preregister"
+          >Pre-register</a
+        >
+      </div>
+    </nav>
+
+    <!-- ================= PAGE DOTS ================= -->
+
+    <nav class="page-dots" id="pageDots" aria-label="Page navigation">
+      <a href="#pageTop" data-target="pageTop" aria-label="Page 1: Demo"
+        ><span class="pd-label">01 · Demo</span></a
+      >
+      <a
+        href="#pageStory"
+        data-target="pageStory"
+        aria-label="Page 2: Manifesto"
+        ><span class="pd-label">02 · Manifesto</span></a
+      >
+      <a href="#pageSystem" data-target="pageSystem" aria-label="Page 3: System"
+        ><span class="pd-label">03 · System</span></a
+      >
+      <a
+        href="#pagePrinciple"
+        data-target="pagePrinciple"
+        aria-label="Page 4: Principle"
+        ><span class="pd-label">04 · Principle</span></a
+      >
+      <a
+        href="#pageIntelligence"
+        data-target="pageIntelligence"
+        aria-label="Page 5: Intelligence"
+        ><span class="pd-label">05 · Intelligence</span></a
+      >
+      <a
+        href="#pageVerification"
+        data-target="pageVerification"
+        aria-label="Page 6: Verification"
+        ><span class="pd-label">06 · Verification</span></a
+      >
+      <a
+        href="#pageIndustries"
+        data-target="pageIndustries"
+        aria-label="Page 7: Industries"
+        ><span class="pd-label">07 · Industries</span></a
+      >
+      <a
+        href="#pageProviders"
+        data-target="pageProviders"
+        aria-label="Page 8: Providers"
+        ><span class="pd-label">08 · Providers</span></a
+      >
+      <a href="#footer" data-target="footer" aria-label="Page 9: Footer"
+        ><span class="pd-label">09 · Footer</span></a
+      >
+    </nav>
+
+    <!-- =====================================================================
+     PAGE 1 — HERO + DASHBOARD
+     ===================================================================== -->
+
+    <div class="page page-top" id="pageTop">
+      <!-- 🟡 PLACEHOLDER [BG 1] → assets/images/backgrounds/bg-1-hero.jpg -->
+      <div class="page-bg" id="pageBg" aria-hidden="true"></div>
+      <div class="page-bg-blur" aria-hidden="true"></div>
+
+      <section class="hero-section">
+        <div class="hero-content">
+          <h1 class="hero-title">
+            Make every AI dollar<br />
+            work harder.
+          </h1>
+
+          <p class="hero-tagline">Intelligence at your budget.</p>
+
+          <div class="hero-actions">
+            <a
+              class="btn-hero-primary"
+              href="Registration.html?intent=preregister"
+            >
+              Pre-register with Dsrt AI
+            </a>
+
+            <button class="btn-hero-secondary" onclick="scrollToDemo()">
+              See how it works
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= DEMO ================= -->
+
+      <section class="demo-section" id="demo">
+        <div class="demo-container">
+          <div class="mac-window">
+            <div class="mac-titlebar">
+              <div class="mac-dot close"></div>
+              <div class="mac-dot min"></div>
+              <div class="mac-dot max"></div>
+
+              <div class="mac-titlebar-center">
+                <div class="brand-icon-slot-mini">
+                  <img
+                    src="assets/dsrt-logo.png"
+                    alt="Dsrt AI logo"
+                    onerror="this.style.visibility = 'hidden'"
+                  />
+                </div>
+                Dsrt AI — War Mode
+              </div>
+            </div>
+
+            <div class="app-layout">
+              <!-- ===== SIDEBAR ===== -->
+
+              <div class="app-sidebar">
+                <div class="sidebar-brand">
+                  <div class="sidebar-brand-icon">
+                    <img
+                      src="assets/dsrt-logo.png"
+                      alt="Dsrt AI logo"
+                      onerror="this.style.visibility = 'hidden'"
+                    />
+                  </div>
+                  <div class="sidebar-brand-text">Dsrt AI</div>
+                </div>
+
+                <div class="sidebar-scroll">
+                  <div class="sidebar-label">Modes</div>
+
+                  <div
+                    class="sidebar-item active"
+                    onclick="activateSidebarItem(this)"
+                  >
+                    <svg
+                      class="si-icon"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <path d="M14.5 17.5L3 6V3h3l11.5 11.5" />
+                      <path d="M13 19l6-6" />
+                      <path d="M16 16l4 4" />
+                    </svg>
+                    War Mode
+                  </div>
+
+                  <div class="sidebar-item" onclick="activateSidebarItem(this)">
+                    <svg
+                      class="si-icon"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <rect x="2" y="7" width="20" height="14" rx="2" />
+                      <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+                    </svg>
+                    Work Mode
+                  </div>
+
+                  <div class="sidebar-label">Workspace</div>
+
+                  <div
+                    class="sidebar-item"
+                    onclick="showToast('✨ New comparison created')"
+                  >
+                    <svg
+                      class="si-icon"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <circle cx="12" cy="12" r="10" />
+                      <line x1="12" y1="8" x2="12" y2="16" />
+                      <line x1="8" y1="12" x2="16" y2="12" />
+                    </svg>
+                    New comparison
+                  </div>
+
+                  <div class="sidebar-label">Recent Comparisons</div>
+
+                  <div
+                    class="sidebar-item scenario-item"
+                    data-scenario="ev"
+                    onclick="loadScenario('ev')"
+                  >
+                    <svg
+                      class="si-icon"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <path
+                        d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
+                      />
+                      <polyline points="14 2 14 8 20 8" />
+                    </svg>
+                    Electric Vehicles
+                  </div>
+
+                  <div
+                    class="sidebar-item scenario-item"
+                    data-scenario="earnings"
+                    onclick="loadScenario('earnings')"
+                  >
+                    <svg
+                      class="si-icon"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <path
+                        d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
+                      />
+                      <polyline points="14 2 14 8 20 8" />
+                    </svg>
+                    Q3 Earnings Call
+                  </div>
+
+                  <div
+                    class="sidebar-item scenario-item"
+                    data-scenario="saas"
+                    onclick="loadScenario('saas')"
+                  >
+                    <svg
+                      class="si-icon"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <path
+                        d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
+                      />
+                      <polyline points="14 2 14 8 20 8" />
+                    </svg>
+                    SaaS Unit Economics
+                  </div>
+
+                  <div
+                    class="sidebar-item scenario-item"
+                    data-scenario="competitor"
+                    onclick="loadScenario('competitor')"
+                  >
+                    <svg
+                      class="si-icon"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <path
+                        d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
+                      />
+                      <polyline points="14 2 14 8 20 8" />
+                    </svg>
+                    Competitor Analysis
+                  </div>
+
+                  <div
+                    class="sidebar-item scenario-item"
+                    data-scenario="inference"
+                    onclick="loadScenario('inference')"
+                  >
+                    <svg
+                      class="si-icon"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <path
+                        d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
+                      />
+                      <polyline points="14 2 14 8 20 8" />
+                    </svg>
+                    AI Inference Costs
+                  </div>
+                </div>
+
+                <div class="sidebar-bottom">
+                  <div
+                    class="sidebar-item"
+                    onclick="
+                      showToast('⚙️ Settings are available in the full product')
+                    "
+                  >
+                    <svg
+                      class="si-icon"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <circle cx="12" cy="12" r="3" />
+                      <path
+                        d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9c.26.604.852.997 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"
+                      />
+                    </svg>
+                    Settings
+                  </div>
+
+                  <div
+                    class="sidebar-profile"
+                    onclick="showToast('Profile menu opened')"
+                  >
+                    <div class="profile-avatar">JM</div>
+                    <div class="profile-info">
+                      <div class="profile-name">Jisu Mondal</div>
+                      <div class="profile-email">jisu@dsrtai.com</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- ===== MAIN AREA ===== -->
+
+              <div class="app-main">
+                <div class="settings-row">
+                  <!-- ROUTE (replaces model names with routing modes) -->
+
+                  <div
+                    class="setting-pill dropdown-wrapper"
+                    id="routePill"
+                    onclick="toggleDropdown('routeDropdown', event)"
+                  >
+                    <span class="sp-label">Route</span>
+
+                    <div class="sp-value">
+                      <div class="sp-val-left">
+                        <span class="route-dot" id="selectedRouteDot"></span>
+                        <span id="selectedRouteName">Auto-route</span>
+                      </div>
+
+                      <svg
+                        class="sp-chevron"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                      >
+                        <polyline points="6 9 12 15 18 9" />
+                      </svg>
+                    </div>
+
+                    <div class="dropdown-menu" id="routeDropdown">
+                      <div class="dropdown-section-label">Routing mode</div>
+
+                      <div class="dropdown-item selected" data-route="auto">
+                        <span class="route-dot"></span>
+                        <div class="di-name">
+                          <div>Auto-route</div>
+                          <div class="di-sub">
+                            Recommended · cheapest path that passes
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="dropdown-item" data-route="premium">
+                        <span class="route-dot off"></span>
+                        <div class="di-name">
+                          <div>Premium reasoning</div>
+                          <div class="di-sub">
+                            Highest depth for complex, high-stakes tasks
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="dropdown-item" data-route="balanced">
+                        <span class="route-dot off"></span>
+                        <div class="di-name">
+                          <div>Balanced</div>
+                          <div class="di-sub">
+                            Quality and cost held in equilibrium
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="dropdown-item" data-route="economy">
+                        <span class="route-dot off"></span>
+                        <div class="di-name">
+                          <div>Economy</div>
+                          <div class="di-sub">
+                            Maximum savings for routine volume
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- PROVIDER -->
+
+                  <div
+                    class="setting-pill dropdown-wrapper"
+                    id="providerPill"
+                    onclick="toggleDropdown('providerDropdown', event)"
+                  >
+                    <span class="sp-label">Provider</span>
+
+                    <div class="sp-value">
+                      <div class="sp-val-left">
+                        <div
+                          class="provider-icon-slot small"
+                          id="selectedProviderIcon"
+                          data-icon-slot="selected-provider"
+                        ></div>
+                        <span id="selectedProviderName">OpenAI</span>
+                      </div>
+
+                      <svg
+                        class="sp-chevron"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                      >
+                        <polyline points="6 9 12 15 18 9" />
+                      </svg>
+                    </div>
+
+                    <div class="dropdown-menu" id="providerDropdown">
+                      <div id="providerDropdownItems"></div>
+                    </div>
+                  </div>
+
+                  <!-- INPUT TYPE -->
+
+                  <div
+                    class="setting-pill"
+                    onclick="showToast('✨ DSRT amplification active')"
+                  >
+                    <span class="sp-label">Input Type</span>
+
+                    <div class="sp-value">
+                      <div class="sp-val-left">
+                        <div class="provider-icon-slot small">
+                          <img
+                            class="icon-img"
+                            src="assets/dsrt-logo.png"
+                            alt="Dsrt AI logo"
+                            onerror="this.style.visibility = 'hidden'"
+                          />
+                        </div>
+                        DSRT
+                      </div>
+
+                      <svg
+                        class="sp-chevron"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                      >
+                        <polyline points="6 9 12 15 18 9" />
+                      </svg>
+                    </div>
+                  </div>
+
+                  <!-- CONFIGURATION -->
+
+                  <div
+                    class="setting-pill"
+                    onclick="showToast('⚙️ Advanced configuration')"
+                  >
+                    <span class="sp-label">Configuration</span>
+
+                    <div class="sp-value">
+                      <div class="sp-val-left">
+                        <svg
+                          width="14"
+                          height="14"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                        >
+                          <circle cx="12" cy="12" r="3" />
+                          <path
+                            d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9c.26.604.852.997 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"
+                          />
+                        </svg>
+                        Advanced
+                      </div>
+
+                      <svg
+                        class="sp-chevron"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                      >
+                        <polyline points="6 9 12 15 18 9" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Comparison Header -->
+
+                <div class="comparison-header">
+                  <div class="ch-left">
+                    <div class="ch-title-row">
+                      <span class="ch-title" id="scenarioTitle"
+                        >The Future of Electric Vehicles</span
+                      >
+                      <div class="ch-status">
+                        <div class="dot"></div>
+                        Completed
+                      </div>
+                    </div>
+
+                    <div class="ch-meta" id="scenarioMeta">
+                      Market analysis · Same task · Paired comparison
+                    </div>
+                  </div>
+
+                  <div class="ch-right">
+                    <div class="ch-metric-mini">
+                      <div class="ch-metric-label">Quality</div>
+                      <div class="ch-metric-val hi" id="metricQuality">
+                        91.4
+                      </div>
+                      <div class="ch-metric-change" id="metricQualityChange">
+                        +18.7 pts
+                      </div>
+                    </div>
+
+                    <div class="ch-metric-mini">
+                      <div class="ch-metric-label">Efficiency</div>
+                      <div class="ch-metric-val blue" id="metricEfficiency">
+                        +32%
+                      </div>
+                    </div>
+
+                    <div class="ch-metric-mini">
+                      <div class="ch-metric-label">Completion</div>
+                      <div class="ch-metric-val" id="metricCompletion">
+                        100%
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Tabs -->
+
+                <div class="app-tabs" id="appTabs">
+                  <button class="app-tab active" data-tab="output">
+                    Output
+                  </button>
+                  <button class="app-tab" data-tab="details">Details</button>
+                  <button class="app-tab" data-tab="usage">Usage</button>
+                  <button class="app-tab" data-tab="verify">
+                    Verification
+                  </button>
+                </div>
+
+                <!-- Comparison Grid -->
+
+                <div class="comparison-grid" id="outputView">
+                  <!-- Raw -->
+
+                  <div class="panel-col" id="rawPanel">
+                    <div class="panel-header">
+                      <div class="panel-model">
+                        <div
+                          class="provider-icon-slot large"
+                          id="rawPanelIcon"
+                          data-icon-slot="raw-panel"
+                        ></div>
+
+                        <div class="panel-model-info">
+                          <span class="panel-model-name" id="rawModelName"
+                            >OpenAI</span
+                          >
+                          <span class="panel-model-sub" id="rawModelSub"
+                            >Single-provider baseline · Native output</span
+                          >
+                        </div>
+                      </div>
+
+                      <div class="panel-actions">
+                        <span class="panel-token-count" id="rawTokens"
+                          >612 tokens</span
+                        >
+                        <div class="panel-badge badge-raw">RAW</div>
+                        <div class="panel-badge badge-done">
+                          <div class="dot"></div>
+                          Done
+                        </div>
+
+                        <button
+                          class="panel-action-btn"
+                          onclick="copyPanel('raw')"
+                          title="Copy"
+                        >
+                          <svg
+                            width="13"
+                            height="13"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                          >
+                            <rect x="9" y="9" width="13" height="13" rx="2" />
+                            <path
+                              d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"
+                            />
+                          </svg>
+                        </button>
+                      </div>
+                    </div>
+
+                    <div class="panel-scroll-area">
+                      <div class="panel-content" id="rawContent"></div>
+                    </div>
+                  </div>
+
+                  <!-- Amplified -->
+
+                  <div class="panel-col amplified" id="ampPanel">
+                    <div class="panel-header">
+                      <div class="panel-model">
+                        <div class="provider-icon-slot large">
+                          <img
+                            class="icon-img"
+                            src="assets/dsrt-logo.png"
+                            alt="Dsrt AI logo"
+                            onerror="this.style.visibility = 'hidden'"
+                          />
+                        </div>
+
+                        <div class="panel-model-info">
+                          <span class="panel-model-name">Dsrt AI</span>
+                          <span class="panel-model-sub"
+                            >Amplified · Verified · Traced</span
+                          >
+                        </div>
+                      </div>
+
+                      <div class="panel-actions">
+                        <span class="panel-token-count" id="ampTokens"
+                          >824 tokens</span
+                        >
+                        <div class="panel-badge badge-amp">AMPLIFIED</div>
+                        <div class="panel-badge badge-done">
+                          <div class="dot"></div>
+                          Done
+                        </div>
+
+                        <button
+                          class="panel-action-btn"
+                          onclick="copyPanel('amp')"
+                          title="Copy"
+                        >
+                          <svg
+                            width="13"
+                            height="13"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                          >
+                            <rect x="9" y="9" width="13" height="13" rx="2" />
+                            <path
+                              d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"
+                            />
+                          </svg>
+                        </button>
+
+                        <button
+                          class="panel-action-btn"
+                          onclick="showToast('📄 Exporting as PDF...')"
+                          title="Export"
+                        >
+                          <svg
+                            width="13"
+                            height="13"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                          >
+                            <path
+                              d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"
+                            />
+                            <polyline points="7 10 12 15 17 10" />
+                            <line x1="12" y1="15" x2="12" y2="3" />
+                          </svg>
+                        </button>
+                      </div>
+                    </div>
+
+                    <div class="panel-scroll-area">
+                      <div class="panel-content" id="ampContent"></div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Prompt Composer -->
+
+                <div class="prompt-container">
+                  <div
+                    class="attached-files"
+                    id="attachedFiles"
+                    style="display: none"
+                  ></div>
+
+                  <div class="prompt-box">
+                    <div style="position: relative">
+                      <button
+                        class="prompt-icon-btn"
+                        id="attachBtn"
+                        onclick="toggleAttachMenu(event)"
+                        title="Attach files"
+                      >
+                        <svg
+                          width="16"
+                          height="16"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                        >
+                          <line x1="12" y1="5" x2="12" y2="19" />
+                          <line x1="5" y1="12" x2="19" y2="12" />
+                        </svg>
+                      </button>
+
+                      <div class="attachment-menu" id="attachMenu">
+                        <div class="attachment-menu-title">
+                          Add to your task
+                        </div>
+
+                        <div class="am-item" onclick="triggerUpload('doc')">
+                          <div class="am-icon am-icon-doc">
+                            <svg
+                              width="14"
+                              height="14"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              stroke-width="2"
+                            >
+                              <path
+                                d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
+                              />
+                              <polyline points="14 2 14 8 20 8" />
+                            </svg>
+                          </div>
+                          <div class="am-info">
+                            <div class="am-label">Documents & PDFs</div>
+                            <div class="am-desc">
+                              Upload PDF, DOCX, TXT files
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="am-item" onclick="triggerUpload('img')">
+                          <div class="am-icon am-icon-img">
+                            <svg
+                              width="14"
+                              height="14"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              stroke-width="2"
+                            >
+                              <rect x="3" y="3" width="18" height="18" rx="2" />
+                              <circle cx="8.5" cy="8.5" r="1.5" />
+                              <polyline points="21 15 16 10 5 21" />
+                            </svg>
+                          </div>
+                          <div class="am-info">
+                            <div class="am-label">Images</div>
+                            <div class="am-desc">Photos and screenshots</div>
+                          </div>
+                        </div>
+
+                        <div class="am-item" onclick="triggerUpload('data')">
+                          <div class="am-icon am-icon-data">
+                            <svg
+                              width="14"
+                              height="14"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              stroke-width="2"
+                            >
+                              <path
+                                d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
+                              />
+                              <line x1="8" y1="13" x2="16" y2="13" />
+                              <line x1="8" y1="17" x2="16" y2="17" />
+                            </svg>
+                          </div>
+                          <div class="am-info">
+                            <div class="am-label">Spreadsheets</div>
+                            <div class="am-desc">CSV, XLSX data files</div>
+                          </div>
+                        </div>
+
+                        <div class="am-item" onclick="triggerUpload('code')">
+                          <div class="am-icon am-icon-code">
+                            <svg
+                              width="14"
+                              height="14"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              stroke-width="2"
+                            >
+                              <polyline points="16 18 22 12 16 6" />
+                              <polyline points="8 6 2 12 8 18" />
+                            </svg>
+                          </div>
+                          <div class="am-info">
+                            <div class="am-label">Code files</div>
+                            <div class="am-desc">Source and configuration</div>
+                          </div>
+                        </div>
+
+                        <div class="am-item" onclick="addUrlAttachment()">
+                          <div class="am-icon am-icon-url">
+                            <svg
+                              width="14"
+                              height="14"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              stroke-width="2"
+                            >
+                              <path
+                                d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"
+                              />
+                              <path
+                                d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"
+                              />
+                            </svg>
+                          </div>
+                          <div class="am-info">
+                            <div class="am-label">Add a URL</div>
+                            <div class="am-desc">Web references</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <button
+                      class="prompt-icon-btn"
+                      id="voiceBtn"
+                      onclick="toggleVoice()"
+                      title="Voice input"
+                    >
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                      >
+                        <path
+                          d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"
+                        />
+                        <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+                        <line x1="12" y1="19" x2="12" y2="23" />
+                        <line x1="8" y1="23" x2="16" y2="23" />
+                      </svg>
+                    </button>
+
+                    <input
+                      type="text"
+                      class="prompt-input"
+                      id="promptInput"
+                      placeholder="Ask Dsrt AI to analyze, calculate, compare or execute a task..."
+                      onkeydown="if (event.key === 'Enter') runComparison();"
+                    />
+
+                    <div class="prompt-controls">
+                      <button
+                        class="model-selector-btn"
+                        onclick="toggleDropdown('routeDropdown', event)"
+                      >
+                        <span id="promptRouteName">Auto-route</span>
+                        <svg
+                          width="10"
+                          height="10"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                        >
+                          <polyline points="6 9 12 15 18 9" />
+                        </svg>
+                      </button>
+
+                      <button class="prompt-run-btn" onclick="runComparison()">
+                        <svg
+                          width="10"
+                          height="10"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                        >
+                          <polygon points="5 3 19 12 5 21 5 3" />
+                        </svg>
+                        Run
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <input
+                  type="file"
+                  class="hidden-input"
+                  id="fileInput"
+                  multiple
+                  onchange="handleFileUpload(this)"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- =====================================================================
+     CTA BAND — matte black box (after the demo, before the manifesto)
+     ===================================================================== -->
+
+    <section class="cta-band" id="ctaBand">
+      <div class="cta-box reveal from-up">
+        <div class="cta-stack" id="ctaStack">
+          <span class="cta-line is-active">More intelligence.</span>
+          <span class="cta-line">Greater efficiency.</span>
+          <span class="cta-line">Controlled AI expenditure.</span>
+        </div>
+
+        <a class="cta-get" href="Registration.html?intent=preregister">
+          <span>Pre-register</span>
+          <span>with Dsrt AI</span>
+          <small>Early access · Limited seats</small>
+        </a>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+     STORY WRAPPER — BG 2 shared by manifesto, system and principle pages
+     ===================================================================== -->
+
+    <div class="story-wrap" id="storyWrap">
+      <!-- 🟡 PLACEHOLDER [BG 2] → assets/images/backgrounds/bg-2-story.jpg (1920×1020, native) -->
+      <div class="story-bg-stick" aria-hidden="true">
+        <div class="story-bg-img" id="storyBgImg"></div>
+        <div class="story-bg-veil"></div>
+      </div>
+
+      <!-- ============ PAGE 2 — MANIFESTO + BUILD ============ -->
+
+      <div class="page page-story" id="pageStory">
+        <section class="scroll-text-section" id="manifesto">
+          <div class="scroll-text-inner">
+            <div class="scroll-eyebrow">Dsrt AI · Manifesto</div>
+            <p class="scroll-text" id="scrollText">
+              We force AI to work harder, think smarter, and cost less —
+              empowering individuals and enterprises to do more with every
+              model, every token, and every dollar.
+            </p>
+          </div>
+        </section>
+
+        <section class="build-section" id="build">
+          <div class="build-container">
+            <div class="build-content reveal from-left">
+              <h2 class="build-title">There is so much left to build.</h2>
+
+              <p class="build-body">
+                Build with DSRT AI because we understand what hurts your
+                enterprise's profits.
+              </p>
+
+              <a class="btn-inline" href="Registration.html?intent=preregister">
+                Pre-register with Dsrt AI <span aria-hidden="true">→</span>
+              </a>
+            </div>
+
+            <!-- 🟡 PLACEHOLDER [IMAGE] → assets/images/sections/build.png (1400×1050, 4:3) -->
+            <div
+              class="split-image reveal from-right"
+              data-image-slot="build-visual"
+            >
+              <img
+                class="split-img"
+                src="assets/images/sections/build.png"
+                data-base="assets/images/sections/build"
+                data-step="0"
+                alt="Build with Dsrt AI"
+                loading="lazy"
+                onload="this.parentNode.classList.add('has-img')"
+                onerror="sectionImgFallback(this)"
+              />
+              <span class="split-ph"
+                >Image Placeholder<small
+                  >assets/images/sections/build.png</small
+                ></span
+              >
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- ============ PAGE 3 — SYSTEM (animated architecture) ============ -->
+
+      <div class="page page-system" id="pageSystem">
+        <canvas
+          class="system-canvas"
+          id="sysCanvas"
+          aria-hidden="true"
+        ></canvas>
+        <div class="system-grid-bg" aria-hidden="true"></div>
+
+        <div class="system-head reveal from-up">
+          <div class="system-fig">Fig 0.1 &nbsp;·&nbsp; System</div>
+          <h2 class="system-title">DSRT AI</h2>
+          <p class="system-sub">
+            Providers → Amplification → Evaluation → Economics
+          </p>
+          <h3 class="system-heading">
+            One system. Every provider. Measured economics.
+          </h3>
+        </div>
+
+        <div class="system-stage-wrap reveal from-up">
+          <div class="system-frame">
+            <div class="system-scroll">
+              <div class="system-board" id="sysBoard">
+                <svg
+                  class="sys-svg"
+                  viewBox="0 0 1000 600"
+                  preserveAspectRatio="xMidYMid meet"
+                  aria-hidden="true"
+                >
+                  <defs>
+                    <filter
+                      id="sysGlow"
+                      x="-50%"
+                      y="-50%"
+                      width="200%"
+                      height="200%"
+                    >
+                      <feGaussianBlur stdDeviation="2.5" result="b" />
+                      <feMerge>
+                        <feMergeNode in="b" />
+                        <feMergeNode in="SourceGraphic" />
+                      </feMerge>
+                    </filter>
+                  </defs>
+
+                  <!-- Inputs → Core -->
+                  <path
+                    class="sys-path"
+                    data-flow="in-task"
+                    d="M210 110 C262 110 272 255 325 255"
+                  />
+                  <path
+                    class="sys-path"
+                    data-flow="in-ctx"
+                    d="M210 300 L325 300"
+                  />
+                  <path
+                    class="sys-path"
+                    data-flow="in-req"
+                    d="M210 490 C262 490 272 345 325 345"
+                  />
+
+                  <!-- Core → Providers -->
+                  <path
+                    class="sys-path"
+                    data-flow="route-a"
+                    d="M555 255 C600 255 610 110 630 110"
+                  />
+                  <path
+                    class="sys-path"
+                    data-flow="route-b"
+                    d="M555 300 L630 300"
+                  />
+                  <path
+                    class="sys-path"
+                    data-flow="route-c"
+                    d="M555 345 C600 345 610 470 630 470"
+                  />
+
+                  <!-- Providers → Output -->
+                  <path
+                    class="sys-path"
+                    data-flow="ret-a"
+                    d="M800 110 C860 120 820 280 830 282"
+                  />
+                  <path
+                    class="sys-path"
+                    data-flow="ret-b"
+                    d="M800 300 L830 300"
+                  />
+                  <path
+                    class="sys-path"
+                    data-flow="ret-c"
+                    d="M800 470 C860 460 820 322 830 318"
+                  />
+
+                  <!-- Core → Evaluation → Economics -->
+                  <path
+                    class="sys-path"
+                    data-flow="core-eval"
+                    d="M440 388 L440 507"
+                  />
+                  <path
+                    class="sys-path"
+                    data-flow="eval-econ"
+                    d="M580 545 L630 545"
+                  />
+
+                  <g id="sysPackets"></g>
+                </svg>
+
+                <div
+                  class="sys-halo h1"
+                  aria-hidden="true"
+                  style="left: 44%; top: 50%"
+                ></div>
+                <div
+                  class="sys-halo h2"
+                  aria-hidden="true"
+                  style="left: 44%; top: 50%"
+                ></div>
+                <div class="sys-scan" aria-hidden="true"></div>
+
+                <!-- Inputs -->
+                <div
+                  class="sys-node"
+                  data-node="task"
+                  style="left: 12.5%; top: 18.33%"
+                >
+                  <span class="sn-dot"></span>
+                  <div class="sn-title">Task Input</div>
+                  <div class="sn-sub">Intent · Context</div>
+                </div>
+
+                <div
+                  class="sys-node"
+                  data-node="ctx"
+                  style="left: 12.5%; top: 50%"
+                >
+                  <span class="sn-dot"></span>
+                  <div class="sn-title">Context</div>
+                  <div class="sn-sub">Knowledge · History</div>
+                </div>
+
+                <div
+                  class="sys-node"
+                  data-node="req"
+                  style="left: 12.5%; top: 81.67%"
+                >
+                  <span class="sn-dot"></span>
+                  <div class="sn-title">Requirements</div>
+                  <div class="sn-sub">Quality · Format</div>
+                </div>
+
+                <!-- Core -->
+                <div
+                  class="sys-node node-core"
+                  data-node="core"
+                  style="left: 44%; top: 50%"
+                >
+                  <span class="sn-dot"></span>
+                  <svg
+                    class="sys-orb"
+                    viewBox="0 0 60 60"
+                    fill="none"
+                    stroke="#ffffff"
+                    stroke-width="0.8"
+                    aria-hidden="true"
+                  >
+                    <circle cx="30" cy="30" r="26" stroke-opacity="0.35" />
+                    <ellipse cx="30" cy="30" rx="26" ry="10" />
+                    <ellipse
+                      cx="30"
+                      cy="30"
+                      rx="26"
+                      ry="10"
+                      transform="rotate(60 30 30)"
+                    />
+                    <ellipse
+                      cx="30"
+                      cy="30"
+                      rx="26"
+                      ry="10"
+                      transform="rotate(-60 30 30)"
+                    />
+                    <ellipse cx="30" cy="30" rx="10" ry="26" />
+                    <circle cx="30" cy="30" r="2.6" fill="#ffffff" />
+                  </svg>
+                  <div class="sn-title">DSRT CORE</div>
+                  <div class="sn-caps">Amplification engine</div>
+                  <div class="sn-ptis">
+                    PTIS · Per-Token Intelligence System
+                  </div>
+                </div>
+
+                <!-- Providers (icons from the provider SVG set) -->
+                <div
+                  class="sys-node node-provider"
+                  data-node="prov-a"
+                  style="left: 71.5%; top: 11%"
+                >
+                  <span class="sn-dot"></span>
+                  <div class="sn-row">
+                    <div
+                      class="provider-icon-slot"
+                      data-icon-slot="sys-openai"
+                    ></div>
+                    <div class="sn-text">
+                      <div class="sn-title">OpenAI</div>
+                      <div class="sn-sub">Direct lab</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div
+                  class="sys-node node-provider"
+                  data-node="prov-b"
+                  style="left: 71.5%; top: 50%"
+                >
+                  <span class="sn-dot"></span>
+                  <div class="sn-row">
+                    <div
+                      class="provider-icon-slot"
+                      data-icon-slot="sys-anthropic"
+                    ></div>
+                    <div class="sn-text">
+                      <div class="sn-title">Anthropic</div>
+                      <div class="sn-sub">Direct lab</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div
+                  class="sys-node node-provider"
+                  data-node="prov-c"
+                  style="left: 71.5%; top: 78.33%"
+                >
+                  <span class="sn-dot"></span>
+                  <div class="sn-row">
+                    <div
+                      class="provider-icon-slot"
+                      data-icon-slot="sys-aws"
+                    ></div>
+                    <div class="sn-text">
+                      <div class="sn-title">Cloud platforms</div>
+                      <div class="sn-sub">+ 20 more providers</div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Output -->
+                <div
+                  class="sys-node node-output"
+                  data-node="output"
+                  style="left: 90%; top: 50%"
+                >
+                  <span class="sn-dot"></span>
+                  <div class="sn-title">Verified output</div>
+                  <div class="sn-sub">Raw · Amplified · Trace</div>
+                </div>
+
+                <!-- Evaluation + Economics -->
+                <div
+                  class="sys-node node-eval"
+                  data-node="eval"
+                  style="left: 44%; top: 90.83%"
+                >
+                  <span class="sn-dot"></span>
+                  <div class="sn-title">Evaluation &amp; Verification</div>
+                  <div class="sn-sub">
+                    Quality · Correctness · Cost · Overhead
+                  </div>
+                </div>
+
+                <div
+                  class="sys-node node-econ"
+                  data-node="econ"
+                  style="left: 73.5%; top: 90.83%"
+                >
+                  <span class="sn-dot"></span>
+                  <div class="sn-title">Economic Measurement</div>
+                  <div class="sn-sub">Tokens · Cost · Savings · Margin</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Stage rail -->
+            <div class="sys-stages" id="sysStages">
+              <div class="sys-stage is-active">
+                <span class="ss-num">01</span><span class="ss-name">Intake</span
+                ><span class="ss-bar"><i></i></span>
+              </div>
+              <div class="sys-stage">
+                <span class="ss-num">02</span
+                ><span class="ss-name">Amplify</span
+                ><span class="ss-bar"><i></i></span>
+              </div>
+              <div class="sys-stage">
+                <span class="ss-num">03</span><span class="ss-name">Route</span
+                ><span class="ss-bar"><i></i></span>
+              </div>
+              <div class="sys-stage">
+                <span class="ss-num">04</span><span class="ss-name">Verify</span
+                ><span class="ss-bar"><i></i></span>
+              </div>
+              <div class="sys-stage">
+                <span class="ss-num">05</span
+                ><span class="ss-name">Measure</span
+                ><span class="ss-bar"><i></i></span>
+              </div>
+            </div>
+
+            <div class="sys-caption" id="sysCaption">
+              <span>01</span> Intake — Task, context and requirements enter one
+              governed pipeline.
+            </div>
+
+            <!-- Live feed -->
+            <div class="sys-live">
+              <span class="sys-live-tag">Simulated live feed</span>
+              <div class="sys-live-cell">
+                <div class="sys-live-label">Tasks routed</div>
+                <div class="sys-live-val" id="cntRouted">12,840</div>
+              </div>
+              <div class="sys-live-cell">
+                <div class="sys-live-label">Verification passes</div>
+                <div class="sys-live-val" id="cntVerified">11,972</div>
+              </div>
+              <div class="sys-live-cell">
+                <div class="sys-live-label">Tokens measured</div>
+                <div class="sys-live-val" id="cntTokens">4,812,930</div>
+              </div>
+              <div class="sys-live-cell">
+                <div class="sys-live-label">Cost lines traced</div>
+                <div class="sys-live-val" id="cntCost">38,410</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="system-cta reveal from-up">
+          <a
+            class="btn-preregister"
+            href="Registration.html?intent=preregister"
+          >
+            Pre-register with Dsrt AI
+            <span class="arrow" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- ============ PAGE 4 — PRINCIPLE ============ -->
+
+      <div class="page desc-page" id="pagePrinciple">
+        <div class="desc-inner">
+          <div class="desc-row">
+            <div
+              class="desc-col-title reveal from-left"
+              style="--reveal-delay: 0ms"
+            >
+              <div class="desc-index">01 · Our principle</div>
+              <h2 class="desc-title">More value from every AI dollar.</h2>
+              <a class="btn-inline" href="Registration.html?intent=preregister"
+                >Pre-register with Dsrt AI <span aria-hidden="true">→</span></a
+              >
+            </div>
+
+            <div class="desc-body reveal from-up" style="--reveal-delay: 120ms">
+              Businesses should get more value from every dollar spent on AI.
+              Whether it's
+              <strong>reducing unnecessary AI costs</strong>,
+              <strong>improving the quality of everyday work</strong>, or making
+              <strong>advanced AI capabilities more accessible</strong>, Dsrt
+              aims to help individuals and enterprises do more with AI while
+              spending less.
+              <ul class="desc-points">
+                <li>Spend only where quality demands it</li>
+                <li>Measure every token, not just every invoice</li>
+                <li>Make premium reasoning reachable on everyday budgets</li>
+              </ul>
+            </div>
+
+            <!-- 🟡 PLACEHOLDER [IMAGE] → assets/images/sections/principle.png (1500×1200, 5:4) -->
+            <div
+              class="split-image xl reveal from-right"
+              style="--reveal-delay: 240ms"
+              data-image-slot="principle-visual"
+            >
+              <img
+                class="split-img"
+                src="assets/images/sections/principle.png"
+                data-base="assets/images/sections/principle"
+                data-step="0"
+                alt="Our principle"
+                loading="lazy"
+                onload="this.parentNode.classList.add('has-img')"
+                onerror="sectionImgFallback(this)"
+              />
+              <span class="split-ph"
+                >Image Placeholder<small
+                  >assets/images/sections/principle.png</small
+                ></span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ PAGE 5 — INTELLIGENCE ============ -->
+
+      <div class="page desc-page" id="pageIntelligence">
+        <div class="desc-inner">
+          <div class="desc-row">
+            <div
+              class="desc-col-title reveal from-left"
+              style="--reveal-delay: 0ms"
+            >
+              <div class="desc-index">02 · Intelligence at your budget</div>
+              <h2 class="desc-title">
+                Route every task to the cheapest path that still passes.
+              </h2>
+              <a class="btn-inline" href="Registration.html?intent=preregister"
+                >Pre-register with Dsrt AI <span aria-hidden="true">→</span></a
+              >
+            </div>
+
+            <div class="desc-body reveal from-up" style="--reveal-delay: 120ms">
+              Dsrt AI amplifies the providers you already use. Each task is sent
+              to the
+              <strong>least expensive inference path</strong> that still meets
+              your quality threshold, then verified with
+              <strong>measured quality, cost and completion data</strong> — so
+              you can see exactly where every token and every dollar goes.
+              <ul class="desc-points">
+                <li>Quality threshold set by you, enforced by Dsrt</li>
+                <li>Hybrid routing across providers and capability tiers</li>
+                <li>Every run returns cost, quality and completion metrics</li>
+              </ul>
+            </div>
+
+            <!-- 🟡 PLACEHOLDER [IMAGE] → assets/images/sections/intelligence.png (1500×1200, 5:4) -->
+            <div
+              class="split-image xl reveal from-right"
+              style="--reveal-delay: 240ms"
+              data-image-slot="intelligence-visual"
+            >
+              <img
+                class="split-img"
+                src="assets/images/sections/intelligence.png"
+                data-base="assets/images/sections/intelligence"
+                data-step="0"
+                alt="Intelligence at your budget"
+                loading="lazy"
+                onload="this.parentNode.classList.add('has-img')"
+                onerror="sectionImgFallback(this)"
+              />
+              <span class="split-ph"
+                >Image Placeholder<small
+                  >assets/images/sections/intelligence.png</small
+                ></span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ PAGE 6 — VERIFICATION ============ -->
+
+      <div class="page desc-page" id="pageVerification">
+        <div class="desc-inner">
+          <div class="desc-row">
+            <div
+              class="desc-col-title reveal from-left"
+              style="--reveal-delay: 0ms"
+            >
+              <div class="desc-index">03 · Verified, not assumed</div>
+              <h2 class="desc-title">Proof travels with every answer.</h2>
+              <a class="btn-inline" href="Registration.html?intent=preregister"
+                >Pre-register with Dsrt AI <span aria-hidden="true">→</span></a
+              >
+            </div>
+
+            <div class="desc-body reveal from-up" style="--reveal-delay: 120ms">
+              Cheaper is only better if it still passes. Dsrt AI pairs every
+              amplified output with a
+              <strong>raw baseline</strong>, flags
+              <strong>unsupported claims and speculative numbers</strong>, and
+              reports the <strong>amplification overhead</strong> alongside the
+              savings — so the economics are established by measurement, not by
+              promise.
+              <ul class="desc-points">
+                <li>Side-by-side raw vs amplified comparison</li>
+                <li>Traceable calculations and labelled assumptions</li>
+                <li>Overhead included in every cost figure</li>
+              </ul>
+            </div>
+
+            <!-- 🟡 PLACEHOLDER [IMAGE] → assets/images/sections/verification.png (1500×1200, 5:4) -->
+            <div
+              class="split-image xl reveal from-right"
+              style="--reveal-delay: 240ms"
+              data-image-slot="verification-visual"
+            >
+              <img
+                class="split-img"
+                src="assets/images/sections/verification.png"
+                data-base="assets/images/sections/verification"
+                data-step="0"
+                alt="Verified, not assumed"
+                loading="lazy"
+                onload="this.parentNode.classList.add('has-img')"
+                onerror="sectionImgFallback(this)"
+              />
+              <span class="split-ph"
+                >Image Placeholder<small
+                  >assets/images/sections/verification.png</small
+                ></span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- =====================================================================
+     PAGE 7 — INDUSTRY APPLICATIONS (4 core + 4 additional, business view)
+     ===================================================================== -->
+
+    <section class="page page-industries" id="pageIndustries">
+      <div class="ind-wrap">
+        <div class="ind-head reveal from-up">
+          <div class="ind-eyebrow">// Industry applications · Profit view</div>
+          <h2 class="ind-title">Where AI spend becomes margin.</h2>
+          <p class="ind-sub">
+            Every application is judged on the three numbers an owner needs
+            before scaling AI: cost per outcome, quality against a threshold,
+            and proof for every decision.
+          </p>
+        </div>
+
+        <div class="ind-levers">
+          <div class="lever reveal from-up" style="--reveal-delay: 0ms">
+            <div class="lever-num">01 · Route</div>
+            <div class="lever-name">Routine volume goes to economy paths.</div>
+            <div class="lever-text">
+              Most tasks do not need premium reasoning. Dsrt moves them to the
+              cheapest path that still passes.
+            </div>
+          </div>
+          <div class="lever reveal from-up" style="--reveal-delay: 120ms">
+            <div class="lever-num">02 · Gate</div>
+            <div class="lever-name">
+              Premium spend only where quality demands it.
+            </div>
+            <div class="lever-text">
+              Quality thresholds are set by the business and enforced on every
+              task before an output is released.
+            </div>
+          </div>
+          <div class="lever reveal from-up" style="--reveal-delay: 240ms">
+            <div class="lever-num">03 · Prove</div>
+            <div class="lever-name">Every task returns a cost and a trace.</div>
+            <div class="lever-text">
+              Spend is reported per outcome, including amplification overhead,
+              so finance can verify the savings.
+            </div>
+          </div>
+        </div>
+
+        <div class="ind-grid">
+          <!-- 1 · Software Engineering -->
+          <article class="ind-card reveal from-up" style="--reveal-delay: 0ms">
+            <div class="ind-top">
+              <div class="ind-icon" aria-hidden="true">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                >
+                  <polyline points="16 18 22 12 16 6" />
+                  <polyline points="8 6 2 12 8 18" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="ind-name">Software Engineering</h3>
+                <div class="ind-tags">
+                  Code review · Debugging · Architecture
+                </div>
+              </div>
+            </div>
+
+            <p class="ind-desc">
+              Engineering leaders want faster reviews without paying premium
+              rates on every commit. DSRT gives each code task the reasoning
+              depth it needs and keeps routine checks on economy paths.
+            </p>
+
+            <ol class="ind-steps">
+              <li>
+                <span>01</span>Task: Security and logic review across a 50K-line
+                codebase.
+              </li>
+              <li>
+                <span>02</span>DSRT: Critical paths to premium reasoning;
+                routine checks to economy paths.
+              </li>
+              <li>
+                <span>03</span>Result: Severity-ranked findings with fix
+                suggestions and a full trace.
+              </li>
+            </ol>
+
+            <div class="ind-profit">
+              <div class="ind-profit-label">Profit lens</div>
+              <p>
+                Fewer premium hours on routine work, and faster release cycles
+                that protect revenue timing.
+              </p>
+            </div>
+
+            <div class="ind-metrics">
+              <div><span>Quality target</span><strong>≥ 92/100</strong></div>
+              <div>
+                <span>Cost efficiency</span><strong>30–50% target</strong>
+              </div>
+              <div><span>Verification</span><strong>Full trace</strong></div>
+            </div>
+
+            <a class="ind-cta" href="Registration.html?intent=preregister"
+              >Pre-register with Dsrt AI <span class="arrow">→</span></a
+            >
+          </article>
+
+          <!-- 2 · Finance & Operations -->
+          <article
+            class="ind-card reveal from-up"
+            style="--reveal-delay: 120ms"
+          >
+            <div class="ind-top">
+              <div class="ind-icon" aria-hidden="true">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                >
+                  <line x1="12" y1="1" x2="12" y2="23" />
+                  <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="ind-name">Finance &amp; Operations</h3>
+                <div class="ind-tags">
+                  Financial analysis · Reporting · Risk assessment
+                </div>
+              </div>
+            </div>
+
+            <p class="ind-desc">
+              Finance teams process high volumes of analysis where a wrong
+              number costs more than a slow answer. DSRT verifies calculations,
+              labels assumptions and keeps an audit trail.
+            </p>
+
+            <ol class="ind-steps">
+              <li>
+                <span>01</span>Task: Quarterly earnings review with margin and
+                cash-flow analysis.
+              </li>
+              <li>
+                <span>02</span>DSRT: Amplifies reasoning, recalculates figures,
+                flags unsupported claims.
+              </li>
+              <li>
+                <span>03</span>Result: Traceable report with verified math and
+                labelled assumptions.
+              </li>
+            </ol>
+
+            <div class="ind-profit">
+              <div class="ind-profit-label">Profit lens</div>
+              <p>
+                Margin erosion and cash-flow risk surface before they reach the
+                board pack, not after.
+              </p>
+            </div>
+
+            <div class="ind-metrics">
+              <div>
+                <span>Cost efficiency</span><strong>35–50% target</strong>
+              </div>
+              <div>
+                <span>Verification</span><strong>Full audit trail</strong>
+              </div>
+              <div>
+                <span>Calculation check</span><strong>Per figure</strong>
+              </div>
+            </div>
+
+            <a class="ind-cta" href="Registration.html?intent=preregister"
+              >Pre-register with Dsrt AI <span class="arrow">→</span></a
+            >
+          </article>
+
+          <!-- 3 · Customer Operations -->
+          <article class="ind-card reveal from-up" style="--reveal-delay: 0ms">
+            <div class="ind-top">
+              <div class="ind-icon" aria-hidden="true">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                >
+                  <path
+                    d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
+                  />
+                </svg>
+              </div>
+              <div>
+                <h3 class="ind-name">Customer Operations</h3>
+                <div class="ind-tags">
+                  High-volume support · Business workflows
+                </div>
+              </div>
+            </div>
+
+            <p class="ind-desc">
+              Support leaders are judged on resolution speed and cost per
+              ticket. DSRT routes simple queries to efficient paths and reserves
+              premium reasoning for complex escalations.
+            </p>
+
+            <ol class="ind-steps">
+              <li>
+                <span>01</span>Task: Classify and resolve 12,000 daily tickets
+                across four tiers.
+              </li>
+              <li>
+                <span>02</span>DSRT: Routes 78% of queries to economy paths,
+                escalates 22% to premium.
+              </li>
+              <li>
+                <span>03</span>Result: Higher first-touch resolution at a lower
+                cost per ticket.
+              </li>
+            </ol>
+
+            <div class="ind-profit">
+              <div class="ind-profit-label">Profit lens</div>
+              <p>
+                Lower cost per ticket compounds across volume, and faster
+                resolution supports retention.
+              </p>
+            </div>
+
+            <div class="ind-metrics">
+              <div>
+                <span>Resolution rate</span><strong>≥ 92% target</strong>
+              </div>
+              <div>
+                <span>Cost reduction</span><strong>40–60% target</strong>
+              </div>
+              <div><span>Latency SLO</span><strong>&lt; 3.0s p95</strong></div>
+            </div>
+
+            <a class="ind-cta" href="Registration.html?intent=preregister"
+              >Pre-register with Dsrt AI <span class="arrow">→</span></a
+            >
+          </article>
+
+          <!-- 4 · Research & Knowledge Work -->
+          <article
+            class="ind-card reveal from-up"
+            style="--reveal-delay: 120ms"
+          >
+            <div class="ind-top">
+              <div class="ind-icon" aria-hidden="true">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                >
+                  <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+                  <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="ind-name">Research &amp; Knowledge Work</h3>
+                <div class="ind-tags">
+                  Research · Document intelligence · Analysis
+                </div>
+              </div>
+            </div>
+
+            <p class="ind-desc">
+              Strategy and research teams synthesise large document sets. DSRT
+              traces every claim to its source and flags extrapolations before
+              they reach a decision.
+            </p>
+
+            <ol class="ind-steps">
+              <li>
+                <span>01</span>Task: Synthesise 40 research papers and eight
+                internal reports.
+              </li>
+              <li>
+                <span>02</span>DSRT: Builds a knowledge map and links each claim
+                to its source.
+              </li>
+              <li>
+                <span>03</span>Result: Structured synthesis with per-claim
+                attribution and confidence scoring.
+              </li>
+            </ol>
+
+            <div class="ind-profit">
+              <div class="ind-profit-label">Profit lens</div>
+              <p>
+                Faster, defensible decisions reduce the cost of acting on weak
+                evidence.
+              </p>
+            </div>
+
+            <div class="ind-metrics">
+              <div>
+                <span>Source traceability</span><strong>100% required</strong>
+              </div>
+              <div>
+                <span>Unsupported claims</span><strong>≤ 2% target</strong>
+              </div>
+              <div><span>Verification</span><strong>Per claim</strong></div>
+            </div>
+
+            <a class="ind-cta" href="Registration.html?intent=preregister"
+              >Pre-register with Dsrt AI <span class="arrow">→</span></a
+            >
+          </article>
+
+          <!-- 5 · Marketing & Growth -->
+          <article class="ind-card reveal from-up" style="--reveal-delay: 0ms">
+            <div class="ind-top">
+              <div class="ind-icon" aria-hidden="true">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                >
+                  <path
+                    d="M3 11v2a1 1 0 0 0 1 1h2l5 4V6L6 10H4a1 1 0 0 0-1 1z"
+                  />
+                  <path d="M16 8a5 5 0 0 1 0 8" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="ind-name">Marketing &amp; Growth</h3>
+                <div class="ind-tags">
+                  Campaign copy · Segmentation · Content variants
+                </div>
+              </div>
+            </div>
+
+            <p class="ind-desc">
+              Growth teams need many variants at a low unit cost. DSRT generates
+              and scores variants against brand and performance criteria, then
+              sends only the strongest to premium review.
+            </p>
+
+            <ol class="ind-steps">
+              <li>
+                <span>01</span>Task: Produce 60 ad and landing-page variants
+                from one campaign brief.
+              </li>
+              <li>
+                <span>02</span>DSRT: Generates on economy paths; scores against
+                brand rules and clarity.
+              </li>
+              <li>
+                <span>03</span>Result: Ranked shortlist with cost per asset and
+                rationale for each pick.
+              </li>
+            </ol>
+
+            <div class="ind-profit">
+              <div class="ind-profit-label">Profit lens</div>
+              <p>
+                Cost per asset falls while testing volume rises, so each
+                marketing dollar buys more experiments.
+              </p>
+            </div>
+
+            <div class="ind-metrics">
+              <div><span>Cost per asset</span><strong>Tracked</strong></div>
+              <div><span>Brand check</span><strong>Pass / fail</strong></div>
+              <div><span>Verification</span><strong>Per variant</strong></div>
+            </div>
+
+            <a class="ind-cta" href="Registration.html?intent=preregister"
+              >Pre-register with Dsrt AI <span class="arrow">→</span></a
+            >
+          </article>
+
+          <!-- 6 · Legal & Compliance -->
+          <article
+            class="ind-card reveal from-up"
+            style="--reveal-delay: 120ms"
+          >
+            <div class="ind-top">
+              <div class="ind-icon" aria-hidden="true">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                >
+                  <line x1="12" y1="3" x2="12" y2="21" />
+                  <line x1="5" y1="7" x2="19" y2="7" />
+                  <path d="M5 7l-3 7a3 3 0 0 0 6 0z" />
+                  <path d="M19 7l-3 7a3 3 0 0 0 6 0z" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="ind-name">Legal &amp; Compliance</h3>
+                <div class="ind-tags">
+                  Contract review · Obligations · Policy checks
+                </div>
+              </div>
+            </div>
+
+            <p class="ind-desc">
+              Legal teams need coverage without billing hours for every routine
+              clause. DSRT extracts obligations and flags deviations from the
+              playbook, with human sign-off kept at every decision point.
+            </p>
+
+            <ol class="ind-steps">
+              <li>
+                <span>01</span>Task: Review 200 supplier contracts for renewal,
+                liability and termination terms.
+              </li>
+              <li>
+                <span>02</span>DSRT: Extracts clauses, compares them to the
+                playbook, flags deviations.
+              </li>
+              <li>
+                <span>03</span>Result: Clause map with risk tiers and the source
+                text behind each flag.
+              </li>
+            </ol>
+
+            <div class="ind-profit">
+              <div class="ind-profit-label">Profit lens</div>
+              <p>
+                Review hours shift toward negotiation, and missed renewal
+                windows, a direct cost, are avoided.
+              </p>
+            </div>
+
+            <div class="ind-metrics">
+              <div><span>Human sign-off</span><strong>Required</strong></div>
+              <div><span>Clause traceability</span><strong>100%</strong></div>
+              <div>
+                <span>Review time</span><strong>Tracked per file</strong>
+              </div>
+            </div>
+
+            <a class="ind-cta" href="Registration.html?intent=preregister"
+              >Pre-register with Dsrt AI <span class="arrow">→</span></a
+            >
+          </article>
+
+          <!-- 7 · Supply Chain & Operations -->
+          <article class="ind-card reveal from-up" style="--reveal-delay: 0ms">
+            <div class="ind-top">
+              <div class="ind-icon" aria-hidden="true">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                >
+                  <rect x="1" y="6" width="13" height="10" rx="1" />
+                  <path d="M14 10h4l3 3v3h-7" />
+                  <circle cx="5.5" cy="18.5" r="2" />
+                  <circle cx="17.5" cy="18.5" r="2" />
+                </svg>
+              </div>
+              <div>
+                <h3 class="ind-name">Supply Chain &amp; Operations</h3>
+                <div class="ind-tags">
+                  Demand summaries · Exceptions · Supplier comms
+                </div>
+              </div>
+            </div>
+
+            <p class="ind-desc">
+              Operations teams face a constant stream of exceptions. DSRT
+              triages alerts, drafts supplier communications and summarises root
+              causes, so managers act on the few that matter.
+            </p>
+
+            <ol class="ind-steps">
+              <li>
+                <span>01</span>Task: Triage 800 daily shipment exceptions across
+                three regions.
+              </li>
+              <li>
+                <span>02</span>DSRT: Ranks exceptions by cost impact; drafts
+                supplier notices on economy paths.
+              </li>
+              <li>
+                <span>03</span>Result: Prioritised action list with estimated
+                cost exposure per exception.
+              </li>
+            </ol>
+
+            <div class="ind-profit">
+              <div class="ind-profit-label">Profit lens</div>
+              <p>
+                Expedite fees and stock-outs are the margin leak. Ranking by
+                cost impact targets them first.
+              </p>
+            </div>
+
+            <div class="ind-metrics">
+              <div><span>Triage time</span><strong>Reduced target</strong></div>
+              <div>
+                <span>Exception accuracy</span><strong>Measured</strong>
+              </div>
+              <div><span>Cost per report</span><strong>Tracked</strong></div>
+            </div>
+
+            <a class="ind-cta" href="Registration.html?intent=preregister"
+              >Pre-register with Dsrt AI <span class="arrow">→</span></a
+            >
+          </article>
+
+          <!-- 8 · Healthcare Administration -->
+          <article
+            class="ind-card reveal from-up"
+            style="--reveal-delay: 120ms"
+          >
+            <div class="ind-top">
+              <div class="ind-icon" aria-hidden="true">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                >
+                  <path
+                    d="M12 21s-7-4.5-9-9a5 5 0 0 1 9-3 5 5 0 0 1 9 3c-2 4.5-9 9-9 9z"
+                  />
+                </svg>
+              </div>
+              <div>
+                <h3 class="ind-name">Healthcare Administration</h3>
+                <div class="ind-tags">
+                  Documentation · Claims support · Scheduling
+                </div>
+              </div>
+            </div>
+
+            <p class="ind-desc">
+              Administrative load drains clinical capacity and margin. DSRT
+              drafts documentation and claims support for staff review. It does
+              not make clinical decisions.
+            </p>
+
+            <ol class="ind-steps">
+              <li>
+                <span>01</span>Task: Draft visit summaries and
+                prior-authorisation packets from structured notes.
+              </li>
+              <li>
+                <span>02</span>DSRT: Routes drafting to economy paths; checks
+                completeness against payer rules.
+              </li>
+              <li>
+                <span>03</span>Result: Draft packets with missing-field flags,
+                ready for clinician review.
+              </li>
+            </ol>
+
+            <div class="ind-profit">
+              <div class="ind-profit-label">Profit lens</div>
+              <p>
+                Shorter administrative cycles free clinical capacity and speed
+                up reimbursement.
+              </p>
+            </div>
+
+            <div class="ind-metrics">
+              <div>
+                <span>Clinical decisions</span><strong>None automated</strong>
+              </div>
+              <div><span>Review</span><strong>Required</strong></div>
+              <div>
+                <span>Completeness check</span><strong>Per packet</strong>
+              </div>
+            </div>
+
+            <a class="ind-cta" href="Registration.html?intent=preregister"
+              >Pre-register with Dsrt AI <span class="arrow">→</span></a
+            >
+          </article>
+        </div>
+
+        <p class="ind-note">
+          Targets shown are planning ranges drawn from pilot scenarios, not
+          guaranteed results. Regulated workflows require human review and your
+          own compliance sign-off.
+        </p>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+     PAGE 8 — PROVIDER MARQUEE
+     ===================================================================== -->
+
+    <div class="page page-providers" id="pageProviders">
+      <div class="providers-head">
+        <div class="providers-eyebrow">// Every provider, one budget</div>
+        <h2 class="providers-title">
+          All model providers available in Dsrt AI
+        </h2>
+        <p class="providers-sub">
+          Direct labs, cloud platforms and inference networks — amplified
+          through one interface.
+        </p>
+      </div>
+
+      <div
+        class="pm-stage"
+        id="pmStage"
+        aria-label="Model providers available in Dsrt AI"
+      >
+        <div class="pm-track" id="pmTrack"></div>
+      </div>
+
+      <div class="pm-ground"></div>
+
+      <div class="providers-cta reveal from-up">
+        <p>
+          Bring the providers you already pay for. Pre-register and Dsrt AI will
+          amplify them from day one.
+        </p>
+        <a class="btn-preregister" href="Registration.html?intent=preregister">
+          Pre-register with Dsrt AI
+          <span class="arrow" aria-hidden="true">→</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- =====================================================================
+     PAGE 9 — FOOTER (BG 3 raw)
+     ===================================================================== -->
+
+    <footer class="site-footer" id="footer">
+      <!-- 🟡 PLACEHOLDER [BG 3] → assets/images/backgrounds/bg-3-footer.jpg (raw, no filter) -->
+      <div class="footer-bg" aria-hidden="true">
+        <div class="footer-bg-img"></div>
+      </div>
+
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <a class="footer-brand-logo" href="#pageTop">
+            <span class="footer-logo-mark">
+              <img
+                class="footer-logo-img"
+                src="assets/dsrt-logo.png"
+                alt="Dsrt AI logo"
+                onerror="this.style.visibility = 'hidden'"
+              />
+            </span>
+            Dsrt AI
+          </a>
+          <div class="footer-tagline">Intelligence at your budget.</div>
+
+          <div class="footer-divider"></div>
+
+          <div class="footer-copy">
+            © 2026 Dsrt AI Technologies Inc.<br />All rights reserved.
+          </div>
+
+          <div class="footer-divider"></div>
+
+          <button
+            class="footer-cookie"
+            onclick="
+              showToast('Cookie settings are available in the full product')
+            "
+          >
+            Cookie Settings
+            <svg
+              width="10"
+              height="10"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.2"
+            >
+              <line x1="7" y1="17" x2="17" y2="7" />
+              <polyline points="7 7 17 7 17 17" />
+            </svg>
+          </button>
+
+          <div class="footer-divider"></div>
+
+          <div class="footer-social">
+            <a href="https://www.youtube.com/" target="_blank" rel="noopener"
+              >YouTube</a
+            >
+            <a href="https://x.com/" target="_blank" rel="noopener">X</a>
+            <a href="https://www.linkedin.com/" target="_blank" rel="noopener"
+              >LinkedIn</a
+            >
+            <a href="https://github.com/" target="_blank" rel="noopener"
+              >GitHub</a
+            >
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <div class="footer-col-label">Products</div>
+          <ul class="footer-links">
+            <li><a href="/work-mode">Work Mode</a></li>
+            <li><a href="/war-mode">War Mode</a></li>
+            <li><a href="/providers">Providers</a></li>
+            <li><a href="/agents">Agents</a></li>
+            <li><a href="/amplification">DSRT Amplification</a></li>
+            <li><a href="/developers/api">API &amp; Developer Tools</a></li>
+          </ul>
+
+          <div class="footer-group">
+            <div class="footer-col-label">Solutions</div>
+            <ul class="footer-links">
+              <li><a href="/solutions/individuals">Individuals</a></li>
+              <li><a href="/solutions/startups">Startups</a></li>
+              <li><a href="/solutions/teams">Teams</a></li>
+              <li><a href="/solutions/enterprises">Enterprises</a></li>
+              <li><a href="/solutions/developers">Developers</a></li>
+              <li>
+                <a href="/solutions/cost-optimization">AI Cost Optimization</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <div class="footer-col-label">Resources</div>
+          <ul class="footer-links">
+            <li><a href="/docs">Documentation</a></li>
+            <li><a href="/docs/getting-started">Getting Started</a></li>
+            <li><a href="/providers/directory">Provider Directory</a></li>
+            <li><a href="/use-cases">Use Cases</a></li>
+            <li><a href="/customers">Customer Stories</a></li>
+            <li><a href="/changelog">Changelog</a></li>
+          </ul>
+
+          <div class="footer-group">
+            <div class="footer-col-label">Trust &amp; Legal</div>
+            <ul class="footer-links">
+              <li><a href="/security">Security</a></li>
+              <li><a href="/privacy">Privacy Policy</a></li>
+              <li><a href="/terms">Terms of Service</a></li>
+              <li><a href="/cookies">Cookie Policy</a></li>
+              <li><a href="/dpa">Data Processing Agreement</a></li>
+              <li><a href="/acceptable-use">Acceptable Use Policy</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <div class="footer-col-label">Company</div>
+          <ul class="footer-links">
+            <li><a href="/about">About DSRT</a></li>
+            <li><a href="/approach">Our Approach</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <li><a href="/partnerships">Partnerships</a></li>
+            <li><a href="/careers">Careers</a></li>
+            <li><a href="/news">News &amp; Updates</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+
+    <div class="toast" id="toastMsg">Action triggered!</div>
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script src="/compiled/pages/index_html-inline-1.js"></script>
+    <script src="/compiled/assets/js/professional-motion.js" defer></script>
+  </body>
+</html>
